@@ -1,17 +1,16 @@
 ﻿using EbayPlatform.Domain.Interfaces;
 using EbayPlatform.Domain.Models;
 using EbayPlatform.Infrastructure.Context;
-using EbayPlatform.Infrastructure.Dependency;
+using EbayPlatform.Infrastructure.Core.Dependency;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace EbayPlatform.Infrastructure.Repository
 {
-    public class StudentRepository : Repository<Student, long, StudentDbContext>, IStudentRepository, IDependency
+    public class StudentRepository : Repository<Student, long, EbayPlatformDbContext>, IStudentRepository, IDependency
     {
-        public StudentRepository(StudentDbContext dbContext) : base(dbContext)
+        public StudentRepository(EbayPlatformDbContext dbContext) : base(dbContext)
         {
-
         }
 
         /// <summary>

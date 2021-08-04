@@ -31,6 +31,18 @@
           }
         }
       },
+      "DotNetCore.CAP.RabbitMQ/5.1.2": {
+        "dependencies": {
+          "DotNetCore.CAP": "5.1.2",
+          "RabbitMQ.Client": "6.2.1"
+        },
+        "runtime": {
+          "lib/netstandard2.1/DotNetCore.CAP.RabbitMQ.dll": {
+            "assemblyVersion": "5.1.2.0",
+            "fileVersion": "5.1.2.0"
+          }
+        }
+      },
       "DotNetCore.CAP.SqlServer/5.1.2": {
         "dependencies": {
           "DotNetCore.CAP": "5.1.2",
@@ -236,6 +248,17 @@
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.Extensions.Configuration.Abstractions.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.20.51904"
+          }
+        }
+      },
+      "Microsoft.Extensions.Configuration.Binder/5.0.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Configuration.Abstractions": "5.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Configuration.Binder.dll": {
             "assemblyVersion": "5.0.0.0",
             "fileVersion": "5.0.20.51904"
           }
@@ -471,6 +494,31 @@
           "lib/netstandard1.3/Newtonsoft.Json.dll": {
             "assemblyVersion": "10.0.0.0",
             "fileVersion": "10.0.1.20720"
+          }
+        }
+      },
+      "Quartz/3.3.2": {
+        "dependencies": {
+          "Microsoft.Extensions.Logging.Abstractions": "5.0.0",
+          "System.Configuration.ConfigurationManager": "4.7.0",
+          "System.Diagnostics.DiagnosticSource": "5.0.1"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Quartz.dll": {
+            "assemblyVersion": "3.3.2.0",
+            "fileVersion": "3.3.2.0"
+          }
+        }
+      },
+      "RabbitMQ.Client/6.2.1": {
+        "dependencies": {
+          "System.Memory": "4.5.4",
+          "System.Threading.Channels": "5.0.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/RabbitMQ.Client.dll": {
+            "assemblyVersion": "6.0.0.0",
+            "fileVersion": "6.2.1.0"
           }
         }
       },
@@ -726,6 +774,7 @@
           "System.Threading": "4.3.0"
         }
       },
+      "System.Memory/4.5.4": {},
       "System.Net.NameResolution/4.3.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.1.0",
@@ -1142,22 +1191,42 @@
       },
       "EbayPlatform.Domain/1.0.0": {
         "dependencies": {
-          "MediatR": "9.0.0"
+          "DotNetCore.CAP": "5.1.2",
+          "EbayPlatform.Domain.Core": "1.0.0"
         },
         "runtime": {
           "EbayPlatform.Domain.dll": {}
         }
       },
+      "EbayPlatform.Domain.Core/1.0.0": {
+        "dependencies": {
+          "MediatR": "9.0.0"
+        },
+        "runtime": {
+          "EbayPlatform.Domain.Core.dll": {}
+        }
+      },
       "EbayPlatform.Infrastructure/1.0.0": {
         "dependencies": {
-          "DotNetCore.CAP": "5.1.2",
-          "DotNetCore.CAP.SqlServer": "5.1.2",
           "EbayPlatform.Domain": "1.0.0",
-          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.8",
-          "Microsoft.Extensions.DependencyModel": "5.0.0"
+          "EbayPlatform.Infrastructure.Core": "1.0.0",
+          "Quartz": "3.3.2"
         },
         "runtime": {
           "EbayPlatform.Infrastructure.dll": {}
+        }
+      },
+      "EbayPlatform.Infrastructure.Core/1.0.0": {
+        "dependencies": {
+          "DotNetCore.CAP.RabbitMQ": "5.1.2",
+          "DotNetCore.CAP.SqlServer": "5.1.2",
+          "EbayPlatform.Domain": "1.0.0",
+          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.8",
+          "Microsoft.Extensions.Configuration.Binder": "5.0.0",
+          "Microsoft.Extensions.DependencyModel": "5.0.0"
+        },
+        "runtime": {
+          "EbayPlatform.Infrastructure.Core.dll": {}
         }
       }
     }
@@ -1174,6 +1243,13 @@
       "sha512": "sha512-Iuj+4J+X3cU33P9M8K5LKQIi1QnonXUC0YR69rq8xFK04cDEBR3Sh5GybJ4ivhWp5hd4mUGPju5TWuHIZO+utA==",
       "path": "dotnetcore.cap/5.1.2",
       "hashPath": "dotnetcore.cap.5.1.2.nupkg.sha512"
+    },
+    "DotNetCore.CAP.RabbitMQ/5.1.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-ttIdlvdPFSXbMg/hG8d+AU+7RXBXEMVzp6/A9nXYWuwkUpdTXq6IBhiwtB8S0oG/p98udcHZ1BqM+CxPlpfheg==",
+      "path": "dotnetcore.cap.rabbitmq/5.1.2",
+      "hashPath": "dotnetcore.cap.rabbitmq.5.1.2.nupkg.sha512"
     },
     "DotNetCore.CAP.SqlServer/5.1.2": {
       "type": "package",
@@ -1279,6 +1355,13 @@
       "sha512": "sha512-ETjSBHMp3OAZ4HxGQYpwyGsD8Sw5FegQXphi0rpoGMT74S4+I2mm7XJEswwn59XAaKOzC15oDSOWEE8SzDCd6Q==",
       "path": "microsoft.extensions.configuration.abstractions/5.0.0",
       "hashPath": "microsoft.extensions.configuration.abstractions.5.0.0.nupkg.sha512"
+    },
+    "Microsoft.Extensions.Configuration.Binder/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Of1Irt1+NzWO+yEYkuDh5TpT4On7LKl98Q9iLqCdOZps6XXEWDj3AKtmyvzJPVXZe4apmkJJIiDL7rR1yC+hjQ==",
+      "path": "microsoft.extensions.configuration.binder/5.0.0",
+      "hashPath": "microsoft.extensions.configuration.binder.5.0.0.nupkg.sha512"
     },
     "Microsoft.Extensions.DependencyInjection/5.0.2": {
       "type": "package",
@@ -1419,6 +1502,20 @@
       "sha512": "sha512-ebWzW9j2nwxQeBo59As2TYn7nYr9BHicqqCwHOD1Vdo+50HBtLPuqdiCYJcLdTRknpYis/DSEOQz5KmZxwrIAg==",
       "path": "newtonsoft.json/10.0.1",
       "hashPath": "newtonsoft.json.10.0.1.nupkg.sha512"
+    },
+    "Quartz/3.3.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-zsLt0LLHfIO+hlLBrBB2f7Qolf2C3SeCWXawgnWXSuvsAWsvWBLSax9Tpu5X/KzoF4Y4UHX7tdxvQjxILEsRWA==",
+      "path": "quartz/3.3.2",
+      "hashPath": "quartz.3.3.2.nupkg.sha512"
+    },
+    "RabbitMQ.Client/6.2.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kdcin0uz1b9xQPvlLOoa8Y2zQsfu7nRuTrcX02dCLVzwGVlsPp9AFgu1L3kRh4wSFEOGE03OVqpWKxaDlhuowQ==",
+      "path": "rabbitmq.client/6.2.1",
+      "hashPath": "rabbitmq.client.6.2.1.nupkg.sha512"
     },
     "runtime.native.System/4.3.0": {
       "type": "package",
@@ -1594,6 +1691,13 @@
       "sha512": "sha512-PGKkrd2khG4CnlyJwxwwaWWiSiWFNBGlgXvJpeO0xCXrZ89ODrQ6tjEWS/kOqZ8GwEOUATtKtzp1eRgmYNfclg==",
       "path": "system.linq.expressions/4.3.0",
       "hashPath": "system.linq.expressions.4.3.0.nupkg.sha512"
+    },
+    "System.Memory/4.5.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-1MbJTHS1lZ4bS4FmsJjnuGJOu88ZzTT2rLvrhW7Ygic+pC0NWA+3hgAen0HRdsocuQXCkUTdFn9yHJJhsijDXw==",
+      "path": "system.memory/4.5.4",
+      "hashPath": "system.memory.4.5.4.nupkg.sha512"
     },
     "System.Net.NameResolution/4.3.0": {
       "type": "package",
@@ -1901,7 +2005,17 @@
       "serviceable": false,
       "sha512": ""
     },
+    "EbayPlatform.Domain.Core/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
     "EbayPlatform.Infrastructure/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "EbayPlatform.Infrastructure.Core/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

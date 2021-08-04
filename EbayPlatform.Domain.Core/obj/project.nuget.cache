@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "5X9v1d6DSudE/uoc2adASjwBfBAitVZaAMCPGmDw15wg4x2XbVwPEJYfR93xdCZGVwAVmdXFWIJQiUfsIN3qjg==",
+  "success": true,
+  "projectFilePath": "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Domain.Core\\EbayPlatform.Domain.Core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\W\\.nuget\\packages\\mediatr\\9.0.0\\mediatr.9.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

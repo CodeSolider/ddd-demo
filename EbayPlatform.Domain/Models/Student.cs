@@ -1,5 +1,5 @@
-﻿using EbayPlatform.Domain.Abstractions;
-using EbayPlatform.Domain.Events;
+﻿using EbayPlatform.Domain.Core.Abstractions;
+using EbayPlatform.Domain.Events.Student;
 
 namespace EbayPlatform.Domain.Models
 {

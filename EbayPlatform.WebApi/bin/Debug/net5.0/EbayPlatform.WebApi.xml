@@ -4,64 +4,6 @@
         <name>EbayPlatform.WebApi</name>
     </assembly>
     <members>
-        <member name="M:EbayPlatform.WebApi.Controllers.WeatherForecastController.GetStudetsList">
-            <summary>
-            获取所有的数据
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:EbayPlatform.WebApi.Controllers.WeatherForecastController.AddStudent(EbayPlatform.Application.Commands.Student.CreateStudentCommand)">
-            <summary>
-            创建学生
-            </summary>
-            <param name="request"></param>
-            <returns></returns>
-        </member>
-        <member name="T:EbayPlatform.WebApi.Extensions.ServiceCollectionExtension">
-            <summary>
-            服务容器扩展类
-            </summary>
-        </member>
-        <member name="M:EbayPlatform.WebApi.Extensions.ServiceCollectionExtension.AddMediatRServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
-            <summary>
-            MediatR
-            </summary>
-            <param name="services"></param>
-            <param name="serviceLifetime"></param>
-            <returns></returns>
-        </member>
-        <member name="M:EbayPlatform.WebApi.Extensions.ServiceCollectionExtension.AddDomainContext(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Microsoft.EntityFrameworkCore.DbContextOptionsBuilder})">
-            <summary>
-            Domain 层注入数据库
-            </summary>
-            <param name="services"></param>
-            <param name="options"></param>
-            <returns></returns>
-        </member>
-        <member name="M:EbayPlatform.WebApi.Extensions.ServiceCollectionExtension.AddSqlServerDomainContext(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.String)">
-            <summary>
-             添加数据库
-            </summary>
-            <param name="services"></param>
-            <param name="connectionString"></param>
-            <returns></returns>
-        </member>
-        <member name="M:EbayPlatform.WebApi.Extensions.ServiceCollectionExtension.AddEventBus(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
-            <summary>
-            添加分布式事件总线
-            </summary>
-            <param name="services"></param>
-            <param name="configuration"></param>
-            <returns></returns>
-        </member>
-        <member name="M:EbayPlatform.WebApi.Extensions.ServiceCollectionExtension.AddAutoDIService(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.DependencyInjection.ServiceLifetime)">
-            <summary>
-            注册服务
-            </summary>
-            <param name="services"></param>
-            <param name="serviceLifetime"></param>
-            <returns></returns>
-        </member>
         <member name="T:EbayPlatform.WebApi.Extensions.SwaggerExtensions">
             <summary>
             Swagger 扩展类

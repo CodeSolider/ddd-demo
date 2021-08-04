@@ -68,14 +68,14 @@
         }
       }
     },
-    "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Domain\\EbayPlatform.Domain.csproj": {
+    "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Domain.Core\\EbayPlatform.Domain.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Domain\\EbayPlatform.Domain.csproj",
-        "projectName": "EbayPlatform.Domain",
-        "projectPath": "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Domain\\EbayPlatform.Domain.csproj",
+        "projectUniqueName": "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Domain.Core\\EbayPlatform.Domain.Core.csproj",
+        "projectName": "EbayPlatform.Domain.Core",
+        "projectPath": "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Domain.Core\\EbayPlatform.Domain.Core.csproj",
         "packagesPath": "C:\\Users\\W\\.nuget\\packages\\",
-        "outputPath": "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Domain\\obj\\",
+        "outputPath": "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Domain.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\W\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -128,14 +128,78 @@
         }
       }
     },
-    "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Infrastructure\\EbayPlatform.Infrastructure.csproj": {
+    "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Domain\\EbayPlatform.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Infrastructure\\EbayPlatform.Infrastructure.csproj",
-        "projectName": "EbayPlatform.Infrastructure",
-        "projectPath": "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Infrastructure\\EbayPlatform.Infrastructure.csproj",
+        "projectUniqueName": "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Domain\\EbayPlatform.Domain.csproj",
+        "projectName": "EbayPlatform.Domain",
+        "projectPath": "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Domain\\EbayPlatform.Domain.csproj",
         "packagesPath": "C:\\Users\\W\\.nuget\\packages\\",
-        "outputPath": "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Infrastructure\\obj\\",
+        "outputPath": "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\W\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Domain.Core\\EbayPlatform.Domain.Core.csproj": {
+                "projectPath": "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Domain.Core\\EbayPlatform.Domain.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "DotNetCore.CAP": {
+              "target": "Package",
+              "version": "[5.1.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Infrastructure.Core\\EbayPlatform.Infrastructure.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Infrastructure.Core\\EbayPlatform.Infrastructure.Core.csproj",
+        "projectName": "EbayPlatform.Infrastructure.Core",
+        "projectPath": "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Infrastructure.Core\\EbayPlatform.Infrastructure.Core.csproj",
+        "packagesPath": "C:\\Users\\W\\.nuget\\packages\\",
+        "outputPath": "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Infrastructure.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\W\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -168,7 +232,7 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
-            "DotNetCore.CAP": {
+            "DotNetCore.CAP.RabbitMQ": {
               "target": "Package",
               "version": "[5.1.2, )"
             },
@@ -192,9 +256,80 @@
               "target": "Package",
               "version": "[5.0.8, )"
             },
+            "Microsoft.Extensions.Configuration.Binder": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
             "Microsoft.Extensions.DependencyModel": {
               "target": "Package",
               "version": "[5.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.202\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Infrastructure\\EbayPlatform.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Infrastructure\\EbayPlatform.Infrastructure.csproj",
+        "projectName": "EbayPlatform.Infrastructure",
+        "projectPath": "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Infrastructure\\EbayPlatform.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\W\\.nuget\\packages\\",
+        "outputPath": "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Infrastructure\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\W\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Domain\\EbayPlatform.Domain.csproj": {
+                "projectPath": "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Domain\\EbayPlatform.Domain.csproj"
+              },
+              "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Infrastructure.Core\\EbayPlatform.Infrastructure.Core.csproj": {
+                "projectPath": "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Infrastructure.Core\\EbayPlatform.Infrastructure.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Quartz": {
+              "target": "Package",
+              "version": "[3.3.2, )"
             }
           },
           "imports": [
@@ -256,10 +391,6 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
-            "DotNetCore.CAP.RabbitMQ": {
-              "target": "Package",
-              "version": "[5.1.2, )"
-            },
             "MediatR.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[9.0.0, )"

@@ -5,7 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="DotNetCore.CAP" Version="5.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EbayPlatform.Domain.Core\EbayPlatform.Domain.Core.csproj" />
   </ItemGroup>
 
 </Project>

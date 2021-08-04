@@ -1,4 +1,4 @@
-﻿using EbayPlatform.Domain.Abstractions;
+﻿using EbayPlatform.Domain.Core.Abstractions;
 using System.Threading;
 using System.Threading.Tasks;
 
