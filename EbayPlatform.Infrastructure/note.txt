@@ -1,0 +1,7 @@
+﻿1.删除迁移文件:
+  a.Update-Database -Migration:0  （删除表结构）
+  b.Remove-Migration （删除迁移文件）
+
+2.生成迁移文件:
+  a.Add-Migration Name
+  b.Update-Database

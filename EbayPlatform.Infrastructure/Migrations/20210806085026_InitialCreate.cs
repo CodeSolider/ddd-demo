@@ -29,7 +29,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SyncTaskJobParam",
+                name: "SyncTaskJobParams",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false),
@@ -38,9 +38,9 @@ namespace EbayPlatform.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SyncTaskJobParam", x => x.Id);
+                    table.PrimaryKey("PK_SyncTaskJobParams", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SyncTaskJobParam_SyncTaskJobConfigs_Id",
+                        name: "FK_SyncTaskJobParams_SyncTaskJobConfigs_Id",
                         column: x => x.Id,
                         principalTable: "SyncTaskJobConfigs",
                         principalColumn: "Id");
@@ -50,7 +50,7 @@ namespace EbayPlatform.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "SyncTaskJobParam");
+                name: "SyncTaskJobParams");
 
             migrationBuilder.DropTable(
                 name: "SyncTaskJobConfigs");

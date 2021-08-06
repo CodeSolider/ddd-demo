@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EbayPlatform.Infrastructure.Migrations
 {
     [DbContext(typeof(EbayPlatformDbContext))]
-    [Migration("20210802072226_InitialCreate")]
+    [Migration("20210806085026_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -90,7 +90,7 @@ namespace EbayPlatform.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SyncTaskJobParam");
+                    b.ToTable("SyncTaskJobParams");
                 });
 
             modelBuilder.Entity("EbayPlatform.Domain.Models.SyncTaskJobParam", b =>

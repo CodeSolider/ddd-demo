@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Quartz\" />
+    <Folder Include="Quartz\Jobs\" />
   </ItemGroup>
 
 </Project>
