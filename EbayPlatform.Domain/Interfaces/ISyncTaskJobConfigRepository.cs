@@ -13,5 +13,12 @@ namespace EbayPlatform.Domain.Interfaces
         /// </summary>
         /// <returns></returns>
         List<SyncTaskJobConfig> GetSyncTaskJobConfigList();
+
+        /// <summary>
+        /// 检查任务名称是否重复
+        /// </summary>
+        /// <param name="jobName"></param>
+        /// <returns></returns>
+        bool CheckJobName(string jobName);
     }
 }

@@ -19,8 +19,7 @@ namespace EbayPlatform.Domain.CommandHandlers.Student
 
         public async Task<long> Handle(CreateStudentCommand request, CancellationToken cancellationToken)
         {
-            var student = new Models.Student(request.Name, request.Gender, request.Age, request.Height);
-            _studentRepository.Add(student);
+            var student = _studentRepository.Add(new Models.Student(request.Name, request.Gender, request.Age, request.Height));
             await _studentRepository.UnitOfWork.CommitAsync(cancellationToken);
             return student.Id;
         }

@@ -8,7 +8,7 @@ namespace EbayPlatform.Infrastructure.Mappings
     {
         public void Configure(EntityTypeBuilder<SyncTaskJobConfig> builder)
         {
-            builder.ToTable("SyncTaskJobConfigs").HasKey(p => p.Id);
+            builder.ToTable("SyncTaskJobConfig").HasKey(p => p.Id);
             builder.Property(p => p.Id).ValueGeneratedOnAdd();
             builder.Property(p => p.JobName).HasMaxLength(100).IsRequired();
             builder.Property(p => p.JobDesc).HasMaxLength(300).IsRequired(false);

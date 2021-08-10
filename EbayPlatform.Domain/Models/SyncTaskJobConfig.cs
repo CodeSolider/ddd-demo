@@ -1,4 +1,5 @@
 ﻿using EbayPlatform.Domain.Core.Abstractions;
+using EbayPlatform.Domain.Events.SyncTaskJobConfig;
 using System;
 using System.Collections.Generic;
 using static EbayPlatform.Domain.Models.Enums.SyncTask;
@@ -23,7 +24,7 @@ namespace EbayPlatform.Domain.Models
         /// <summary>
         /// 任务类全名
         /// </summary>
-        public string JobClassFullName { get; set; }
+        public string JobClassFullName { get; private set; }
 
         /// <summary>
         /// Cron表达式
@@ -64,14 +65,19 @@ namespace EbayPlatform.Domain.Models
         protected SyncTaskJobConfig() { }
 
         public SyncTaskJobConfig(string jobName, string jobDesc,
-            string cron, string cronDesc,
-            List<SyncTaskJobParam> syncTaskJobParams)
+            string jobClassFullName, string cron, string cronDesc, JobStatus jobStatus)
         {
             this.JobName = jobName;
             this.JobDesc = jobDesc;
+            this.JobClassFullName = jobClassFullName;
             this.Cron = cron;
             this.CronDesc = cronDesc;
-            this.SyncTaskJobParams = syncTaskJobParams;
+            this.JobStatus = jobStatus;
+
+            //添加事件
+            this.AddDomainEvent(new CreateSyncTaskJobConfigDomainEvent(this));
         }
+
+
     }
 }

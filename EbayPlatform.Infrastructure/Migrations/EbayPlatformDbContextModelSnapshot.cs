@@ -69,7 +69,7 @@ namespace EbayPlatform.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SyncTaskJobConfigs");
+                    b.ToTable("SyncTaskJobConfig");
                 });
 
             modelBuilder.Entity("EbayPlatform.Domain.Models.SyncTaskJobParam", b =>
@@ -88,7 +88,7 @@ namespace EbayPlatform.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SyncTaskJobParams");
+                    b.ToTable("SyncTaskJobParam");
                 });
 
             modelBuilder.Entity("EbayPlatform.Domain.Models.SyncTaskJobParam", b =>

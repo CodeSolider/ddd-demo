@@ -1,6 +1,5 @@
-using EbayPlatform.Application.Dto;
 using EbayPlatform.Application.IntegrationEvents;
-using EbayPlatform.Domain.Interfaces;
+using EbayPlatform.Domain.Models;
 using EbayPlatform.Infrastructure.Context;
 using EbayPlatform.Infrastructure.Core.Extensions;
 using EbayPlatform.Infrastructure.Quartz;
@@ -11,7 +10,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Quartz;
 
 namespace EbayPlatform.WebApi
 {
@@ -32,7 +30,7 @@ namespace EbayPlatform.WebApi
 
             #region MediatR
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(EbayPlatformContextTransactionBehavior<,>));
-            services.AddMediatR(typeof(StudentDto).Assembly, typeof(Program).Assembly);
+            services.AddMediatR(typeof(Student).Assembly, typeof(Program).Assembly);
             #endregion
 
             services.AddSqlServerDomainContext<EbayPlatformDbContext>(Configuration.GetConnectionString("DefaultConnection"));
@@ -49,23 +47,13 @@ namespace EbayPlatform.WebApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IScheduler scheduler)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwaggerDocumentation();
             }
-
-            #region Quartz
-            ISyncTaskJobConfigRepository syncTaskJobConfigRepository = app.ApplicationServices.GetRequiredService<ISyncTaskJobConfigRepository>();
-            var syncTaskJobConfigList = syncTaskJobConfigRepository.GetSyncTaskJobConfigList();
-            syncTaskJobConfigList.ForEach(syncTaskJobConfigItem =>
-            {
-                SchedulerProvider.StartJob(scheduler, syncTaskJobConfigItem);
-            });
-            #endregion
-
 
             app.UseRouting();
             app.UseAuthorization();

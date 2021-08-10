@@ -24,5 +24,16 @@ namespace EbayPlatform.Infrastructure.Repository
         {
             return this.NoTrackingQueryable.ToList();
         }
+
+        /// <summary>
+        /// 检查任务名称是否重复
+        /// </summary>
+        /// <param name="jobName"></param>
+        /// <returns></returns>
+        public bool CheckJobName(string jobName)
+        {
+            return this.NoTrackingQueryable.Any(o => o.JobName == jobName);
+        }
+
     }
 }

@@ -2,6 +2,7 @@
 using Quartz;
 using System.Reflection;
 using System;
+using System.Threading.Tasks;
 
 namespace EbayPlatform.Infrastructure.Quartz
 {
@@ -15,7 +16,7 @@ namespace EbayPlatform.Infrastructure.Quartz
         /// </summary>
         /// <param name="scheduler"></param>
         /// <param name="syncTaskJobConfig"></param>
-        public async static void StartJob(IScheduler scheduler, SyncTaskJobConfig syncTaskJobConfig)
+        public static async Task StartJob(IScheduler scheduler, SyncTaskJobConfig syncTaskJobConfig)
         {
             Assembly assembly = Assembly.Load(syncTaskJobConfig.JobClassFullName);
             if (assembly == null)

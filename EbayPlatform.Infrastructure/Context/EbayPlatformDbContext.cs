@@ -43,6 +43,7 @@ namespace EbayPlatform.Infrastructure.Context
             modelBuilder.ApplyConfiguration(new SyncTaskJobConfigMap());
             modelBuilder.ApplyConfiguration(new SyncTaskJobParamMap());
             #endregion
+
             base.OnModelCreating(modelBuilder);
         }
     }

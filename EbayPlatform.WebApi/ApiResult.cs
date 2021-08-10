@@ -102,7 +102,11 @@
         }
     }
 
-    public class ApiResult<T> : ApiResult
+    /// <summary>
+    /// 返回响应信息
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    internal class ApiResult<T> : ApiResult
     {
         public T Data { get; set; }
     }

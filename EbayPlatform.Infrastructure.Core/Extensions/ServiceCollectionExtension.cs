@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
+using System.Reflection;
 
 namespace EbayPlatform.Infrastructure.Core.Extensions
 {
@@ -36,8 +37,8 @@ namespace EbayPlatform.Infrastructure.Core.Extensions
         /// <param name="services"></param>
         /// <param name="connectionString"></param>
         /// <returns></returns>
-        public static IServiceCollection AddSqlServerDomainContext<TDbContext>(this IServiceCollection services, 
-            string connectionString, 
+        public static IServiceCollection AddSqlServerDomainContext<TDbContext>(this IServiceCollection services,
+            string connectionString,
             ServiceLifetime serviceLifetime = ServiceLifetime.Scoped)
              where TDbContext : EFContext
         {
@@ -45,7 +46,9 @@ namespace EbayPlatform.Infrastructure.Core.Extensions
 
             return services.AddDomainContext<TDbContext>(builder =>
             {
-                builder.UseSqlServer(connectionString);
+                builder.UseSqlServer(connectionString, options => 
+                                                        options.MigrationsAssembly
+                                                        (typeof(TDbContext).GetTypeInfo().Assembly.GetName().Name));
             }, serviceLifetime);
         }
 

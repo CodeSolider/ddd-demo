@@ -29,9 +29,9 @@ namespace EbayPlatform.Infrastructure.Repository
             return DbContext.Add(entity).Entity;
         }
 
-        public virtual Task<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
-            return Task.FromResult(Add(entity));
+            return (await DbContext.AddAsync(entity, cancellationToken).ConfigureAwait(false)).Entity;
         }
 
         public virtual TEntity Update(TEntity entity)

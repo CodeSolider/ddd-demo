@@ -8,7 +8,7 @@ namespace EbayPlatform.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "SyncTaskJobConfigs",
+                name: "SyncTaskJobConfig",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -25,11 +25,11 @@ namespace EbayPlatform.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SyncTaskJobConfigs", x => x.Id);
+                    table.PrimaryKey("PK_SyncTaskJobConfig", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "SyncTaskJobParams",
+                name: "SyncTaskJobParam",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false),
@@ -38,11 +38,11 @@ namespace EbayPlatform.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SyncTaskJobParams", x => x.Id);
+                    table.PrimaryKey("PK_SyncTaskJobParam", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SyncTaskJobParams_SyncTaskJobConfigs_Id",
+                        name: "FK_SyncTaskJobParam_SyncTaskJobConfig_Id",
                         column: x => x.Id,
-                        principalTable: "SyncTaskJobConfigs",
+                        principalTable: "SyncTaskJobConfig",
                         principalColumn: "Id");
                 });
         }
@@ -50,10 +50,10 @@ namespace EbayPlatform.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "SyncTaskJobParams");
+                name: "SyncTaskJobParam");
 
             migrationBuilder.DropTable(
-                name: "SyncTaskJobConfigs");
+                name: "SyncTaskJobConfig");
         }
     }
 }

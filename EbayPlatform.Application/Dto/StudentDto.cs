@@ -1,5 +1,4 @@
-﻿
-namespace EbayPlatform.Application.Dto
+﻿namespace EbayPlatform.Application.Dto
 {
     public class StudentDto
     {

@@ -61,6 +61,37 @@
             <param name="data"></param>
             <returns></returns>
         </member>
+        <member name="T:EbayPlatform.WebApi.ApiResult`1">
+            <summary>
+            返回响应信息
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="T:EbayPlatform.WebApi.Controllers.SyncTaskJobConfigController">
+            <summary>
+            同步任务作业配置
+            </summary>
+        </member>
+        <member name="M:EbayPlatform.WebApi.Controllers.SyncTaskJobConfigController.#ctor(Microsoft.Extensions.Logging.ILogger{EbayPlatform.WebApi.Controllers.SyncTaskJobConfigController},EbayPlatform.Application.Services.ISyncTaskJobService)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="logger"></param>
+            <param name="syncTaskJobService"></param>
+        </member>
+        <member name="M:EbayPlatform.WebApi.Controllers.SyncTaskJobConfigController.ExecuteAllTask">
+            <summary>
+            执行所有任务
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EbayPlatform.WebApi.Controllers.SyncTaskJobConfigController.CreateSyncTaskJob(EbayPlatform.Application.Dto.SyncTaskJobConfigDto)">
+            <summary>
+            创建同步任务
+            </summary>
+            <param name="syncTaskJobConfigDto"></param>
+            <returns></returns>
+        </member>
         <member name="T:EbayPlatform.WebApi.Extensions.SwaggerExtensions">
             <summary>
             Swagger 扩展类
