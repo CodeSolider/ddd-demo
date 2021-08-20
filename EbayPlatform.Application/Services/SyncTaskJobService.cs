@@ -41,13 +41,22 @@ namespace EbayPlatform.Application.Services
         }
 
         /// <summary>
-        /// 添加一个新任务
+        /// 添加任务
         /// </summary>
         /// <returns></returns>
-        public async Task<int> CreateSyncTaskJobAsync(SyncTaskJobConfigDto syncTaskJobConfigDto, 
+        public async Task<int> CreateSyncTaskJobAsync(SyncTaskJobConfigDto syncTaskJobConfigDto,
             CancellationToken cancellationToken = default)
         {
-            return await _mediator.Send(syncTaskJobConfigDto.Adapt<CreateSyncTaskJobConfigCommand>(), cancellationToken);
+            return await _mediator.Send(syncTaskJobConfigDto.Adapt<CreateSyncTaskJobConfigCommand>(), cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// 删除任务
+        /// </summary>
+        /// <returns></returns>
+        public async Task<bool> DeleteSyncTaskJobAsync(string jobName, CancellationToken cancellationToken = default)
+        {
+            return await _mediator.Send(new DeleteSyncTaskJobConfigCommand(jobName), cancellationToken).ConfigureAwait(false);
         }
 
 

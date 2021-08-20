@@ -30,12 +30,5 @@ namespace EbayPlatform.Application.Services
         {
             return _studentRepository.GetStudentList().Adapt<List<StudentDto>>();
         }
-
-        public void Resiter()
-        {
-           // CreateStudentCommand 
-        }
-
-
     }
 }

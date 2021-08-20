@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EbayPlatform.Domain.Core.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 

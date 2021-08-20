@@ -1,4 +1,5 @@
-﻿using EbayPlatform.Infrastructure.Core.Page;
+﻿using EbayPlatform.Domain.Core.Abstractions;
+using EbayPlatform.Infrastructure.Core.Page;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading;

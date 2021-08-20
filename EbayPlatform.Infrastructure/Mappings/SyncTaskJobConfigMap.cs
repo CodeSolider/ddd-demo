@@ -18,9 +18,15 @@ namespace EbayPlatform.Infrastructure.Mappings
             builder.Property(p => p.IsRunning).HasDefaultValue(false).IsRequired();
             builder.Property(p => p.JobStatus).IsRequired(true);
             builder.Property(p => p.CreateDate).HasDefaultValueSql("CURRENT_TIMESTAMP").IsRequired();
-            builder.Property(p => p.ModifyDate).HasDefaultValueSql("CURRENT_TIMESTAMP").ValueGeneratedOnUpdate().IsRequired(false);
-            builder.HasMany(p => p.SyncTaskJobParams).WithOne(p => p.SyncTaskJobConfig).HasForeignKey(p => p.Id)
-                   .OnDelete(DeleteBehavior.NoAction);
+            builder.Property(p => p.ModifyDate).HasDefaultValueSql("CURRENT_TIMESTAMP").ValueGeneratedOnUpdate().IsRequired(false); 
+            //one to many
+            builder.OwnsMany(p => p.SyncTaskJobParams, p =>
+            {
+                p.WithOwner();
+                p.Property(p => p.ShopName).HasMaxLength(50).IsRequired();
+                p.Property(p => p.ParamValue).IsRequired(false);
+            });
+
             builder.HasQueryFilter(p => p.IsRunning);
         }
     }

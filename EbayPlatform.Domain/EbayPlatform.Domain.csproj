@@ -12,4 +12,8 @@
     <ProjectReference Include="..\EbayPlatform.Domain.Core\EbayPlatform.Domain.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Commands\StystemLog\" />
+  </ItemGroup>
+
 </Project>

@@ -13,8 +13,4 @@
     <PackageReference Include="Quartz" Version="3.3.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Quartz\Jobs\" />
-  </ItemGroup>
-
 </Project>

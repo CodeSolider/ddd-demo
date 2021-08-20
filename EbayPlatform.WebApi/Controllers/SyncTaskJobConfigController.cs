@@ -58,7 +58,7 @@ namespace EbayPlatform.WebApi.Controllers
         {
             try
             {
-                int syncTaskJobId = await _syncTaskJobService.CreateSyncTaskJobAsync(syncTaskJobConfigDto, HttpContext.RequestAborted);
+                int syncTaskJobId = await _syncTaskJobService.CreateSyncTaskJobAsync(syncTaskJobConfigDto, HttpContext.RequestAborted).ConfigureAwait(false);
                 return ApiResult.OK("创建任务配置信息成功", syncTaskJobId);
             }
             catch (System.Exception ex)
@@ -68,6 +68,26 @@ namespace EbayPlatform.WebApi.Controllers
                 return ApiResult.Fail("创建任务配置信息发生异常", $"异常信息:{ex.Message}");
             }
         }
+
+        /// <summary>
+        /// 删除同步任务数据
+        /// </summary>
+        /// <param name="jobName"></param>
+        /// <returns></returns>
+        [HttpDelete("{jobName}")]
+        public async Task<ApiResult> DeleteSyncTaskJob([FromQuery] string jobName)
+        {
+            try
+            {
+                return ApiResult.OK("删除同步任务数据成功", await _syncTaskJobService.DeleteSyncTaskJobAsync(jobName, HttpContext.RequestAborted).ConfigureAwait(false));
+            }
+            catch (System.Exception ex)
+            {
+                throw;
+            }
+
+        }
+
 
     }
 }

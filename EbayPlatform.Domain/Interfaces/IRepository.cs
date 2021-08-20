@@ -1,4 +1,5 @@
 ﻿using EbayPlatform.Domain.Core.Abstractions;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,11 +13,13 @@ namespace EbayPlatform.Domain.Interfaces
     {
         IUnitOfWork UnitOfWork { get; }
         TEntity Add(TEntity entity);
-        ValueTask<TEntity> AddAsync(TEntity entity,CancellationToken cancellationToken = default); 
+        ValueTask<TEntity> AddAsync(TEntity entity);
+        bool AddRange(List<TEntity> entities);
+        Task AddRangeAsync(List<TEntity> entities, CancellationToken cancellationToken = default);
         TEntity Update(TEntity entity);
-        Task<TEntity> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default);
-        bool Remove(Entity entity);
-        Task<bool> RemoveAsync(Entity entity);
+        void Remove(TEntity entity);
+        void RemoveRange(IEnumerable<TEntity> entities);
+
 
         bool Delete(TKey id);
         Task<bool> DeleteAsync(TKey id, CancellationToken cancellationToken = default);

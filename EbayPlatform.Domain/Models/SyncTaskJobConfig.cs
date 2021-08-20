@@ -77,7 +77,5 @@ namespace EbayPlatform.Domain.Models
             //添加事件
             this.AddDomainEvent(new CreateSyncTaskJobConfigDomainEvent(this));
         }
-
-
     }
 }

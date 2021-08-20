@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 
-namespace EbayPlatform.Infrastructure.Core.Page
+namespace EbayPlatform.Domain.Core.Abstractions
 {
     /// <summary>
     /// 分页
     /// </summary>
-    /// <typeparam name="T"></typeparam>
     public interface IPagedList<T>
     {
         /// <summary>

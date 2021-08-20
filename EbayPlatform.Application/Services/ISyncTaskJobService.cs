@@ -19,5 +19,11 @@ namespace EbayPlatform.Application.Services
         /// </summary>
         /// <returns></returns>
         Task<int> CreateSyncTaskJobAsync(SyncTaskJobConfigDto syncTaskJobConfigDto, CancellationToken cancellationToken);
+
+        /// <summary>
+        /// 删除任务
+        /// </summary>
+        /// <returns></returns>
+        Task<bool> DeleteSyncTaskJobAsync(string jobName, CancellationToken cancellationToken = default);
     }
 }

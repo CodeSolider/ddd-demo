@@ -12,9 +12,8 @@ namespace EbayPlatform.Infrastructure.Repository
     /// </summary>
     public class SyncTaskJobConfigRepository : Repository<SyncTaskJobConfig, int, EbayPlatformDbContext>, ISyncTaskJobConfigRepository, IDependency
     {
-        public SyncTaskJobConfigRepository(EbayPlatformDbContext dbContext) : base(dbContext)
-        {
-        }
+        public SyncTaskJobConfigRepository(EbayPlatformDbContext dbContext)
+            : base(dbContext) { }
 
         /// <summary>
         /// 获取所有的任务配置作业数据
@@ -33,6 +32,17 @@ namespace EbayPlatform.Infrastructure.Repository
         public bool CheckJobName(string jobName)
         {
             return this.NoTrackingQueryable.Any(o => o.JobName == jobName);
+        }
+
+        /// <summary>
+        /// 根据任务名称获取任务配置作业数据
+        /// </summary>
+        /// <param name="jobName"></param>
+        /// <returns></returns>
+
+        public SyncTaskJobConfig GetSyncTaskJobConfigByJobName(string jobName)
+        {
+            return this.NoTrackingQueryable.FirstOrDefault(o => o.JobName.Equals(jobName));
         }
 
     }

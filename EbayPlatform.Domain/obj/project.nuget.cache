@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "HuajA0uEkKn95vThAl8LOe7roNoh1p5Mb/FR+KrJewOYTIHuXxg4SBumgssWl+5t/C4uPjMRaxA/uXVF5pmFwg==",
+  "dgSpecHash": "iJLlmQfbBt4ZfzjBHw5/zZ6qacmGlzW4vB4rY6NQROJzopbkqUJtotQ7AQs5n2laIP2RzTUT0ntAEsnqHfez5A==",
   "success": true,
   "projectFilePath": "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Domain\\EbayPlatform.Domain.csproj",
   "expectedPackageFiles": [
@@ -13,6 +13,7 @@
     "C:\\Users\\W\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\5.0.0\\microsoft.extensions.logging.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\W\\.nuget\\packages\\microsoft.extensions.options\\5.0.0\\microsoft.extensions.options.5.0.0.nupkg.sha512",
     "C:\\Users\\W\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512",
+    "C:\\Users\\W\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\W\\.nuget\\packages\\system.diagnostics.diagnosticsource\\5.0.1\\system.diagnostics.diagnosticsource.5.0.1.nupkg.sha512",
     "C:\\Users\\W\\.nuget\\packages\\system.text.json\\5.0.1\\system.text.json.5.0.1.nupkg.sha512",
     "C:\\Users\\W\\.nuget\\packages\\system.threading.channels\\5.0.0\\system.threading.channels.5.0.0.nupkg.sha512"

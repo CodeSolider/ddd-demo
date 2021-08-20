@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using System;
 using static EbayPlatform.Domain.Models.Enums.SyncTask;
 
 namespace EbayPlatform.Domain.Commands.SyncTaskJobConfig
@@ -41,18 +40,21 @@ namespace EbayPlatform.Domain.Commands.SyncTaskJobConfig
         /// </summary>
         public JobStatus JobStatus { get; private set; }
 
+
+
+
         public CreateSyncTaskJobConfigCommand() { }
 
-        public CreateSyncTaskJobConfigCommand(string jobName, string jobDesc, string jobClassFullName,
-            string cron, string cronDesc)
+        public CreateSyncTaskJobConfigCommand(string jobName, string jobDesc,
+            string jobClassFullName, string cron, string cronDesc)
         {
             this.JobName = jobName;
             this.JobDesc = jobDesc;
             this.JobClassFullName = jobClassFullName;
             this.Cron = cron;
-            this.CronDesc = CronDesc;
+            this.CronDesc = cronDesc;
             this.IsRunning = false;
-            this.JobStatus = JobStatus.UnExecute; 
+            this.JobStatus = JobStatus.UnExecute;
         }
     }
 }

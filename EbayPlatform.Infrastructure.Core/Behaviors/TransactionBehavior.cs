@@ -56,7 +56,7 @@ namespace EbayPlatform.Infrastructure.Core.Behaviors
                         response = await next();
 
                         _logger.LogInformation("----- 提交事务 {TransactionId} {CommandName}", transaction.TransactionId, typeName);
-
+                        
                         await _transaction.CommitTransactionAsync(transaction);
                         transactionId = transaction.TransactionId;
                     }

@@ -2,6 +2,7 @@
 using EbayPlatform.Domain.Interfaces;
 using EbayPlatform.Infrastructure.Core;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -29,9 +30,20 @@ namespace EbayPlatform.Infrastructure.Repository
             return DbContext.Add(entity).Entity;
         }
 
-        public virtual async ValueTask<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<TEntity> AddAsync(TEntity entity)
         {
-            return (await DbContext.AddAsync(entity, cancellationToken).ConfigureAwait(false)).Entity;
+            return (await DbContext.AddAsync(entity).ConfigureAwait(false)).Entity;
+        }
+
+        public virtual bool AddRange(List<TEntity> entities)
+        {
+            DbContext.AddRange(entities);
+            return true;
+        }
+
+        public virtual async Task AddRangeAsync(List<TEntity> entities, CancellationToken cancellationToken = default)
+        {
+            await DbContext.AddRangeAsync(entities, cancellationToken).ConfigureAwait(false);
         }
 
         public virtual TEntity Update(TEntity entity)
@@ -39,20 +51,15 @@ namespace EbayPlatform.Infrastructure.Repository
             return DbContext.Update(entity).Entity;
         }
 
-        public virtual Task<TEntity> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)
-        {
-            return Task.FromResult(Update(entity));
-        }
 
-        public virtual bool Remove(Entity entity)
+        public virtual void Remove(TEntity entity)
         {
             DbContext.Remove(entity);
-            return true;
         }
 
-        public virtual Task<bool> RemoveAsync(Entity entity)
+        public virtual void RemoveRange(IEnumerable<TEntity> entities)
         {
-            return Task.FromResult(Remove(entity));
+            DbContext.Remove(entities);
         }
 
         public virtual bool Delete(TKey id)
@@ -68,7 +75,7 @@ namespace EbayPlatform.Infrastructure.Repository
 
         public virtual async Task<bool> DeleteAsync(TKey id, CancellationToken cancellationToken = default)
         {
-            var entity = await DbContext.FindAsync<TEntity>(id, cancellationToken);
+            var entity = await DbContext.FindAsync<TEntity>(id, cancellationToken).ConfigureAwait(false);
             if (entity == null)
             {
                 return false;
@@ -84,7 +91,7 @@ namespace EbayPlatform.Infrastructure.Repository
 
         public virtual async Task<TEntity> GetAsync(TKey id, CancellationToken cancellationToken = default)
         {
-            return await DbContext.FindAsync<TEntity>(id, cancellationToken);
+            return await DbContext.FindAsync<TEntity>(id, cancellationToken).ConfigureAwait(false);
         }
 
     }

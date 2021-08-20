@@ -20,5 +20,12 @@ namespace EbayPlatform.Domain.Interfaces
         /// <param name="jobName"></param>
         /// <returns></returns>
         bool CheckJobName(string jobName);
+
+        /// <summary>
+        /// 根据任务名称获取任务配置作业数据
+        /// </summary>
+        /// <param name="jobName"></param>
+        /// <returns></returns>
+        SyncTaskJobConfig GetSyncTaskJobConfigByJobName(string jobName);
     }
 }
