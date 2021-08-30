@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Quartz;
 using Quartz.Impl;
 using Quartz.Spi;
-using System.Collections.Specialized;
 
 namespace EbayPlatform.Infrastructure.Quartz
 {
@@ -13,21 +13,7 @@ namespace EbayPlatform.Infrastructure.Quartz
         public static void UseQuartz(this IServiceCollection services)
         {
             services.AddSingleton<IJobFactory, JobFactory>();
-
-            services.AddSingleton(provider =>
-            {
-                var props = new NameValueCollection
-                {
-                    { "quartz.serializer.type", "binary" }
-                };
-
-                var schedulerFactory = new StdSchedulerFactory(props);
-                var scheduler = schedulerFactory.GetScheduler().Result;
-                scheduler.JobFactory = provider.GetService<IJobFactory>();
-                scheduler.Start();
-
-                return scheduler;
-            });
+            services.AddSingleton<ISchedulerFactory, StdSchedulerFactory>();
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using MediatR;
+﻿using EbayPlatform.Domain.Commands.StystemLog;
+using MediatR;
 using Quartz;
+using System;
 using System.Threading.Tasks;
 
 namespace EbayPlatform.Infrastructure.Quartz.Jobs
@@ -18,8 +20,7 @@ namespace EbayPlatform.Infrastructure.Quartz.Jobs
 
         public Task Execute(IJobExecutionContext context)
         {
-           // return _mediator.Send();
-            return null;
+            return _mediator.Send(new DeleteSystemLogCommand(createDate: DateTime.Now));
         }
     }
 }

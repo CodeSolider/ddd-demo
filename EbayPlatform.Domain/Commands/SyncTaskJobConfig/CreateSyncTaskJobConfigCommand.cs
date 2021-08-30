@@ -42,9 +42,7 @@ namespace EbayPlatform.Domain.Commands.SyncTaskJobConfig
 
 
 
-
         public CreateSyncTaskJobConfigCommand() { }
-
         public CreateSyncTaskJobConfigCommand(string jobName, string jobDesc,
             string jobClassFullName, string cron, string cronDesc)
         {

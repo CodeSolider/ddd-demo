@@ -1,5 +1,6 @@
 ﻿using EbayPlatform.Domain.Core.Abstractions;
 using EbayPlatform.Domain.Models;
+using EbayPlatform.Domain.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.Threading;
@@ -16,10 +17,11 @@ namespace EbayPlatform.Domain.Interfaces
         /// 获取过期的系统日志
         /// </summary>
         /// <param name="createDate"></param>
+        /// <param name="logType"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<IPagedList<SystemLog>> GetExpireSystemLogListAsync(DateTime createDate,
-               CancellationToken cancellationToken = default);
+               LogType? logType,CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 添加日志

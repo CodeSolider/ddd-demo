@@ -13,7 +13,7 @@ namespace EbayPlatform.Domain.Interfaces
     {
         IUnitOfWork UnitOfWork { get; }
         TEntity Add(TEntity entity);
-        ValueTask<TEntity> AddAsync(TEntity entity);
+        ValueTask<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default);
         bool AddRange(List<TEntity> entities);
         Task AddRangeAsync(List<TEntity> entities, CancellationToken cancellationToken = default);
         TEntity Update(TEntity entity);

@@ -4,7 +4,6 @@ D:\Doc\Demo\EbayPlatform\EbayPlatform.Domain\bin\Debug\net5.0\ref\EbayPlatform.D
 D:\Doc\Demo\EbayPlatform\EbayPlatform.Domain\bin\Debug\net5.0\EbayPlatform.Domain.pdb
 D:\Doc\Demo\EbayPlatform\EbayPlatform.Domain\bin\Debug\net5.0\EbayPlatform.Domain.Core.dll
 D:\Doc\Demo\EbayPlatform\EbayPlatform.Domain\bin\Debug\net5.0\EbayPlatform.Domain.Core.pdb
-D:\Doc\Demo\EbayPlatform\EbayPlatform.Domain\obj\Debug\net5.0\EbayPlatform.Domain.csprojAssemblyReference.cache
 D:\Doc\Demo\EbayPlatform\EbayPlatform.Domain\obj\Debug\net5.0\EbayPlatform.Domain.GeneratedMSBuildEditorConfig.editorconfig
 D:\Doc\Demo\EbayPlatform\EbayPlatform.Domain\obj\Debug\net5.0\EbayPlatform.Domain.AssemblyInfoInputs.cache
 D:\Doc\Demo\EbayPlatform\EbayPlatform.Domain\obj\Debug\net5.0\EbayPlatform.Domain.AssemblyInfo.cs
@@ -13,3 +12,4 @@ D:\Doc\Demo\EbayPlatform\EbayPlatform.Domain\obj\Debug\net5.0\EbayPlatform.Domai
 D:\Doc\Demo\EbayPlatform\EbayPlatform.Domain\obj\Debug\net5.0\EbayPlatform.Domain.dll
 D:\Doc\Demo\EbayPlatform\EbayPlatform.Domain\obj\Debug\net5.0\ref\EbayPlatform.Domain.dll
 D:\Doc\Demo\EbayPlatform\EbayPlatform.Domain\obj\Debug\net5.0\EbayPlatform.Domain.pdb
+D:\Doc\Demo\EbayPlatform\EbayPlatform.Domain\obj\Debug\net5.0\EbayPlatform.Domain.csproj.AssemblyReference.cache

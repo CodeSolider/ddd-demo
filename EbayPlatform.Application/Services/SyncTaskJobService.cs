@@ -8,6 +8,7 @@ using EbayPlatform.Domain.Commands.SyncTaskJobConfig;
 using Mapster;
 using System.Threading.Tasks;
 using System.Threading;
+using System;
 
 namespace EbayPlatform.Application.Services
 {
@@ -17,27 +18,35 @@ namespace EbayPlatform.Application.Services
     public class SyncTaskJobService : ISyncTaskJobService, IDependency
     {
         private readonly IMediator _mediator;
-        private readonly IScheduler _scheduler;
+        private readonly ISchedulerFactory _schedulerFactory;
+        private readonly IServiceProvider _serviceProvider;
         private readonly ISyncTaskJobConfigRepository _syncTaskJobConfigRepository;
         public SyncTaskJobService(IMediator mediator,
-            IScheduler scheduler,
+            ISchedulerFactory schedulerFactory,
+            IServiceProvider serviceProvider,
             ISyncTaskJobConfigRepository syncTaskJobConfigRepository)
         {
             _mediator = mediator;
+            _schedulerFactory = schedulerFactory;
+            _serviceProvider = serviceProvider;
             _syncTaskJobConfigRepository = syncTaskJobConfigRepository;
-            _scheduler = scheduler;
         }
 
         /// <summary>
         /// 执行所有任务
         /// </summary>
-        public void ExecuteAllTask()
+        public async Task ExecuteAllTaskAysnc(CancellationToken cancellationToken)
         {
-            var syncTaskJobConfigList = _syncTaskJobConfigRepository.GetSyncTaskJobConfigList();
+            IScheduler scheduler = await _schedulerFactory.GetScheduler(cancellationToken).ConfigureAwait(false);
+            var syncTaskJobConfigList = await _syncTaskJobConfigRepository.GetSyncTaskJobConfigListAsync(cancellationToken);
             syncTaskJobConfigList.ForEach(async syncTaskJobConfigItem =>
             {
-                await SchedulerProvider.StartJob(_scheduler, syncTaskJobConfigItem);
+                await SchedulerProvider
+                      .StartJob(scheduler, syncTaskJobConfigItem)
+                      .ConfigureAwait(false);
             });
+            scheduler.JobFactory = new JobFactory(_serviceProvider);
+            await scheduler.Start(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -47,7 +56,10 @@ namespace EbayPlatform.Application.Services
         public async Task<int> CreateSyncTaskJobAsync(SyncTaskJobConfigDto syncTaskJobConfigDto,
             CancellationToken cancellationToken = default)
         {
-            return await _mediator.Send(syncTaskJobConfigDto.Adapt<CreateSyncTaskJobConfigCommand>(), cancellationToken).ConfigureAwait(false);
+            return await _mediator
+                        .Send(syncTaskJobConfigDto.Adapt<CreateSyncTaskJobConfigCommand>(),
+                              cancellationToken)
+                        .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -56,7 +68,10 @@ namespace EbayPlatform.Application.Services
         /// <returns></returns>
         public async Task<bool> DeleteSyncTaskJobAsync(string jobName, CancellationToken cancellationToken = default)
         {
-            return await _mediator.Send(new DeleteSyncTaskJobConfigCommand(jobName), cancellationToken).ConfigureAwait(false);
+            return await _mediator
+                        .Send(new DeleteSyncTaskJobConfigCommand(jobName),
+                              cancellationToken)
+                        .ConfigureAwait(false);
         }
 
 

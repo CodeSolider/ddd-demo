@@ -1,5 +1,7 @@
 ﻿using EbayPlatform.Domain.Models;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace EbayPlatform.Domain.Interfaces
 {
@@ -12,7 +14,7 @@ namespace EbayPlatform.Domain.Interfaces
         /// 获取所有的任务配置作业数据
         /// </summary>
         /// <returns></returns>
-        List<SyncTaskJobConfig> GetSyncTaskJobConfigList();
+        Task<List<SyncTaskJobConfig>> GetSyncTaskJobConfigListAsync(CancellationToken cancellationToken);
 
         /// <summary>
         /// 检查任务名称是否重复
@@ -26,6 +28,6 @@ namespace EbayPlatform.Domain.Interfaces
         /// </summary>
         /// <param name="jobName"></param>
         /// <returns></returns>
-        SyncTaskJobConfig GetSyncTaskJobConfigByJobName(string jobName);
+        Task<SyncTaskJobConfig> GetSyncTaskJobConfigByJobNameAsync(string jobName);
     }
 }

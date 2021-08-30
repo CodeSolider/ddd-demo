@@ -13,7 +13,6 @@ namespace EbayPlatform.Domain.Commands.SyncTaskJobConfig
         public string JobName { get; private set; }
 
         public DeleteSyncTaskJobConfigCommand() { }
-
         public DeleteSyncTaskJobConfigCommand(string jobName)
         {
             this.JobName = jobName;

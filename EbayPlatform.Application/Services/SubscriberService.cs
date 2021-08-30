@@ -1,5 +1,4 @@
 ﻿using DotNetCore.CAP;
-using EbayPlatform.Domain.IntegrationEvents.Student;
 using EbayPlatform.Domain.IntegrationEvents.SyncTaskJobConfig;
 using System;
 
@@ -10,12 +9,6 @@ namespace EbayPlatform.Application.IntegrationEvents
     /// </summary>
     public class SubscriberService : ICapSubscribe, ISubscriberService
     {
-        [CapSubscribe(nameof(StudentCreated))]
-        public void StudentCreated(StudentCreatedIntegrationEvent @event)
-        {
-            Console.WriteLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss}");
-        }
-
         /// <summary>
         /// 创建同步任务配置信息
         /// </summary>

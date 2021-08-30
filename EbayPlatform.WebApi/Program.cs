@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 
 namespace EbayPlatform.WebApi
@@ -14,6 +15,8 @@ namespace EbayPlatform.WebApi
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    // add commands
+                    new ConfigurationBuilder().AddCommandLine(args).Build();
                     webBuilder.UseStartup<Startup>();
                 });
     }

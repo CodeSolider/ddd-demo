@@ -8,21 +8,28 @@ using System.Threading.Tasks;
 
 namespace EbayPlatform.Domain.CommandHandlers.StystemLog
 {
-    public class DeleteSystemLogCommonHandler : IRequestHandler<DeleteSystemLogCommand, bool>
+    /// <summary>
+    /// 系统日志
+    /// </summary>
+    public class SystemLogCommonHandler : IRequestHandler<DeleteSystemLogCommand, bool>
     {
         private readonly ISystemLogRepository _systemLogRepository;
-        private readonly ILogger _logger;
-        public DeleteSystemLogCommonHandler(ISystemLogRepository systemLogRepository, ILogger logger)
+        private readonly ILogger<SystemLogCommonHandler> _logger;
+        public SystemLogCommonHandler(ISystemLogRepository systemLogRepository,
+            ILogger<SystemLogCommonHandler> logger)
         {
             _systemLogRepository = systemLogRepository;
             _logger = logger;
         }
 
+
         public async Task<bool> Handle(DeleteSystemLogCommand request, CancellationToken cancellationToken)
         {
             try
             {
-                var systemLogPagedList = await _systemLogRepository.GetExpireSystemLogListAsync(request.CreateDate).ConfigureAwait(false);
+                var systemLogPagedList = await _systemLogRepository
+                                                .GetExpireSystemLogListAsync(request.CreateDate, request.LogType, cancellationToken)
+                                                .ConfigureAwait(false);
                 _systemLogRepository.RemoveRange(systemLogPagedList.Items);
                 _logger.LogWarning($"日志:{JsonConvert.SerializeObject(systemLogPagedList.Items)}已被删除");
                 return true;
@@ -34,5 +41,7 @@ namespace EbayPlatform.Domain.CommandHandlers.StystemLog
                 return false;
             }
         }
+
+
     }
 }

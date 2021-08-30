@@ -1,5 +1,5 @@
-﻿using EbayPlatform.Infrastructure.Core.Behaviors;
-using EbayPlatform.Infrastructure.Core.Transaction;
+﻿using DotNetCore.CAP;
+using EbayPlatform.Infrastructure.Core.Behaviors;
 using Microsoft.Extensions.Logging;
 
 namespace EbayPlatform.Infrastructure.Context
@@ -9,12 +9,13 @@ namespace EbayPlatform.Infrastructure.Context
     /// </summary>
     /// <typeparam name="TRequest"></typeparam>
     /// <typeparam name="TResponse"></typeparam>
-    public class EbayPlatformContextTransactionBehavior<TRequest, TResponse> : TransactionBehavior<EbayPlatformDbContext, TRequest, TResponse>
+    public class EbayPlatformContextTransactionBehavior<TRequest, TResponse> :
+        TransactionBehavior<EbayPlatformDbContext, TRequest, TResponse>
     {
         public EbayPlatformContextTransactionBehavior(EbayPlatformDbContext dbContext,
-            ITransaction transaction,
+            ICapPublisher capPublisher,
             ILogger<EbayPlatformContextTransactionBehavior<TRequest, TResponse>> logger)
-            : base(dbContext, transaction, logger)
+            : base(dbContext, capPublisher, logger)
         {
         }
     }

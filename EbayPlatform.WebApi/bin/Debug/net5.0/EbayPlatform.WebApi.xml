@@ -92,9 +92,32 @@
             <param name="syncTaskJobConfigDto"></param>
             <returns></returns>
         </member>
+        <member name="M:EbayPlatform.WebApi.Controllers.SyncTaskJobConfigController.DeleteSyncTaskJob(System.String)">
+            <summary>
+            删除同步任务数据
+            </summary>
+            <param name="jobName"></param>
+            <returns></returns>
+        </member>
         <member name="T:EbayPlatform.WebApi.Extensions.SwaggerExtensions">
             <summary>
             Swagger 扩展类
+            </summary>
+        </member>
+        <member name="T:EbayPlatform.WebApi.Startup">
+            <summary>
+            Startup
+            </summary>
+        </member>
+        <member name="M:EbayPlatform.WebApi.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Startup ctor
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:EbayPlatform.WebApi.Startup.Configuration">
+            <summary>
+            Startup Configuration
             </summary>
         </member>
     </members>

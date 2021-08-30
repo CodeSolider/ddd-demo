@@ -22,14 +22,31 @@ namespace EbayPlatform.Domain.Commands.StystemLog
         public DateTime CreateDate { get; private set; }
 
 
-
         public DeleteSystemLogCommand() { }
-        public DeleteSystemLogCommand(int objectId, LogType logType, DateTime createDate)
+
+        /// <summary>
+        /// 按照时间删除
+        /// </summary>
+        /// <param name="createDate">创建日期</param>
+        public DeleteSystemLogCommand(DateTime createDate)
         {
-            this.ObjectId = objectId;
-            LogType = logType;
             CreateDate = createDate;
         }
 
+        /// <summary>
+        /// 按照日志类型删除
+        /// </summary>
+        /// <param name="logType">日志类型</param>
+        public DeleteSystemLogCommand(LogType logType)
+        {
+            LogType = logType;
+        }
+
+        public DeleteSystemLogCommand(DateTime createDate,
+            LogType logType)
+        {
+            CreateDate = createDate;
+            LogType = logType;
+        }
     }
 }

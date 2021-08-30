@@ -13,7 +13,8 @@ namespace EbayPlatform.Infrastructure.Repository
     /// 定义通用存储库的实现
     /// </summary>
     public abstract class Repository<TEntity, TKey, TDbContext> :
-        IRepository<TEntity, TKey> where TEntity : Entity<TKey>, IAggregateRoot where TDbContext : EFContext
+        IRepository<TEntity, TKey> where TEntity : Entity<TKey>, IAggregateRoot
+        where TDbContext : EFContext
     {
         protected virtual TDbContext DbContext { get; }
 
@@ -30,9 +31,9 @@ namespace EbayPlatform.Infrastructure.Repository
             return DbContext.Add(entity).Entity;
         }
 
-        public virtual async ValueTask<TEntity> AddAsync(TEntity entity)
+        public virtual async ValueTask<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
-            return (await DbContext.AddAsync(entity).ConfigureAwait(false)).Entity;
+            return (await DbContext.AddAsync(entity, cancellationToken).ConfigureAwait(false)).Entity;
         }
 
         public virtual bool AddRange(List<TEntity> entities)
@@ -75,7 +76,8 @@ namespace EbayPlatform.Infrastructure.Repository
 
         public virtual async Task<bool> DeleteAsync(TKey id, CancellationToken cancellationToken = default)
         {
-            var entity = await DbContext.FindAsync<TEntity>(id, cancellationToken).ConfigureAwait(false);
+            var entity = await DbContext.FindAsync<TEntity>(id, cancellationToken)
+                                        .ConfigureAwait(false);
             if (entity == null)
             {
                 return false;

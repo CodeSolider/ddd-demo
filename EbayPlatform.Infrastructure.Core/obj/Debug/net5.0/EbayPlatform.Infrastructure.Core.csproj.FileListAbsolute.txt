@@ -1,6 +1,4 @@
 D:\Doc\Demo\EbayPlatform\EbayPlatform.Infrastructure.Core\bin\Debug\net5.0\EbayPlatform.Infrastructure.Core.deps.json
-D:\Doc\Demo\EbayPlatform\EbayPlatform.Infrastructure.Core\bin\Debug\net5.0\EbayPlatform.Infrastructure.Core.runtimeconfig.json
-D:\Doc\Demo\EbayPlatform\EbayPlatform.Infrastructure.Core\bin\Debug\net5.0\EbayPlatform.Infrastructure.Core.runtimeconfig.dev.json
 D:\Doc\Demo\EbayPlatform\EbayPlatform.Infrastructure.Core\bin\Debug\net5.0\EbayPlatform.Infrastructure.Core.dll
 D:\Doc\Demo\EbayPlatform\EbayPlatform.Infrastructure.Core\bin\Debug\net5.0\ref\EbayPlatform.Infrastructure.Core.dll
 D:\Doc\Demo\EbayPlatform\EbayPlatform.Infrastructure.Core\bin\Debug\net5.0\EbayPlatform.Infrastructure.Core.pdb
@@ -8,7 +6,6 @@ D:\Doc\Demo\EbayPlatform\EbayPlatform.Infrastructure.Core\bin\Debug\net5.0\EbayP
 D:\Doc\Demo\EbayPlatform\EbayPlatform.Infrastructure.Core\bin\Debug\net5.0\EbayPlatform.Domain.dll
 D:\Doc\Demo\EbayPlatform\EbayPlatform.Infrastructure.Core\bin\Debug\net5.0\EbayPlatform.Domain.pdb
 D:\Doc\Demo\EbayPlatform\EbayPlatform.Infrastructure.Core\bin\Debug\net5.0\EbayPlatform.Domain.Core.pdb
-D:\Doc\Demo\EbayPlatform\EbayPlatform.Infrastructure.Core\obj\Debug\net5.0\EbayPlatform.Infrastructure.Core.csprojAssemblyReference.cache
 D:\Doc\Demo\EbayPlatform\EbayPlatform.Infrastructure.Core\obj\Debug\net5.0\EbayPlatform.Infrastructure.Core.GeneratedMSBuildEditorConfig.editorconfig
 D:\Doc\Demo\EbayPlatform\EbayPlatform.Infrastructure.Core\obj\Debug\net5.0\EbayPlatform.Infrastructure.Core.AssemblyInfoInputs.cache
 D:\Doc\Demo\EbayPlatform\EbayPlatform.Infrastructure.Core\obj\Debug\net5.0\EbayPlatform.Infrastructure.Core.AssemblyInfo.cs
@@ -17,4 +14,4 @@ D:\Doc\Demo\EbayPlatform\EbayPlatform.Infrastructure.Core\obj\Debug\net5.0\EbayP
 D:\Doc\Demo\EbayPlatform\EbayPlatform.Infrastructure.Core\obj\Debug\net5.0\EbayPlatform.Infrastructure.Core.dll
 D:\Doc\Demo\EbayPlatform\EbayPlatform.Infrastructure.Core\obj\Debug\net5.0\ref\EbayPlatform.Infrastructure.Core.dll
 D:\Doc\Demo\EbayPlatform\EbayPlatform.Infrastructure.Core\obj\Debug\net5.0\EbayPlatform.Infrastructure.Core.pdb
-D:\Doc\Demo\EbayPlatform\EbayPlatform.Infrastructure.Core\obj\Debug\net5.0\EbayPlatform.Infrastructure.Core.genruntimeconfig.cache
+D:\Doc\Demo\EbayPlatform\EbayPlatform.Infrastructure.Core\obj\Debug\net5.0\EbayPlatform.Infrastructure.Core.csproj.AssemblyReference.cache

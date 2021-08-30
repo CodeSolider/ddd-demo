@@ -182,7 +182,11 @@
           "dependencies": {
             "DotNetCore.CAP": {
               "target": "Package",
-              "version": "[5.1.2, )"
+              "version": "[5.1.3, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.9, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -254,27 +258,15 @@
           "dependencies": {
             "DotNetCore.CAP.RabbitMQ": {
               "target": "Package",
-              "version": "[5.1.2, )"
+              "version": "[5.1.3, )"
             },
             "DotNetCore.CAP.SqlServer": {
               "target": "Package",
-              "version": "[5.1.2, )"
-            },
-            "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.1.3, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[5.0.8, )"
-            },
-            "Microsoft.EntityFrameworkCore.Tools": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Microsoft.Extensions.Configuration.Binder": {
               "target": "Package",
@@ -353,7 +345,7 @@
           "dependencies": {
             "Quartz": {
               "target": "Package",
-              "version": "[3.3.2, )"
+              "version": "[3.3.3, )"
             }
           },
           "imports": [
@@ -423,15 +415,15 @@
               "target": "Package",
               "version": "[9.0.0, )"
             },
-            "Microsoft.EntityFrameworkCore.Design": {
+            "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.8, )"
+              "version": "[5.0.9, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[5.6.3, )"
+              "version": "[6.1.5, )"
             }
           },
           "imports": [

@@ -3,6 +3,7 @@ using Quartz;
 using System.Reflection;
 using System;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace EbayPlatform.Infrastructure.Quartz
 {
@@ -16,25 +17,28 @@ namespace EbayPlatform.Infrastructure.Quartz
         /// </summary>
         /// <param name="scheduler"></param>
         /// <param name="syncTaskJobConfig"></param>
-        public static async Task StartJob(IScheduler scheduler, SyncTaskJobConfig syncTaskJobConfig)
+        public static async Task StartJob(IScheduler scheduler,
+            SyncTaskJobConfig syncTaskJobConfig,
+            CancellationToken cancellationToken = default)
         {
             Assembly assembly = Assembly.Load(syncTaskJobConfig.JobClassFullName);
             if (assembly == null)
             {
-                throw new ArgumentNullException($"未能加载类型[{syncTaskJobConfig.JobClassFullName}]");
+                throw new ArgumentNullException($"未能加载类型[{syncTaskJobConfig.JobClassFullName}],任务名称[{syncTaskJobConfig.JobName}]");
             }
 
-            var job = JobBuilder.Create(assembly.GetType())
-                .WithIdentity(syncTaskJobConfig.JobName)
-                .Build();
+            IJobDetail job = JobBuilder.Create(assembly.GetType())
+                                       .WithIdentity(syncTaskJobConfig.JobName)
+                                       .Build();
 
-            var trigger = TriggerBuilder.Create()
-                .WithIdentity($"{syncTaskJobConfig.JobName}.trigger")
-                .StartNow()
-                .WithCronSchedule(syncTaskJobConfig.Cron)
-                .Build();
+            ITrigger trigger = TriggerBuilder.Create()
+                                             .WithIdentity($"{syncTaskJobConfig.JobName}.trigger")
+                                             .StartNow()
+                                             .WithCronSchedule(syncTaskJobConfig.Cron)
+                                             .Build();
 
-            await scheduler.ScheduleJob(job, trigger);
+            await scheduler.ScheduleJob(job, trigger, cancellationToken)
+                           .ConfigureAwait(false);
         }
     }
 }

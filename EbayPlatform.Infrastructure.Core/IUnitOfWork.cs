@@ -1,13 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
+using System;
+using System.Threading;
 using System.Threading.Tasks;
 
-namespace EbayPlatform.Infrastructure.Core.Transaction
+namespace EbayPlatform.Domain.Interfaces
 {
     /// <summary>
-    /// 事务
+    /// 定义工作单元的接口
     /// </summary>
-    public interface ITransaction
+    public interface IUnitOfWork : IDisposable
     {
+        /// <summary>
+        /// 异步 统一保存
+        /// </summary>
+        /// <returns></returns>
+        Task<bool> CommitAsync(CancellationToken cancellationToken = default);
+
         #region 事务
         /// <summary>
         /// 获取当前事物

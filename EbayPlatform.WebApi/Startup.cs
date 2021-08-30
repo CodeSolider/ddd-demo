@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Reflection;
 
 namespace EbayPlatform.WebApi
 {
@@ -40,17 +41,18 @@ namespace EbayPlatform.WebApi
 
             #region MediatR
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(EbayPlatformContextTransactionBehavior<,>));
-            services.AddMediatR(typeof(Student).Assembly, typeof(Program).Assembly);
+            services.AddMediatR(Assembly.Load(Configuration.GetSection("MediatRPath").Value), typeof(Program).Assembly);
             #endregion
 
-            services.AddSqlServerDomainContext<EbayPlatformDbContext>(Configuration.GetConnectionString("DefaultConnection"));
+            services.AddSqlServerDomainContext<EbayPlatformDbContext>
+                     (Configuration.GetConnectionString("DefaultConnection"));
             services.AddAutoDIService();
 
             #region Cap
             services.AddTransient<ISubscriberService, SubscriberService>();
             services.AddCapService<EbayPlatformDbContext>(Configuration);
             #endregion
-
+             
             #region Quartz
             services.UseQuartz();
             #endregion

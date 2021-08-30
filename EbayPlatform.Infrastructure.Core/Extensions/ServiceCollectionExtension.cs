@@ -46,7 +46,7 @@ namespace EbayPlatform.Infrastructure.Core.Extensions
 
             return services.AddDomainContext<TDbContext>(builder =>
             {
-                builder.UseSqlServer(connectionString, options => 
+                builder.UseSqlServer(connectionString, options =>
                                                         options.MigrationsAssembly
                                                         (typeof(TDbContext).GetTypeInfo().Assembly.GetName().Name));
             }, serviceLifetime);
@@ -59,7 +59,8 @@ namespace EbayPlatform.Infrastructure.Core.Extensions
         /// <param name="services"></param>
         /// <param name="Configuration"></param>
         /// <returns></returns>
-        public static IServiceCollection AddCapService<TDbContext>(this IServiceCollection services, IConfiguration Configuration)
+        public static IServiceCollection AddCapService<TDbContext>(this IServiceCollection services,
+            IConfiguration Configuration)
               where TDbContext : EFContext
         {
             services.AddCap(options =>

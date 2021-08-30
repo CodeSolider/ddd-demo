@@ -4,6 +4,6 @@
     {
         public SyncTaskJobConfigCreatedIntegrationEvent(int syncTaskJobConfigId) => this.SyncTaskJobConfigId = syncTaskJobConfigId;
 
-        public int SyncTaskJobConfigId { get; set; }
+        public int SyncTaskJobConfigId { get; }
     }
 }

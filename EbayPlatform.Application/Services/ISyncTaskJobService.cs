@@ -12,7 +12,9 @@ namespace EbayPlatform.Application.Services
         /// <summary>
         /// 执行所有任务
         /// </summary>
-        void ExecuteAllTask();
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task ExecuteAllTaskAysnc(CancellationToken cancellationToken);
 
         /// <summary>
         /// 添加一个新任务

@@ -2,15 +2,19 @@
 using EbayPlatform.Domain.Models;
 using EbayPlatform.Infrastructure.Context;
 using EbayPlatform.Infrastructure.Core.Dependency;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace EbayPlatform.Infrastructure.Repository
 {
     /// <summary>
     /// 同步任务作业配置仓储
     /// </summary>
-    public class SyncTaskJobConfigRepository : Repository<SyncTaskJobConfig, int, EbayPlatformDbContext>, ISyncTaskJobConfigRepository, IDependency
+    public class SyncTaskJobConfigRepository : Repository<SyncTaskJobConfig, int, EbayPlatformDbContext>,
+        ISyncTaskJobConfigRepository, IDependency
     {
         public SyncTaskJobConfigRepository(EbayPlatformDbContext dbContext)
             : base(dbContext) { }
@@ -19,9 +23,9 @@ namespace EbayPlatform.Infrastructure.Repository
         /// 获取所有的任务配置作业数据
         /// </summary>
         /// <returns></returns>
-        public List<SyncTaskJobConfig> GetSyncTaskJobConfigList()
+        public async Task<List<SyncTaskJobConfig>> GetSyncTaskJobConfigListAsync(CancellationToken cancellationToken)
         {
-            return this.NoTrackingQueryable.ToList();
+            return await this.NoTrackingQueryable.ToListAsync(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -40,9 +44,11 @@ namespace EbayPlatform.Infrastructure.Repository
         /// <param name="jobName"></param>
         /// <returns></returns>
 
-        public SyncTaskJobConfig GetSyncTaskJobConfigByJobName(string jobName)
+        public async Task<SyncTaskJobConfig> GetSyncTaskJobConfigByJobNameAsync(string jobName)
         {
-            return this.NoTrackingQueryable.FirstOrDefault(o => o.JobName.Equals(jobName));
+            return await this.NoTrackingQueryable
+                             .FirstOrDefaultAsync(o => o.JobName.Equals(jobName))
+                             .ConfigureAwait(false);
         }
 
     }

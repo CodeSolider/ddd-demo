@@ -49,12 +49,12 @@ namespace EbayPlatform.Domain.Models
         /// <summary>
         /// 同步时间
         /// </summary>
-        public DateTimeOffset CreateDate { get; private set; } = DateTimeOffset.Now;
+        public DateTime CreateDate { get; private set; } = DateTime.Now;
 
         /// <summary>
         /// 同步修改时间
         /// </summary>
-        public DateTimeOffset? ModifyDate { get; private set; } = DateTimeOffset.Now;
+        public DateTime? ModifyDate { get; private set; } = DateTime.Now;
 
         /// <summary>
         /// 任务参数

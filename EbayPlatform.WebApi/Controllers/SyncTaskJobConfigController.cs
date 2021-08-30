@@ -33,16 +33,16 @@ namespace EbayPlatform.WebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ApiResult ExecuteAllTask()
+        public async Task<ApiResult> ExecuteAllTask()
         {
             try
             {
-                _syncTaskJobService.ExecuteAllTask();
+                await _syncTaskJobService.ExecuteAllTaskAysnc(HttpContext.RequestAborted).ConfigureAwait(false);
                 return ApiResult.OK("执行所有可用任务成功");
             }
             catch (System.Exception ex)
             {
-                _logger.LogInformation($"{nameof(ExecuteAllTask)}发生异常");
+                _logger.LogInformation($"执行所有任务发生异常");
                 _logger.LogError($"{ex.Message}");
                 return ApiResult.Fail("执行所有可用任务发生异常", $"异常信息:{ex.Message}");
             }
@@ -58,12 +58,16 @@ namespace EbayPlatform.WebApi.Controllers
         {
             try
             {
-                int syncTaskJobId = await _syncTaskJobService.CreateSyncTaskJobAsync(syncTaskJobConfigDto, HttpContext.RequestAborted).ConfigureAwait(false);
+                int syncTaskJobId = await _syncTaskJobService
+                                          .CreateSyncTaskJobAsync(syncTaskJobConfigDto,
+                                                                   HttpContext.RequestAborted)
+                                          .ConfigureAwait(false);
+
                 return ApiResult.OK("创建任务配置信息成功", syncTaskJobId);
             }
             catch (System.Exception ex)
             {
-                _logger.LogInformation($"{nameof(CreateSyncTaskJob)}发生异常");
+                _logger.LogInformation($"创建同步任务发生异常");
                 _logger.LogError($"{ex.Message}");
                 return ApiResult.Fail("创建任务配置信息发生异常", $"异常信息:{ex.Message}");
             }
@@ -79,13 +83,16 @@ namespace EbayPlatform.WebApi.Controllers
         {
             try
             {
-                return ApiResult.OK("删除同步任务数据成功", await _syncTaskJobService.DeleteSyncTaskJobAsync(jobName, HttpContext.RequestAborted).ConfigureAwait(false));
+                return ApiResult.OK("删除同步任务数据成功", await _syncTaskJobService
+                                                              .DeleteSyncTaskJobAsync(jobName, HttpContext.RequestAborted)
+                                                              .ConfigureAwait(false));
             }
             catch (System.Exception ex)
             {
-                throw;
+                _logger.LogInformation($"删除同步任务数据发生异常");
+                _logger.LogError($"{ex.Message}");
+                return ApiResult.Fail("删除同步任务数据发生异常", $"异常信息:{ex.Message}");
             }
-
         }
 
 

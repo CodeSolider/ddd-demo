@@ -3,5 +3,5 @@
   b.Remove-Migration （删除迁移文件）
 
 2.生成迁移文件:
-  a.Add-Migration Name
+  a.Add-Migration Name(InitialCreate)
   b.Update-Database
