@@ -7,8 +7,6 @@ namespace EbayPlatform.Domain.Events.SyncTaskJobConfig
         public Models.SyncTaskJobConfig SyncTaskJobConfig { get; private set; }
 
         public CreateSyncTaskJobConfigDomainEvent(Models.SyncTaskJobConfig syncTaskJobConfig)
-        {
-            this.SyncTaskJobConfig = syncTaskJobConfig;
-        }
+               => this.SyncTaskJobConfig = syncTaskJobConfig;
     }
 }

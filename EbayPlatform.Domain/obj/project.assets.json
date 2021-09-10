@@ -256,7 +256,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
-          "MediatR": "9.0.0"
+          "MediatR": "9.0.0",
+          "Microsoft.EntityFrameworkCore": "5.0.9"
         },
         "compile": {
           "bin/placeholder/EbayPlatform.Domain.Core.dll": {}
@@ -803,7 +804,6 @@
     "net5.0": [
       "DotNetCore.CAP >= 5.1.3",
       "EbayPlatform.Domain.Core >= 1.0.0",
-      "Microsoft.EntityFrameworkCore >= 5.0.9",
       "Newtonsoft.Json >= 13.0.1"
     ]
   },
@@ -858,10 +858,6 @@
           "DotNetCore.CAP": {
             "target": "Package",
             "version": "[5.1.3, )"
-          },
-          "Microsoft.EntityFrameworkCore": {
-            "target": "Package",
-            "version": "[5.0.9, )"
           },
           "Newtonsoft.Json": {
             "target": "Package",

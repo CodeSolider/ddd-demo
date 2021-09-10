@@ -1,7 +1,7 @@
 ﻿using EbayPlatform.Domain.Interfaces;
 using EbayPlatform.Domain.Models;
 using EbayPlatform.Infrastructure.Context;
-using EbayPlatform.Infrastructure.Core.Dependency;
+using EbayPlatform.Infrastructure.Core;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +20,14 @@ namespace EbayPlatform.Infrastructure.Repository
             : base(dbContext) { }
 
         /// <summary>
-        /// 获取所有的任务配置作业数据
+        /// 获取所有的未启动的任务配置作业数据
         /// </summary>
         /// <returns></returns>
-        public async Task<List<SyncTaskJobConfig>> GetSyncTaskJobConfigListAsync(CancellationToken cancellationToken)
+        public async Task<List<SyncTaskJobConfig>> GetUnStartSyncTaskJobConfigListAsync(CancellationToken cancellationToken)
         {
-            return await this.NoTrackingQueryable.ToListAsync(cancellationToken).ConfigureAwait(false);
+            return await this.NoTrackingQueryable
+                             .IgnoreQueryFilters()
+                             .ToListAsync(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -39,17 +41,27 @@ namespace EbayPlatform.Infrastructure.Repository
         }
 
         /// <summary>
+        /// 根据Id获取任务配置作业数据
+        /// </summary>
+        /// <param name="syncTaskJobConfigId"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<SyncTaskJobConfig> GetSyncTaskJobConfigByIdAsync(int syncTaskJobConfigId,
+            CancellationToken cancellationToken = default)
+        {
+            return await this.GetAsync(syncTaskJobConfigId, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
         /// 根据任务名称获取任务配置作业数据
         /// </summary>
         /// <param name="jobName"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-
-        public async Task<SyncTaskJobConfig> GetSyncTaskJobConfigByJobNameAsync(string jobName)
+        public async Task<SyncTaskJobConfig> GetSyncTaskJobConfigByNameAsync(string jobName,
+           CancellationToken cancellationToken = default)
         {
-            return await this.NoTrackingQueryable
-                             .FirstOrDefaultAsync(o => o.JobName.Equals(jobName))
-                             .ConfigureAwait(false);
+            return await this.GetFirstOrDefaultAsync(o => o.JobName.Equals(jobName), cancellationToken).ConfigureAwait(false);
         }
-
     }
 }

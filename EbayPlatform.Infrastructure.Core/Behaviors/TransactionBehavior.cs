@@ -1,6 +1,5 @@
 ﻿using DotNetCore.CAP;
 using EbayPlatform.Infrastructure.Core.Extensions;
-using EbayPlatform.Infrastructure.Core.Transaction;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;

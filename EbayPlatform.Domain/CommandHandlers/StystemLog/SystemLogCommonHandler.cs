@@ -22,17 +22,22 @@ namespace EbayPlatform.Domain.CommandHandlers.StystemLog
             _logger = logger;
         }
 
-
+        /// <summary>
+        /// 根据创建删除过期的日志
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<bool> Handle(DeleteSystemLogCommand request, CancellationToken cancellationToken)
         {
             try
             {
                 var systemLogPagedList = await _systemLogRepository
-                                                .GetExpireSystemLogListAsync(request.CreateDate, request.LogType, cancellationToken)
+                                                .GetExpireSystemLogListAsync(request.CreateDate, cancellationToken)
                                                 .ConfigureAwait(false);
                 _systemLogRepository.RemoveRange(systemLogPagedList.Items);
                 _logger.LogWarning($"日志:{JsonConvert.SerializeObject(systemLogPagedList.Items)}已被删除");
-                return true;
+                return await _systemLogRepository.UnitOfWork.CommitAsync().ConfigureAwait(false);
             }
             catch (System.Exception ex)
             {
@@ -42,6 +47,9 @@ namespace EbayPlatform.Domain.CommandHandlers.StystemLog
             }
         }
 
-
+        public void Dispose()
+        {
+            _systemLogRepository.Dispose();
+        }
     }
 }

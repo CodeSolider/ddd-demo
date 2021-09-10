@@ -67,37 +67,10 @@
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="T:EbayPlatform.WebApi.Controllers.SyncTaskJobConfigController">
+        <member name="T:EbayPlatform.WebApi.Controllers.SyncTaskJobController">
             <summary>
-            同步任务作业配置
+            同步任务配置接口
             </summary>
-        </member>
-        <member name="M:EbayPlatform.WebApi.Controllers.SyncTaskJobConfigController.#ctor(Microsoft.Extensions.Logging.ILogger{EbayPlatform.WebApi.Controllers.SyncTaskJobConfigController},EbayPlatform.Application.Services.ISyncTaskJobService)">
-            <summary>
-            构造函数
-            </summary>
-            <param name="logger"></param>
-            <param name="syncTaskJobService"></param>
-        </member>
-        <member name="M:EbayPlatform.WebApi.Controllers.SyncTaskJobConfigController.ExecuteAllTask">
-            <summary>
-            执行所有任务
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:EbayPlatform.WebApi.Controllers.SyncTaskJobConfigController.CreateSyncTaskJob(EbayPlatform.Application.Dto.SyncTaskJobConfigDto)">
-            <summary>
-            创建同步任务
-            </summary>
-            <param name="syncTaskJobConfigDto"></param>
-            <returns></returns>
-        </member>
-        <member name="M:EbayPlatform.WebApi.Controllers.SyncTaskJobConfigController.DeleteSyncTaskJob(System.String)">
-            <summary>
-            删除同步任务数据
-            </summary>
-            <param name="jobName"></param>
-            <returns></returns>
         </member>
         <member name="T:EbayPlatform.WebApi.Extensions.SwaggerExtensions">
             <summary>
@@ -119,6 +92,12 @@
             <summary>
             Startup Configuration
             </summary>
+        </member>
+        <member name="M:EbayPlatform.WebApi.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            ConfigureServices
+            </summary>
+            <param name="services"></param>
         </member>
     </members>
 </doc>

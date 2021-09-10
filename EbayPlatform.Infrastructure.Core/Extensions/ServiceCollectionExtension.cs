@@ -1,6 +1,4 @@
-﻿using EbayPlatform.Infrastructure.Core.Dependency;
-using EbayPlatform.Infrastructure.Core.Transaction;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -20,14 +18,11 @@ namespace EbayPlatform.Infrastructure.Core.Extensions
         /// <param name="services"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public static IServiceCollection AddDomainContext<TDbContext>(this IServiceCollection services,
-            Action<DbContextOptionsBuilder> options,
-            ServiceLifetime serviceLifetime = ServiceLifetime.Scoped)
+        static IServiceCollection AddDomainContext<TDbContext>(this IServiceCollection services,
+            Action<DbContextOptionsBuilder> options, ServiceLifetime serviceLifetime = ServiceLifetime.Scoped)
             where TDbContext : EFContext
         {
             services.AddDbContext<TDbContext>(options, serviceLifetime);
-            //事务注入
-            services.AddTransient<ITransaction, Transaction<TDbContext>>();
             return services;
         }
 
@@ -38,8 +33,7 @@ namespace EbayPlatform.Infrastructure.Core.Extensions
         /// <param name="connectionString"></param>
         /// <returns></returns>
         public static IServiceCollection AddSqlServerDomainContext<TDbContext>(this IServiceCollection services,
-            string connectionString,
-            ServiceLifetime serviceLifetime = ServiceLifetime.Scoped)
+            string connectionString, ServiceLifetime serviceLifetime = ServiceLifetime.Scoped)
              where TDbContext : EFContext
         {
             if (string.IsNullOrWhiteSpace(connectionString)) throw new NullReferenceException($"{nameof(connectionString)}不能为空");

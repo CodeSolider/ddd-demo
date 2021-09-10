@@ -24,11 +24,10 @@ namespace EbayPlatform.Domain.EventHadlers.SyncTaskJobConfig
         public async Task Handle(CreateSyncTaskJobConfigDomainEvent notification, CancellationToken cancellationToken)
         {
             await _capPublisher
-                  .PublishAsync("SyncTaskJobConfigCreated",
-                                 new SyncTaskJobConfigCreatedIntegrationEvent(notification.SyncTaskJobConfig.Id),
-                                 cancellationToken: cancellationToken);
+                   .PublishAsync("SyncTaskJobConfigCreated",
+                       new SyncTaskJobConfigCreatedIntegrationEvent(notification.SyncTaskJobConfig.Id),
+                                                                     cancellationToken: cancellationToken)
+                   .ConfigureAwait(false);
         }
-
-
     }
 }

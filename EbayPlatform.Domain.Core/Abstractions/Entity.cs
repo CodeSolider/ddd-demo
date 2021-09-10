@@ -84,8 +84,6 @@ namespace EbayPlatform.Domain.Core.Abstractions
                 return base.GetHashCode();
         }
 
-
-
         //表示对象是否为全新创建的，未持久化的
         public bool IsTransient()
         {

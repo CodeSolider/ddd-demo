@@ -1,9 +1,10 @@
 ﻿using EbayPlatform.Domain.Core.Abstractions;
-using EbayPlatform.Domain.Interfaces;
 using EbayPlatform.Infrastructure.Core;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -96,5 +97,74 @@ namespace EbayPlatform.Infrastructure.Repository
             return await DbContext.FindAsync<TEntity>(id, cancellationToken).ConfigureAwait(false);
         }
 
+
+        /// <summary>
+        /// 获取单条数据
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public virtual async Task<TEntity> GetFirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate = null,
+           CancellationToken cancellationToken = default)
+        {
+            return await DbContext.Set<TEntity>().FirstOrDefaultAsync(predicate, cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// 获取单条数据
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public virtual TEntity GetFirstOrDefault(Expression<Func<TEntity, bool>> predicate = null)
+        {
+            return DbContext.Set<TEntity>().FirstOrDefault(predicate);
+        }
+
+        /// <summary>
+        /// Get List NoTracking
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public List<TEntity> GetNoTrackingList(Expression<Func<TEntity, bool>> predicate = null)
+        {
+            return this.NoTrackingQueryable.Where(predicate).ToList();
+        }
+
+        /// <summary>
+        /// Get List Async NoTracking 
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public async Task<List<TEntity>> GetNoTrackingListAsync(Expression<Func<TEntity, bool>> predicate = null)
+        {
+            return await this.NoTrackingQueryable.Where(predicate).ToListAsync().ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Get List NoTracking
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public List<TEntity> GetList(Expression<Func<TEntity, bool>> predicate = null)
+        {
+            return DbContext.Set<TEntity>().Where(predicate).ToList();
+        }
+
+        /// <summary>
+        /// Get List Async NoTracking 
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        public async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate = null)
+        {
+            return await DbContext.Set<TEntity>().Where(predicate).ToListAsync().ConfigureAwait(false);
+        }
+
+
+        public void Dispose()
+        {
+            DbContext.Dispose();
+            GC.SuppressFinalize(this);
+        }
     }
 }

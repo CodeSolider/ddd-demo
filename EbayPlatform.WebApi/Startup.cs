@@ -1,8 +1,7 @@
 using EbayPlatform.Application.IntegrationEvents;
-using EbayPlatform.Domain.Models;
 using EbayPlatform.Infrastructure.Context;
 using EbayPlatform.Infrastructure.Core.Extensions;
-using EbayPlatform.Infrastructure.Quartz;
+using EbayPlatform.Infrastructure.Core.Quartz;
 using EbayPlatform.WebApi.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -33,6 +32,10 @@ namespace EbayPlatform.WebApi
         /// </summary>
         public IConfiguration Configuration { get; }
 
+        /// <summary>
+        /// ConfigureServices
+        /// </summary>
+        /// <param name="services"></param>
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -45,14 +48,14 @@ namespace EbayPlatform.WebApi
             #endregion
 
             services.AddSqlServerDomainContext<EbayPlatformDbContext>
-                     (Configuration.GetConnectionString("DefaultConnection"));
+                     (Configuration.GetConnectionString("DefaultConnection"), ServiceLifetime.Transient);
             services.AddAutoDIService();
 
             #region Cap
             services.AddTransient<ISubscriberService, SubscriberService>();
             services.AddCapService<EbayPlatformDbContext>(Configuration);
             #endregion
-             
+
             #region Quartz
             services.UseQuartz();
             #endregion

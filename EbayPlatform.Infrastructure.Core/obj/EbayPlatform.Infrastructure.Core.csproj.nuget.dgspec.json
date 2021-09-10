@@ -47,6 +47,10 @@
             "MediatR": {
               "target": "Package",
               "version": "[9.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.9, )"
             }
           },
           "imports": [
@@ -115,10 +119,6 @@
             "DotNetCore.CAP": {
               "target": "Package",
               "version": "[5.1.3, )"
-            },
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[5.0.9, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -207,6 +207,10 @@
             "Microsoft.Extensions.DependencyModel": {
               "target": "Package",
               "version": "[5.0.0, )"
+            },
+            "Quartz": {
+              "target": "Package",
+              "version": "[3.3.3, )"
             }
           },
           "imports": [

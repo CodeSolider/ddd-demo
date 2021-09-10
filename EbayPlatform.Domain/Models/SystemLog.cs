@@ -12,21 +12,25 @@ namespace EbayPlatform.Domain.Models
         /// <summary>
         /// 外键ID->FK
         /// </summary>
-        public int ObjectId { get; set; }
+        public int ObjectId { get; private set; }
 
         /// <summary>
         /// 日志类型 
         /// </summary>
-        public LogType LogType { get; set; }
+        public LogType LogType { get; private set; }
 
         /// <summary>
         /// Log 内容
         /// </summary>
-        public string Content { get; set; }
+        public string Content { get; private set; }
 
         /// <summary>
         /// 创建日期
         /// </summary>
-        public DateTime CreateDate { get; set; } = DateTime.Now;
+        public DateTime CreateDate { get; private set; }
+
+
+        protected SystemLog() { }
+
     }
 }

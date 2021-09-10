@@ -22,6 +22,10 @@
     <ProjectReference Include="..\EbayPlatform.Application\EbayPlatform.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="RequestModel\" />
+  </ItemGroup>
+
   <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>

@@ -1,12 +1,11 @@
 ﻿using EbayPlatform.Domain.Core.Abstractions;
-using System.Collections.Generic;
 
 namespace EbayPlatform.Domain.Models
 {
     /// <summary>
     /// 同步任务参数配置表 值对象
     /// </summary>
-    public class SyncTaskJobParam : ValueObject
+    public class SyncTaskJobParam : Entity<int>
     {
         /// <summary>
         /// 店铺名称
@@ -19,7 +18,6 @@ namespace EbayPlatform.Domain.Models
         public string ParamValue { get; private set; }
 
 
-
         public SyncTaskJobParam() { }
 
         public SyncTaskJobParam(string shopName, string paramValue)
@@ -28,10 +26,14 @@ namespace EbayPlatform.Domain.Models
             this.ParamValue = paramValue;
         }
 
-        protected override IEnumerable<object> GetAtomicValues()
+        /// <summary>
+        /// 更新参数值
+        /// </summary>
+        /// <param name="paramValue"></param>
+        public void ChangeParamValue(string paramValue)
         {
-            yield return ShopName;
-            yield return ParamValue;
+            this.ParamValue = paramValue;
         }
+
     }
 }

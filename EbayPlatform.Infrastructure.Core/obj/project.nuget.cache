@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "l42Zjw4lHFm7jeIOdJ6yZS4V7qFqfBlQz2U+6Gk15kmD3vMIgWl+2Lm8aqOxx+yx6gHI7RON6V69jv3GyMCO7Q==",
+  "dgSpecHash": "9vT2zvyngRxEYFVeR/szG7iT148kfsOlFWMbas13bHa9Jv9cXJIqHBsbGHlIZTepFFbNM0CVbUGpiYh4CuMSPg==",
   "success": true,
   "projectFilePath": "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Infrastructure.Core\\EbayPlatform.Infrastructure.Core.csproj",
   "expectedPackageFiles": [
@@ -40,6 +40,7 @@
     "C:\\Users\\W\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\W\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
     "C:\\Users\\W\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
+    "C:\\Users\\W\\.nuget\\packages\\quartz\\3.3.3\\quartz.3.3.3.nupkg.sha512",
     "C:\\Users\\W\\.nuget\\packages\\rabbitmq.client\\6.2.1\\rabbitmq.client.6.2.1.nupkg.sha512",
     "C:\\Users\\W\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\W\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",

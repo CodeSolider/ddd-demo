@@ -1,8 +1,9 @@
 ﻿using EbayPlatform.Domain.Core.Abstractions;
 using EbayPlatform.Domain.Events.SyncTaskJobConfig;
+using EbayPlatform.Domain.Models.Enums;
 using System;
 using System.Collections.Generic;
-using static EbayPlatform.Domain.Models.Enums.SyncTask;
+using System.Linq;
 
 namespace EbayPlatform.Domain.Models
 {
@@ -22,9 +23,9 @@ namespace EbayPlatform.Domain.Models
         public string JobDesc { get; private set; }
 
         /// <summary>
-        /// 任务类全名
+        /// Job程序集
         /// </summary>
-        public string JobClassFullName { get; private set; }
+        public string JobAssemblyName { get; private set; }
 
         /// <summary>
         /// Cron表达式
@@ -44,7 +45,7 @@ namespace EbayPlatform.Domain.Models
         /// <summary>
         /// 作业状态
         /// </summary>
-        public JobStatus JobStatus { get; private set; }
+        public JobStatusType JobStatus { get; private set; }
 
         /// <summary>
         /// 同步时间
@@ -59,23 +60,39 @@ namespace EbayPlatform.Domain.Models
         /// <summary>
         /// 任务参数
         /// </summary>
-        public ICollection<SyncTaskJobParam> SyncTaskJobParams { get; private set; }
+        public virtual ICollection<SyncTaskJobParam> SyncTaskJobParams { get; private set; }
 
 
-        protected SyncTaskJobConfig() { }
+        protected SyncTaskJobConfig()
+        {
+            this.SyncTaskJobParams = new List<SyncTaskJobParam>();
+        }
 
         public SyncTaskJobConfig(string jobName, string jobDesc,
-            string jobClassFullName, string cron, string cronDesc, JobStatus jobStatus)
+            string jobAssemblyName, string cron, string cronDesc )
         {
             this.JobName = jobName;
             this.JobDesc = jobDesc;
-            this.JobClassFullName = jobClassFullName;
+            this.JobAssemblyName = jobAssemblyName;
             this.Cron = cron;
             this.CronDesc = cronDesc;
-            this.JobStatus = jobStatus;
-
+            this.JobStatus = JobStatusType.UnExecute; 
             //添加事件
             this.AddDomainEvent(new CreateSyncTaskJobConfigDomainEvent(this));
         }
+
+        public void ChangeSyncTaskJobParamValue(string shopName, string paramValue)
+        {
+            var existingSyncTaskJobParam = SyncTaskJobParams.SingleOrDefault(o => o.ShopName.Equals(shopName));
+            if (existingSyncTaskJobParam != null)
+            {
+                existingSyncTaskJobParam.ChangeParamValue(paramValue);
+            }
+            else
+            {
+                SyncTaskJobParams.Add(new SyncTaskJobParam(shopName, paramValue));
+            }
+        }
+
     }
 }

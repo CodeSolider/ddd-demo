@@ -10,7 +10,6 @@
         "dependencies": {
           "DotNetCore.CAP": "5.1.3",
           "EbayPlatform.Domain.Core": "1.0.0",
-          "Microsoft.EntityFrameworkCore": "5.0.9",
           "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
@@ -219,7 +218,8 @@
       "System.Threading.Channels/5.0.0": {},
       "EbayPlatform.Domain.Core/1.0.0": {
         "dependencies": {
-          "MediatR": "9.0.0"
+          "MediatR": "9.0.0",
+          "Microsoft.EntityFrameworkCore": "5.0.9"
         },
         "runtime": {
           "EbayPlatform.Domain.Core.dll": {}

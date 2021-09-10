@@ -1,0 +1,28 @@
+﻿using EbayPlatform.Application.Services;
+using EbayPlatform.Infrastructure.Core;
+using Quartz;
+using System;
+using System.Threading.Tasks;
+
+namespace EbayPlatform.Application.Quartz
+{
+    [DisallowConcurrentExecution]
+    public class DeleteLogJob : IJob, IDependency
+    {
+        private readonly ISystemLogAppService _systemLogAppService;
+        public DeleteLogJob(ISystemLogAppService systemLogAppService)
+        {
+            _systemLogAppService = systemLogAppService;
+        }
+
+        /// <summary>
+        /// 根据创建删除过期的日志
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public Task Execute(IJobExecutionContext context)
+        {
+            return _systemLogAppService.DeleteSystemLogByDate(DateTime.Now);
+        }
+    }
+}

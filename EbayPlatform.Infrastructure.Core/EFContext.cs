@@ -1,5 +1,5 @@
 ﻿using DotNetCore.CAP;
-using EbayPlatform.Domain.Interfaces;
+using EbayPlatform.Domain.Core.Abstractions;
 using EbayPlatform.Infrastructure.Core.Extensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -16,8 +16,7 @@ namespace EbayPlatform.Infrastructure.Core
     public class EFContext : DbContext, IUnitOfWork
     {
         protected readonly IMediator _mediator;
-        public EFContext(DbContextOptions options,
-            IMediator mediator)
+        public EFContext(DbContextOptions options, IMediator mediator)
             : base(options)
         {
             _mediator = mediator;
@@ -26,8 +25,8 @@ namespace EbayPlatform.Infrastructure.Core
         #region IUnitOfWork
         public async Task<bool> CommitAsync(CancellationToken cancellationToken = default)
         {
-            _ = await base.SaveChangesAsync(cancellationToken);
-            await _mediator.DispatchDomainEventsAsync(this);
+            _ = await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
+            await _mediator.DispatchDomainEventsAsync(this).ConfigureAwait(false);
             return true;
         }
         #endregion
@@ -64,7 +63,7 @@ namespace EbayPlatform.Infrastructure.Core
 
             try
             {
-                await SaveChangesAsync().ConfigureAwait(false);
+                await base.SaveChangesAsync().ConfigureAwait(false);
                 transaction.Commit();
             }
             catch
