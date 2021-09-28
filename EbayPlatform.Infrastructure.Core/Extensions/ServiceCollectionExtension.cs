@@ -1,9 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EbayPlatform.Infrastructure.Core.Filters;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 using System.Reflection;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 
 namespace EbayPlatform.Infrastructure.Core.Extensions
 {
@@ -53,7 +56,7 @@ namespace EbayPlatform.Infrastructure.Core.Extensions
         /// <param name="services"></param>
         /// <param name="Configuration"></param>
         /// <returns></returns>
-        public static IServiceCollection AddCapService<TDbContext>(this IServiceCollection services,
+        public static IServiceCollection AddCapEventBus<TDbContext>(this IServiceCollection services,
             IConfiguration Configuration)
               where TDbContext : EFContext
         {
@@ -62,15 +65,18 @@ namespace EbayPlatform.Infrastructure.Core.Extensions
                 options.UseEntityFramework<TDbContext>();
 
                 options.UseRabbitMQ(opts =>
-                {
-                    Configuration.GetSection("RabbitMQ").Bind(opts);
-                });
+                 {
+                     Configuration.GetSection("RabbitMQ").Bind(opts);
+                 });
                 //设置重试次数
-                options.FailedRetryCount = 5;
-                //失败后的重拾间隔，默认60秒
-                options.FailedRetryInterval = 60;
-                // options.UseDashboard();
-            });
+                options.FailedRetryCount = 3;
+                //失败后的重拾间隔，默认5秒
+                options.FailedRetryInterval = 5;
+                options.JsonSerializerOptions.Encoder = JavaScriptEncoder.Create(UnicodeRanges.All);
+                //设置成功信息的删除时间默认24*3600
+                options.SucceedMessageExpiredAfter = Configuration.GetValue<int>("SucceedMessageExpiredAfter");
+                //options.UseDashboard();
+            }).AddSubscribeFilter<CapSubscribeFilter>();
             return services;
         }
 

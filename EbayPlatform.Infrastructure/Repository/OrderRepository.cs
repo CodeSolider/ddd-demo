@@ -1,7 +1,11 @@
 ﻿using EbayPlatform.Domain.Interfaces;
 using EbayPlatform.Domain.Models.Orders;
 using EbayPlatform.Infrastructure.Context;
-using EbayPlatform.Infrastructure.Core; 
+using EbayPlatform.Infrastructure.Core;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace EbayPlatform.Infrastructure.Repository
 {
@@ -12,6 +16,18 @@ namespace EbayPlatform.Infrastructure.Repository
           : base(dbContext) { }
 
 
+        /// <summary>
+        /// 根据订单ID获取所有订单
+        /// </summary>
+        /// <param name="orderIDList"></param>
+        /// <returns></returns>
+        public async Task<List<Order>> GetOrderListByOrderIdsAsync(IEnumerable<string> orderIDList)
+        {
+            return await this.DbContext.Orders
+                             .Where(o => orderIDList.Contains(o.OrderID))
+                             .ToListAsync()
+                             .ConfigureAwait(false);
+        }
 
     }
 }

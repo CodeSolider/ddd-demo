@@ -62,27 +62,32 @@ namespace EbayPlatform.Domain.Models.Orders
             ShippingPackages = new List<ShippingPackage>();
         }
 
-        public ShippingServiceOption(string shippingService, bool? expeditedService,
-           int? shippingTimeMin, int? shippingTimeMax)
+        public ShippingServiceOption(string shippingService, MoneyValue shippingServiceCost,
+            int? shippingServicePriority, bool? expeditedService,
+            int? shippingTimeMin, int? shippingTimeMax) : this()
         {
             this.ShippingService = shippingService;
+            this.ShippingServiceCost = shippingServiceCost;
+            this.ShippingServicePriority = shippingServicePriority;
             this.ExpeditedService = expeditedService;
             this.ShippingTimeMin = shippingTimeMin;
             this.ShippingTimeMax = shippingTimeMax;
         }
 
         /// <summary>
-        /// 更新发货信息
+        /// 设置发货服务值
         /// </summary>
-        /// <param name="shippingService"></param> 
+        /// <param name="shippingServiceCost"></param>
+        /// <param name="shippingServicePriority"></param>
         /// <param name="expeditedService"></param>
         /// <param name="shippingTimeMin"></param>
         /// <param name="shippingTimeMax"></param>
-        public void ChangeShippingServiceOption(string shippingService, bool? expeditedService,
-            int? shippingTimeMin, int? shippingTimeMax)
+        public void SetShippingServiceOption(MoneyValue shippingServiceCost, bool? expeditedService,
+            int? shippingServicePriority, int? shippingTimeMin, int? shippingTimeMax)
         {
-            this.ShippingService = shippingService;
+            this.ShippingServiceCost = shippingServiceCost;
             this.ExpeditedService = expeditedService;
+            this.ShippingServicePriority = shippingServicePriority;
             this.ShippingTimeMin = shippingTimeMin;
             this.ShippingTimeMax = shippingTimeMax;
         }

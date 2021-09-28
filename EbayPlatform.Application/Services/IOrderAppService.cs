@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using EbayPlatform.Application.Dtos.Orders;
+using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace EbayPlatform.Application.Services
@@ -13,6 +15,13 @@ namespace EbayPlatform.Application.Services
         /// </summary>
         /// <param name="orderIdList"></param>
         /// <returns></returns>
-        Task<bool> GetOrderListByOrderIdsAsync(IEnumerable<string> orderIdList);
+        Task<bool> DeleteOrderByIdsAsync(IEnumerable<string> orderIdList, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 添加订单数据
+        /// </summary>
+        /// <param name="orderDtos"></param>
+        /// <returns></returns>
+        Task<bool> AddOrderAsync(List<OrderDto> orderDtos, CancellationToken cancellationToken = default);
     }
 }

@@ -1,5 +1,5 @@
 ﻿using EbayPlatform.Domain.Core.Abstractions;
-using EbayPlatform.Domain.Models;
+using EbayPlatform.Domain.Models; 
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,8 +14,10 @@ namespace EbayPlatform.Domain.Interfaces
         /// <summary>
         /// 获取所有的任务配置作业数据
         /// </summary>
+        /// <param name="jobStatus"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<List<SyncTaskJobConfig>> GetUnStartSyncTaskJobConfigListAsync(CancellationToken cancellationToken);
+        Task<List<SyncTaskJobConfig>> GetSyncTaskJobConfigListByAsync(CancellationToken cancellationToken);
 
         /// <summary>
         /// 检查任务名称是否重复
@@ -30,8 +32,7 @@ namespace EbayPlatform.Domain.Interfaces
         /// <param name="syncTaskJobConfigId"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<SyncTaskJobConfig> GetSyncTaskJobConfigByIdAsync(int syncTaskJobConfigId,
-          CancellationToken cancellationToken = default);
+        Task<SyncTaskJobConfig> GetSyncTaskJobConfigByIdAsync(int syncTaskJobConfigId);
 
         /// <summary>
         /// 根据任务名称获取任务配置作业数据

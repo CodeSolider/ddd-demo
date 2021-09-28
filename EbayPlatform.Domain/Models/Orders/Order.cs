@@ -46,6 +46,12 @@ namespace EbayPlatform.Domain.Models.Orders
         public string SellerEmail { get; private set; }
 
         /// <summary>
+        /// 卖家账号
+        /// </summary>
+        public string SellerUserID { get; private set; }
+
+
+        /// <summary>
         /// 订单创建日期
         /// </summary>
         public DateTime? CreatedTime { get; private set; }
@@ -98,40 +104,53 @@ namespace EbayPlatform.Domain.Models.Orders
 
 
         public Order(string orderID, string orderStatus,
-            string paymentMethods, string sellerEmail,
+            string paymentMethods, string sellerEmail, string sellerUserID,
             MoneyValue adjustmentAmount, MoneyValue amountPaid,
             MoneyValue amountSaved, MoneyValue total, MoneyValue subtotal,
-            Address shippingAddress, DateTime? createdTime)
+            CheckoutStatus checkoutStatus, Address shippingAddress,
+            ShippingServiceOption shippingServiceSelected,
+            DateTime? createdTime) : this()
         {
             this.OrderID = orderID;
             this.OrderStatus = orderStatus;
             this.PaymentMethods = paymentMethods;
             this.SellerEmail = sellerEmail;
+            this.SellerUserID = sellerUserID;
             this.AdjustmentAmount = adjustmentAmount;
             this.AmountPaid = amountPaid;
             this.AmountSaved = amountSaved;
             this.AmountSaved = amountSaved;
             this.Total = total;
             this.Subtotal = subtotal;
+            this.CheckoutStatus = checkoutStatus;
             this.ShippingAddress = shippingAddress;
+            this.ShippingServiceSelected = shippingServiceSelected;
             this.CreatedTime = createdTime;
+            this.SyncDate = DateTime.Now;
         }
 
+
         /// <summary>
-        /// 添加结账状态
+        /// 添加订单交易信息
         /// </summary>
-        /// <param name="eBayPaymentStatus"></param>
-        /// <param name="paymentMethod"></param>
-        /// <param name="status"></param>
-        /// <param name="integratedMerchantCreditCardEnabled"></param>
-        /// <param name="paymentInstrument"></param>
-        /// <param name="lastModifiedTime"></param>
-        public void AddCheckoutStatus(string eBayPaymentStatus, string paymentMethod, string status,
-            bool? integratedMerchantCreditCardEnabled, string paymentInstrument, DateTime? lastModifiedTime)
+        public void AddOrderTransaction(string transactionID, string orderLineItemID,
+            string siteCode, string title, int? conditionID, string conditionDisplayName,
+            int quantityPurchased, MoneyValue transactionPrice, TransactionStatus status,
+            ShippingServiceOption shippingServiceOption, DateTime? createdDate)
         {
-            this.CheckoutStatus = new CheckoutStatus(eBayPaymentStatus, paymentMethod, status,
-             integratedMerchantCreditCardEnabled, paymentInstrument, lastModifiedTime);
+            var existsOrderTransaction = this.OrderTransactions.FirstOrDefault(o => o.TransactionID == transactionID && o.OrderLineItemID == orderLineItemID);
+            if (existsOrderTransaction != null)
+            {
+                existsOrderTransaction.ChangeOrderTransaction(quantityPurchased, transactionPrice, status, createdDate);
+            }
+            else
+            {
+                existsOrderTransaction = new OrderTransaction(transactionID, orderLineItemID, siteCode, title, conditionID, conditionDisplayName,
+                                                              quantityPurchased, transactionPrice, status, shippingServiceOption, createdDate);
+                this.OrderTransactions.Add(existsOrderTransaction);
+            }
         }
+
 
         /// <summary>
         /// 添加发货详情信息
@@ -139,7 +158,6 @@ namespace EbayPlatform.Domain.Models.Orders
         /// <param name="salesTax"></param>
         /// <param name="sellingManagerSalesRecordNumber"></param>
         /// <param name="getItFast"></param>
-        /// <param name="shippingServiceOptions"></param>
         public void AddShippingDetail(SalesTax salesTax, int? sellingManagerSalesRecordNumber, bool? getItFast,
             List<ShippingServiceOption> shippingServiceOptions)
         {
@@ -147,10 +165,12 @@ namespace EbayPlatform.Domain.Models.Orders
 
             shippingServiceOptions.ForEach(shippingItem =>
             {
-                ShippingDetail.ChangeShippingServiceOption(shippingItem.ShippingService, shippingItem.ExpeditedService,
+                ShippingDetail.ChangeShippingServiceOption(shippingItem.ShippingService, shippingItem.ShippingServiceCost,
+                                                           shippingItem.ShippingServicePriority, shippingItem.ExpeditedService,
                                                            shippingItem.ShippingTimeMin, shippingItem.ShippingTimeMax,
                                                            shippingItem.ShippingPackages.ToList());
             });
         }
+
     }
 }

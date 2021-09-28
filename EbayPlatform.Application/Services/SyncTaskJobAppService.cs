@@ -13,7 +13,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using EbayPlatform.Application.Dtos;
-using EbayPlatform.Infrastructure.Core.ThirdComponents;
+using Microsoft.Extensions.Logging;
+using EbayPlatform.Infrastructure.Core.Quartz;
 
 namespace EbayPlatform.Application.Services
 {
@@ -23,19 +24,33 @@ namespace EbayPlatform.Application.Services
     public class SyncTaskJobAppService : ISyncTaskJobAppService, IDependency
     {
         private readonly IMediator _mediator;
+        private readonly ISyncTaskJobConfigRepository _syncTaskJobConfigRepository;
         private readonly ISchedulerFactory _schedulerFactory;
         private readonly IServiceScopeFactory _serviceScopeFactory;
-        private readonly ISyncTaskJobConfigRepository _syncTaskJobConfigRepository;
+        private readonly ILogger<SyncTaskJobAppService> _logger;
         public SyncTaskJobAppService(IMediator mediator,
+            ISyncTaskJobConfigRepository syncTaskJobConfigRepository,
             ISchedulerFactory schedulerFactory,
             IServiceScopeFactory serviceScopeFactory,
-            ISyncTaskJobConfigRepository syncTaskJobConfigRepository)
+            ILogger<SyncTaskJobAppService> logger)
         {
             _mediator = mediator;
             _schedulerFactory = schedulerFactory;
             _serviceScopeFactory = serviceScopeFactory;
             _syncTaskJobConfigRepository = syncTaskJobConfigRepository;
+            _logger = logger;
         }
+
+        /// <summary>
+        /// 根据任务状态获取任务配置信息
+        /// </summary>
+        /// <returns></returns>
+        public Task<List<SyncTaskJobConfig>> GetSyncTaskJobConfigListByAsync(CancellationToken cancellationToken = default)
+        {
+            return _syncTaskJobConfigRepository
+                   .GetSyncTaskJobConfigListByAsync(cancellationToken);
+        }
+
 
         #region Quartz Job
         /// <summary>
@@ -44,7 +59,7 @@ namespace EbayPlatform.Application.Services
         public async Task ExecuteAllTaskAysnc(CancellationToken cancellationToken = default)
         {
             IScheduler scheduler = await _schedulerFactory.GetScheduler(cancellationToken).ConfigureAwait(false);
-            var syncTaskJobConfigList = await _syncTaskJobConfigRepository.GetUnStartSyncTaskJobConfigListAsync(cancellationToken);
+            var syncTaskJobConfigList = await GetSyncTaskJobConfigListByAsync(cancellationToken).ConfigureAwait(false);
             syncTaskJobConfigList.ForEach(async syncTaskJobConfigItem =>
             {
                 await StartJob(scheduler, syncTaskJobConfigItem)
@@ -62,7 +77,7 @@ namespace EbayPlatform.Application.Services
         /// <param name="syncTaskJobConfig">任务配置信息</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        public static async Task StartJob(IScheduler scheduler,
+        public async Task StartJob(IScheduler scheduler,
            SyncTaskJobConfig syncTaskJobConfig,
            CancellationToken cancellationToken = default)
         {
@@ -75,7 +90,8 @@ namespace EbayPlatform.Application.Services
             TypeInfo typeInfo = assembly.DefinedTypes.FirstOrDefault(o => o.Name == syncTaskJobConfig.JobName);
             if (typeInfo == null)
             {
-                throw new ArgumentNullException($"找不到任务名称[{syncTaskJobConfig.JobName}]");
+                _logger.LogWarning($"找不到任务名称[{syncTaskJobConfig.JobName}]");
+                return;
             }
 
             IJobDetail job = JobBuilder.Create(typeInfo)
@@ -94,41 +110,40 @@ namespace EbayPlatform.Application.Services
         }
 
 
-
-
         /// <summary>
         /// 添加任务
         /// </summary>
         /// <returns></returns>
-        public async Task<SyncTaskJobConfig> CreateSyncTaskJobAsync(SyncTaskJobConfigDto syncTaskJobConfigDto,
+        public async Task<int> CreateSyncTaskJobAsync(SyncTaskJobConfigDto syncTaskJobConfigDto,
             CancellationToken cancellationToken = default)
         {
-            SyncTaskJobConfig syncTaskJobItem = await _mediator
-                                                      .Send(new CreateSyncTaskJobConfigCommand(syncTaskJobConfigDto.JobName, syncTaskJobConfigDto.JobDesc,
-                                                                                                syncTaskJobConfigDto.JobAssemblyName, syncTaskJobConfigDto.Cron,
-                                                                                                syncTaskJobConfigDto.CronDesc, syncTaskJobConfigDto.SyncTaskJobParamsDto.Adapt<List<SyncTaskJobParam>>()),
-                                                            cancellationToken)
-                                                      .ConfigureAwait(false);
+            int syncTaskJobConfigId = await _mediator
+                                             .Send(new CreateSyncTaskJobConfigCommand(syncTaskJobConfigDto.JobName, syncTaskJobConfigDto.JobDesc,
+                                                                                      syncTaskJobConfigDto.JobAssemblyName, syncTaskJobConfigDto.Cron,
+                                                                                      syncTaskJobConfigDto.CronDesc, syncTaskJobConfigDto.SyncTaskJobParams.Adapt<List<ShopTask>>()),
+                                                   cancellationToken)
+                                              .ConfigureAwait(false);
+
+
 
             IScheduler scheduler = await _schedulerFactory.GetScheduler(cancellationToken).ConfigureAwait(false);
-            await StartJob(scheduler, syncTaskJobItem, cancellationToken).ConfigureAwait(false);
-            return syncTaskJobItem;
+            await StartJob(scheduler, await GetSyncTaskJobConfigByIdAsync(syncTaskJobConfigId).ConfigureAwait(false), cancellationToken)
+                  .ConfigureAwait(false);
+            return syncTaskJobConfigId;
         }
         #endregion
 
 
         /// <summary>
-        /// 根据任务名称获取任务配置作业数据
+        /// 根据任务Id获取任务配置作业数据
         /// </summary>
         /// <param name="syncTaskJobConfigId"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<SyncTaskJobConfig> GetSyncTaskJobConfigByIdAsync(int syncTaskJobConfigId,
-            CancellationToken cancellationToken = default)
+        public Task<SyncTaskJobConfig> GetSyncTaskJobConfigByIdAsync(int syncTaskJobConfigId)
         {
-            return await _syncTaskJobConfigRepository
-                        .GetSyncTaskJobConfigByIdAsync(syncTaskJobConfigId, cancellationToken)
-                        .ConfigureAwait(false);
+            return _syncTaskJobConfigRepository
+                   .GetSyncTaskJobConfigByIdAsync(syncTaskJobConfigId);
         }
 
         /// <summary>
@@ -137,17 +152,26 @@ namespace EbayPlatform.Application.Services
         /// <param name="jobName"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<SyncTaskJobConfig> GetSyncTaskJobConfigByNameAsync(string jobName, 
-            CancellationToken cancellationToken = default)
+        public Task<SyncTaskJobConfig> GetSyncTaskJobConfigByName(string jobName,
+           CancellationToken cancellationToken = default)
         {
-            return await _syncTaskJobConfigRepository.GetSyncTaskJobConfigByNameAsync(jobName);
+            return _syncTaskJobConfigRepository
+                    .GetSyncTaskJobConfigByNameAsync(jobName, cancellationToken);
         }
 
 
+        public Task<bool> UpdateShopTaskAsync(List<SyncTaskJobConfig> syncTaskJobConfigs, CancellationToken cancellationToken = default)
+        {
+            return _mediator.Send(new UpdateSyncTaskJobConfigCommand(syncTaskJobConfigs), cancellationToken);
+        }
+
+
+        /// <summary>
+        /// 手动释放
+        /// </summary>
         public void Dispose()
         {
             GC.SuppressFinalize(this);
         }
-
     }
 }

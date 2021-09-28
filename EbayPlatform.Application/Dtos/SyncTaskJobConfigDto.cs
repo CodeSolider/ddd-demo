@@ -4,6 +4,11 @@ namespace EbayPlatform.Application.Dtos
 {
     public class SyncTaskJobConfigDto
     {
+        public SyncTaskJobConfigDto()
+        {
+            SyncTaskJobParams = new List<ShopTaskDto>();
+        }
+
         /// <summary>
         /// 作业名称
         /// </summary>
@@ -32,6 +37,6 @@ namespace EbayPlatform.Application.Dtos
         /// <summary>
         /// 添加同步任务参数数据
         /// </summary>
-        public List<SyncTaskJobParamsDto> SyncTaskJobParamsDto { get; set; }
+        public List<ShopTaskDto> SyncTaskJobParams { get; set; }
     }
 }

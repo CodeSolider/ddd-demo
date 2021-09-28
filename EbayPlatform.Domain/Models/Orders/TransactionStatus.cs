@@ -32,6 +32,13 @@ namespace EbayPlatform.Domain.Models.Orders
         }
 
 
-        protected TransactionStatus() { }
+        public TransactionStatus() { }
+
+        public TransactionStatus(string paymentHoldStatus, string inquiryStatus, string returnStatus)
+        {
+            this.PaymentHoldStatus = paymentHoldStatus;
+            this.InquiryStatus = inquiryStatus;
+            this.ReturnStatus = returnStatus;
+        }
     }
 }

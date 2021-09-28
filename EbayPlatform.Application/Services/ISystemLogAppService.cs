@@ -15,6 +15,6 @@ namespace EbayPlatform.Application.Services
         /// <param name="createDate"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task DeleteSystemLogByDate(DateTime createDate, CancellationToken cancellationToken = default);
+        Task DeleteSystemLogByDateAsync(DateTime createDate, CancellationToken cancellationToken = default);
     }
 }

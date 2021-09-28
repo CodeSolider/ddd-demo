@@ -1,7 +1,6 @@
 ﻿using EbayPlatform.Domain.Commands.Order;
 using EbayPlatform.Domain.Interfaces;
 using MediatR;
-using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,25 +10,54 @@ namespace EbayPlatform.Domain.CommandHandlers.Order
     /// <summary>
     /// 订单操作
     /// </summary>
-    public class OrderCommandHandler : IRequestHandler<OrderDeleteCommand, bool>
+    public class OrderCommandHandler : IRequestHandler<OrderDeleteCommand, bool>,
+        IRequestHandler<OrderCreatedCommand, bool>
     {
         private readonly IOrderRepository _orderRepository;
-        private readonly ILogger<OrderCommandHandler> _logger;
-        public OrderCommandHandler(IOrderRepository orderRepository,
-            ILogger<OrderCommandHandler> logger)
+        public OrderCommandHandler(IOrderRepository orderRepository)
         {
             this._orderRepository = orderRepository;
-            _logger = logger;
         }
 
+        /// <summary>
+        /// 删除订单数据
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public async Task<bool> Handle(OrderDeleteCommand request, CancellationToken cancellationToken)
         {
             var orderList = await _orderRepository
-                                  .GetListAsync(o => request.OrderIDList.Contains(o.OrderID))
+                                  .GetOrderListByOrderIdsAsync(request.OrderIDList)
                                   .ConfigureAwait(false);
 
+            if (!orderList.Any())
+            {
+                return false;
+            }
             this._orderRepository.RemoveRange(orderList);
-            return await this._orderRepository.UnitOfWork.CommitAsync();
+            return await _orderRepository.UnitOfWork.CommitAsync(cancellationToken).ConfigureAwait(false);
+        }
+
+
+        /// <summary>
+        /// 批量订单数据
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<bool> Handle(OrderCreatedCommand request, CancellationToken cancellationToken)
+        {
+            _orderRepository.AddRange(request.Orders);
+            return _orderRepository.UnitOfWork.CommitAsync(cancellationToken);
+        }
+
+        /// <summary>
+        /// 手动释放
+        /// </summary>
+        public void Dispose()
+        {
+            _orderRepository.Dispose();
         }
     }
 }

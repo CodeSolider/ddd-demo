@@ -4,7 +4,7 @@ using Quartz.Spi;
 using Quartz.Util;
 using System;
 
-namespace EbayPlatform.Infrastructure.Core.ThirdComponents
+namespace EbayPlatform.Infrastructure.Core.Quartz
 {
     /// <summary>
     /// 任务工厂->用来管理任务生命周期

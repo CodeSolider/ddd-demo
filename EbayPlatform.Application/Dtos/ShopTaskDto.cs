@@ -1,6 +1,6 @@
 ﻿namespace EbayPlatform.Application.Dtos
 {
-    public class SyncTaskJobParamsDto
+    public class ShopTaskDto
     {
         /// <summary>
         /// 店铺名称

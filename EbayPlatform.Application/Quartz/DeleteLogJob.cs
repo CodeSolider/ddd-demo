@@ -22,7 +22,7 @@ namespace EbayPlatform.Application.Quartz
         /// <returns></returns>
         public Task Execute(IJobExecutionContext context)
         {
-            return _systemLogAppService.DeleteSystemLogByDate(DateTime.Now);
+            return _systemLogAppService.DeleteSystemLogByDateAsync(DateTime.Now);
         }
     }
 }

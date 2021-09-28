@@ -4,77 +4,42 @@
         <name>EbayPlatform.WebApi</name>
     </assembly>
     <members>
-        <member name="T:EbayPlatform.WebApi.ApiResult">
-            <summary>
-            统一返回格式
-            </summary>
-        </member>
-        <member name="P:EbayPlatform.WebApi.ApiResult.Code">
-            <summary>
-            返回代码
-            </summary>
-        </member>
-        <member name="P:EbayPlatform.WebApi.ApiResult.Message">
-            <summary>
-            返回消息
-            </summary>
-        </member>
-        <member name="M:EbayPlatform.WebApi.ApiResult.OK">
-            <summary>
-            返回成功
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:EbayPlatform.WebApi.ApiResult.Fail">
-            <summary>
-            返回失败
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:EbayPlatform.WebApi.ApiResult.OK(System.String)">
-            <summary>
-            返回成功
-            </summary>
-            <param name="message"></param>
-            <returns></returns>
-        </member>
-        <member name="M:EbayPlatform.WebApi.ApiResult.Fail(System.String)">
-            <summary>
-            返回失败
-            </summary>
-            <param name="message"></param>
-            <returns></returns>
-        </member>
-        <member name="M:EbayPlatform.WebApi.ApiResult.OK``1(System.String,``0)">
-            <summary>
-            返回成功的消息
-            </summary>
-            <param name="message"></param>
-            <param name="data"></param>
-            <returns></returns>
-        </member>
-        <member name="M:EbayPlatform.WebApi.ApiResult.Fail``1(System.String,``0)">
-            <summary>
-            返回失败的消息
-            </summary>
-            <param name="message"></param>
-            <param name="data"></param>
-            <returns></returns>
-        </member>
-        <member name="T:EbayPlatform.WebApi.ApiResult`1">
-            <summary>
-            返回响应信息
-            </summary>
-            <typeparam name="T"></typeparam>
-        </member>
         <member name="T:EbayPlatform.WebApi.Controllers.SyncTaskJobController">
             <summary>
             同步任务配置接口
             </summary>
         </member>
+        <member name="F:EbayPlatform.WebApi.Controllers.SyncTaskJobController._syncTaskJobAppService">
+            <summary>
+            同步任务配置服务
+            </summary>
+        </member>
+        <member name="M:EbayPlatform.WebApi.Controllers.SyncTaskJobController.StartAllTaskJobAsync">
+            <summary>
+            启动所有任务
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EbayPlatform.WebApi.Controllers.SyncTaskJobController.CreateSyncTaskJobAsync(EbayPlatform.WebApi.RequestModel.CreateSyncTaskJobRequestModel)">
+            <summary>
+            创建同步任务
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
         <member name="T:EbayPlatform.WebApi.Extensions.SwaggerExtensions">
             <summary>
             Swagger 扩展类
+            </summary>
+        </member>
+        <member name="T:EbayPlatform.WebApi.RequestModel.CreateSyncTaskJobRequestModel">
+            <summary>
+            创建同步任务请求参数
+            </summary>
+        </member>
+        <member name="P:EbayPlatform.WebApi.RequestModel.CreateSyncTaskJobRequestModel.SyncTaskJobConfig">
+            <summary>
+            同步配置任务
             </summary>
         </member>
         <member name="T:EbayPlatform.WebApi.Startup">

@@ -38,11 +38,6 @@ namespace EbayPlatform.Domain.Models
         public string CronDesc { get; private set; }
 
         /// <summary>
-        /// 是否运行中
-        /// </summary>
-        public bool IsRunning { get; private set; }
-
-        /// <summary>
         /// 作业状态
         /// </summary>
         public JobStatusType JobStatus { get; private set; }
@@ -58,39 +53,52 @@ namespace EbayPlatform.Domain.Models
         public DateTime? ModifyDate { get; private set; } = DateTime.Now;
 
         /// <summary>
-        /// 任务参数
+        /// 店铺任务
         /// </summary>
-        public virtual ICollection<SyncTaskJobParam> SyncTaskJobParams { get; private set; }
+        public virtual ICollection<ShopTask> ShopTasks { get; private set; }
 
 
         protected SyncTaskJobConfig()
         {
-            this.SyncTaskJobParams = new List<SyncTaskJobParam>();
+            this.ShopTasks = new List<ShopTask>();
         }
 
         public SyncTaskJobConfig(string jobName, string jobDesc,
-            string jobAssemblyName, string cron, string cronDesc )
+            string jobAssemblyName, string cron, string cronDesc) : this()
         {
             this.JobName = jobName;
             this.JobDesc = jobDesc;
             this.JobAssemblyName = jobAssemblyName;
             this.Cron = cron;
             this.CronDesc = cronDesc;
-            this.JobStatus = JobStatusType.UnExecute; 
-            //添加事件
-            this.AddDomainEvent(new CreateSyncTaskJobConfigDomainEvent(this));
+            this.JobStatus = JobStatusType.UnExecute;
+            ////添加事件
+            //this.AddDomainEvent(new CreateSyncTaskJobConfigDomainEvent(this));
         }
 
-        public void ChangeSyncTaskJobParamValue(string shopName, string paramValue)
+        /// <summary>
+        /// 更新作业状态
+        /// </summary>
+        /// <param name="JobStatus"></param>
+        public void ChangeSyncTaskJobConfigJobStatus(JobStatusType jobStatus)
         {
-            var existingSyncTaskJobParam = SyncTaskJobParams.SingleOrDefault(o => o.ShopName.Equals(shopName));
-            if (existingSyncTaskJobParam != null)
+            this.JobStatus = jobStatus;
+        }
+
+        /// <summary>
+        /// 添加店铺任务
+        /// </summary>
+        public void AddShopTask(string shopName, string paramValue)
+        {
+            var existsShopTask = this.ShopTasks.FirstOrDefault(o => o.ShopName.Equals(shopName));
+            if (existsShopTask != null)
             {
-                existingSyncTaskJobParam.ChangeParamValue(paramValue);
+                existsShopTask.ChangeShopTaskParamValue(paramValue);
             }
             else
             {
-                SyncTaskJobParams.Add(new SyncTaskJobParam(shopName, paramValue));
+                existsShopTask = new ShopTask(shopName, paramValue);
+                this.ShopTasks.Add(existsShopTask);
             }
         }
 

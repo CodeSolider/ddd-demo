@@ -1,14 +1,10 @@
 ﻿using EbayPlatform.Domain.Models;
 using MediatR;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EbayPlatform.Domain.Commands.SyncTaskJobConfig
 {
-    public class CreateSyncTaskJobConfigCommand : IRequest<Models.SyncTaskJobConfig>
+    public class CreateSyncTaskJobConfigCommand : IRequest<int>
     {
         /// <summary>
         /// 作业名称
@@ -38,19 +34,19 @@ namespace EbayPlatform.Domain.Commands.SyncTaskJobConfig
         /// <summary>
         /// 同步任务参数
         /// </summary>
-        public List<SyncTaskJobParam> SyncTaskJobParams { get; }
+        public List<ShopTask> ShopTasks { get; }
 
 
         public CreateSyncTaskJobConfigCommand(string jobName, string jobDesc,
             string jobAssemblyName, string cron, string cronDesc,
-            List<SyncTaskJobParam> syncTaskJobParams)
+            List<ShopTask> shopTasks)
         {
             this.JobName = jobName;
             this.JobDesc = jobDesc;
             this.JobAssemblyName = jobAssemblyName;
             this.Cron = cron;
             this.CronDesc = cronDesc;
-            this.SyncTaskJobParams = syncTaskJobParams;
+            this.ShopTasks = shopTasks;
         }
     }
 }

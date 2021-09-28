@@ -1,4 +1,5 @@
 ﻿using EbayPlatform.Domain.Models;
+using EbayPlatform.Domain.Models.Listing;
 using EbayPlatform.Domain.Models.Orders;
 using EbayPlatform.Infrastructure.Core;
 using EbayPlatform.Infrastructure.Mappings;
@@ -34,6 +35,8 @@ namespace EbayPlatform.Infrastructure.Context
         /// 订单
         /// </summary>
         public DbSet<Order> Orders { get; set; }
+
+        public DbSet<Product> Products { get; set; }
 
         #endregion
 

@@ -41,7 +41,8 @@ namespace EbayPlatform.Domain.Models.Orders
             ShippingServiceOptions = new List<ShippingServiceOption>();
         }
 
-        public ShippingDetail(SalesTax salesTax, int? sellingManagerSalesRecordNumber, bool? getItFast)
+        public ShippingDetail(SalesTax salesTax, int? sellingManagerSalesRecordNumber,
+            bool? getItFast) : this()
         {
             this.SalesTax = salesTax;
             this.SellingManagerSalesRecordNumber = sellingManagerSalesRecordNumber;
@@ -52,19 +53,22 @@ namespace EbayPlatform.Domain.Models.Orders
         /// <summary>
         /// 更新发货服务信息
         /// </summary>
-        public void ChangeShippingServiceOption(string shippingService, bool? expeditedService,
+        public void ChangeShippingServiceOption(string shippingService, MoneyValue shippingServiceCost,
+            int? shippingServicePriority, bool? expeditedService,
             int? shippingTimeMin, int? shippingTimeMax, List<ShippingPackage> shippingPackages)
         {
             var existsForShippingServiceOption = this.ShippingServiceOptions.SingleOrDefault(o => o.ShippingService.Equals(shippingService));
 
             if (existsForShippingServiceOption != null)
             {
+
                 existsForShippingServiceOption
-                    .ChangeShippingServiceOption(shippingService, expeditedService, shippingTimeMin, shippingTimeMax);
+                    .SetShippingServiceOption(shippingServiceCost, expeditedService, shippingServicePriority, shippingTimeMin, shippingTimeMax);
             }
             else
             {
-                existsForShippingServiceOption = new ShippingServiceOption(shippingService, expeditedService,
+                existsForShippingServiceOption = new ShippingServiceOption(shippingService, shippingServiceCost,
+                                                                           shippingServicePriority, expeditedService,
                                                                            shippingTimeMin, shippingTimeMax);
                 this.ShippingServiceOptions.Add(existsForShippingServiceOption);
             }

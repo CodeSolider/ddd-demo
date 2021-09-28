@@ -1,4 +1,3 @@
-using EbayPlatform.Application.IntegrationEvents;
 using EbayPlatform.Infrastructure.Context;
 using EbayPlatform.Infrastructure.Core.Extensions;
 using EbayPlatform.Infrastructure.Core.Quartz;
@@ -39,9 +38,6 @@ namespace EbayPlatform.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            services.AddSwaggerDocumentation();
-
             #region MediatR
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(EbayPlatformContextTransactionBehavior<,>));
             services.AddMediatR(Assembly.Load(Configuration.GetSection("MediatRPath").Value), typeof(Program).Assembly);
@@ -51,14 +47,15 @@ namespace EbayPlatform.WebApi
                      (Configuration.GetConnectionString("DefaultConnection"), ServiceLifetime.Transient);
             services.AddAutoDIService();
 
-            #region Cap
-            services.AddTransient<ISubscriberService, SubscriberService>();
-            services.AddCapService<EbayPlatformDbContext>(Configuration);
+            #region Cap 
+            services.AddCapEventBus<EbayPlatformDbContext>(Configuration);
             #endregion
 
             #region Quartz
             services.UseQuartz();
             #endregion
+            services.AddControllers();
+            services.AddSwaggerDocumentation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

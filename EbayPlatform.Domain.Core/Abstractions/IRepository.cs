@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using System;
-using System.Linq.Expressions;
+using System; 
 
 namespace EbayPlatform.Domain.Core.Abstractions
 {
@@ -18,44 +17,14 @@ namespace EbayPlatform.Domain.Core.Abstractions
         bool AddRange(List<TEntity> entities);
         Task AddRangeAsync(List<TEntity> entities, CancellationToken cancellationToken = default);
         TEntity Update(TEntity entity);
+        void UpdateRange(IEnumerable<TEntity> entities);
         void Remove(TEntity entity);
         void RemoveRange(IEnumerable<TEntity> entities);
 
 
         bool Delete(TKey id);
-        Task<bool> DeleteAsync(TKey id, CancellationToken cancellationToken = default);
+        Task<bool> DeleteAsync(TKey id);
         TEntity Get(TKey id);
-        Task<TEntity> GetAsync(TKey id, CancellationToken cancellationToken = default);
-        Task<TEntity> GetFirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate = null,
-            CancellationToken cancellationToken = default);
-        TEntity GetFirstOrDefault(Expression<Func<TEntity, bool>> predicate = null);
-
-        /// <summary>
-        /// Get List NoTracking
-        /// </summary>
-        /// <param name="predicate"></param>
-        /// <returns></returns>
-        List<TEntity> GetNoTrackingList(Expression<Func<TEntity, bool>> predicate = null);
-
-        /// <summary>
-        /// Get List Async NoTracking 
-        /// </summary>
-        /// <param name="predicate"></param>
-        /// <returns></returns>
-        Task<List<TEntity>> GetNoTrackingListAsync(Expression<Func<TEntity, bool>> predicate = null);
-
-        /// <summary>
-        /// Get List NoTracking
-        /// </summary>
-        /// <param name="predicate"></param>
-        /// <returns></returns>
-        List<TEntity> GetList(Expression<Func<TEntity, bool>> predicate = null);
-
-        /// <summary>
-        /// Get List Async NoTracking 
-        /// </summary>
-        /// <param name="predicate"></param>
-        /// <returns></returns>
-        Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate = null);
+        ValueTask<TEntity> GetAsync(TKey id);       
     }
 }

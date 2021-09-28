@@ -1,4 +1,4 @@
-﻿namespace EbayPlatform.WebApi
+﻿namespace EbayPlatform.Infrastructure.Core
 {
     /// <summary>
     /// 统一返回格式
@@ -106,7 +106,7 @@
     /// 返回响应信息
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    internal class ApiResult<T> : ApiResult
+    public class ApiResult<T> : ApiResult
     {
         public T Data { get; set; }
     }

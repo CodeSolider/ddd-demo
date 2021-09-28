@@ -14,45 +14,45 @@ namespace EbayPlatform.Infrastructure.Mappings
             builder.ToTable("Order").HasComment("订单");
             builder.HasKey(p => p.Id);
             builder.Property(p => p.Id).ValueGeneratedOnAdd().HasComment("主键Id");
-            builder.Property(p => p.OrderID).HasMaxLength(50).HasComment("eBay下载的订单ID、唯一");
+            builder.Property(p => p.OrderID).HasMaxLength(50).IsRequired(true).HasComment("eBay下载的订单ID、唯一");
             builder.Property(p => p.OrderStatus).HasMaxLength(20).IsRequired(false).HasComment("订单状态");
             builder.OwnsOne(p => p.AdjustmentAmount, v =>
             {
-                v.Property(p => p.Value).HasPrecision(18, 3).HasColumnName("AdjustmentAmount");
+                v.Property(p => p.Value).HasPrecision(18, 3).IsRequired(true).HasColumnName("AdjustmentAmount");
                 v.Property(p => p.Currency).HasMaxLength(10).IsRequired(false).HasColumnName("AdjustmentAmountCurrency");
             });
 
             builder.OwnsOne(p => p.AmountPaid, v =>
             {
-                v.Property(p => p.Value).HasPrecision(18, 3).HasColumnName("AmountPaid");
+                v.Property(p => p.Value).HasPrecision(18, 3).IsRequired(true).HasColumnName("AmountPaid");
                 v.Property(p => p.Currency).HasMaxLength(10).IsRequired(false).HasColumnName("AmountPaidCurrency");
             });
 
             builder.OwnsOne(p => p.AmountSaved, v =>
             {
-                v.Property(p => p.Value).HasPrecision(18, 3).HasColumnName("AmountSaved");
+                v.Property(p => p.Value).HasPrecision(18, 3).IsRequired(true).HasColumnName("AmountSaved");
                 v.Property(p => p.Currency).HasMaxLength(10).IsRequired(false).HasColumnName("AmountSavedCurrency");
             });
 
             builder.Property(p => p.PaymentMethods).HasMaxLength(300).IsRequired(false).HasComment("付款方式");
             builder.Property(p => p.SellerEmail).HasMaxLength(100).IsRequired(false).HasComment("卖家邮箱地址");
             builder.Property(p => p.CreatedTime).IsRequired(false).HasComment("订单创建日期");
-            builder.Property(p => p.SyncDate).HasDefaultValueSql("getDate()").HasComment("同步日期");
+            builder.Property(p => p.SyncDate).IsRequired(true).HasDefaultValueSql("getDate()").HasComment("同步日期");
 
             builder.OwnsMany(p => p.OrderTransactions, p =>
             {
                 p.HasKey(v => v.Id);
                 p.Property(v => v.Id).ValueGeneratedOnAdd().HasComment("主键Id");
-                p.Property(v => v.TransactionID).HasMaxLength(50).HasComment("TransactionID");
-                p.Property(v => v.OrderLineItemID).HasMaxLength(50).HasComment("OrderLineItemID");
-                p.Property(v => v.SiteCode).HasMaxLength(20).HasComment("站点");
-                p.Property(v => v.Title).IsRequired(false).HasComment("标题");
-                p.Property(v => v.ConditionID).HasMaxLength(100).IsRequired(false).HasComment("条件性ID");
-                p.Property(v => v.ConditionDisplayName).HasMaxLength(500).IsRequired(false).HasComment("条件性ID");
-                p.Property(v => v.QuantityPurchased).HasComment("购买数");
+                p.Property(v => v.TransactionID).HasMaxLength(50).IsRequired(true).HasComment("TransactionID");
+                p.Property(v => v.OrderLineItemID).HasMaxLength(50).IsRequired(true).HasComment("OrderLineItemID");
+                p.Property(v => v.SiteCode).HasMaxLength(20).IsRequired(false).HasComment("站点");
+                p.Property(v => v.Title).IsRequired(false).IsRequired(false).HasComment("标题");
+                p.Property(v => v.ConditionID).IsRequired(false).IsRequired(false).HasComment("条件性ID");
+                p.Property(v => v.ConditionDisplayName).HasMaxLength(500).IsRequired(false).IsRequired(false).HasComment("条件性ID");
+                p.Property(v => v.QuantityPurchased).HasComment("购买数").IsRequired(true);
                 p.OwnsOne(v => v.TransactionPrice, v =>
                 {
-                    v.Property(v => v.Value).HasPrecision(18, 3).HasColumnName("TransactionPrice");
+                    v.Property(v => v.Value).HasPrecision(18, 3).IsRequired(true).HasColumnName("TransactionPrice");
                     v.Property(v => v.Currency).HasMaxLength(10).IsRequired(false).HasColumnName("TransactionPriceCurrency");
                 });
 
@@ -68,7 +68,7 @@ namespace EbayPlatform.Infrastructure.Mappings
                     v.Property(v => v.ShippingService).IsRequired(false).HasMaxLength(300).HasComment("运输服务");
                     v.OwnsOne(v => v.ShippingServiceCost, v =>
                     {
-                        v.Property(v => v.Value).HasPrecision(18, 3).HasColumnName("ShippingServiceCost");
+                        v.Property(v => v.Value).HasPrecision(18, 3).IsRequired(true).HasColumnName("ShippingServiceCost");
                         v.Property(v => v.Currency).HasMaxLength(10).IsRequired(false).HasColumnName("AmountSavedCurrency");
                     });
                     v.Property(p => p.ShippingServicePriority).IsRequired(false);
@@ -91,13 +91,13 @@ namespace EbayPlatform.Infrastructure.Mappings
 
             builder.OwnsOne(p => p.Total, v =>
             {
-                v.Property(p => p.Value).HasPrecision(18, 3).HasColumnName("Total");
+                v.Property(p => p.Value).HasPrecision(18, 3).IsRequired(true).HasColumnName("Total");
                 v.Property(p => p.Currency).HasMaxLength(10).IsRequired(false).HasColumnName("TotalCurrency");
             });
 
             builder.OwnsOne(p => p.Subtotal, v =>
             {
-                v.Property(p => p.Value).HasPrecision(18, 3).HasColumnName("Subtotal");
+                v.Property(p => p.Value).HasPrecision(18, 3).IsRequired(true).HasColumnName("Subtotal");
                 v.Property(p => p.Currency).HasMaxLength(10).IsRequired(false).HasColumnName("TotalCurrency");
             });
 
@@ -115,11 +115,11 @@ namespace EbayPlatform.Infrastructure.Mappings
             {
                 v.OwnsOne(v => v.SalesTax, s =>
                 {
-                    s.Property(v => v.SalesTaxPercent).HasComment("营业税率");
+                    s.Property(v => v.SalesTaxPercent).IsRequired(true).HasComment("营业税率");
                     s.Property(v => v.SalesTaxState).HasMaxLength(300).IsRequired(false);
                     s.OwnsOne(p => p.SalesTaxAmount, v =>
                     {
-                        v.Property(p => p.Value).HasPrecision(18, 3).HasColumnName("SalesTaxAmount");
+                        v.Property(p => p.Value).HasPrecision(18, 3).IsRequired(true).HasColumnName("SalesTaxAmount");
                         v.Property(p => p.Currency).HasMaxLength(10).IsRequired(false).HasColumnName("SalesTaxAmountCurrency");
                     });
                 });
@@ -130,8 +130,8 @@ namespace EbayPlatform.Infrastructure.Mappings
                     v.Property(v => v.ShippingService).IsRequired(false).HasMaxLength(300).HasComment("运输服务");
                     v.OwnsOne(v => v.ShippingServiceCost, v =>
                     {
-                        v.Property(v => v.Value).HasPrecision(18, 3).HasColumnName("ShippingServiceCost");
-                        v.Property(v => v.Currency).HasMaxLength(10).HasColumnName("AmountSavedCurrency");
+                        v.Property(v => v.Value).HasPrecision(18, 3).IsRequired(true).HasDefaultValue(0M).HasColumnName("ShippingServiceCost");
+                        v.Property(v => v.Currency).HasMaxLength(10).IsRequired(false).HasColumnName("AmountSavedCurrency");
                     });
                     v.Property(p => p.ShippingServicePriority).IsRequired(false);
                     v.Property(v => v.ExpeditedService).IsRequired(false).HasComment("是否加急服务");
@@ -166,7 +166,7 @@ namespace EbayPlatform.Infrastructure.Mappings
                 v.Property(v => v.ShippingService).IsRequired(false).HasMaxLength(300).HasComment("运输服务");
                 v.OwnsOne(v => v.ShippingServiceCost, v =>
                 {
-                    v.Property(v => v.Value).HasPrecision(18, 3).HasColumnName("ShippingServiceCost");
+                    v.Property(v => v.Value).HasPrecision(18, 3).IsRequired(true).HasColumnName("ShippingServiceCost");
                     v.Property(v => v.Currency).HasMaxLength(10).HasColumnName("AmountSavedCurrency");
                 });
                 v.Property(p => p.ShippingServicePriority).IsRequired(false);

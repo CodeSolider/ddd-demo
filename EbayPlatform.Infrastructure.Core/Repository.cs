@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -29,137 +28,78 @@ namespace EbayPlatform.Infrastructure.Repository
 
         public virtual TEntity Add(TEntity entity)
         {
-            return DbContext.Add(entity).Entity;
+            return DbContext.Set<TEntity>().Add(entity).Entity;
         }
 
         public virtual async ValueTask<TEntity> AddAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
-            return (await DbContext.AddAsync(entity, cancellationToken).ConfigureAwait(false)).Entity;
+            return (await DbContext.Set<TEntity>().AddAsync(entity, cancellationToken).ConfigureAwait(false)).Entity;
         }
 
         public virtual bool AddRange(List<TEntity> entities)
         {
-            DbContext.AddRange(entities);
+            DbContext.Set<TEntity>().AddRange(entities);
             return true;
         }
 
         public virtual async Task AddRangeAsync(List<TEntity> entities, CancellationToken cancellationToken = default)
         {
-            await DbContext.AddRangeAsync(entities, cancellationToken).ConfigureAwait(false);
+            await DbContext.Set<TEntity>().AddRangeAsync(entities, cancellationToken).ConfigureAwait(false);
         }
 
         public virtual TEntity Update(TEntity entity)
         {
-            return DbContext.Update(entity).Entity;
+            return DbContext.Set<TEntity>().Update(entity).Entity;
+        }
+
+        public virtual void UpdateRange(IEnumerable<TEntity> entities)
+        {
+            DbContext.Set<TEntity>().UpdateRange(entities);
         }
 
 
         public virtual void Remove(TEntity entity)
         {
-            DbContext.Remove(entity);
+            DbContext.Set<TEntity>().Remove(entity);
         }
 
         public virtual void RemoveRange(IEnumerable<TEntity> entities)
         {
-            DbContext.Remove(entities);
+            DbContext.Set<TEntity>().RemoveRange(entities);
         }
 
         public virtual bool Delete(TKey id)
         {
-            var entity = DbContext.Find<TEntity>(id);
+            var entity = Get(id);
             if (entity == null)
             {
                 return false;
             }
-            DbContext.Remove(entity);
+            Remove(entity);
             return true;
         }
 
-        public virtual async Task<bool> DeleteAsync(TKey id, CancellationToken cancellationToken = default)
+        public virtual async Task<bool> DeleteAsync(TKey id)
         {
-            var entity = await DbContext.FindAsync<TEntity>(id, cancellationToken)
-                                        .ConfigureAwait(false);
+            var entity = await GetAsync(id)
+                               .ConfigureAwait(false);
             if (entity == null)
             {
                 return false;
             }
-            DbContext.Remove(entity);
+            Remove(entity);
             return true;
         }
 
         public virtual TEntity Get(TKey id)
         {
-            return DbContext.Find<TEntity>(id);
+            return DbContext.Set<TEntity>().Find(id);
         }
 
-        public virtual async Task<TEntity> GetAsync(TKey id, CancellationToken cancellationToken = default)
+        public virtual async ValueTask<TEntity> GetAsync(TKey id)
         {
-            return await DbContext.FindAsync<TEntity>(id, cancellationToken).ConfigureAwait(false);
+            return await DbContext.Set<TEntity>().FindAsync(id).ConfigureAwait(false);
         }
-
-
-        /// <summary>
-        /// 获取单条数据
-        /// </summary>
-        /// <param name="predicate"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        public virtual async Task<TEntity> GetFirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate = null,
-           CancellationToken cancellationToken = default)
-        {
-            return await DbContext.Set<TEntity>().FirstOrDefaultAsync(predicate, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// 获取单条数据
-        /// </summary>
-        /// <param name="predicate"></param>
-        /// <returns></returns>
-        public virtual TEntity GetFirstOrDefault(Expression<Func<TEntity, bool>> predicate = null)
-        {
-            return DbContext.Set<TEntity>().FirstOrDefault(predicate);
-        }
-
-        /// <summary>
-        /// Get List NoTracking
-        /// </summary>
-        /// <param name="predicate"></param>
-        /// <returns></returns>
-        public List<TEntity> GetNoTrackingList(Expression<Func<TEntity, bool>> predicate = null)
-        {
-            return this.NoTrackingQueryable.Where(predicate).ToList();
-        }
-
-        /// <summary>
-        /// Get List Async NoTracking 
-        /// </summary>
-        /// <param name="predicate"></param>
-        /// <returns></returns>
-        public async Task<List<TEntity>> GetNoTrackingListAsync(Expression<Func<TEntity, bool>> predicate = null)
-        {
-            return await this.NoTrackingQueryable.Where(predicate).ToListAsync().ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Get List NoTracking
-        /// </summary>
-        /// <param name="predicate"></param>
-        /// <returns></returns>
-        public List<TEntity> GetList(Expression<Func<TEntity, bool>> predicate = null)
-        {
-            return DbContext.Set<TEntity>().Where(predicate).ToList();
-        }
-
-        /// <summary>
-        /// Get List Async NoTracking 
-        /// </summary>
-        /// <param name="predicate"></param>
-        /// <returns></returns>
-        public async Task<List<TEntity>> GetListAsync(Expression<Func<TEntity, bool>> predicate = null)
-        {
-            return await DbContext.Set<TEntity>().Where(predicate).ToListAsync().ConfigureAwait(false);
-        }
-
 
         public void Dispose()
         {

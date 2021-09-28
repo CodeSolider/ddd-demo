@@ -3,9 +3,9 @@
 namespace EbayPlatform.Application.Dtos
 {
     /// <summary>
-    /// AcquisitionTask带分页带时间
+    /// 数据下载分页
     /// </summary>
-    public class AcquisitionTaskDto
+    public class ParamValueToEntityDto
     {
         /// <summary>
         /// 页码
@@ -26,5 +26,9 @@ namespace EbayPlatform.Application.Dtos
         /// 到什么时间结束下载
         /// </summary>
         public DateTime ToDate { get; set; }
+    }
+    internal class ParamValueToEntityDto<T> : ParamValueToEntityDto
+    {
+        public T Data { get; set; }
     }
 }

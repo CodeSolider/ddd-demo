@@ -31,7 +31,7 @@ namespace EbayPlatform.Domain.Models.Orders
         /// <summary>
         /// ConditionID
         /// </summary>
-        public string ConditionID { get; private set; }
+        public int? ConditionID { get; private set; }
 
         /// <summary>
         /// ConditionDisplayName
@@ -66,5 +66,46 @@ namespace EbayPlatform.Domain.Models.Orders
 
 
         protected OrderTransaction() { }
+
+        public OrderTransaction(string transactionID, string orderLineItemID,
+            string siteCode, string title, int? conditionID, string conditionDisplayName,
+            int quantityPurchased, MoneyValue transactionPrice, TransactionStatus status,
+            ShippingServiceOption shippingServiceOption, DateTime? createdDate)
+        {
+            this.TransactionID = transactionID;
+            this.OrderLineItemID = orderLineItemID;
+            this.SiteCode = siteCode;
+            this.Title = title;
+            this.ConditionID = conditionID;
+            this.ConditionDisplayName = conditionDisplayName;
+            this.QuantityPurchased = quantityPurchased;
+            this.TransactionPrice = transactionPrice;
+            this.Status = status;
+            this.ShippingServiceSelected = shippingServiceOption;
+            this.CreatedDate = createdDate;
+        }
+
+        /// <summary>
+        /// 更新订单交易信息
+        /// </summary>
+        /// <param name="siteCode"></param>
+        /// <param name="title"></param>
+        /// <param name="conditionID"></param>
+        /// <param name="conditionDisplayName"></param>
+        /// <param name="quantityPurchased"></param>
+        /// <param name="transactionPrice"></param>
+        /// <param name="status"></param>
+        /// <param name="createdDate"></param>
+        public void ChangeOrderTransaction(int quantityPurchased, MoneyValue transactionPrice,
+            TransactionStatus status, DateTime? createdDate)
+        {
+            this.QuantityPurchased = quantityPurchased;
+            this.TransactionPrice = transactionPrice;
+            this.Status = status;
+            this.CreatedDate = createdDate;
+        }
+
+
+
     }
 }

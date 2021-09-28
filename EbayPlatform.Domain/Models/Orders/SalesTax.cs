@@ -34,10 +34,11 @@ namespace EbayPlatform.Domain.Models.Orders
 
         public SalesTax() { }
 
-        public SalesTax(float salesTaxPercent, string salesTaxState)
+        public SalesTax(float salesTaxPercent, string salesTaxState, MoneyValue salesTaxAmount)
         {
             this.SalesTaxPercent = salesTaxPercent;
             this.SalesTaxState = salesTaxState;
+            this.SalesTaxAmount = salesTaxAmount;
         }
 
     }

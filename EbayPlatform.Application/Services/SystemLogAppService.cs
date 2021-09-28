@@ -21,10 +21,11 @@ namespace EbayPlatform.Application.Services
         /// <param name="createDate"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public Task DeleteSystemLogByDate(DateTime createDate, CancellationToken cancellationToken = default)
+        public Task DeleteSystemLogByDateAsync(DateTime createDate, CancellationToken cancellationToken = default)
         {
             return _mediator.Send(new DeleteSystemLogCommand(createDate), cancellationToken);
         }
+
 
         public void Dispose()
         {

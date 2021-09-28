@@ -1,7 +1,5 @@
-﻿using DotNetCore.CAP;
-using EbayPlatform.Domain.Core.Abstractions;
+﻿using EbayPlatform.Domain.Core.Abstractions;
 using EbayPlatform.Domain.Events.SyncTaskJobConfig;
-using EbayPlatform.Domain.IntegrationEvents.SyncTaskJobConfig;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -9,10 +7,9 @@ namespace EbayPlatform.Domain.EventHadlers.SyncTaskJobConfig
 {
     public class SyncTaskJobConfigEventHandler : IDomainEventHandler<CreateSyncTaskJobConfigDomainEvent>
     {
-        private readonly ICapPublisher _capPublisher;
-        public SyncTaskJobConfigEventHandler(ICapPublisher capPublisher)
+        public SyncTaskJobConfigEventHandler()
         {
-            _capPublisher = capPublisher;
+
         }
 
         /// <summary>
@@ -21,13 +18,10 @@ namespace EbayPlatform.Domain.EventHadlers.SyncTaskJobConfig
         /// <param name="notification"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task Handle(CreateSyncTaskJobConfigDomainEvent notification, CancellationToken cancellationToken)
+        public Task Handle(CreateSyncTaskJobConfigDomainEvent notification, CancellationToken cancellationToken)
         {
-            await _capPublisher
-                   .PublishAsync("SyncTaskJobConfigCreated",
-                       new SyncTaskJobConfigCreatedIntegrationEvent(notification.SyncTaskJobConfig.Id),
-                                                                     cancellationToken: cancellationToken)
-                   .ConfigureAwait(false);
+            return Task.CompletedTask;
         }
+
     }
 }

@@ -5,7 +5,7 @@
         /// <summary>
         /// 未执行
         /// </summary>
-        UnExecute = 0,
+        UnExecute = -1,
 
         /// <summary>
         /// 正在执行中

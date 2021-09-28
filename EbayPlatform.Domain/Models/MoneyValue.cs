@@ -1,12 +1,12 @@
 ﻿using EbayPlatform.Domain.Core.Abstractions;
 using System.Collections.Generic;
 
-namespace EbayPlatform.Domain.Models.Orders
+namespace EbayPlatform.Domain.Models
 {
     public class MoneyValue : ValueObject
     {
         /// <summary>
-        /// 或者值
+        /// 值
         /// </summary>
         public decimal Value { get; private set; }
 
@@ -24,7 +24,7 @@ namespace EbayPlatform.Domain.Models.Orders
 
 
 
-        protected MoneyValue() { }
+        public MoneyValue() { }
 
         public MoneyValue(decimal value, string currency)
         {

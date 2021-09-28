@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace EbayPlatform.Domain.CommandHandlers.SyncTaskJobConfig
 {
-    public class SyncTaskJobConfigCommandHandler : IRequestHandler<CreateSyncTaskJobConfigCommand, Models.SyncTaskJobConfig>
+    public class SyncTaskJobConfigCommandHandler : IRequestHandler<CreateSyncTaskJobConfigCommand, int>,
+        IRequestHandler<UpdateSyncTaskJobConfigCommand, bool>
     {
         private readonly ISyncTaskJobConfigRepository _syncTaskJobConfigRepository;
         public SyncTaskJobConfigCommandHandler(ISyncTaskJobConfigRepository syncTaskJobConfigRepository)
@@ -21,7 +22,7 @@ namespace EbayPlatform.Domain.CommandHandlers.SyncTaskJobConfig
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<Models.SyncTaskJobConfig> Handle(CreateSyncTaskJobConfigCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreateSyncTaskJobConfigCommand request, CancellationToken cancellationToken)
         {
             bool exists = _syncTaskJobConfigRepository.CheckJobName(request.JobName);
             if (exists)
@@ -32,17 +33,29 @@ namespace EbayPlatform.Domain.CommandHandlers.SyncTaskJobConfig
             var syncTaskJobConfig = new Models.SyncTaskJobConfig(request.JobName, request.JobDesc, request.JobAssemblyName,
                                                                  request.Cron, request.CronDesc);
 
-            request.SyncTaskJobParams.ForEach(SyncTaskJobParam =>
+            request.ShopTasks.ForEach(SyncTaskJobParam =>
             {
-                syncTaskJobConfig.ChangeSyncTaskJobParamValue(SyncTaskJobParam.ShopName, SyncTaskJobParam.ParamValue);
+                syncTaskJobConfig.AddShopTask(SyncTaskJobParam.ShopName, SyncTaskJobParam.ParamValue);
             });
 
-            return await _syncTaskJobConfigRepository
-                         .AddAsync(syncTaskJobConfig, cancellationToken)
-                         .ConfigureAwait(false);
+            _ = await _syncTaskJobConfigRepository
+                      .AddAsync(syncTaskJobConfig, cancellationToken)
+                      .ConfigureAwait(false);
+
+            await _syncTaskJobConfigRepository.UnitOfWork.CommitAsync(cancellationToken).ConfigureAwait(false);
+            return syncTaskJobConfig.Id;
         }
 
 
+        public async Task<bool> Handle(UpdateSyncTaskJobConfigCommand request, CancellationToken cancellationToken)
+        {
+            _syncTaskJobConfigRepository.UpdateRange(request.SyncTaskJobConfigs);
+            return await _syncTaskJobConfigRepository.UnitOfWork.CommitAsync(cancellationToken).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// 手动释放
+        /// </summary>
         public void Dispose()
         {
             _syncTaskJobConfigRepository.Dispose();
