@@ -50,7 +50,7 @@ namespace EbayPlatform.WebApi.Controllers
         /// <param name="input"></param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<ApiResult> CreateSyncTaskJobAsync(CreateSyncTaskJobRequestModel input)
+        public async Task<ApiResult> CreateSyncTaskJobAsync(CreateSyncTaskJobRequestInput input)
         {
             try
             {

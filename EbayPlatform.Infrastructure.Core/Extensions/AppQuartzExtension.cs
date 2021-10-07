@@ -1,9 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using EbayPlatform.Infrastructure.Core.Quartz;
+using Microsoft.Extensions.DependencyInjection;
 using Quartz;
 using Quartz.Impl;
 using Quartz.Spi;
 
-namespace EbayPlatform.Infrastructure.Core.Quartz
+namespace EbayPlatform.Infrastructure.Core.Extensions
 {
     /// <summary>
     /// Quartz扩展类

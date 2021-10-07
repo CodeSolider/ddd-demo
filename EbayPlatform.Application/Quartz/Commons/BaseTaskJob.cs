@@ -85,6 +85,5 @@ namespace EbayPlatform.Application.Quartz.Commons
             }
 
         }
-
     }
 }

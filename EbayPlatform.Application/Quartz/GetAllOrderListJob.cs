@@ -37,7 +37,6 @@ namespace EbayPlatform.Application.Quartz
             var apiCall = this.BeforeRequest(integrationEvent.ParamValue);
             var apiResult = await DownloadDataAsync(apiCall).ConfigureAwait(false);
             await SaveDataAsync(integrationEvent, apiResult).ConfigureAwait(false);
-
         }
 
         /// <summary>
@@ -129,7 +128,7 @@ namespace EbayPlatform.Application.Quartz
         /// </summary>
         /// <param name="orderTypeList"></param>
         /// <returns></returns>
-        List<OrderDto> ConvertData(List<OrderType> orderTypeList)
+        private List<OrderDto> ConvertData(List<OrderType> orderTypeList)
         {
             List<OrderDto> orderDtoList = new();
             orderTypeList.ForEach(orderType =>

@@ -20,20 +20,6 @@ namespace EbayPlatform.Application.Services
         Task<List<SyncTaskJobConfig>> GetSyncTaskJobConfigListByAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// 执行所有任务
-        /// </summary>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task ExecuteAllTaskAysnc(CancellationToken cancellationToken = default);
-
-        /// <summary>
-        /// 添加一个新任务
-        /// </summary>
-        /// <returns></returns>
-        Task<int> CreateSyncTaskJobAsync(SyncTaskJobConfigDto syncTaskJobConfigDto,
-            CancellationToken cancellationToken = default);
-
-        /// <summary>
         /// 根据任务Id获取任务配置作业数据
         /// </summary>
         /// <param name="syncTaskJobConfigId"></param> 
@@ -46,8 +32,13 @@ namespace EbayPlatform.Application.Services
         /// <param name="jobName"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<SyncTaskJobConfig> GetSyncTaskJobConfigByName(string jobName,
-          CancellationToken cancellationToken = default);
+        Task<SyncTaskJobConfig> GetSyncTaskJobConfigByName(string jobName, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 添加任务
+        /// </summary>
+        /// <returns></returns>
+        Task<int> CreateSyncTaskJobAsync(SyncTaskJobConfigDto syncTaskJobConfigDto, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 更新店铺信息

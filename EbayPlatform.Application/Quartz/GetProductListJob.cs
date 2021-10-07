@@ -104,7 +104,7 @@ namespace EbayPlatform.Application.Quartz
         /// </summary>
         /// <param name="itemTypeList"></param>
         /// <returns></returns>
-        List<ProductDto> ConvertData(List<ItemType> itemTypeList)
+        private List<ProductDto> ConvertData(List<ItemType> itemTypeList)
         {
             List<ProductDto> productDtoList = new();
             itemTypeList.ForEach(itemType =>

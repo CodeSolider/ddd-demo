@@ -2,6 +2,7 @@ using EbayPlatform.Infrastructure.Context;
 using EbayPlatform.Infrastructure.Core.Extensions;
 using EbayPlatform.Infrastructure.Core.Quartz;
 using EbayPlatform.WebApi.Extensions;
+using EbayPlatform.WebApi.HostedService;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -56,6 +57,8 @@ namespace EbayPlatform.WebApi
             #endregion
             services.AddControllers();
             services.AddSwaggerDocumentation();
+            //½«QuartzÍÐ¹Ü
+            services.AddHostedService<QuartzHostedService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
