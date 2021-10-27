@@ -1,4 +1,4 @@
-﻿using EbayPlatform.Domain.Models;
+﻿using EbayPlatform.Application.Dtos;
 using Quartz;
 using System;
 using System.Linq;
@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace EbayPlatform.Infrastructure.Core.Quartz
+namespace EbayPlatform.Application.Quartz
 {
     public class QuartzProvider
     {
@@ -18,7 +18,7 @@ namespace EbayPlatform.Infrastructure.Core.Quartz
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
         public static async Task StartJobAsync(IScheduler scheduler,
-            SyncTaskJobConfig syncTaskJobConfig,
+            SyncTaskJobConfigDto syncTaskJobConfig,
            CancellationToken cancellationToken = default)
         {
             Assembly assembly = Assembly.Load(syncTaskJobConfig.JobAssemblyName);
@@ -33,6 +33,12 @@ namespace EbayPlatform.Infrastructure.Core.Quartz
                 return;
             }
 
+            bool isExists = await scheduler.CheckExists(new JobKey(syncTaskJobConfig.JobName), cancellationToken).ConfigureAwait(false);
+            if (isExists)
+            {
+                return;
+            }
+
             IJobDetail job = JobBuilder.Create(typeInfo)
                                        .WithIdentity(syncTaskJobConfig.JobName)
                                        .Build();
@@ -43,9 +49,7 @@ namespace EbayPlatform.Infrastructure.Core.Quartz
                                              .WithCronSchedule(syncTaskJobConfig.Cron)
                                              .Build();
 
-            await scheduler.ScheduleJob(job, trigger, cancellationToken)
-                           .ConfigureAwait(false);
-
+            await scheduler.ScheduleJob(job, trigger, cancellationToken).ConfigureAwait(false);
         }
     }
 }

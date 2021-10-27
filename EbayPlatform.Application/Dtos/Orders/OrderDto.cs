@@ -23,6 +23,11 @@ namespace EbayPlatform.Application.Dtos.Orders
         /// </summary>
         public string OrderStatus { get; set; }
 
+        /// <summary>
+        /// 店铺名称
+        /// </summary>
+        public string ShopName { get; set; }
+
         #region AdjustmentAmount
         /// <summary>
         /// 或者值

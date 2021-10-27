@@ -15,6 +15,11 @@ namespace EbayPlatform.Application.Dtos.Listing
         public string MSKU { get; set; }
 
         /// <summary>
+        /// 店铺名称
+        /// </summary>
+        public string ShopName { get; set; }
+
+        /// <summary>
         /// 站点
         /// </summary>
         public string SiteCode { get; set; }

@@ -14,7 +14,9 @@ namespace EbayPlatform.Domain.Models.Orders
         /// </summary>
         public SalesTax SalesTax { get; private set; }
 
-
+        /// <summary>
+        /// SellingManagerSalesRecordNumber
+        /// </summary>
         public int? SellingManagerSalesRecordNumber { get; private set; }
 
         /// <summary>
@@ -26,14 +28,6 @@ namespace EbayPlatform.Domain.Models.Orders
         /// 发货服务选项
         /// </summary>
         public virtual ICollection<ShippingServiceOption> ShippingServiceOptions { get; private set; }
-
-
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return SalesTax;
-            yield return SellingManagerSalesRecordNumber;
-            yield return GetItFast;
-        }
 
 
         public ShippingDetail()
@@ -49,13 +43,19 @@ namespace EbayPlatform.Domain.Models.Orders
             this.GetItFast = getItFast;
         }
 
+        protected override IEnumerable<object> GetEqualityComponents()
+        {
+            yield return SalesTax;
+            yield return SellingManagerSalesRecordNumber;
+            yield return GetItFast;
+        }
 
         /// <summary>
         /// 更新发货服务信息
         /// </summary>
         public void ChangeShippingServiceOption(string shippingService, MoneyValue shippingServiceCost,
             int? shippingServicePriority, bool? expeditedService,
-            int? shippingTimeMin, int? shippingTimeMax, List<ShippingPackage> shippingPackages)
+            int? shippingTimeMin, int? shippingTimeMax, ShippingPackage shippingPackage)
         {
             var existsForShippingServiceOption = this.ShippingServiceOptions.SingleOrDefault(o => o.ShippingService.Equals(shippingService));
 
@@ -63,23 +63,16 @@ namespace EbayPlatform.Domain.Models.Orders
             {
 
                 existsForShippingServiceOption
-                    .SetShippingServiceOption(shippingServiceCost, expeditedService, shippingServicePriority, shippingTimeMin, shippingTimeMax);
+                    .SetShippingServiceOption(shippingServiceCost, expeditedService, shippingServicePriority, shippingTimeMin, shippingTimeMax, shippingPackage);
             }
             else
             {
                 existsForShippingServiceOption = new ShippingServiceOption(shippingService, shippingServiceCost,
                                                                            shippingServicePriority, expeditedService,
-                                                                           shippingTimeMin, shippingTimeMax);
+                                                                           shippingTimeMin, shippingTimeMax, shippingPackage);
+
                 this.ShippingServiceOptions.Add(existsForShippingServiceOption);
             }
-
-
-            shippingPackages.ForEach(packageItem =>
-            {
-                existsForShippingServiceOption.ChangeShippingPackage(packageItem.StoreID, packageItem.ShippingTrackingEvent,
-                                                                      packageItem.ScheduledDeliveryTimeMin, packageItem.ScheduledDeliveryTimeMax,
-                                                                      packageItem.EstimatedDeliveryTimeMin, packageItem.EstimatedDeliveryTimeMax);
-            });
         }
 
     }

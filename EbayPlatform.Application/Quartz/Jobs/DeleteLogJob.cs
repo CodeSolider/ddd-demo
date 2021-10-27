@@ -1,10 +1,10 @@
 ﻿using EbayPlatform.Application.Services;
-using EbayPlatform.Infrastructure.Core;
+using EbayPlatform.Domain.Core.Abstractions;
 using Quartz;
 using System;
 using System.Threading.Tasks;
 
-namespace EbayPlatform.Application.Quartz
+namespace EbayPlatform.Application.Quartz.Jobs
 {
     [DisallowConcurrentExecution]
     public class DeleteLogJob : IJob, IDependency

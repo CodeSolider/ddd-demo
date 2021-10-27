@@ -1,4 +1,6 @@
-﻿using EbayPlatform.Infrastructure.Core.Filters;
+﻿using DotNetCore.CAP;
+using EbayPlatform.Domain.Core.Abstractions;
+using EbayPlatform.Infrastructure.Core.Engines;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -56,11 +58,10 @@ namespace EbayPlatform.Infrastructure.Core.Extensions
         /// <param name="services"></param>
         /// <param name="Configuration"></param>
         /// <returns></returns>
-        public static IServiceCollection AddCapEventBus<TDbContext>(this IServiceCollection services,
-            IConfiguration Configuration)
-              where TDbContext : EFContext
+        public static CapBuilder AddCapEventBus<TDbContext>(this IServiceCollection services,
+            IConfiguration Configuration) where TDbContext : EFContext
         {
-            services.AddCap(options =>
+            return services.AddCap(options =>
             {
                 options.UseEntityFramework<TDbContext>();
 
@@ -76,8 +77,7 @@ namespace EbayPlatform.Infrastructure.Core.Extensions
                 //设置成功信息的删除时间默认24*3600
                 options.SucceedMessageExpiredAfter = Configuration.GetValue<int>("SucceedMessageExpiredAfter");
                 //options.UseDashboard();
-            }).AddSubscribeFilter<CapSubscribeFilter>();
-            return services;
+            });
         }
 
         /// <summary>
@@ -99,19 +99,38 @@ namespace EbayPlatform.Infrastructure.Core.Extensions
                 foreach (var type in types)
                 {
                     var interfaces = type.GetInterfaces();
+                    if (interfaces.Any())
+                    {
+                        var interfaceType = interfaces.FirstOrDefault(x => x.Name == $"I{type.Name}");
+                        if (interfaceType == null)
+                        {
+                            interfaceType = type;
+                        }
 
-                    var interfaceType = interfaces.FirstOrDefault(x => x.Name == $"I{type.Name}");
-                    if (interfaceType == null)
-                    {
-                        interfaceType = type;
+                        ServiceDescriptor serviceDescriptor = new(interfaceType, type, serviceLifetime);
+                        if (!services.Contains(serviceDescriptor))
+                        {
+                            services.Add(serviceDescriptor);
+                        }
                     }
-                    ServiceDescriptor serviceDescriptor = new(interfaceType, type, serviceLifetime);
-                    if (!services.Contains(serviceDescriptor))
+                    else
                     {
-                        services.Add(serviceDescriptor);
+                        services.Add(new ServiceDescriptor(type, type, serviceLifetime));
                     }
                 }
             }
+            return services;
+        }
+
+        /// <summary>
+        /// 注入引擎服务
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddEngineService(this IServiceCollection services)
+        {
+            //引擎服务注入
+            EngineContext.Initialize(new Engine(services.BuildServiceProvider()));
             return services;
         }
     }

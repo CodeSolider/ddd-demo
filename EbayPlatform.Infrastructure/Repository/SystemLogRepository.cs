@@ -2,7 +2,6 @@
 using EbayPlatform.Domain.Interfaces;
 using EbayPlatform.Domain.Models;
 using EbayPlatform.Infrastructure.Context;
-using EbayPlatform.Infrastructure.Core;
 using EbayPlatform.Infrastructure.Core.Extensions;
 using System;
 using System.Linq;

@@ -1,5 +1,6 @@
 ﻿using EbayPlatform.Application.Dtos;
 using EbayPlatform.Domain.Models;
+using EbayPlatform.Domain.Models.Enums;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -17,14 +18,22 @@ namespace EbayPlatform.Application.Services
         /// <param name="jobStatus"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<List<SyncTaskJobConfig>> GetSyncTaskJobConfigListByAsync(CancellationToken cancellationToken = default);
+        Task<List<SyncTaskJobConfig>> GetListByJobStatusAsync(JobStatusType? jobStatus = null,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 获取所有的任务配置数据
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<List<SyncTaskJobConfig>> GetSyncTaskJobConfigListAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 根据任务Id获取任务配置作业数据
         /// </summary>
         /// <param name="syncTaskJobConfigId"></param> 
         /// <returns></returns>
-        Task<SyncTaskJobConfig> GetSyncTaskJobConfigByIdAsync(int syncTaskJobConfigId);
+        ValueTask<SyncTaskJobConfig> GetSyncTaskJobConfigByIdAsync(int syncTaskJobConfigId);
 
         /// <summary>
         /// 根据任务名称获取任务配置作业数据
@@ -32,7 +41,7 @@ namespace EbayPlatform.Application.Services
         /// <param name="jobName"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<SyncTaskJobConfig> GetSyncTaskJobConfigByName(string jobName, CancellationToken cancellationToken = default);
+        Task<SyncTaskJobConfig> GetSyncTaskJobConfigByNameAsync(string jobName, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 添加任务

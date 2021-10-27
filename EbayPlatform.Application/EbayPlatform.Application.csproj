@@ -5,15 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="eBay.Service.Standard" Version="3.1113.0" />
     <PackageReference Include="Mapster" Version="7.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\EbayPlatform.Infrastructure\EbayPlatform.Infrastructure.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Quartz\Commons\" />
   </ItemGroup>
 
 </Project>

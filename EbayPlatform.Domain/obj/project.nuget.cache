@@ -1,14 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "tWwzGaFyonGHoDMH8uSx4PAcJKUUG77/9DUmmz1aOJVSvIrMjkk9WAnXoy4frFaVjOw52/ijmovZddPy9w9Lvw==",
+  "dgSpecHash": "dsNlE/8uij65mbOR87gI6ZmSnWbke2X15KGFKF3rmYS2YDSfDJEkeH3G3eZW83rbU258Cl8mk2T+8QvhghLAmw==",
   "success": true,
   "projectFilePath": "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Domain\\EbayPlatform.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\W\\.nuget\\packages\\dotnetcore.cap\\5.1.3\\dotnetcore.cap.5.1.3.nupkg.sha512",
     "C:\\Users\\W\\.nuget\\packages\\mediatr\\9.0.0\\mediatr.9.0.0.nupkg.sha512",
-    "C:\\Users\\W\\.nuget\\packages\\microsoft.entityframeworkcore\\5.0.9\\microsoft.entityframeworkcore.5.0.9.nupkg.sha512",
-    "C:\\Users\\W\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\5.0.9\\microsoft.entityframeworkcore.abstractions.5.0.9.nupkg.sha512",
-    "C:\\Users\\W\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\5.0.9\\microsoft.entityframeworkcore.analyzers.5.0.9.nupkg.sha512",
+    "C:\\Users\\W\\.nuget\\packages\\microsoft.entityframeworkcore\\5.0.11\\microsoft.entityframeworkcore.5.0.11.nupkg.sha512",
+    "C:\\Users\\W\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\5.0.11\\microsoft.entityframeworkcore.abstractions.5.0.11.nupkg.sha512",
+    "C:\\Users\\W\\.nuget\\packages\\microsoft.entityframeworkcore.analyzers\\5.0.11\\microsoft.entityframeworkcore.analyzers.5.0.11.nupkg.sha512",
     "C:\\Users\\W\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\5.0.0\\microsoft.extensions.caching.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\W\\.nuget\\packages\\microsoft.extensions.caching.memory\\5.0.0\\microsoft.extensions.caching.memory.5.0.0.nupkg.sha512",
     "C:\\Users\\W\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\5.0.0\\microsoft.extensions.configuration.abstractions.5.0.0.nupkg.sha512",

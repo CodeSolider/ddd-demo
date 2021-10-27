@@ -20,13 +20,17 @@ namespace EbayPlatform.Domain.CommandHandlers.Order
         }
 
         /// <summary>
-        /// 删除订单数据
+        /// 根据订单ID删除订单数据
         /// </summary>
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public async Task<bool> Handle(OrderDeleteCommand request, CancellationToken cancellationToken)
         {
+            if (!request.OrderIDList.Any())
+            {
+                return await Task.FromResult(false);
+            }
             var orderList = await _orderRepository
                                   .GetOrderListByOrderIdsAsync(request.OrderIDList)
                                   .ConfigureAwait(false);
@@ -48,6 +52,10 @@ namespace EbayPlatform.Domain.CommandHandlers.Order
         /// <returns></returns>
         public Task<bool> Handle(OrderCreatedCommand request, CancellationToken cancellationToken)
         {
+            if (!request.Orders.Any())
+            {
+                return Task.FromResult(false);
+            }
             _orderRepository.AddRange(request.Orders);
             return _orderRepository.UnitOfWork.CommitAsync(cancellationToken);
         }

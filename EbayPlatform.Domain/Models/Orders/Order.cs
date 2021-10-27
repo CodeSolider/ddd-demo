@@ -21,6 +21,11 @@ namespace EbayPlatform.Domain.Models.Orders
         public string OrderStatus { get; private set; }
 
         /// <summary>
+        /// 店铺名称
+        /// </summary>
+        public string ShopName { get; private set; }
+
+        /// <summary>
         /// 调价
         /// </summary>
         public MoneyValue AdjustmentAmount { get; private set; }
@@ -49,7 +54,6 @@ namespace EbayPlatform.Domain.Models.Orders
         /// 卖家账号
         /// </summary>
         public string SellerUserID { get; private set; }
-
 
         /// <summary>
         /// 订单创建日期
@@ -92,7 +96,7 @@ namespace EbayPlatform.Domain.Models.Orders
         public Address ShippingAddress { get; private set; }
 
         /// <summary>
-        /// 发货选中服务
+        /// 发货选项服务
         /// </summary>
         public ShippingServiceOption ShippingServiceSelected { get; private set; }
 
@@ -103,7 +107,7 @@ namespace EbayPlatform.Domain.Models.Orders
         }
 
 
-        public Order(string orderID, string orderStatus,
+        public Order(string orderID, string orderStatus, string shopName,
             string paymentMethods, string sellerEmail, string sellerUserID,
             MoneyValue adjustmentAmount, MoneyValue amountPaid,
             MoneyValue amountSaved, MoneyValue total, MoneyValue subtotal,
@@ -113,6 +117,7 @@ namespace EbayPlatform.Domain.Models.Orders
         {
             this.OrderID = orderID;
             this.OrderStatus = orderStatus;
+            this.ShopName = shopName;
             this.PaymentMethods = paymentMethods;
             this.SellerEmail = sellerEmail;
             this.SellerUserID = sellerUserID;
@@ -127,6 +132,9 @@ namespace EbayPlatform.Domain.Models.Orders
             this.ShippingServiceSelected = shippingServiceSelected;
             this.CreatedTime = createdTime;
             this.SyncDate = DateTime.Now;
+
+            ////添加事件
+            //this.AddDomainEvent(new CreateOrderDomainEvent(this));
         }
 
 
@@ -145,9 +153,8 @@ namespace EbayPlatform.Domain.Models.Orders
             }
             else
             {
-                existsOrderTransaction = new OrderTransaction(transactionID, orderLineItemID, siteCode, title, conditionID, conditionDisplayName,
-                                                              quantityPurchased, transactionPrice, status, shippingServiceOption, createdDate);
-                this.OrderTransactions.Add(existsOrderTransaction);
+                this.OrderTransactions.Add(new OrderTransaction(transactionID, orderLineItemID, siteCode, title, conditionID, conditionDisplayName,
+                                                              quantityPurchased, transactionPrice, status, shippingServiceOption, createdDate));
             }
         }
 
@@ -168,7 +175,7 @@ namespace EbayPlatform.Domain.Models.Orders
                 ShippingDetail.ChangeShippingServiceOption(shippingItem.ShippingService, shippingItem.ShippingServiceCost,
                                                            shippingItem.ShippingServicePriority, shippingItem.ExpeditedService,
                                                            shippingItem.ShippingTimeMin, shippingItem.ShippingTimeMax,
-                                                           shippingItem.ShippingPackages.ToList());
+                                                           shippingItem.ShippingPackage);
             });
         }
 

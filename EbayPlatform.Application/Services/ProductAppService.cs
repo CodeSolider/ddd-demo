@@ -1,5 +1,6 @@
 ﻿using EbayPlatform.Application.Dtos.Listing;
 using EbayPlatform.Domain.Commands.Listing;
+using EbayPlatform.Domain.Core.Abstractions;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace EbayPlatform.Application.Services
 {
-    public class ProductAppService : IProductAppService
+    public class ProductAppService : IProductAppService, IDependency
     {
         private readonly IMediator _mediator;
         public ProductAppService(IMediator mediator)
@@ -42,7 +43,7 @@ namespace EbayPlatform.Application.Services
                                                                             productDtoItem.QuantitySold, productDtoItem.AdminEnded, promotionalSaleDetailItem);
 
 
-                Domain.Models.Listing.Product productItem = new(productDtoItem.ItemID, productDtoItem.MSKU, productDtoItem.SiteCode,
+                Domain.Models.Listing.Product productItem = new(productDtoItem.ItemID, productDtoItem.MSKU, productDtoItem.ShopName, productDtoItem.SiteCode,
                                                                 new Domain.Models.MoneyValue(productDtoItem.StartPriceValue, productDtoItem.StartPriceCurrency),
                                                                 new Domain.Models.MoneyValue(productDtoItem.BuyerGuaranteePriceValue, productDtoItem.BuyerGuaranteePriceCurrency),
                                                                 new Domain.Models.MoneyValue(productDtoItem.BuyItNowPriceValue, productDtoItem.BuyItNowPriceCurrency),
@@ -61,9 +62,8 @@ namespace EbayPlatform.Application.Services
             return _mediator.Send(new ProductCreatedCommand(productList), cancellationToken);
         }
 
-        public void Dispose()
-        {
-            GC.SuppressFinalize(this);
-        }
+#pragma warning disable CA1816 // Dispose 方法应调用 SuppressFinalize
+        public void Dispose() => GC.SuppressFinalize(this);
+#pragma warning restore CA1816 // Dispose 方法应调用 SuppressFinalize
     }
 }

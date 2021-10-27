@@ -1,5 +1,6 @@
 ﻿using EbayPlatform.Domain.Core.Abstractions;
-using EbayPlatform.Domain.Models; 
+using EbayPlatform.Domain.Models;
+using EbayPlatform.Domain.Models.Enums;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,12 +13,20 @@ namespace EbayPlatform.Domain.Interfaces
     public interface ISyncTaskJobConfigRepository : IRepository<SyncTaskJobConfig, int>
     {
         /// <summary>
-        /// 获取所有的任务配置作业数据
+        /// 根据状态获取任务配置信息
         /// </summary>
         /// <param name="jobStatus"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<List<SyncTaskJobConfig>> GetSyncTaskJobConfigListByAsync(CancellationToken cancellationToken);
+        Task<List<SyncTaskJobConfig>> GetListByJobStatusAsync(JobStatusType? jobStatus = null,
+            CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 获取所有的任务配置信息
+        /// </summary>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<List<SyncTaskJobConfig>> GetSyncTaskJobConfigListAsync(CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 检查任务名称是否重复
@@ -32,7 +41,7 @@ namespace EbayPlatform.Domain.Interfaces
         /// <param name="syncTaskJobConfigId"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<SyncTaskJobConfig> GetSyncTaskJobConfigByIdAsync(int syncTaskJobConfigId);
+        ValueTask<SyncTaskJobConfig> GetByIdAsync(int syncTaskJobConfigId);
 
         /// <summary>
         /// 根据任务名称获取任务配置作业数据
@@ -40,7 +49,7 @@ namespace EbayPlatform.Domain.Interfaces
         /// <param name="jobName"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<SyncTaskJobConfig> GetSyncTaskJobConfigByNameAsync(string jobName,
+        Task<SyncTaskJobConfig> GetByNameAsync(string jobName,
           CancellationToken cancellationToken = default);
     }
 }

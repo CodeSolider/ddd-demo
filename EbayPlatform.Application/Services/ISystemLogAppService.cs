@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EbayPlatform.Application.Dtos;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,5 +17,13 @@ namespace EbayPlatform.Application.Services
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task DeleteSystemLogByDateAsync(DateTime createDate, CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// 添加日志
+        /// </summary>
+        /// <param name="systemLogDto"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        Task<int> AddSystemLogAsync(SystemLogDto systemLogDto, CancellationToken cancellationToken = default);
     }
 }

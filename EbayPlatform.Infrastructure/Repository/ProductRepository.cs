@@ -1,7 +1,7 @@
-﻿using EbayPlatform.Domain.Interfaces;
+﻿using EbayPlatform.Domain.Core.Abstractions;
+using EbayPlatform.Domain.Interfaces;
 using EbayPlatform.Domain.Models.Listing;
 using EbayPlatform.Infrastructure.Context;
-using EbayPlatform.Infrastructure.Core;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,12 +23,11 @@ namespace EbayPlatform.Infrastructure.Repository
         /// </summary>
         /// <param name="productIDList"></param>
         /// <returns></returns>
-        public async Task<List<Product>> GetProductListByOrderIdsAsync(IEnumerable<string> productIDList)
+        public Task<List<Product>> GetProductListByOrderIdsAsync(IEnumerable<string> productIDList)
         {
-            return await this.DbContext.Products
-                             .Where(o => productIDList.Contains(o.ItemID))
-                             .ToListAsync()
-                             .ConfigureAwait(false);
+            return this.DbContext.Products
+                       .Where(o => productIDList.Contains(o.ItemID))
+                       .ToListAsync();
         }
 
     }

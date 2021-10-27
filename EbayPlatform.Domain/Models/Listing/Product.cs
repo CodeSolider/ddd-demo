@@ -19,6 +19,11 @@ namespace EbayPlatform.Domain.Models.Listing
         public string MSKU { get; private set; }
 
         /// <summary>
+        /// 店铺名称
+        /// </summary>
+        public string ShopName { get; private set; }
+
+        /// <summary>
         /// 站点
         /// </summary>
         public string SiteCode { get; private set; }
@@ -151,7 +156,7 @@ namespace EbayPlatform.Domain.Models.Listing
 
         protected Product() { }
 
-        public Product(string itemID, string msku, string siteCode, MoneyValue startPrice,
+        public Product(string itemID, string msku, string shopName, string siteCode, MoneyValue startPrice,
           MoneyValue buyerGuaranteePrice, MoneyValue buyItNowPrice, MoneyValue reservePrice,
           int quantity, string quantityAvailableHint, int quantityThreshold, string country,
           string currencyCode, string title, string description, long hitCount, string hitCounter,
@@ -162,6 +167,7 @@ namespace EbayPlatform.Domain.Models.Listing
         {
             this.ItemID = itemID;
             this.MSKU = msku;
+            this.ShopName = shopName;
             this.SiteCode = siteCode;
             this.StartPrice = startPrice;
             this.BuyerGuaranteePrice = buyerGuaranteePrice;
@@ -187,7 +193,9 @@ namespace EbayPlatform.Domain.Models.Listing
             this.SecondaryCategory = secondaryCategory;
             this.PrivateListing = privateListing;
             this.ItemRevised = itemRevised;
-            this.SyncDate = DateTime.Now;
+
+            ////添加事件
+            //this.AddDomainEvent(new CreateProductDomainEvent(this));
         }
 
     }

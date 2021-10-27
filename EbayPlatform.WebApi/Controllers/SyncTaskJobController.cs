@@ -27,24 +27,6 @@ namespace EbayPlatform.WebApi.Controllers
         }
 
         /// <summary>
-        /// 启动所有任务
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public async Task<ApiResult> StartAllTaskJobAsync()
-        {
-            try
-            {
-                await _syncTaskJobAppService.ExecuteAllTaskAysnc(HttpContext.RequestAborted).ConfigureAwait(false);
-                return ApiResult.OK("所有任务启动成功");
-            }
-            catch (Exception ex)
-            {
-                return ApiResult.OK($"所有任务启动失败,失败原因:{ex.Message}");
-            }
-        }
-
-        /// <summary>
         /// 创建同步任务
         /// </summary>
         /// <param name="input"></param>
@@ -55,8 +37,8 @@ namespace EbayPlatform.WebApi.Controllers
             try
             {
                 int syncTaskJobConfigId = await _syncTaskJobAppService
-                                                   .CreateSyncTaskJobAsync(input.SyncTaskJobConfig, HttpContext.RequestAborted)
-                                                   .ConfigureAwait(false);
+                                                .CreateSyncTaskJobAsync(input.SyncTaskJobConfig, HttpContext.RequestAborted)
+                                                .ConfigureAwait(false);
 
                 return ApiResult.OK("创建同步任务成功", syncTaskJobConfigId);
             }

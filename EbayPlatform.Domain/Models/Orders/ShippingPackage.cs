@@ -44,6 +44,11 @@ namespace EbayPlatform.Domain.Models.Orders
 
         protected override IEnumerable<object> GetEqualityComponents()
         {
+            yield return StoreID;
+            yield return ShippingTrackingEvent;
+            yield return ScheduledDeliveryTimeMin;
+            yield return ScheduledDeliveryTimeMax;
+            yield return ActualDeliveryTime;
             yield return EstimatedDeliveryTimeMin;
             yield return EstimatedDeliveryTimeMax;
         }
@@ -53,31 +58,16 @@ namespace EbayPlatform.Domain.Models.Orders
 
         public ShippingPackage(string storeID, string shippingTrackingEvent,
             DateTime? scheduledDeliveryTimeMin, DateTime? scheduledDeliveryTimeMax,
-            DateTime? estimatedDeliveryTimeMin, DateTime? estimatedDeliveryTimeMax)
+            DateTime? actualDeliveryTime, DateTime? estimatedDeliveryTimeMin, 
+            DateTime? estimatedDeliveryTimeMax)
         {
             this.StoreID = storeID;
             this.ShippingTrackingEvent = shippingTrackingEvent;
-            this.EstimatedDeliveryTimeMin = estimatedDeliveryTimeMin;
-            this.EstimatedDeliveryTimeMax = estimatedDeliveryTimeMax;
             this.ScheduledDeliveryTimeMin = scheduledDeliveryTimeMin;
             this.ScheduledDeliveryTimeMax = scheduledDeliveryTimeMax;
-        }
-
-        /// <summary>
-        /// 更新打包信息
-        /// </summary>
-        /// <param name="scheduledDeliveryTimeMin"></param>
-        /// <param name="scheduledDeliveryTimeMax"></param>
-        /// <param name="estimatedDeliveryTimeMin"></param>
-        /// <param name="estimatedDeliveryTimeMax"></param>
-        public void ChangeShippingPackage(DateTime? scheduledDeliveryTimeMin, DateTime? scheduledDeliveryTimeMax,
-            DateTime? estimatedDeliveryTimeMin, DateTime? estimatedDeliveryTimeMax)
-        {
+            this.ActualDeliveryTime = actualDeliveryTime;
             this.EstimatedDeliveryTimeMin = estimatedDeliveryTimeMin;
             this.EstimatedDeliveryTimeMax = estimatedDeliveryTimeMax;
-            this.ScheduledDeliveryTimeMin = scheduledDeliveryTimeMin;
-            this.ScheduledDeliveryTimeMax = scheduledDeliveryTimeMax;
         }
-
     }
 }

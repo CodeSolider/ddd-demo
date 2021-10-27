@@ -1,14 +1,12 @@
 ﻿using EbayPlatform.Domain.Core.Abstractions;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace EbayPlatform.Domain.Models.Orders
 {
     /// <summary>
     /// 发货服务选项
     /// </summary>
-    public class ShippingServiceOption : ValueObject
+    public class ShippingServiceOption : Entity<long>
     {
         /// <summary>
         /// 发货服务
@@ -43,28 +41,13 @@ namespace EbayPlatform.Domain.Models.Orders
         /// <summary>
         /// 发货打包信息
         /// </summary>
-        public virtual ICollection<ShippingPackage> ShippingPackages { get; private set; }
+        public ShippingPackage ShippingPackage { get; private set; }
 
 
-        protected override IEnumerable<object> GetEqualityComponents()
-        {
-            yield return ShippingService;
-            yield return ShippingServiceCost;
-            yield return ExpeditedService;
-            yield return ShippingTimeMin;
-            yield return ShippingTimeMax;
-            yield return ShippingPackages;
-        }
-
-
-        public ShippingServiceOption()
-        {
-            ShippingPackages = new List<ShippingPackage>();
-        }
-
+        public ShippingServiceOption() { }
         public ShippingServiceOption(string shippingService, MoneyValue shippingServiceCost,
             int? shippingServicePriority, bool? expeditedService,
-            int? shippingTimeMin, int? shippingTimeMax) : this()
+            int? shippingTimeMin, int? shippingTimeMax, ShippingPackage shippingPackage)
         {
             this.ShippingService = shippingService;
             this.ShippingServiceCost = shippingServiceCost;
@@ -72,6 +55,7 @@ namespace EbayPlatform.Domain.Models.Orders
             this.ExpeditedService = expeditedService;
             this.ShippingTimeMin = shippingTimeMin;
             this.ShippingTimeMax = shippingTimeMax;
+            this.ShippingPackage = shippingPackage;
         }
 
         /// <summary>
@@ -83,46 +67,15 @@ namespace EbayPlatform.Domain.Models.Orders
         /// <param name="shippingTimeMin"></param>
         /// <param name="shippingTimeMax"></param>
         public void SetShippingServiceOption(MoneyValue shippingServiceCost, bool? expeditedService,
-            int? shippingServicePriority, int? shippingTimeMin, int? shippingTimeMax)
+            int? shippingServicePriority, int? shippingTimeMin, int? shippingTimeMax,
+            ShippingPackage shippingPackage)
         {
             this.ShippingServiceCost = shippingServiceCost;
             this.ExpeditedService = expeditedService;
             this.ShippingServicePriority = shippingServicePriority;
             this.ShippingTimeMin = shippingTimeMin;
             this.ShippingTimeMax = shippingTimeMax;
+            this.ShippingPackage = shippingPackage;
         }
-
-
-        /// <summary>
-        /// 更新打包信息
-        /// </summary>
-        /// <param name="storeID"></param>
-        /// <param name="shippingTrackingEvent"></param>
-        /// <param name="scheduledDeliveryTimeMin"></param>
-        /// <param name="scheduledDeliveryTimeMax"></param>
-        /// <param name="estimatedDeliveryTimeMin"></param>
-        /// <param name="estimatedDeliveryTimeMax"></param>
-        public void ChangeShippingPackage(string storeID, string shippingTrackingEvent,
-            DateTime? scheduledDeliveryTimeMin, DateTime? scheduledDeliveryTimeMax,
-            DateTime? estimatedDeliveryTimeMin, DateTime? estimatedDeliveryTimeMax)
-        {
-            var existsForshippingPackage = this.ShippingPackages
-                                                .SingleOrDefault(o => o.StoreID.Equals(storeID) &&
-                                                                      o.ShippingTrackingEvent.Equals(shippingTrackingEvent));
-
-            if (existsForshippingPackage != null)
-            {
-                existsForshippingPackage
-                    .ChangeShippingPackage(scheduledDeliveryTimeMin, scheduledDeliveryTimeMax,
-                                            estimatedDeliveryTimeMin, estimatedDeliveryTimeMax);
-            }
-            else
-            {
-                this.ShippingPackages.Add(new ShippingPackage(storeID, shippingTrackingEvent,
-                                                               scheduledDeliveryTimeMin, scheduledDeliveryTimeMax,
-                                                               estimatedDeliveryTimeMin, estimatedDeliveryTimeMax));
-            }
-        }
-
     }
 }

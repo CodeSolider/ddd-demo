@@ -37,10 +37,10 @@ namespace EbayPlatform.Infrastructure.Core
         public IDbContextTransaction GetCurrentTransaction() => _currentTransaction;
         public bool HasActiveTransaction => _currentTransaction != null;
 
-        public async Task<IDbContextTransaction> BeginTransactionAsync()
+        public Task<IDbContextTransaction> BeginTransactionAsync()
         {
             if (_currentTransaction != null) return null;
-            return await Database.BeginTransactionAsync().ConfigureAwait(false);
+            return Database.BeginTransactionAsync();
         }
 
         /// <summary>

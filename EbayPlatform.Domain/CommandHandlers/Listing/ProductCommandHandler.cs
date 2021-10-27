@@ -25,6 +25,10 @@ namespace EbayPlatform.Domain.CommandHandlers.Listing
         /// <returns></returns>
         public async Task<bool> Handle(ProductDeleteCommand request, CancellationToken cancellationToken)
         {
+            if (!request.ProductDList.Any())
+            {
+                return await Task.FromResult(false);
+            }
             var productList = await _productRepository
                                   .GetProductListByOrderIdsAsync(request.ProductDList)
                                   .ConfigureAwait(false);
@@ -45,6 +49,10 @@ namespace EbayPlatform.Domain.CommandHandlers.Listing
         /// <returns></returns>
         public Task<bool> Handle(ProductCreatedCommand request, CancellationToken cancellationToken)
         {
+            if (!request.Products.Any())
+            {
+                return Task.FromResult(false);
+            }
             _productRepository.AddRange(request.Products);
             return _productRepository.UnitOfWork.CommitAsync(cancellationToken);
         }
@@ -56,6 +64,5 @@ namespace EbayPlatform.Domain.CommandHandlers.Listing
         {
             _productRepository.Dispose();
         }
-
     }
 }

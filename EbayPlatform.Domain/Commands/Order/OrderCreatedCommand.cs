@@ -15,7 +15,7 @@ namespace EbayPlatform.Domain.Commands.Order
 
         public OrderCreatedCommand(List<Models.Orders.Order> orders)
         {
-            this.Orders = Orders;
+            this.Orders = orders;
         }
     }
 }

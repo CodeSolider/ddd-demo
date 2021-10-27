@@ -11,7 +11,7 @@ namespace EbayPlatform.Application.Services
     public interface IOrderAppService
     {
         /// <summary>
-        /// 根据订单ID获取订单
+        /// 根据订单ID删除订单信息
         /// </summary>
         /// <param name="orderIdList"></param>
         /// <returns></returns>
@@ -21,6 +21,7 @@ namespace EbayPlatform.Application.Services
         /// 添加订单数据
         /// </summary>
         /// <param name="orderDtos"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         Task<bool> AddOrderAsync(List<OrderDto> orderDtos, CancellationToken cancellationToken = default);
     }

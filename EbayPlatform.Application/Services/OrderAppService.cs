@@ -1,6 +1,5 @@
 ﻿using EbayPlatform.Application.Dtos.Orders;
 using EbayPlatform.Domain.Commands.Order;
-using EbayPlatform.Infrastructure.Core;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -8,6 +7,7 @@ using System.Threading.Tasks;
 using Mapster;
 using System.Linq;
 using System.Threading;
+using EbayPlatform.Domain.Core.Abstractions;
 
 namespace EbayPlatform.Application.Services
 {
@@ -23,7 +23,7 @@ namespace EbayPlatform.Application.Services
         }
 
         /// <summary>
-        /// 根据订单ID获取订单
+        /// 根据订单ID删除订单信息
         /// </summary>
         /// <param name="orderIdList"></param>
         /// <returns></returns>
@@ -33,10 +33,12 @@ namespace EbayPlatform.Application.Services
         }
 
         #region CreateOrder
+
         /// <summary>
         /// 添加订单数据
         /// </summary>
         /// <param name="orderDtos"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public Task<bool> AddOrderAsync(List<OrderDto> orderDtos, CancellationToken cancellationToken = default)
         {
@@ -46,7 +48,7 @@ namespace EbayPlatform.Application.Services
                 Domain.Models.Orders.CheckoutStatus checkoutStatus = new(orderDtoItem.EBayPaymentStatus, orderDtoItem.PaymentMethod, orderDtoItem.Status,
                 orderDtoItem.IntegratedMerchantCreditCardEnabled, orderDtoItem.PaymentInstrument, orderDtoItem.LastModifiedTime);
 
-                Domain.Models.Orders.Order orderItem = new(orderDtoItem.OrderID, orderDtoItem.OrderStatus, orderDtoItem.PaymentMethods,
+                Domain.Models.Orders.Order orderItem = new(orderDtoItem.OrderID, orderDtoItem.OrderStatus, orderDtoItem.ShopName, orderDtoItem.PaymentMethods,
                                                            orderDtoItem.SellerEmail, orderDtoItem.SellerUserID, new Domain.Models.MoneyValue(orderDtoItem.AdjustmentAmountValue, orderDtoItem.AdjustmentAmountCurrency),
                                                            new Domain.Models.MoneyValue(orderDtoItem.AmountPaidValue, orderDtoItem.AmountPaidCurrency),
                                                            new Domain.Models.MoneyValue(orderDtoItem.AmountSavedValue, orderDtoItem.AmountSavedCurrency),
@@ -54,7 +56,6 @@ namespace EbayPlatform.Application.Services
                                                            new Domain.Models.MoneyValue(orderDtoItem.SubtotalValue, orderDtoItem.SubtotalCurrency),
                                                            checkoutStatus, orderDtoItem.ShippingAddress.Adapt<Domain.Models.Orders.Address>(), GetShippingServiceOption(orderDtoItem.ShippingServiceSelected),
                                                            orderDtoItem.CreatedTime);
-
                 //订单交易
                 orderDtoItem.OrderTransactions.ForEach(transactionItem =>
                 {
@@ -71,9 +72,6 @@ namespace EbayPlatform.Application.Services
                                             new Domain.Models.MoneyValue(orderDtoItem.ShippingDetail.Value, orderDtoItem.ShippingDetail.Currency)),
                                             orderDtoItem.ShippingDetail.SellingManagerSalesRecordNumber, orderDtoItem.ShippingDetail.GetItFast,
                                             orderDtoItem.ShippingDetail.ShippingServiceOptions.Select(o => GetShippingServiceOption(o)).ToList());
-
-
-
 
                 orderList.Add(orderItem);
             });
@@ -92,22 +90,15 @@ namespace EbayPlatform.Application.Services
                                                                                        shippingServiceOptionDto?.ShippingServicePriority,
                                                                                        shippingServiceOptionDto?.ExpeditedService,
                                                                                        shippingServiceOptionDto?.ShippingTimeMin,
-                                                                                       shippingServiceOptionDto?.ShippingTimeMax);
-
-            //发货打包
-            shippingServiceOptionDto.ShippingPackages.ForEach(pagckageItem =>
-            {
-                shippingServiceOption.ChangeShippingPackage(pagckageItem.StoreID, pagckageItem.ShippingTrackingEvent, pagckageItem.ScheduledDeliveryTimeMin, pagckageItem.ScheduledDeliveryTimeMax,
-                                                            pagckageItem.EstimatedDeliveryTimeMin, pagckageItem.EstimatedDeliveryTimeMax);
-            });
+                                                                                       shippingServiceOptionDto?.ShippingTimeMax,
+                                                                                       shippingServiceOptionDto?.ShippingPackage.Adapt<Domain.Models.Orders.ShippingPackage>());
             return shippingServiceOption;
         }
         #endregion
 
 
-        public void Dispose()
-        {
-            GC.SuppressFinalize(this);
-        }
+#pragma warning disable CA1816 // Dispose 方法应调用 SuppressFinalize
+        public void Dispose() => GC.SuppressFinalize(this);
+#pragma warning restore CA1816 // Dispose 方法应调用 SuppressFinalize
     }
 }

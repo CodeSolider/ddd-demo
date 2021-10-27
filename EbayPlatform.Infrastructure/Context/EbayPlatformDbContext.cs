@@ -1,8 +1,8 @@
 ﻿using EbayPlatform.Domain.Models;
+using EbayPlatform.Domain.Models.Accounts;
 using EbayPlatform.Domain.Models.Listing;
 using EbayPlatform.Domain.Models.Orders;
 using EbayPlatform.Infrastructure.Core;
-using EbayPlatform.Infrastructure.Mappings;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,7 +16,7 @@ namespace EbayPlatform.Infrastructure.Context
         {
         }
 
-        #region 同步任务
+        #region 配置、日志信息
         /// <summary>
         /// 同步任务作业配置类
         /// </summary>
@@ -28,8 +28,7 @@ namespace EbayPlatform.Infrastructure.Context
         public DbSet<SystemLog> SystemLogs { get; set; }
         #endregion
 
-
-        #region Acquisition Task
+        #region  Task
 
         /// <summary>
         /// 订单
@@ -37,6 +36,8 @@ namespace EbayPlatform.Infrastructure.Context
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<Product> Products { get; set; }
+
+        public DbSet<Account> Accounts { get; set; }
 
         #endregion
 

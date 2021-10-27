@@ -30,17 +30,16 @@ namespace EbayPlatform.Domain.CommandHandlers.SyncTaskJobConfig
                 throw new Exception("任务名称重复");
             }
 
-            var syncTaskJobConfig = new Models.SyncTaskJobConfig(request.JobName, request.JobDesc, request.JobAssemblyName,
-                                                                 request.Cron, request.CronDesc);
+            var syncTaskJobConfig = await _syncTaskJobConfigRepository
+                                          .AddAsync(new Models.SyncTaskJobConfig(request.JobName, request.JobDesc,
+                                                    request.JobAssemblyName, request.Cron, request.CronDesc), cancellationToken)
+                                          .ConfigureAwait(false);
+
 
             request.ShopTasks.ForEach(SyncTaskJobParam =>
             {
                 syncTaskJobConfig.AddShopTask(SyncTaskJobParam.ShopName, SyncTaskJobParam.ParamValue);
             });
-
-            _ = await _syncTaskJobConfigRepository
-                      .AddAsync(syncTaskJobConfig, cancellationToken)
-                      .ConfigureAwait(false);
 
             await _syncTaskJobConfigRepository.UnitOfWork.CommitAsync(cancellationToken).ConfigureAwait(false);
             return syncTaskJobConfig.Id;

@@ -1,8 +1,7 @@
 using EbayPlatform.Infrastructure.Context;
 using EbayPlatform.Infrastructure.Core.Extensions;
-using EbayPlatform.Infrastructure.Core.Quartz;
 using EbayPlatform.WebApi.Extensions;
-using EbayPlatform.WebApi.HostedService;
+using EbayPlatform.WebApi.Filters;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -49,21 +48,24 @@ namespace EbayPlatform.WebApi
             services.AddAutoDIService();
 
             #region Cap 
-            services.AddCapEventBus<EbayPlatformDbContext>(Configuration);
+            services.AddCapEventBus<EbayPlatformDbContext>(Configuration).AddSubscribeFilter<CapSubscribeFilter>();
             #endregion
 
             #region Quartz
             services.UseQuartz();
             #endregion
+
             services.AddControllers();
             services.AddSwaggerDocumentation();
-            //将Quartz托管
-            services.AddHostedService<QuartzHostedService>();
+            services.AddEngineService();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+#pragma warning disable CS1591 // 缺少对公共可见类型或成员的 XML 注释
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+#pragma warning restore CS1591 // 缺少对公共可见类型或成员的 XML 注释
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

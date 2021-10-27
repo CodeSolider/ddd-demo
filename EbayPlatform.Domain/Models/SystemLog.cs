@@ -12,7 +12,7 @@ namespace EbayPlatform.Domain.Models
         /// <summary>
         /// 外键ID->FK
         /// </summary>
-        public int ObjectId { get; private set; }
+        public string ObjectId { get; private set; }
 
         /// <summary>
         /// 日志类型 
@@ -31,6 +31,13 @@ namespace EbayPlatform.Domain.Models
 
 
         protected SystemLog() { }
+
+        public SystemLog(string objectId, LogType logType, string content)
+        {
+            this.ObjectId = objectId;
+            this.LogType = logType;
+            this.Content = content;
+        }
 
     }
 }

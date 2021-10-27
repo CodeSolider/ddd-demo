@@ -3,73 +3,61 @@ using eBay.Service.Core.Sdk;
 using eBay.Service.Core.Soap;
 using EbayPlatform.Application.Dtos;
 using EbayPlatform.Application.Dtos.Orders;
-using EbayPlatform.Application.Quartz.Commons;
 using EbayPlatform.Application.Services;
+using EbayPlatform.Domain.Core.Abstractions;
 using EbayPlatform.Domain.IntegrationEvents;
 using EbayPlatform.Infrastructure.Core;
 using Newtonsoft.Json;
+using Quartz;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EbayPlatform.Application.Quartz
+namespace EbayPlatform.Application.Quartz.Jobs
 {
     /// <summary>
-    /// 下载所有订单数据
+    /// 获取所有订单数据
     /// </summary>
-    public class GetAllOrderListJob : BaseTaskJob, IEbayCollection, IDependency
+    [DisallowConcurrentExecution]
+    public class GetAllOrderListJob : AbstractBaseJob, IJob, ICapSubscribe, IDependency
     {
         private readonly IOrderAppService _orderAppService;
-        public GetAllOrderListJob(IOrderAppService orderAppService, ISyncTaskJobAppService syncTaskJobAppService,
-            ICapPublisher capPublisher) : base(syncTaskJobAppService, capPublisher)
+        public GetAllOrderListJob(ISyncTaskJobAppService syncTaskJobAppService,
+            IOrderAppService orderAppService)
+            : base(syncTaskJobAppService)
         {
             _orderAppService = orderAppService;
         }
 
-        /// <summary>
-        /// 接收处理数据
-        /// </summary>
-        /// <param name="integrationEvent"></param>
-        [CapSubscribe(name: nameof(GetAllOrderListJob))]
-        public async Task ReceiveCapMQEventAsync(CollectionIntegrationEvent integrationEvent)
+        public Task Execute(IJobExecutionContext context)
         {
-            var apiCall = this.BeforeRequest(integrationEvent.ParamValue);
-            var apiResult = await DownloadDataAsync(apiCall).ConfigureAwait(false);
-            await SaveDataAsync(integrationEvent, apiResult).ConfigureAwait(false);
+            string jobName = context.JobDetail.Key.Name;
+            return base.PublishQueueAsync(jobName, context.CancellationToken);
         }
 
         /// <summary>
-        /// 保存结果
+        /// 处理MQ消息
         /// </summary>
         /// <param name="integrationEvent"></param>
-        /// <param name="apiResult"></param>
         /// <returns></returns>
-        public async Task SaveDataAsync(CollectionIntegrationEvent integrationEvent, ApiResult apiResult)
+        [CapSubscribe(nameof(GetAllOrderListJob))]
+        protected override Task ProcessQueueDataAsync(CollectionIntegrationEvent integrationEvent)
         {
-            if (apiResult.Code == 200 && apiResult is ApiResult<ParamValueToEntityDto<List<OrderDto>>> responseData)
-            {
-                var orderIdList = responseData.Data.Data.Select(o => o.OrderID);
-                if (orderIdList.Any())
-                {
-                    await _orderAppService.DeleteOrderByIdsAsync(orderIdList).ConfigureAwait(false);
-                }
-                await _orderAppService.AddOrderAsync(responseData.Data.Data).ConfigureAwait(false);
-                //存储结果集
-                await base.SaveResultAsync<List<OrderDto>>(nameof(GetAllOrderListJob), integrationEvent.ShopName, apiResult).ConfigureAwait(false);
-            }
+            return base.ProcessQueueDataAsync(integrationEvent);
         }
 
         /// <summary>
-        /// 请求前
+        /// 下载前
         /// </summary>
-        /// <param name="paramValue"></param>
+        /// <param name="arg"></param>
         /// <returns></returns>
-        public ApiCall BeforeRequest(string paramValue)
+        protected override ApiCall AbstractBaseJob_DownloadingPre(string arg)
         {
-            ParamValueToEntityDto paramValueEntityDto = JsonConvert.DeserializeObject<ParamValueToEntityDto>(paramValue);
+            ParamValueToEntityDto paramValueEntityDto = JsonConvert.DeserializeObject<ParamValueToEntityDto>(arg);
             return new eBay.Service.Call.GetOrdersCall
             {
+                ApiContext = GetApiContext(paramValueEntityDto.Token),
                 Site = SiteCodeType.US,
                 CreateTimeFrom = paramValueEntityDto.FromDate,
                 CreateTimeTo = paramValueEntityDto.ToDate,
@@ -87,48 +75,74 @@ namespace EbayPlatform.Application.Quartz
         }
 
         /// <summary>
-        /// 下载请求
+        /// 下载中
         /// </summary>
         /// <param name="apiCall"></param>
+        /// <param name="shopName"></param>
         /// <returns></returns>
-        public Task<ApiResult> DownloadDataAsync(ApiCall apiCall)
+        protected override Task<ApiResult> DownloaderProvider_Downloading(ApiCall apiCall, string shopName)
         {
             return Task.Run(() =>
             {
-                var getOrdersCall = apiCall as eBay.Service.Call.GetOrdersCall;
-                bool hasMoreOrders = false;
+                 var getOrdersCall = apiCall as eBay.Service.Call.GetOrdersCall;
+                 bool hasMoreOrders = false;
+                 List<OrderDto> orderDtoList = new();
+                 do
+                 {
+                     getOrdersCall.Execute();
+                     hasMoreOrders = getOrdersCall.ApiResponse.HasMoreOrders.GetValueOrDefault();
+                     getOrdersCall.Pagination.PageNumber++;
+                     if (getOrdersCall.OrderList.Any())
+                     {
+                         orderDtoList.AddRange(ConvertData(shopName, getOrdersCall.OrderList));
+                     }
+                 } while (hasMoreOrders);
 
-                List<OrderDto> orderDtoList = new();
-                do
-                {
-                    getOrdersCall.Execute();
-                    hasMoreOrders = getOrdersCall.ApiResponse.HasMoreOrders.GetValueOrDefault();
-                    getOrdersCall.Pagination.PageNumber++;
-                    if (getOrdersCall.OrderList.Any())
-                    {
-                        orderDtoList.AddRange(ConvertData(getOrdersCall.OrderList));
-                    }
-
-                } while (hasMoreOrders);
-
-                return ApiResult.OK("下载订单数据成功", new ParamValueToEntityDto<List<OrderDto>>
-                {
-                    FromDate = getOrdersCall.CreateTimeTo,
-                    ToDate = DateTime.Now,
-                    PageIndex = (getOrdersCall?.Pagination?.PageNumber).GetValueOrDefault(),
-                    PageSize = 100,
-                    Data = orderDtoList
-                });
-            });
+                 return ApiResult.OK("下载订单数据成功", new ParamValueToEntityDto<List<OrderDto>>
+                 {
+                     FromDate = getOrdersCall.CreateTimeTo,
+                     ToDate = DateTime.Now,
+                     PageIndex = (getOrdersCall?.Pagination?.PageNumber).GetValueOrDefault(),
+                     PageSize = 100,
+                     Data = orderDtoList
+                 });
+             });
         }
 
+        /// <summary>
+        /// 下载完成
+        /// </summary>
+        /// <param name="apiResult"></param>
+        /// <param name="shopName"></param>
+        protected override async Task DownloaderProvider_DownloadingEnd(ApiResult apiResult, string shopName)
+        {
+            if (apiResult.Code == 200 && apiResult is ApiResult<ParamValueToEntityDto<List<OrderDto>>> responseData)
+            {
+                var orderIdList = responseData.Data.Data.Select(o => o.OrderID);
+                if (orderIdList.Any())
+                {
+                    await _orderAppService.DeleteOrderByIdsAsync(orderIdList).ConfigureAwait(false);
+                }
+
+                if (responseData.Data.Data.Any())
+                {
+                    await _orderAppService.AddOrderAsync(responseData.Data.Data).ConfigureAwait(false);
+                }
+
+                //存储结果集
+                await base.ModifySyncTaskJobConfigStatusAsync<List<OrderDto>>(apiResult, nameof(GetAllOrderListJob), shopName).ConfigureAwait(false);
+            }
+        }
+
+        #region 数据处理
 
         /// <summary>
         /// 数据转换
         /// </summary>
+        /// <param name="shopName"></param>
         /// <param name="orderTypeList"></param>
         /// <returns></returns>
-        private List<OrderDto> ConvertData(List<OrderType> orderTypeList)
+        private List<OrderDto> ConvertData(string shopName, List<OrderType> orderTypeList)
         {
             List<OrderDto> orderDtoList = new();
             orderTypeList.ForEach(orderType =>
@@ -138,6 +152,7 @@ namespace EbayPlatform.Application.Quartz
                     OrderID = orderType.OrderID,
                     SellerEmail = orderType.SellerEmail,
                     SellerUserID = orderType.SellerUserID,
+                    ShopName = shopName,
                     SyncDate = DateTime.Now
                 };
 
@@ -327,7 +342,6 @@ namespace EbayPlatform.Application.Quartz
             return orderDtoList;
         }
 
-
         /// <summary>
         /// 获取发货选项信息
         /// </summary>
@@ -341,7 +355,7 @@ namespace EbayPlatform.Application.Quartz
                 ShippingServicePriority = serviceOptionsType.ShippingServicePriority,
                 ExpeditedService = serviceOptionsType.ExpeditedService,
                 ShippingTimeMin = serviceOptionsType.ShippingTimeMin,
-                ShippingTimeMax = serviceOptionsType.ShippingTimeMax
+                ShippingTimeMax = serviceOptionsType.ShippingTimeMax,
             };
 
             if (serviceOptionsType.ShippingServiceCost != null)
@@ -350,19 +364,25 @@ namespace EbayPlatform.Application.Quartz
                 shippingServiceOptionDto.Currency = Convert.ToString(serviceOptionsType.ShippingServiceCost.currencyID);
             }
 
-            shippingServiceOptionDto.ShippingPackages = serviceOptionsType.ShippingPackageInfo
-                                                        .Select(packageItem => new ShippingPackageDto
-                                                        {
-                                                            StoreID = packageItem.StoreID,
-                                                            ShippingTrackingEvent = packageItem.ShippingTrackingEvent,
-                                                            ScheduledDeliveryTimeMin = packageItem.ScheduledDeliveryTimeMin,
-                                                            ScheduledDeliveryTimeMax = packageItem.ScheduledDeliveryTimeMax,
-                                                            ActualDeliveryTime = packageItem.ActualDeliveryTime,
-                                                            EstimatedDeliveryTimeMin = packageItem.EstimatedDeliveryTimeMin,
-                                                            EstimatedDeliveryTimeMax = packageItem.EstimatedDeliveryTimeMax,
-                                                        }).ToList();
+            if (serviceOptionsType.ShippingPackageInfo.Any())
+            {
+                var shippingPackage = serviceOptionsType.ShippingPackageInfo.First();
+                shippingServiceOptionDto.ShippingPackage = new ShippingPackageDto
+                {
+                    StoreID = shippingPackage.StoreID,
+                    ShippingTrackingEvent = shippingPackage.ShippingTrackingEvent,
+                    ScheduledDeliveryTimeMin = shippingPackage.ScheduledDeliveryTimeMin,
+                    ScheduledDeliveryTimeMax = shippingPackage.ScheduledDeliveryTimeMax,
+                    ActualDeliveryTime = shippingPackage.ActualDeliveryTime,
+                    EstimatedDeliveryTimeMin = shippingPackage.EstimatedDeliveryTimeMin,
+                    EstimatedDeliveryTimeMax = shippingPackage.EstimatedDeliveryTimeMax,
+                };
+            }
 
             return shippingServiceOptionDto;
         }
+
+        #endregion
+
     }
 }

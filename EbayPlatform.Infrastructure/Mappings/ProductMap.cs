@@ -8,40 +8,41 @@ namespace EbayPlatform.Infrastructure.Mappings
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
-            builder.ToTable("Product").HasComment("产品");
+            builder.ToTable(nameof(Product)).HasComment("产品");
             builder.HasKey(p => p.Id);
             builder.Property(p => p.Id).ValueGeneratedOnAdd().HasComment("主键Id");
-            builder.Property(p => p.ItemID).HasMaxLength(50).IsRequired(true).HasComment("eBay下载的产品ID、唯一");
-            builder.Property(p => p.MSKU).HasMaxLength(50).IsRequired(false).HasColumnName("渠道SKU");
-            builder.Property(v => v.SiteCode).HasMaxLength(20).IsRequired(false).HasComment("站点");
+            builder.Property(p => p.ItemID).HasMaxLength(50).HasComment("eBay下载的产品ID、唯一").IsRequired(true);
+            builder.Property(p => p.MSKU).HasMaxLength(50).HasComment("渠道SKU").IsRequired(false);
+            builder.Property(p => p.ShopName).HasMaxLength(50).HasComment("店铺编号，来自ERP").IsRequired(true);
+            builder.Property(v => v.SiteCode).HasMaxLength(20).HasComment("站点").IsRequired(false);
             builder.OwnsOne(p => p.StartPrice, v =>
             {
-                v.Property(p => p.Value).HasPrecision(18, 3).IsRequired(true).HasColumnName("StartPrice");
-                v.Property(p => p.Currency).HasMaxLength(10).IsRequired(false).HasColumnName("StartPriceCurrency");
+                v.Property(p => p.Value).HasPrecision(18, 3).HasColumnName("StartPrice").IsRequired(true);
+                v.Property(p => p.Currency).HasMaxLength(10).HasColumnName("StartPriceCurrency").IsRequired(false);
             });
             builder.OwnsOne(p => p.BuyerGuaranteePrice, v =>
             {
-                v.Property(p => p.Value).HasPrecision(18, 3).IsRequired(true).HasColumnName("BuyerGuaranteePrice");
-                v.Property(p => p.Currency).HasMaxLength(10).IsRequired(false).HasColumnName("BuyerGuaranteePriceCurrency");
+                v.Property(p => p.Value).HasPrecision(18, 3).HasColumnName("BuyerGuaranteePrice").IsRequired(true);
+                v.Property(p => p.Currency).HasMaxLength(10).HasColumnName("BuyerGuaranteePriceCurrency").IsRequired(false);
             });
             builder.OwnsOne(p => p.BuyItNowPrice, v =>
             {
-                v.Property(p => p.Value).HasPrecision(18, 3).IsRequired(true).HasColumnName("BuyItNowPrice");
-                v.Property(p => p.Currency).HasMaxLength(10).IsRequired(false).HasColumnName("BuyItNowPriceCurrency");
+                v.Property(p => p.Value).HasPrecision(18, 3).HasColumnName("BuyItNowPrice").IsRequired(true);
+                v.Property(p => p.Currency).HasMaxLength(10).HasColumnName("BuyItNowPriceCurrency").IsRequired(false);
             });
             builder.OwnsOne(p => p.ReservePrice, v =>
             {
-                v.Property(p => p.Value).HasPrecision(18, 3).IsRequired(true).HasColumnName("ReservePrice");
-                v.Property(p => p.Currency).HasMaxLength(10).IsRequired(false).HasColumnName("ReservePriceCurrency");
+                v.Property(p => p.Value).HasPrecision(18, 3).HasColumnName("ReservePrice").IsRequired(true);
+                v.Property(p => p.Currency).HasMaxLength(10).HasColumnName("ReservePriceCurrency").IsRequired(false);
             });
-            builder.Property(p => p.Quantity).IsRequired(true).HasDefaultValue(0).HasComment("数量");
+            builder.Property(p => p.Quantity).HasDefaultValue(0).HasComment("数量").IsRequired(true);
             builder.Property(p => p.QuantityAvailableHint).HasMaxLength(10).IsRequired(false);
-            builder.Property(p => p.QuantityThreshold).IsRequired(true).HasDefaultValue(0);
+            builder.Property(p => p.QuantityThreshold).HasDefaultValue(0).IsRequired(true);
             builder.Property(p => p.Country).HasMaxLength(10).IsRequired(false);
             builder.Property(p => p.CurrencyCode).HasMaxLength(10).IsRequired(false);
             builder.Property(p => p.Title).HasMaxLength(4000).IsRequired(false);
             builder.Property(p => p.Description).HasMaxLength(4000).IsRequired(false);
-            builder.Property(p => p.HitCount).IsRequired(true).HasDefaultValue(0);
+            builder.Property(p => p.HitCount).HasDefaultValue(0).IsRequired(true);
             builder.Property(p => p.HitCounter).HasMaxLength(50).IsRequired(false);
             builder.Property(p => p.InventoryTrackingMethod).HasMaxLength(20).IsRequired(false);
             builder.Property(p => p.ListingType).HasMaxLength(50).IsRequired(false);
@@ -53,24 +54,24 @@ namespace EbayPlatform.Infrastructure.Mappings
             {
                 v.OwnsOne(p => p.ConvertedCurrentPrice, v =>
                 {
-                    v.Property(p => p.Value).HasPrecision(18, 3).IsRequired(true).HasColumnName("ConvertedCurrentPrice");
-                    v.Property(p => p.Currency).HasMaxLength(10).IsRequired(false).HasColumnName("ConvertedCurrentPriceCurrency");
+                    v.Property(p => p.Value).HasPrecision(18, 3).HasColumnName("ConvertedCurrentPrice").IsRequired(true);
+                    v.Property(p => p.Currency).HasMaxLength(10).HasColumnName("ConvertedCurrentPriceCurrency").IsRequired(false);
                 });
                 v.OwnsOne(p => p.CurrentPrice, v =>
                 {
-                    v.Property(p => p.Value).HasPrecision(18, 3).IsRequired(true).HasColumnName("CurrentPrice");
-                    v.Property(p => p.Currency).HasMaxLength(10).IsRequired(false).HasColumnName("CurrentPriceCurrency");
+                    v.Property(p => p.Value).HasPrecision(18, 3).HasColumnName("CurrentPrice").IsRequired(true);
+                    v.Property(p => p.Currency).HasMaxLength(10).HasColumnName("CurrentPriceCurrency").IsRequired(false);
                 });
                 v.Property(p => p.ListingStatus).HasMaxLength(50).IsRequired(false);
-                v.Property(p => p.QuantitySold).IsRequired(true).HasDefaultValue(0);
-                v.Property(p => p.AdminEnded).IsRequired(true).HasDefaultValue(false);
+                v.Property(p => p.QuantitySold).HasDefaultValue(0).IsRequired(true);
+                v.Property(p => p.AdminEnded).HasDefaultValue(false).IsRequired(true);
                 v.OwnsOne(p => p.PromotionalSaleDetail, v =>
                 {
                     v.Property(p => p.StartTime).IsRequired(false);
                     v.OwnsOne(p => p.OriginalPrice, v =>
                     {
-                        v.Property(p => p.Value).HasPrecision(18, 3).IsRequired(true).HasColumnName("OriginalPrice");
-                        v.Property(p => p.Currency).HasMaxLength(10).IsRequired(false).HasColumnName("OriginalPriceCurrency");
+                        v.Property(p => p.Value).HasPrecision(18, 3).HasColumnName("OriginalPrice").IsRequired(true);
+                        v.Property(p => p.Currency).HasMaxLength(10).HasColumnName("OriginalPriceCurrency").IsRequired(false);
                     });
                     v.Property(p => p.EndTime).IsRequired(false);
                 });
@@ -78,22 +79,22 @@ namespace EbayPlatform.Infrastructure.Mappings
 
             builder.OwnsOne(p => p.FreeAddedCategory, v =>
             {
-                v.Property(p => p.CategoryID).HasMaxLength(50).IsRequired(false).HasColumnName("FreeAddedCategoryID");
-                v.Property(p => p.CategoryName).HasMaxLength(300).IsRequired(false).HasColumnName("FreeAddedCategoryName");
+                v.Property(p => p.CategoryID).HasMaxLength(50).HasColumnName("FreeAddedCategoryID").IsRequired(false);
+                v.Property(p => p.CategoryName).HasMaxLength(300).HasColumnName("FreeAddedCategoryName").IsRequired(false);
             });
             builder.OwnsOne(p => p.PrimaryCategory, v =>
             {
-                v.Property(p => p.CategoryID).HasMaxLength(50).IsRequired(false).HasColumnName("PrimaryCategoryID");
-                v.Property(p => p.CategoryName).HasMaxLength(300).IsRequired(false).HasColumnName("PrimaryCategoryName");
+                v.Property(p => p.CategoryID).HasMaxLength(50).HasColumnName("PrimaryCategoryID").IsRequired(false);
+                v.Property(p => p.CategoryName).HasMaxLength(300).HasColumnName("PrimaryCategoryName").IsRequired(false);
             });
             builder.OwnsOne(p => p.SecondaryCategory, v =>
             {
-                v.Property(p => p.CategoryID).HasMaxLength(50).IsRequired(false).HasColumnName("SecondaryCategoryID");
-                v.Property(p => p.CategoryName).HasMaxLength(300).IsRequired(false).HasColumnName("SecondaryCategoryName");
+                v.Property(p => p.CategoryID).HasMaxLength(50).HasColumnName("SecondaryCategoryID").IsRequired(false);
+                v.Property(p => p.CategoryName).HasMaxLength(300).HasColumnName("SecondaryCategoryName").IsRequired(false);
             });
-            builder.Property(p => p.PrivateListing).IsRequired(true).HasDefaultValue(false);
-            builder.Property(p => p.ItemRevised).IsRequired(true).HasDefaultValue(false);
-            builder.Property(p => p.SyncDate).IsRequired(true).HasDefaultValueSql("getDate()").HasComment("同步日期");
+            builder.Property(p => p.PrivateListing).HasDefaultValue(false).IsRequired(true);
+            builder.Property(p => p.ItemRevised).HasDefaultValue(false).IsRequired(true);
+            builder.Property(p => p.SyncDate).HasDefaultValueSql("getDate()").HasComment("同步日期").IsRequired(true);
         }
     }
 }

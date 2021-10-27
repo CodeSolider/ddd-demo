@@ -42,9 +42,9 @@ namespace EbayPlatform.Infrastructure.Repository
             return true;
         }
 
-        public virtual async Task AddRangeAsync(List<TEntity> entities, CancellationToken cancellationToken = default)
+        public virtual Task AddRangeAsync(List<TEntity> entities, CancellationToken cancellationToken = default)
         {
-            await DbContext.Set<TEntity>().AddRangeAsync(entities, cancellationToken).ConfigureAwait(false);
+            return DbContext.Set<TEntity>().AddRangeAsync(entities, cancellationToken);
         }
 
         public virtual TEntity Update(TEntity entity)
@@ -56,8 +56,7 @@ namespace EbayPlatform.Infrastructure.Repository
         {
             DbContext.Set<TEntity>().UpdateRange(entities);
         }
-
-
+         
         public virtual void Remove(TEntity entity)
         {
             DbContext.Set<TEntity>().Remove(entity);
@@ -81,8 +80,7 @@ namespace EbayPlatform.Infrastructure.Repository
 
         public virtual async Task<bool> DeleteAsync(TKey id)
         {
-            var entity = await GetAsync(id)
-                               .ConfigureAwait(false);
+            var entity = await GetAsync(id).ConfigureAwait(false);
             if (entity == null)
             {
                 return false;
@@ -96,9 +94,9 @@ namespace EbayPlatform.Infrastructure.Repository
             return DbContext.Set<TEntity>().Find(id);
         }
 
-        public virtual async ValueTask<TEntity> GetAsync(TKey id)
+        public virtual ValueTask<TEntity> GetAsync(TKey id)
         {
-            return await DbContext.Set<TEntity>().FindAsync(id).ConfigureAwait(false);
+            return DbContext.Set<TEntity>().FindAsync(id);
         }
 
         public void Dispose()

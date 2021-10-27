@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="eBay.Service.Standard" Version="3.1113.0" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\EbayPlatform.Domain\EbayPlatform.Domain.csproj" />
     <ProjectReference Include="..\EbayPlatform.Infrastructure.Core\EbayPlatform.Infrastructure.Core.csproj" />
   </ItemGroup>

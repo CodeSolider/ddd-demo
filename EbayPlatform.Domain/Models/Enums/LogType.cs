@@ -1,9 +1,16 @@
-﻿namespace EbayPlatform.Domain.Models.Enums
+﻿using System.ComponentModel;
+
+namespace EbayPlatform.Domain.Models.Enums
 {
     /// <summary>
     /// 日志类型
     /// </summary>
     public enum LogType
     {
+        /// <summary>
+        /// EBay 平台
+        /// </summary>
+        [Description("EBay 平台")]
+        EbayPlatform = 1
     }
 }

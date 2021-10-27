@@ -1,14 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace EbayPlatform.Application.Dtos.Orders
+﻿namespace EbayPlatform.Application.Dtos.Orders
 {
     public class ShippingServiceOptionDto
     {
-        public ShippingServiceOptionDto()
-        {
-            ShippingPackages = new List<ShippingPackageDto>();
-        }
-
         /// <summary>
         /// 发货服务
         /// </summary>
@@ -47,6 +40,6 @@ namespace EbayPlatform.Application.Dtos.Orders
         public int? ShippingTimeMax { get; set; }
 
 
-        public List<ShippingPackageDto> ShippingPackages { get; set; }
+        public ShippingPackageDto ShippingPackage { get; set; }
     }
 }

@@ -45,12 +45,12 @@ namespace EbayPlatform.Domain.Models
         /// <summary>
         /// 同步时间
         /// </summary>
-        public DateTime CreateDate { get; private set; } = DateTime.Now;
+        public DateTime CreateDate { get; private set; }
 
         /// <summary>
         /// 同步修改时间
         /// </summary>
-        public DateTime? ModifyDate { get; private set; } = DateTime.Now;
+        public DateTime? ModifyDate { get; private set; }
 
         /// <summary>
         /// 店铺任务

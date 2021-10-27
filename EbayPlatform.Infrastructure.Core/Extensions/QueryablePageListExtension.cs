@@ -28,7 +28,8 @@ namespace EbayPlatform.Infrastructure.Core.Extensions
         {
             var count = await source.CountAsync(cancellationToken).ConfigureAwait(false);
             var items = await source.Skip((pageIndex - 1) * pageSize)
-                    .Take(pageSize).ToListAsync(cancellationToken).ConfigureAwait(false);
+                                    .Take(pageSize)
+                                    .ToListAsync(cancellationToken).ConfigureAwait(false);
 
             var pagedList = new PagedList<T>
             {

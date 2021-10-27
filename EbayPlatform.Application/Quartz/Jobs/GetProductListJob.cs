@@ -3,54 +3,59 @@ using eBay.Service.Core.Sdk;
 using eBay.Service.Core.Soap;
 using EbayPlatform.Application.Dtos;
 using EbayPlatform.Application.Dtos.Listing;
-using EbayPlatform.Application.Quartz.Commons;
 using EbayPlatform.Application.Services;
+using EbayPlatform.Domain.Core.Abstractions;
 using EbayPlatform.Domain.IntegrationEvents;
 using EbayPlatform.Infrastructure.Core;
 using Newtonsoft.Json;
+using Quartz;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
-namespace EbayPlatform.Application.Quartz
+namespace EbayPlatform.Application.Quartz.Jobs
 {
-    /// <summary>
-    /// 获取产品Listing
-    /// </summary>
-    public class GetProductListJob : BaseTaskJob, IEbayCollection, IDependency
+    [DisallowConcurrentExecution]
+    public class GetProductListJob : AbstractBaseJob, IJob, ICapSubscribe, IDependency
     {
         private readonly IProductAppService _productAppService;
         public GetProductListJob(ISyncTaskJobAppService syncTaskJobAppService,
-           ICapPublisher capPublisher, IProductAppService productAppService)
-            : base(syncTaskJobAppService, capPublisher)
+           IProductAppService productAppService)
+            : base(syncTaskJobAppService)
         {
             _productAppService = productAppService;
         }
 
-        /// <summary>
-        /// 接收处理数据
-        /// </summary>
-        /// <param name="integrationEvent"></param>
-        /// <returns></returns>
-        [CapSubscribe(name: nameof(GetProductListJob))]
-        public async Task ReceiveCapMQEventAsync(CollectionIntegrationEvent integrationEvent)
+        public Task Execute(IJobExecutionContext context)
         {
-            var apiCall = this.BeforeRequest(integrationEvent.ParamValue);
-            await SaveResultAsync(await DownloadDataAsync(apiCall).ConfigureAwait(false));
+            string jobName = context.JobDetail.Key.Name;
+            return base.PublishQueueAsync(jobName, context.CancellationToken);
         }
 
         /// <summary>
-        /// 请求前
+        /// 处理MQ消息
         /// </summary>
-        /// <param name="paramValue"></param>
+        /// <param name="integrationEvent"></param>
         /// <returns></returns>
-        public ApiCall BeforeRequest(string paramValue)
+        [CapSubscribe(nameof(GetProductListJob))]
+        protected override Task ProcessQueueDataAsync(CollectionIntegrationEvent integrationEvent)
         {
-            ParamValueToEntityDto paramValueEntityDto = JsonConvert.DeserializeObject<ParamValueToEntityDto>(paramValue);
+            return base.ProcessQueueDataAsync(integrationEvent);
+        }
+
+
+        /// <summary>
+        /// 下载前
+        /// </summary>
+        /// <param name="arg"></param>
+        /// <returns></returns>
+        protected override ApiCall AbstractBaseJob_DownloadingPre(string arg)
+        {
+            ParamValueToEntityDto paramValueEntityDto = JsonConvert.DeserializeObject<ParamValueToEntityDto>(arg);
             return new eBay.Service.Call.GetSellerListCall
             {
+                ApiContext = GetApiContext(paramValueEntityDto.Token),
                 Site = SiteCodeType.US,
                 Pagination = new PaginationType
                 {
@@ -58,16 +63,18 @@ namespace EbayPlatform.Application.Quartz
                     PageNumber = paramValueEntityDto.PageIndex,
                 },
                 IncludeVariations = false,
-                StartTimeFilter = new TimeFilter(paramValueEntityDto.FromDate, paramValueEntityDto.ToDate)
+                StartTimeFrom = paramValueEntityDto.FromDate,
+                StartTimeTo = (paramValueEntityDto.ToDate - paramValueEntityDto.FromDate).Days > 121 ? paramValueEntityDto.FromDate.AddDays(121) : paramValueEntityDto.ToDate
             };
         }
 
         /// <summary>
-        /// 数据下载
+        /// 下载中
         /// </summary>
         /// <param name="apiCall"></param>
+        /// <param name="shopName"></param>
         /// <returns></returns>
-        public Task<ApiResult> DownloadDataAsync(ApiCall apiCall)
+        protected override Task<ApiResult> DownloaderProvider_Downloading(ApiCall apiCall, string shopName)
         {
             return Task.Run(() =>
             {
@@ -82,9 +89,8 @@ namespace EbayPlatform.Application.Quartz
                     getSellerListCall.Pagination.PageNumber++;
                     if (getSellerListCall.ItemList.Any())
                     {
-                        productDtoList.AddRange(ConvertData(getSellerListCall.ItemList));
+                        productDtoList.AddRange(ConvertData(shopName, getSellerListCall.ItemList));
                     }
-
                 } while (hasMoreItems);
 
                 return ApiResult.OK("下载Listing数据成功", new ParamValueToEntityDto<List<ProductDto>>
@@ -98,13 +104,41 @@ namespace EbayPlatform.Application.Quartz
             });
         }
 
+        /// <summary>
+        /// 下载完成
+        /// </summary>
+        /// <param name="apiResult"></param>
+        /// <param name="shopName"></param>
+        /// <returns></returns>
+        protected override async Task DownloaderProvider_DownloadingEnd(ApiResult apiResult, string shopName)
+        {
+            if (apiResult.Code == 200 && apiResult is ApiResult<ParamValueToEntityDto<List<ProductDto>>> responseData)
+            {
+                var itemIDList = responseData.Data.Data.Select(o => o.ItemID);
+                if (itemIDList.Any())
+                {
+                    await _productAppService.DeleteProductByIdsAsync(itemIDList).ConfigureAwait(false);
+                }
+
+                if (responseData.Data.Data.Any())
+                {
+                    await _productAppService.AddProductAsync(responseData.Data.Data).ConfigureAwait(false);
+                }
+
+                //存储结果集
+                await base.ModifySyncTaskJobConfigStatusAsync<List<ProductDto>>(apiResult, nameof(GetProductListJob), shopName).ConfigureAwait(false);
+            }
+        }
+
+        #region 数据处理
 
         /// <summary>
         /// 数据转换
         /// </summary>
+        /// <param name="shopName"></param>
         /// <param name="itemTypeList"></param>
         /// <returns></returns>
-        private List<ProductDto> ConvertData(List<ItemType> itemTypeList)
+        private List<ProductDto> ConvertData(string shopName, List<ItemType> itemTypeList)
         {
             List<ProductDto> productDtoList = new();
             itemTypeList.ForEach(itemType =>
@@ -113,14 +147,14 @@ namespace EbayPlatform.Application.Quartz
                 {
                     ItemID = itemType.ItemID,
                     MSKU = itemType.SKU,
+                    ShopName = shopName,
                     Quantity = itemType.Quantity.GetValueOrDefault(),
                     QuantityThreshold = itemType.QuantityThreshold.GetValueOrDefault(),
                     Title = itemType.Title,
                     Description = itemType.Description,
                     HitCount = itemType.HitCount.GetValueOrDefault(),
                     Location = itemType.Location,
-                    PaymentMethods = string.Join(",", itemType.PaymentMethods.Select(o => o.ToString())),
-
+                    PaymentMethods = string.Join(",", itemType.PaymentMethods.Select(o => o.ToString()))
                 };
 
                 if (itemType.Site.HasValue)
@@ -245,45 +279,7 @@ namespace EbayPlatform.Application.Quartz
             });
             return productDtoList;
         }
-
-        /// <summary>
-        /// 保存下载结果
-        /// </summary>
-        /// <param name="apiResult"></param>
-        /// <returns></returns>
-        public async Task SaveResultAsync(ApiResult apiResult, CancellationToken cancellationToken = default)
-        {
-            if (apiResult.Code == 200 && apiResult is ApiResult<ParamValueToEntityDto<List<ProductDto>>> responseData)
-            {
-                var productIdList = responseData.Data.Data.Select(o => o.ItemID);
-                if (productIdList.Any())
-                {
-                    await _productAppService.DeleteProductByIdsAsync(productIdList, cancellationToken).ConfigureAwait(false);
-                }
-                await _productAppService.AddProductAsync(responseData.Data.Data, cancellationToken).ConfigureAwait(false);
-            }
-        }
-
-        /// <summary>
-        /// 保存结果
-        /// </summary>
-        /// <param name="integrationEvent"></param>
-        /// <param name="apiResult"></param>
-        /// <returns></returns>
-        public async Task SaveDataAsync(CollectionIntegrationEvent integrationEvent, ApiResult apiResult)
-        {
-            if (apiResult.Code == 200 && apiResult is ApiResult<ParamValueToEntityDto<List<ProductDto>>> responseData)
-            {
-                var productIdList = responseData.Data.Data.Select(o => o.ItemID);
-                if (productIdList.Any())
-                {
-                    await _productAppService.DeleteProductByIdsAsync(productIdList).ConfigureAwait(false);
-                }
-                await _productAppService.AddProductAsync(responseData.Data.Data).ConfigureAwait(false);
-                //保存结果集
-                await base.SaveResultAsync<List<ProductDto>>(nameof(GetProductListJob), integrationEvent.ShopName, apiResult).ConfigureAwait(false);
-            }
-        }
+        #endregion
 
     }
 }

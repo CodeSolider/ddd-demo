@@ -6,7 +6,7 @@ namespace EbayPlatform.Infrastructure.Core.Extensions
     /// <summary>
     /// 获取泛型类型扩展
     /// </summary>
-    public static class GenericTypeExtensions
+    public static class GenericTypeExtension
     {
         /// <summary>
         /// 获取泛型类型名称

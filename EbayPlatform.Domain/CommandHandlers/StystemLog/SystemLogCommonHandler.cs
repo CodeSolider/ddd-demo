@@ -3,6 +3,7 @@ using EbayPlatform.Domain.Interfaces;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -11,7 +12,8 @@ namespace EbayPlatform.Domain.CommandHandlers.StystemLog
     /// <summary>
     /// 系统日志
     /// </summary>
-    public class SystemLogCommonHandler : IRequestHandler<DeleteSystemLogCommand, bool>
+    public class SystemLogCommonHandler : IRequestHandler<DeleteSystemLogCommand, bool>,
+        IRequestHandler<CreateSystemLogCommand, int>
     {
         private readonly ISystemLogRepository _systemLogRepository;
         private readonly ILogger<SystemLogCommonHandler> _logger;
@@ -35,21 +37,45 @@ namespace EbayPlatform.Domain.CommandHandlers.StystemLog
                 var systemLogPagedList = await _systemLogRepository
                                                 .GetExpireSystemLogListAsync(request.CreateDate, cancellationToken)
                                                 .ConfigureAwait(false);
+
+                if (!systemLogPagedList.Items.Any())
+                {
+                    _logger.LogWarning($"暂无日志记录信息");
+                    return await Task.FromResult(false).ConfigureAwait(false);
+                }
+
                 _systemLogRepository.RemoveRange(systemLogPagedList.Items);
-                _logger.LogWarning($"日志:{JsonConvert.SerializeObject(systemLogPagedList.Items)}已被删除");
-                return await _systemLogRepository.UnitOfWork.CommitAsync().ConfigureAwait(false);
+                _logger.LogDebug($"{JsonConvert.SerializeObject(systemLogPagedList.Items)}日志记录已被删除");
+                return await _systemLogRepository.UnitOfWork.CommitAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (System.Exception ex)
             {
-                _logger.LogWarning("删除过期日志发生异常");
+                _logger.LogError("删除过期日志发生异常");
                 _logger.LogError($"异常信息:{ex.Message}");
                 return false;
             }
         }
 
+
+        /// <summary>
+        /// 添加系统日志信息
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public async Task<int> Handle(CreateSystemLogCommand request, CancellationToken cancellationToken)
+        {
+            var systemLog = await _systemLogRepository
+                                  .AddAsync(new Models.SystemLog(request.ObjectId, request.LogType, request.Content), cancellationToken)
+                                  .ConfigureAwait(false);
+            return systemLog.Id;
+        }
+
+
         public void Dispose()
         {
             _systemLogRepository.Dispose();
         }
+
     }
 }
