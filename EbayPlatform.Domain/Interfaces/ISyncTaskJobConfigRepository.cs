@@ -24,9 +24,11 @@ namespace EbayPlatform.Domain.Interfaces
         /// <summary>
         /// 获取所有的任务配置信息
         /// </summary>
+        /// <param name="ignoreQueryFilter"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<List<SyncTaskJobConfig>> GetSyncTaskJobConfigListAsync(CancellationToken cancellationToken = default);
+        Task<List<SyncTaskJobConfig>> GetSyncTaskJobConfigListAsync(bool ignoreQueryFilter = true,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 检查任务名称是否重复
@@ -41,7 +43,7 @@ namespace EbayPlatform.Domain.Interfaces
         /// <param name="syncTaskJobConfigId"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        ValueTask<SyncTaskJobConfig> GetByIdAsync(int syncTaskJobConfigId);
+        Task<SyncTaskJobConfig> GetByIdAsync(int syncTaskJobConfigId);
 
         /// <summary>
         /// 根据任务名称获取任务配置作业数据

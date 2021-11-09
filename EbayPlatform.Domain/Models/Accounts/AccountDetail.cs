@@ -78,7 +78,7 @@ namespace EbayPlatform.Domain.Models.Accounts
         /// </summary>
         public bool ReceivedTopRatedDiscount { get; private set; }
 
-        public AccountDetail() { }
+        protected AccountDetail() { }
 
         public AccountDetail(string refNumber, string itemID, DateTime date,
             string accountType, string title, string description,

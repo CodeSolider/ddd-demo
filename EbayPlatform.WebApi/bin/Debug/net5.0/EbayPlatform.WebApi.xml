@@ -26,29 +26,6 @@
             Swagger 扩展类
             </summary>
         </member>
-        <member name="T:EbayPlatform.WebApi.Filters.CapSubscribeFilter">
-            <summary>
-            订阅者过滤器
-            </summary>
-        </member>
-        <member name="M:EbayPlatform.WebApi.Filters.CapSubscribeFilter.OnSubscribeExecuting(DotNetCore.CAP.Filter.ExecutingContext)">
-            <summary>
-            开始订阅
-            </summary>
-            <param name="context"></param>
-        </member>
-        <member name="M:EbayPlatform.WebApi.Filters.CapSubscribeFilter.OnSubscribeExecuted(DotNetCore.CAP.Filter.ExecutedContext)">
-            <summary>
-            执行完成
-            </summary>
-            <param name="context"></param>
-        </member>
-        <member name="M:EbayPlatform.WebApi.Filters.CapSubscribeFilter.OnSubscribeException(DotNetCore.CAP.Filter.ExceptionContext)">
-            <summary>
-            订阅发生异常时
-            </summary>
-            <param name="context"></param>
-        </member>
         <member name="T:EbayPlatform.WebApi.HostedService.QuartzHostedService">
             <summary>
             Quazrt 托管服务
@@ -81,6 +58,16 @@
         <member name="P:EbayPlatform.WebApi.RequestModel.CreateSyncTaskJobRequestInput.SyncTaskJobConfig">
             <summary>
             同步配置任务
+            </summary>
+        </member>
+        <member name="F:EbayPlatform.WebApi.Program.Namespace">
+            <summary>
+            Namespace
+            </summary>
+        </member>
+        <member name="F:EbayPlatform.WebApi.Program.AppName">
+            <summary>
+            AppName
             </summary>
         </member>
         <member name="T:EbayPlatform.WebApi.Startup">

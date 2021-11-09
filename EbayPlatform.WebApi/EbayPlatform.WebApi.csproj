@@ -16,7 +16,7 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 			<TreatAsUsed>true</TreatAsUsed>
 		</PackageReference>
-		<PackageReference Include="NLog.Web.AspNetCore" Version="4.14.0" />
+		<PackageReference Include="Serilog.Sinks.Seq" Version="5.0.1" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.2" />
 	</ItemGroup>
 
@@ -31,9 +31,7 @@
 	</ItemGroup>
 
 	<ProjectExtensions>
-		<VisualStudio>
-			<UserProperties appsettings_1json__JsonSchema="" />
-		</VisualStudio>
+		<VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio>
 	</ProjectExtensions>
 
 </Project>

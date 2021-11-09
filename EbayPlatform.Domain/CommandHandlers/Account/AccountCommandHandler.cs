@@ -1,6 +1,8 @@
 ﻿using EbayPlatform.Domain.Commands.Account;
 using EbayPlatform.Domain.Interfaces;
 using MediatR;
+using Newtonsoft.Json;
+using Serilog.Context;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,20 +29,23 @@ namespace EbayPlatform.Domain.CommandHandlers.Account
         /// <returns></returns>
         public async Task<bool> Handle(AccountDeleteCommand request, CancellationToken cancellationToken)
         {
-            if (!request.AccountIDList.Any())
+            using (LogContext.PushProperty("AccountDeleteCommand", $"{JsonConvert.SerializeObject(request)}"))
             {
-                return await Task.FromResult(false);
-            }
+                if (!request.AccountIDList.Any())
+                {
+                    return false;
+                }
 
-            var accountList = await _accountRepository
-                                    .GetAccountListByOrderIdsAsync(request.AccountIDList)
-                                    .ConfigureAwait(false);            
-            if (!accountList.Any())
-            {
-                return false;
+                var accountList = await _accountRepository
+                                        .GetAccountListByOrderIdsAsync(request.AccountIDList)
+                                        .ConfigureAwait(false);
+                if (!accountList.Any())
+                {
+                    return false;
+                }
+                this._accountRepository.RemoveRange(accountList);
+                return await _accountRepository.UnitOfWork.CommitAsync(cancellationToken).ConfigureAwait(false);
             }
-            this._accountRepository.RemoveRange(accountList);
-            return await _accountRepository.UnitOfWork.CommitAsync(cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -49,23 +54,17 @@ namespace EbayPlatform.Domain.CommandHandlers.Account
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public Task<bool> Handle(AccountCreatedCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(AccountCreatedCommand request, CancellationToken cancellationToken)
         {
-            if (!request.Accounts.Any())
-            {
-                return Task.FromResult(false);
+            using (LogContext.PushProperty("AccountCreatedCommand", $"{JsonConvert.SerializeObject(request)}"))
+            { 
+                if (!request.Accounts.Any())
+                {
+                    return await Task.FromResult(false);
+                }
+                _accountRepository.AddRange(request.Accounts);
+                return await _accountRepository.UnitOfWork.CommitAsync(cancellationToken).ConfigureAwait(false);
             }
-            _accountRepository.AddRange(request.Accounts);
-            return _accountRepository.UnitOfWork.CommitAsync(cancellationToken);
-        }
-
-        /// <summary>
-        /// 手动释放
-        /// </summary>
-        public void Dispose()
-        {
-            _accountRepository.Dispose();
         }
     }
-
 }

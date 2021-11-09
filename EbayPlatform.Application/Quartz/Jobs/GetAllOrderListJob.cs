@@ -7,6 +7,7 @@ using EbayPlatform.Application.Services;
 using EbayPlatform.Domain.Core.Abstractions;
 using EbayPlatform.Domain.IntegrationEvents;
 using EbayPlatform.Infrastructure.Core;
+using EbayPlatform.Infrastructure.Core.Engines;
 using Newtonsoft.Json;
 using Quartz;
 using System;
@@ -23,11 +24,9 @@ namespace EbayPlatform.Application.Quartz.Jobs
     public class GetAllOrderListJob : AbstractBaseJob, IJob, ICapSubscribe, IDependency
     {
         private readonly IOrderAppService _orderAppService;
-        public GetAllOrderListJob(ISyncTaskJobAppService syncTaskJobAppService,
-            IOrderAppService orderAppService)
-            : base(syncTaskJobAppService)
+        public GetAllOrderListJob()
         {
-            _orderAppService = orderAppService;
+            _orderAppService = EngineContext.Current.Resolve<IOrderAppService>();
         }
 
         public Task Execute(IJobExecutionContext context)
@@ -42,9 +41,9 @@ namespace EbayPlatform.Application.Quartz.Jobs
         /// <param name="integrationEvent"></param>
         /// <returns></returns>
         [CapSubscribe(nameof(GetAllOrderListJob))]
-        protected override Task ProcessQueueDataAsync(CollectionIntegrationEvent integrationEvent)
+        protected override async Task ProcessQueueDataAsync(CollectionIntegrationEvent integrationEvent)
         {
-            return base.ProcessQueueDataAsync(integrationEvent);
+            await base.ProcessQueueDataAsync(integrationEvent);
         }
 
         /// <summary>
@@ -84,29 +83,34 @@ namespace EbayPlatform.Application.Quartz.Jobs
         {
             return Task.Run(() =>
             {
-                 var getOrdersCall = apiCall as eBay.Service.Call.GetOrdersCall;
-                 bool hasMoreOrders = false;
-                 List<OrderDto> orderDtoList = new();
-                 do
-                 {
-                     getOrdersCall.Execute();
-                     hasMoreOrders = getOrdersCall.ApiResponse.HasMoreOrders.GetValueOrDefault();
-                     getOrdersCall.Pagination.PageNumber++;
-                     if (getOrdersCall.OrderList.Any())
-                     {
-                         orderDtoList.AddRange(ConvertData(shopName, getOrdersCall.OrderList));
-                     }
-                 } while (hasMoreOrders);
+                var getOrdersCall = apiCall as eBay.Service.Call.GetOrdersCall;
+                bool hasMoreOrders = false;
+                List<OrderDto> orderDtoList = new();
+                do
+                {
+                    getOrdersCall.Execute();
+                    hasMoreOrders = getOrdersCall.ApiResponse.HasMoreOrders.GetValueOrDefault();
+                    getOrdersCall.Pagination.PageNumber++;
+                    if (getOrdersCall.OrderList.Any())
+                    {
+                        orderDtoList.AddRange(ConvertData(shopName, getOrdersCall.OrderList));
+                    }
+                } while (hasMoreOrders);
 
-                 return ApiResult.OK("下载订单数据成功", new ParamValueToEntityDto<List<OrderDto>>
-                 {
-                     FromDate = getOrdersCall.CreateTimeTo,
-                     ToDate = DateTime.Now,
-                     PageIndex = (getOrdersCall?.Pagination?.PageNumber).GetValueOrDefault(),
-                     PageSize = 100,
-                     Data = orderDtoList
-                 });
-             });
+                if (!orderDtoList.Any())
+                {
+                    return ApiResult.Fail("暂无可下载的订单数据");
+                }
+
+                return ApiResult.OK("下载订单数据成功", new ParamValueToEntityDto<List<OrderDto>>
+                {
+                    FromDate = getOrdersCall.CreateTimeTo,
+                    ToDate = DateTime.Now,
+                    PageIndex = (getOrdersCall?.Pagination?.PageNumber).GetValueOrDefault(),
+                    PageSize = 100,
+                    Data = orderDtoList
+                });
+            });
         }
 
         /// <summary>
@@ -161,30 +165,35 @@ namespace EbayPlatform.Application.Quartz.Jobs
                     orderDto.OrderStatus = Convert.ToString(orderType.OrderStatus);
                 }
 
+                orderDto.AdjustmentAmountValue = 0M;
                 if (orderType.AdjustmentAmount != null)
                 {
                     orderDto.AdjustmentAmountValue = (decimal)orderType.AdjustmentAmount.Value;
                     orderDto.AdjustmentAmountCurrency = orderType.AdjustmentAmount.currencyID.ToString();
                 }
 
+                orderDto.AmountPaidValue = 0M;
                 if (orderType.AmountPaid != null)
                 {
                     orderDto.AmountPaidValue = (decimal)orderType.AmountPaid.Value;
                     orderDto.AmountPaidCurrency = orderType.AmountPaid.currencyID.ToString();
                 }
 
+                orderDto.AmountSavedValue = 0M;
                 if (orderType.AmountSaved != null)
                 {
                     orderDto.AmountSavedValue = (decimal)orderType.AmountSaved.Value;
                     orderDto.AmountSavedCurrency = orderType.AmountSaved.currencyID.ToString();
                 }
 
+                orderDto.TotalValue = 0M;
                 if (orderType.Total != null)
                 {
                     orderDto.TotalValue = (decimal)orderType.Total.Value;
                     orderDto.TotalCurrency = orderType.Total.currencyID.ToString();
                 }
 
+                orderDto.SubtotalValue = 0M;
                 if (orderType.Subtotal != null)
                 {
                     orderDto.SubtotalValue = (decimal)orderType.Subtotal.Value;
@@ -276,6 +285,7 @@ namespace EbayPlatform.Application.Quartz.Jobs
 
                     orderTransactionDto.QuantityPurchased = transactionItem.QuantityPurchased.GetValueOrDefault();
 
+                    orderTransactionDto.Value = 0M;
                     if (transactionItem.TransactionPrice != null)
                     {
                         orderTransactionDto.Value = (decimal)transactionItem.TransactionPrice.Value;
@@ -315,6 +325,8 @@ namespace EbayPlatform.Application.Quartz.Jobs
                         GetItFast = orderType.ShippingDetails.GetItFast
                     };
 
+                    orderDto.ShippingDetail.SalesTaxPercent = 0F;
+                    orderDto.ShippingDetail.Value = 0M;
                     if (orderType.ShippingDetails.SalesTax != null)
                     {
                         orderDto.ShippingDetail.SalesTaxPercent = orderType.ShippingDetails.SalesTax.SalesTaxPercent.GetValueOrDefault();
@@ -358,6 +370,7 @@ namespace EbayPlatform.Application.Quartz.Jobs
                 ShippingTimeMax = serviceOptionsType.ShippingTimeMax,
             };
 
+            shippingServiceOptionDto.Value = 0M;
             if (serviceOptionsType.ShippingServiceCost != null)
             {
                 shippingServiceOptionDto.Value = (decimal)serviceOptionsType.ShippingServiceCost.Value;

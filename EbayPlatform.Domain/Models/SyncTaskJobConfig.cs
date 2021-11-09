@@ -53,10 +53,19 @@ namespace EbayPlatform.Domain.Models
         public DateTime? ModifyDate { get; private set; }
 
         /// <summary>
+        /// 是否启用
+        /// </summary>
+        public bool Enable { get; private set; }
+
+        /// <summary>
+        /// 是否初始化ERP店铺账号数据 
+        /// </summary>
+        public bool SyncErp { get; private set; }
+
+        /// <summary>
         /// 店铺任务
         /// </summary>
         public virtual ICollection<ShopTask> ShopTasks { get; private set; }
-
 
         protected SyncTaskJobConfig()
         {

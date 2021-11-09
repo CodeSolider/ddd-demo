@@ -1,5 +1,4 @@
 ﻿using EbayPlatform.Domain.Models;
-using EbayPlatform.Domain.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -20,6 +19,9 @@ namespace EbayPlatform.Infrastructure.Mappings
             builder.Property(p => p.JobStatus).IsRequired(true).HasComment("运行状态");
             builder.Property(p => p.CreateDate).HasDefaultValueSql("getDate()").HasComment("创建日期").IsRequired(true);
             builder.Property(p => p.ModifyDate).ValueGeneratedOnUpdate().HasComment("更新日期").IsRequired(false);
+            builder.Property(p => p.Enable).HasDefaultValue(false).IsRequired(true);
+            builder.Property(p => p.SyncErp).HasDefaultValue(false).IsRequired(true);
+
             //one to many
             builder.OwnsMany(p => p.ShopTasks, p =>
             {
@@ -29,7 +31,7 @@ namespace EbayPlatform.Infrastructure.Mappings
                 p.Property(s => s.ParamValue).HasMaxLength(4000).HasComment("参数值").IsRequired(false);
             });
 
-            builder.HasQueryFilter(o => o.JobStatus == JobStatusType.UnExecute);
+            builder.HasQueryFilter(o => o.Enable);
         }
     }
 }

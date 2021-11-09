@@ -7,6 +7,7 @@
   <ItemGroup>
     <PackageReference Include="eBay.Service.Standard" Version="3.1113.0" />
     <PackageReference Include="Mapster" Version="7.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>

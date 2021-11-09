@@ -162,8 +162,7 @@ namespace EbayPlatform.Domain.Models.Listing
           string currencyCode, string title, string description, long hitCount, string hitCounter,
           string inventoryTrackingMethod, string listingType, string listingSubType, string location,
           string paymentMethods, SellingStatus sellingStatus, ProductCategory freeAddedCategory, ProductCategory primaryCategory,
-         ProductCategory secondaryCategory, bool privateListing, bool itemRevised
-          )
+          ProductCategory secondaryCategory, bool privateListing, bool itemRevised)
         {
             this.ItemID = itemID;
             this.MSKU = msku;

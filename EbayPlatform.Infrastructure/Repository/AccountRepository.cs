@@ -22,11 +22,12 @@ namespace EbayPlatform.Infrastructure.Repository
         /// </summary>
         /// <param name="accountIDList"></param>
         /// <returns></returns>
-        public Task<List<Account>> GetAccountListByOrderIdsAsync(IEnumerable<string> accountIDList)
+        public async Task<List<Account>> GetAccountListByOrderIdsAsync(IEnumerable<string> accountIDList)
         {
-            return this.DbContext.Accounts
-                       .Where(o => accountIDList.Contains(o.AccountID))
-                       .ToListAsync();
+            return await this.DbContext.Accounts.IgnoreAutoIncludes()
+                             .Where(o => accountIDList.Contains(o.AccountID))
+                             .ToListAsync()
+                             .ConfigureAwait(false);
         }
     }
 }

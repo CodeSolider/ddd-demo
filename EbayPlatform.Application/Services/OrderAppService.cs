@@ -1,13 +1,13 @@
 ﻿using EbayPlatform.Application.Dtos.Orders;
 using EbayPlatform.Domain.Commands.Order;
 using MediatR;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Mapster;
 using System.Linq;
 using System.Threading;
 using EbayPlatform.Domain.Core.Abstractions;
+using System;
 
 namespace EbayPlatform.Application.Services
 {
@@ -27,9 +27,9 @@ namespace EbayPlatform.Application.Services
         /// </summary>
         /// <param name="orderIdList"></param>
         /// <returns></returns>
-        public Task<bool> DeleteOrderByIdsAsync(IEnumerable<string> orderIdList, CancellationToken cancellationToken = default)
+        public async Task<bool> DeleteOrderByIdsAsync(IEnumerable<string> orderIdList, CancellationToken cancellationToken = default)
         {
-            return _mediator.Send(new OrderDeleteCommand(orderIdList), cancellationToken);
+            return await _mediator.Send(new OrderDeleteCommand(orderIdList), cancellationToken);
         }
 
         #region CreateOrder
@@ -68,14 +68,13 @@ namespace EbayPlatform.Application.Services
 
                 //添加发货详情信息
                 orderItem.AddShippingDetail(new Domain.Models.Orders.SalesTax(orderDtoItem.ShippingDetail.SalesTaxPercent,
-                                            orderDtoItem.ShippingDetail.SalesTaxState,
-                                            new Domain.Models.MoneyValue(orderDtoItem.ShippingDetail.Value, orderDtoItem.ShippingDetail.Currency)),
-                                            orderDtoItem.ShippingDetail.SellingManagerSalesRecordNumber, orderDtoItem.ShippingDetail.GetItFast,
-                                            orderDtoItem.ShippingDetail.ShippingServiceOptions.Select(o => GetShippingServiceOption(o)).ToList());
+                                               orderDtoItem.ShippingDetail.SalesTaxState,
+                                               new Domain.Models.MoneyValue(orderDtoItem.ShippingDetail.Value, orderDtoItem.ShippingDetail.Currency)),
+                                               orderDtoItem.ShippingDetail.SellingManagerSalesRecordNumber, orderDtoItem.ShippingDetail.GetItFast,
+                                               orderDtoItem.ShippingDetail.ShippingServiceOptions.Select(o => GetShippingServiceOption(o)).ToList());
 
                 orderList.Add(orderItem);
             });
-
             return _mediator.Send(new OrderCreatedCommand(orderList), cancellationToken);
         }
 
@@ -86,7 +85,7 @@ namespace EbayPlatform.Application.Services
         private Domain.Models.Orders.ShippingServiceOption GetShippingServiceOption(ShippingServiceOptionDto shippingServiceOptionDto)
         {
             var shippingServiceOption = new Domain.Models.Orders.ShippingServiceOption(shippingServiceOptionDto?.ShippingService,
-                                                                                       new Domain.Models.MoneyValue((decimal)shippingServiceOptionDto?.Value, shippingServiceOptionDto?.Currency),
+                                                                                       new Domain.Models.MoneyValue((shippingServiceOptionDto?.Value).GetValueOrDefault(), shippingServiceOptionDto?.Currency),
                                                                                        shippingServiceOptionDto?.ShippingServicePriority,
                                                                                        shippingServiceOptionDto?.ExpeditedService,
                                                                                        shippingServiceOptionDto?.ShippingTimeMin,
@@ -94,11 +93,6 @@ namespace EbayPlatform.Application.Services
                                                                                        shippingServiceOptionDto?.ShippingPackage.Adapt<Domain.Models.Orders.ShippingPackage>());
             return shippingServiceOption;
         }
-        #endregion
-
-
-#pragma warning disable CA1816 // Dispose 方法应调用 SuppressFinalize
-        public void Dispose() => GC.SuppressFinalize(this);
-#pragma warning restore CA1816 // Dispose 方法应调用 SuppressFinalize
+        #endregion  
     }
 }

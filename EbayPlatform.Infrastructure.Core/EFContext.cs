@@ -1,12 +1,13 @@
-﻿using DotNetCore.CAP;
-using EbayPlatform.Domain.Core.Abstractions;
-using EbayPlatform.Infrastructure.Core.Extensions;
+﻿using EbayPlatform.Domain.Core.Abstractions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System;
+using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
+using DotNetCore.CAP;
+using EbayPlatform.Infrastructure.Core.Extensions;
 
 namespace EbayPlatform.Infrastructure.Core
 {
@@ -16,8 +17,7 @@ namespace EbayPlatform.Infrastructure.Core
     public class EFContext : DbContext, IUnitOfWork
     {
         protected readonly IMediator _mediator;
-        public EFContext(DbContextOptions options, IMediator mediator)
-            : base(options)
+        public EFContext(DbContextOptions options, IMediator mediator) : base(options)
         {
             _mediator = mediator;
         }
@@ -25,8 +25,8 @@ namespace EbayPlatform.Infrastructure.Core
         #region IUnitOfWork
         public async Task<bool> CommitAsync(CancellationToken cancellationToken = default)
         {
-            _ = await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
-            await _mediator.DispatchDomainEventsAsync(this).ConfigureAwait(false);
+            await _mediator.DispatchDomainEventsAsync(this, cancellationToken).ConfigureAwait(false);
+            await base.SaveChangesAsync(cancellationToken).ConfigureAwait(false);
             return true;
         }
         #endregion
@@ -40,7 +40,7 @@ namespace EbayPlatform.Infrastructure.Core
         public Task<IDbContextTransaction> BeginTransactionAsync()
         {
             if (_currentTransaction != null) return null;
-            return Database.BeginTransactionAsync();
+            return Database.BeginTransactionAsync(IsolationLevel.ReadCommitted);
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace EbayPlatform.Infrastructure.Core
         public Task<IDbContextTransaction> BeginTransactionAsync(ICapPublisher capPublisher)
         {
             if (_currentTransaction != null) return null;
-            _currentTransaction = Database.BeginTransaction(capPublisher, autoCommit: false);
+            _currentTransaction = Database.BeginTransaction(capPublisher);
             return Task.FromResult(_currentTransaction);
         }
 
@@ -63,7 +63,7 @@ namespace EbayPlatform.Infrastructure.Core
 
             try
             {
-                await base.SaveChangesAsync().ConfigureAwait(false);
+                await this.SaveChangesAsync().ConfigureAwait(false);
                 transaction.Commit();
             }
             catch

@@ -22,11 +22,12 @@ namespace EbayPlatform.Infrastructure.Repository
         /// <param name="createDate"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public async Task<IPagedList<SystemLog>> GetExpireSystemLogListAsync(DateTime createDate,
+        public Task<IPagedList<SystemLog>> GetExpireSystemLogListAsync(DateTime createDate,
             CancellationToken cancellationToken = default)
         {
-            return await DbContext.SystemLogs.Where(o => o.CreateDate.Day == createDate.Day)
-                         .ToPagedListAsync(pageSize: 1000, cancellationToken: cancellationToken);
+            return this.DbContext.SystemLogs
+                        .Where(o => o.CreateDate.Day == createDate.Day)
+                        .ToPagedListAsync(pageSize: 1000, cancellationToken: cancellationToken);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace EbayPlatform.Infrastructure.Core.Page
         /// <summary>
         /// 总记录数
         /// </summary>
-        public int TotalCount { get; internal set; }
+        public int TotalCount { get; set; }
 
         /// <summary>
         /// 总页码
@@ -49,7 +49,7 @@ namespace EbayPlatform.Infrastructure.Core.Page
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <param name="indexFrom"></param>
-        internal PagedList(IEnumerable<T> source, int pageIndex, int pageSize)
+        public PagedList(IEnumerable<T> source, int pageIndex, int pageSize)
         {
             if (source is IQueryable<T> querable)
             {
@@ -70,6 +70,6 @@ namespace EbayPlatform.Infrastructure.Core.Page
         /// <summary>
         /// 初始化
         /// </summary>
-        internal PagedList() => Items = Array.Empty<T>();
+        public PagedList() => Items = Array.Empty<T>();
     }
 }

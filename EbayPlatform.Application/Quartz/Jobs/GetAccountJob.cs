@@ -5,7 +5,6 @@ using eBay.Service.Core.Soap;
 using EbayPlatform.Application.Dtos;
 using EbayPlatform.Application.Dtos.Accounts;
 using EbayPlatform.Application.Services;
-using EbayPlatform.Domain.Core.Abstractions;
 using EbayPlatform.Domain.IntegrationEvents;
 using EbayPlatform.Infrastructure.Core;
 using Newtonsoft.Json;
@@ -15,6 +14,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using EbayPlatform.Application.Dtos.Orders;
+using EbayPlatform.Infrastructure.Core.Engines;
+using EbayPlatform.Domain.Core.Abstractions;
 
 namespace EbayPlatform.Application.Quartz.Jobs
 {
@@ -25,11 +26,10 @@ namespace EbayPlatform.Application.Quartz.Jobs
     public class GetAccountJob : AbstractBaseJob, IJob, ICapSubscribe, IDependency
     {
         private readonly IAccountAppService _accountAppService;
-        public GetAccountJob(ISyncTaskJobAppService syncTaskJobAppService,
-            IAccountAppService accountAppService)
-            : base(syncTaskJobAppService)
+
+        public GetAccountJob()
         {
-            _accountAppService = accountAppService;
+            _accountAppService = EngineContext.Current.Resolve<IAccountAppService>();
         }
 
         public Task Execute(IJobExecutionContext context)
@@ -72,7 +72,7 @@ namespace EbayPlatform.Application.Quartz.Jobs
                 },
                 AccountHistorySelection = AccountHistorySelectionCodeType.SpecifiedInvoice,
                 BeginDate = paramValueEntityDto.FromDate,
-                EndDate = (paramValueEntityDto.ToDate.Month - paramValueEntityDto.FromDate.Month) > 4 ? paramValueEntityDto.FromDate.AddMonths(4) : paramValueEntityDto.ToDate //只返回过去四个月内发布的记录
+                EndDate = ((paramValueEntityDto.ToDate.Year - paramValueEntityDto.FromDate.Year) * 12 + paramValueEntityDto.ToDate.Month - paramValueEntityDto.FromDate.Month) > 4 ? paramValueEntityDto.FromDate.AddMonths(4) : paramValueEntityDto.ToDate //只返回过去四个月内发布的记录
             };
         }
 
@@ -99,6 +99,11 @@ namespace EbayPlatform.Application.Quartz.Jobs
                         accountDtoList.Add(ConverData(shopName, getAccountCall.ApiResponse));
                     }
                 } while (hasMoreEntries);
+
+                if (!accountDtoList.Any())
+                {
+                    return ApiResult.Fail("暂无可下载的账单数据");
+                }
 
                 return ApiResult.OK("下载账单数据成功", new ParamValueToEntityDto<List<AccountDto>>
                 {
@@ -155,24 +160,28 @@ namespace EbayPlatform.Application.Quartz.Jobs
                 AccountState = Convert.ToString(getAccountResponseType.AccountSummary.AccountState)
             };
 
+            accountDto.InvoicePaymentValue = 0M;
             if (getAccountResponseType.AccountSummary.InvoicePayment != null)
             {
                 accountDto.InvoicePaymentValue = (decimal)getAccountResponseType.AccountSummary.InvoicePayment.Value;
                 accountDto.InvoicePaymentCurrency = Convert.ToString(getAccountResponseType.AccountSummary.InvoicePayment.currencyID);
             }
 
+            accountDto.InvoiceCreditValue = 0M;
             if (getAccountResponseType.AccountSummary.InvoiceCredit != null)
             {
                 accountDto.InvoiceCreditValue = (decimal)getAccountResponseType.AccountSummary.InvoiceCredit.Value;
                 accountDto.InvoiceCreditCurrency = Convert.ToString(getAccountResponseType.AccountSummary.InvoiceCredit.currencyID);
             }
 
+            accountDto.InvoiceNewFeeValue = 0M;
             if (getAccountResponseType.AccountSummary.InvoiceNewFee != null)
             {
                 accountDto.InvoiceNewFeeValue = (decimal)getAccountResponseType.AccountSummary.InvoiceNewFee.Value;
                 accountDto.InvoiceNewFeeCurrency = Convert.ToString(getAccountResponseType.AccountSummary.InvoiceNewFee.currencyID);
             }
 
+            accountDto.AdditionalAccount.BalanceValue = 0M;
             if (getAccountResponseType.AccountSummary.AdditionalAccount.Any())
             {
                 accountDto.AdditionalAccount = new();

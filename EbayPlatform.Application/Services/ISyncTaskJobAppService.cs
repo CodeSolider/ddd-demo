@@ -26,14 +26,15 @@ namespace EbayPlatform.Application.Services
         /// </summary>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<List<SyncTaskJobConfig>> GetSyncTaskJobConfigListAsync(CancellationToken cancellationToken = default);
+        Task<List<SyncTaskJobConfig>> GetSyncTaskJobConfigListAsync(bool ignoreQueryFilter = true,
+            CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 根据任务Id获取任务配置作业数据
         /// </summary>
         /// <param name="syncTaskJobConfigId"></param> 
         /// <returns></returns>
-        ValueTask<SyncTaskJobConfig> GetSyncTaskJobConfigByIdAsync(int syncTaskJobConfigId);
+        Task<SyncTaskJobConfig> GetSyncTaskJobConfigByIdAsync(int syncTaskJobConfigId);
 
         /// <summary>
         /// 根据任务名称获取任务配置作业数据

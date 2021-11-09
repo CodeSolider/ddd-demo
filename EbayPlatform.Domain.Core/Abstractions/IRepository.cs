@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using System; 
 
 namespace EbayPlatform.Domain.Core.Abstractions
 {
@@ -9,7 +8,7 @@ namespace EbayPlatform.Domain.Core.Abstractions
     /// 定义通用存储库的接口
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public interface IRepository<TEntity, TKey> : IDisposable where TEntity : Entity<TKey>, IAggregateRoot
+    public interface IRepository<TEntity, TKey>  where TEntity : Entity<TKey>, IAggregateRoot
     {
         IUnitOfWork UnitOfWork { get; }
         TEntity Add(TEntity entity);
@@ -25,6 +24,6 @@ namespace EbayPlatform.Domain.Core.Abstractions
         bool Delete(TKey id);
         Task<bool> DeleteAsync(TKey id);
         TEntity Get(TKey id);
-        ValueTask<TEntity> GetAsync(TKey id);       
+        Task<TEntity> GetAsync(TKey id);
     }
 }

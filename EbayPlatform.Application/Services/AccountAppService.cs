@@ -64,9 +64,5 @@ namespace EbayPlatform.Application.Services
             return _mediator.Send(new AccountCreatedCommand(accountList), cancellationToken);
         }
         #endregion
-
-#pragma warning disable CA1816 // Dispose 方法应调用 SuppressFinalize
-        public void Dispose() => GC.SuppressFinalize(this);
-#pragma warning restore CA1816 // Dispose 方法应调用 SuppressFinalize
     }
 }

@@ -10,9 +10,7 @@ namespace EbayPlatform.Infrastructure.Context
 {
     public class EbayPlatformDbContext : EFContext
     {
-
-        public EbayPlatformDbContext(DbContextOptions options, IMediator mediator)
-            : base(options, mediator)
+        public EbayPlatformDbContext(DbContextOptions<EbayPlatformDbContext> options, IMediator mediator) : base(options, mediator)
         {
         }
 

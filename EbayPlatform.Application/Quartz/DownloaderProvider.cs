@@ -1,5 +1,8 @@
 ﻿using eBay.Service.Core.Sdk;
 using EbayPlatform.Infrastructure.Core;
+using EbayPlatform.Infrastructure.Core.Engines;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 
@@ -35,10 +38,13 @@ namespace EbayPlatform.Application.Quartz
         /// </summary>
         public string ParamValue { get; }
 
+        private readonly ILogger _logger;
+
         public DownloaderProvider(string shopName, string paramValue)
         {
             ShopName = shopName;
             ParamValue = paramValue;
+            _logger = EngineContext.Current.Resolve<ILoggerFactory>().CreateLogger(shopName);
         }
 
         /// <summary>
@@ -47,9 +53,10 @@ namespace EbayPlatform.Application.Quartz
         /// <returns></returns>
         public async Task StartAsync()
         {
+            _logger.LogInformation($"参入的参数为：{ParamValue}");
             var apiCall = DownloadingPre?.Invoke(ParamValue);
-
             var apiResult = await (Downloading?.Invoke(apiCall, ShopName)).ConfigureAwait(false);
+            _logger.LogInformation($"下载返回信息：{JsonConvert.SerializeObject(apiResult)}");
             DownloadingEnd?.Invoke(apiResult, ShopName);
         }
     }

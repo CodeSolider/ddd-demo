@@ -29,7 +29,6 @@ namespace EbayPlatform.Infrastructure.Repository
             CancellationToken cancellationToken = default)
         {
             return this.DbContext.SyncTaskJobConfigs
-                       .IgnoreQueryFilters()
                        .WhereIf(jobStatus.HasValue, o => o.JobStatus == jobStatus)
                        .ToListAsync(cancellationToken);
         }
@@ -37,13 +36,16 @@ namespace EbayPlatform.Infrastructure.Repository
         /// <summary>
         /// 获取所有的任务配置数据
         /// </summary>
+        /// <param name="ignoreQueryFilter"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public Task<List<SyncTaskJobConfig>> GetSyncTaskJobConfigListAsync(CancellationToken cancellationToken = default)
+        public Task<List<SyncTaskJobConfig>> GetSyncTaskJobConfigListAsync(bool ignoreQueryFilter = true, CancellationToken cancellationToken = default)
         {
-            return this.NoTrackingQueryable
-                       .IgnoreQueryFilters()
-                       .ToListAsync(cancellationToken);
+            return ignoreQueryFilter ? this.DbContext.SyncTaskJobConfigs
+                                                .IgnoreQueryFilters()
+                                                .ToListAsync(cancellationToken)
+                                    : this.DbContext.SyncTaskJobConfigs
+                                          .ToListAsync(cancellationToken);
         }
 
         /// <summary>
@@ -53,7 +55,7 @@ namespace EbayPlatform.Infrastructure.Repository
         /// <returns></returns>
         public bool CheckJobName(string jobName)
         {
-            return this.NoTrackingQueryable.Any(o => o.JobName == jobName);
+            return this.DbContext.SyncTaskJobConfigs.Any(o => o.JobName == jobName);
         }
 
         /// <summary>
@@ -61,7 +63,7 @@ namespace EbayPlatform.Infrastructure.Repository
         /// </summary>
         /// <param name="syncTaskJobConfigId"></param>
         /// <returns></returns>
-        public ValueTask<SyncTaskJobConfig> GetByIdAsync(int syncTaskJobConfigId)
+        public Task<SyncTaskJobConfig> GetByIdAsync(int syncTaskJobConfigId)
         {
             return this.GetAsync(syncTaskJobConfigId);
         }
@@ -74,9 +76,7 @@ namespace EbayPlatform.Infrastructure.Repository
         /// <returns></returns>
         public Task<SyncTaskJobConfig> GetByNameAsync(string jobName, CancellationToken cancellationToken = default)
         {
-            return this.DbContext.SyncTaskJobConfigs
-                       .IgnoreQueryFilters()
-                       .FirstOrDefaultAsync(o => o.JobName.Equals(jobName), cancellationToken);
+            return this.DbContext.SyncTaskJobConfigs.IgnoreQueryFilters().FirstOrDefaultAsync(o => o.JobName.Equals(jobName), cancellationToken);
         }
     }
 }

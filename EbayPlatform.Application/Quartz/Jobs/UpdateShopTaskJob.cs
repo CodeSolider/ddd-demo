@@ -2,6 +2,7 @@
 using EbayPlatform.Application.Services;
 using EbayPlatform.Domain.Core.Abstractions;
 using EbayPlatform.Domain.Models.Enums;
+using EbayPlatform.Infrastructure.Core.Engines;
 using Newtonsoft.Json;
 using Quartz;
 using System.Linq;
@@ -16,9 +17,9 @@ namespace EbayPlatform.Application.Quartz.Jobs
     public class UpdateShopTaskJob : IJob, IDependency
     {
         private readonly ISyncTaskJobAppService _syncTaskJobAppService;
-        public UpdateShopTaskJob(ISyncTaskJobAppService syncTaskJobAppService)
+        public UpdateShopTaskJob()
         {
-            _syncTaskJobAppService = syncTaskJobAppService;
+            _syncTaskJobAppService = EngineContext.Current.Resolve<ISyncTaskJobAppService>();
         }
 
         public async Task Execute(IJobExecutionContext context)

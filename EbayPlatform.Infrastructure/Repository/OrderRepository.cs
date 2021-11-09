@@ -21,11 +21,13 @@ namespace EbayPlatform.Infrastructure.Repository
         /// </summary>
         /// <param name="orderIDList"></param>
         /// <returns></returns>
-        public Task<List<Order>> GetOrderListByOrderIdsAsync(IEnumerable<string> orderIDList)
+        public async Task<List<Order>> GetOrderListByOrderIdsAsync(IEnumerable<string> orderIDList)
         {
-            return this.DbContext.Orders
-                       .Where(o => orderIDList.Contains(o.OrderID))
-                       .ToListAsync();
+            return await this.DbContext.Orders
+                             .IgnoreAutoIncludes()
+                             .Where(o => orderIDList.Contains(o.OrderID))
+                             .ToListAsync()
+                             .ConfigureAwait(false);
         }
 
     }

@@ -43,8 +43,7 @@ namespace EbayPlatform.Domain.Models.Orders
         /// </summary>
         public ShippingPackage ShippingPackage { get; private set; }
 
-
-        public ShippingServiceOption() { }
+        protected ShippingServiceOption() { }
         public ShippingServiceOption(string shippingService, MoneyValue shippingServiceCost,
             int? shippingServicePriority, bool? expeditedService,
             int? shippingTimeMin, int? shippingTimeMax, ShippingPackage shippingPackage)

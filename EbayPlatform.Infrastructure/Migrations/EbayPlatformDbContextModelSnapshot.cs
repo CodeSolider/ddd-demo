@@ -259,6 +259,11 @@ namespace EbayPlatform.Infrastructure.Migrations
                         .HasColumnType("nvarchar(300)")
                         .HasComment("Cron描述");
 
+                    b.Property<bool>("Enable")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
+
                     b.Property<string>("JobAssemblyName")
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)")
@@ -282,6 +287,11 @@ namespace EbayPlatform.Infrastructure.Migrations
                         .ValueGeneratedOnUpdate()
                         .HasColumnType("datetime2")
                         .HasComment("更新日期");
+
+                    b.Property<bool>("SyncErp")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(false);
 
                     b.HasKey("Id");
 

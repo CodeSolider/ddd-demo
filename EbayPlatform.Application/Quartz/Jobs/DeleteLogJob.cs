@@ -1,5 +1,6 @@
 ﻿using EbayPlatform.Application.Services;
 using EbayPlatform.Domain.Core.Abstractions;
+using EbayPlatform.Infrastructure.Core.Engines;
 using Quartz;
 using System;
 using System.Threading.Tasks;
@@ -10,9 +11,9 @@ namespace EbayPlatform.Application.Quartz.Jobs
     public class DeleteLogJob : IJob, IDependency
     {
         private readonly ISystemLogAppService _systemLogAppService;
-        public DeleteLogJob(ISystemLogAppService systemLogAppService)
+        public DeleteLogJob()
         {
-            _systemLogAppService = systemLogAppService;
+            _systemLogAppService = EngineContext.Current.Resolve<ISystemLogAppService>();
         }
 
         /// <summary>
@@ -22,7 +23,7 @@ namespace EbayPlatform.Application.Quartz.Jobs
         /// <returns></returns>
         public Task Execute(IJobExecutionContext context)
         {
-            return _systemLogAppService.DeleteSystemLogByDateAsync(DateTime.Now);
+            return _systemLogAppService.DeleteSystemLogByDateAsync(DateTime.Now.AddDays(-3));
         }
     }
 }

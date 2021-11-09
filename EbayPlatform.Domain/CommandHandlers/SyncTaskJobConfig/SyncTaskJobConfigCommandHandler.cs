@@ -1,6 +1,8 @@
 ﻿using EbayPlatform.Domain.Commands.SyncTaskJobConfig;
 using EbayPlatform.Domain.Interfaces;
 using MediatR;
+using Newtonsoft.Json;
+using Serilog.Context;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -24,40 +26,40 @@ namespace EbayPlatform.Domain.CommandHandlers.SyncTaskJobConfig
         /// <returns></returns>
         public async Task<int> Handle(CreateSyncTaskJobConfigCommand request, CancellationToken cancellationToken)
         {
-            bool exists = _syncTaskJobConfigRepository.CheckJobName(request.JobName);
-            if (exists)
+            using (LogContext.PushProperty("CreateSyncTaskJobConfigCommand", $"{JsonConvert.SerializeObject(request)}"))
             {
-                throw new Exception("任务名称重复");
+                bool exists = _syncTaskJobConfigRepository.CheckJobName(request.JobName);
+                if (exists)
+                {
+                    throw new Exception("任务名称重复");
+                }
+
+                var syncTaskJobConfig = await _syncTaskJobConfigRepository
+                                              .AddAsync(new Models.SyncTaskJobConfig(request.JobName, request.JobDesc,
+                                                        request.JobAssemblyName, request.Cron, request.CronDesc), cancellationToken)
+                                              .ConfigureAwait(false);
+
+
+                request.ShopTasks.ForEach(SyncTaskJobParam =>
+                {
+                    syncTaskJobConfig.AddShopTask(SyncTaskJobParam.ShopName, SyncTaskJobParam.ParamValue);
+                });
+
+                await _syncTaskJobConfigRepository.UnitOfWork.CommitAsync(cancellationToken).ConfigureAwait(false);
+                return syncTaskJobConfig.Id;
             }
 
-            var syncTaskJobConfig = await _syncTaskJobConfigRepository
-                                          .AddAsync(new Models.SyncTaskJobConfig(request.JobName, request.JobDesc,
-                                                    request.JobAssemblyName, request.Cron, request.CronDesc), cancellationToken)
-                                          .ConfigureAwait(false);
-
-
-            request.ShopTasks.ForEach(SyncTaskJobParam =>
-            {
-                syncTaskJobConfig.AddShopTask(SyncTaskJobParam.ShopName, SyncTaskJobParam.ParamValue);
-            });
-
-            await _syncTaskJobConfigRepository.UnitOfWork.CommitAsync(cancellationToken).ConfigureAwait(false);
-            return syncTaskJobConfig.Id;
         }
 
 
         public async Task<bool> Handle(UpdateSyncTaskJobConfigCommand request, CancellationToken cancellationToken)
         {
-            _syncTaskJobConfigRepository.UpdateRange(request.SyncTaskJobConfigs);
-            return await _syncTaskJobConfigRepository.UnitOfWork.CommitAsync(cancellationToken).ConfigureAwait(false);
-        }
+            using (LogContext.PushProperty("UpdateSyncTaskJobConfigCommand", $"{JsonConvert.SerializeObject(request)}"))
+            {
+                _syncTaskJobConfigRepository.UpdateRange(request.SyncTaskJobConfigs);
+                return await _syncTaskJobConfigRepository.UnitOfWork.CommitAsync(cancellationToken).ConfigureAwait(false);
+            }
 
-        /// <summary>
-        /// 手动释放
-        /// </summary>
-        public void Dispose()
-        {
-            _syncTaskJobConfigRepository.Dispose();
         }
     }
 }

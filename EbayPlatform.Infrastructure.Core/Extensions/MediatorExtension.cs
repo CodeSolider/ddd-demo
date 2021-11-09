@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace EbayPlatform.Infrastructure.Core.Extensions
@@ -17,7 +18,8 @@ namespace EbayPlatform.Infrastructure.Core.Extensions
         /// <param name="mediator"></param>
         /// <param name="ctx"></param>
         /// <returns></returns>
-        public static async Task DispatchDomainEventsAsync(this IMediator mediator, DbContext ctx)
+        public static async Task DispatchDomainEventsAsync(this IMediator mediator, DbContext ctx,
+            CancellationToken cancellationToken = default)
         {
             var domainEntities = ctx.ChangeTracker
                 .Entries<Entity>()
@@ -31,7 +33,7 @@ namespace EbayPlatform.Infrastructure.Core.Extensions
                 .ForEach(entity => entity.Entity.ClearDomainEvents());
 
             foreach (var domainEvent in domainEvents)
-                await mediator.Publish(domainEvent);
+                await mediator.Publish(domainEvent, cancellationToken).ConfigureAwait(false);
         }
     }
 }

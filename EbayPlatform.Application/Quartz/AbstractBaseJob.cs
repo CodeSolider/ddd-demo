@@ -21,14 +21,16 @@ namespace EbayPlatform.Application.Quartz
     /// </summary>
     public abstract class AbstractBaseJob
     {
-        private readonly ISyncTaskJobAppService _syncTaskJobAppService;
         private readonly ICapPublisher _capPublisher;
+        private readonly ISyncTaskJobAppService _syncTaskJobAppService;
+        private readonly IConfiguration _configuration;
         private readonly EbayOptionsDto _ebayOptions;
-        protected AbstractBaseJob(ISyncTaskJobAppService syncTaskJobAppService)
+        protected AbstractBaseJob()
         {
-            _syncTaskJobAppService = syncTaskJobAppService;
             _capPublisher = EngineContext.Current.Resolve<ICapPublisher>();
-            _ebayOptions = EngineContext.Current.Resolve<IConfiguration>()?.GetSection("EbayOptions").Get<EbayOptionsDto>();
+            _configuration = EngineContext.Current.Resolve<IConfiguration>();
+            _ebayOptions = _configuration.GetSection("EbayOptions").Get<EbayOptionsDto>();
+            _syncTaskJobAppService = EngineContext.Current.Resolve<ISyncTaskJobAppService>();
         }
 
         /// <summary>
@@ -177,10 +179,14 @@ namespace EbayPlatform.Application.Quartz
                     }));
                     shopTask.ChangeShopTaskJobStatus(Domain.Models.Enums.JobStatusType.Completed);
                 }
-                //更新状态
-                syncTaskJobConfigItem.ChangeSyncTaskJobConfigJobStatus(Domain.Models.Enums.JobStatusType.Completed);
-                await _syncTaskJobAppService
-                      .UpdateShopTaskAsync(new List<Domain.Models.SyncTaskJobConfig> { syncTaskJobConfigItem })
+
+                if (syncTaskJobConfigItem.ShopTasks.Count(o => o.ShopTaskStatus == Domain.Models.Enums.JobStatusType.Completed) == syncTaskJobConfigItem.ShopTasks.Count())
+                {
+                    //更新状态
+                    syncTaskJobConfigItem.ChangeSyncTaskJobConfigJobStatus(Domain.Models.Enums.JobStatusType.Completed);
+                }
+
+                await _syncTaskJobAppService.UpdateShopTaskAsync(new List<Domain.Models.SyncTaskJobConfig> { syncTaskJobConfigItem })
                       .ConfigureAwait(false);
             }
         }

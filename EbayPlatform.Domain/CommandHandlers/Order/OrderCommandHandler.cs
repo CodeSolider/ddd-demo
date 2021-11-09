@@ -1,6 +1,8 @@
 ﻿using EbayPlatform.Domain.Commands.Order;
 using EbayPlatform.Domain.Interfaces;
 using MediatR;
+using Newtonsoft.Json;
+using Serilog.Context;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,45 +29,42 @@ namespace EbayPlatform.Domain.CommandHandlers.Order
         /// <returns></returns>
         public async Task<bool> Handle(OrderDeleteCommand request, CancellationToken cancellationToken)
         {
-            if (!request.OrderIDList.Any())
+            using (LogContext.PushProperty("OrderDeleteCommand", $"{JsonConvert.SerializeObject(request)}"))
             {
-                return await Task.FromResult(false);
-            }
-            var orderList = await _orderRepository
-                                  .GetOrderListByOrderIdsAsync(request.OrderIDList)
-                                  .ConfigureAwait(false);
+                if (!request.OrderIDList.Any())
+                {
+                    return false;
+                }
+                var orderList = await _orderRepository
+                                      .GetOrderListByOrderIdsAsync(request.OrderIDList)
+                                      .ConfigureAwait(false);
 
-            if (!orderList.Any())
-            {
-                return false;
+                if (!orderList.Any())
+                {
+                    return false;
+                }
+                this._orderRepository.RemoveRange(orderList);
+                return await _orderRepository.UnitOfWork.CommitAsync(cancellationToken).ConfigureAwait(false);
             }
-            this._orderRepository.RemoveRange(orderList);
-            return await _orderRepository.UnitOfWork.CommitAsync(cancellationToken).ConfigureAwait(false);
         }
 
 
         /// <summary>
-        /// 批量订单数据
+        /// 批量创建订单数据
         /// </summary>
         /// <param name="request"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public Task<bool> Handle(OrderCreatedCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(OrderCreatedCommand request, CancellationToken cancellationToken)
         {
-            if (!request.Orders.Any())
+            using (LogContext.PushProperty("OrderCreatedCommand", $"{JsonConvert.SerializeObject(request)}"))
             {
-                return Task.FromResult(false);
+                if (request.Orders.Any())
+                {
+                    _orderRepository.AddRange(request.Orders);
+                }
+                return await _orderRepository.UnitOfWork.CommitAsync(cancellationToken).ConfigureAwait(false);
             }
-            _orderRepository.AddRange(request.Orders);
-            return _orderRepository.UnitOfWork.CommitAsync(cancellationToken);
-        }
-
-        /// <summary>
-        /// 手动释放
-        /// </summary>
-        public void Dispose()
-        {
-            _orderRepository.Dispose();
         }
     }
 }

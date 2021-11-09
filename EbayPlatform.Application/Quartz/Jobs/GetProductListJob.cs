@@ -7,6 +7,7 @@ using EbayPlatform.Application.Services;
 using EbayPlatform.Domain.Core.Abstractions;
 using EbayPlatform.Domain.IntegrationEvents;
 using EbayPlatform.Infrastructure.Core;
+using EbayPlatform.Infrastructure.Core.Engines;
 using Newtonsoft.Json;
 using Quartz;
 using System;
@@ -20,11 +21,9 @@ namespace EbayPlatform.Application.Quartz.Jobs
     public class GetProductListJob : AbstractBaseJob, IJob, ICapSubscribe, IDependency
     {
         private readonly IProductAppService _productAppService;
-        public GetProductListJob(ISyncTaskJobAppService syncTaskJobAppService,
-           IProductAppService productAppService)
-            : base(syncTaskJobAppService)
+        public GetProductListJob()
         {
-            _productAppService = productAppService;
+            _productAppService = EngineContext.Current.Resolve<IProductAppService>();
         }
 
         public Task Execute(IJobExecutionContext context)
@@ -39,9 +38,9 @@ namespace EbayPlatform.Application.Quartz.Jobs
         /// <param name="integrationEvent"></param>
         /// <returns></returns>
         [CapSubscribe(nameof(GetProductListJob))]
-        protected override Task ProcessQueueDataAsync(CollectionIntegrationEvent integrationEvent)
+        protected override async Task ProcessQueueDataAsync(CollectionIntegrationEvent integrationEvent)
         {
-            return base.ProcessQueueDataAsync(integrationEvent);
+            await base.ProcessQueueDataAsync(integrationEvent);
         }
 
 
@@ -62,9 +61,11 @@ namespace EbayPlatform.Application.Quartz.Jobs
                     EntriesPerPage = paramValueEntityDto.PageSize,
                     PageNumber = paramValueEntityDto.PageIndex,
                 },
+                GranularityLevel = GranularityLevelCodeType.Coarse,
                 IncludeVariations = false,
+                IncludeWatchCount = false,
                 StartTimeFrom = paramValueEntityDto.FromDate,
-                StartTimeTo = (paramValueEntityDto.ToDate - paramValueEntityDto.FromDate).Days > 121 ? paramValueEntityDto.FromDate.AddDays(121) : paramValueEntityDto.ToDate
+                StartTimeTo = (paramValueEntityDto.ToDate - paramValueEntityDto.FromDate).Days > 121 ? paramValueEntityDto.FromDate.AddDays(110) : paramValueEntityDto.ToDate
             };
         }
 
@@ -92,6 +93,11 @@ namespace EbayPlatform.Application.Quartz.Jobs
                         productDtoList.AddRange(ConvertData(shopName, getSellerListCall.ItemList));
                     }
                 } while (hasMoreItems);
+
+                if (!productDtoList.Any())
+                {
+                    return ApiResult.Fail("暂无可下载的Listing数据");
+                }
 
                 return ApiResult.OK("下载Listing数据成功", new ParamValueToEntityDto<List<ProductDto>>
                 {
@@ -162,24 +168,29 @@ namespace EbayPlatform.Application.Quartz.Jobs
                     productDto.SiteCode = Convert.ToString(itemType.Site.Value);
                 }
 
+
+                productDto.StartPriceValue = 0M;
                 if (itemType.StartPrice != null)
                 {
                     productDto.StartPriceValue = (decimal)itemType.StartPrice.Value;
                     productDto.StartPriceCurrency = Convert.ToString(itemType.StartPrice.currencyID);
                 }
 
+                productDto.BuyerGuaranteePriceValue = 0M;
                 if (itemType.BuyerGuaranteePrice != null)
                 {
                     productDto.BuyerGuaranteePriceValue = (decimal)itemType.BuyerGuaranteePrice.Value;
                     productDto.BuyerGuaranteePriceCurrency = Convert.ToString(itemType.BuyerGuaranteePrice.currencyID);
                 }
 
+                productDto.BuyItNowPriceValue = 0M;
                 if (itemType.BuyItNowPrice != null)
                 {
                     productDto.BuyItNowPriceValue = (decimal)itemType.BuyItNowPrice.Value;
                     productDto.BuyItNowPriceCurrency = Convert.ToString(itemType.BuyItNowPrice.currencyID);
                 }
 
+                productDto.ReservePriceValue = 0M;
                 if (itemType.ReservePrice != null)
                 {
                     productDto.ReservePriceValue = (decimal)itemType.ReservePrice.Value;
@@ -257,11 +268,15 @@ namespace EbayPlatform.Application.Quartz.Jobs
                         productDto.ListingStatus = Convert.ToString(itemType.SellingStatus.ListingStatus);
                     }
                     productDto.QuantitySold = itemType.SellingStatus.QuantitySold.GetValueOrDefault();
+
+                    productDto.ConvertedCurrentPriceValue = 0M;
                     if (itemType.SellingStatus.ConvertedCurrentPrice != null)
                     {
                         productDto.ConvertedCurrentPriceValue = (decimal)itemType.SellingStatus.ConvertedCurrentPrice.Value;
                         productDto.ConvertedCurrentPriceCurrency = Convert.ToString(itemType.SellingStatus.ConvertedCurrentPrice.currencyID);
                     }
+
+                    productDto.CurrentPriceValue = 0M;
                     if (itemType.SellingStatus.CurrentPrice != null)
                     {
                         productDto.CurrentPriceValue = (decimal)itemType.SellingStatus.CurrentPrice.Value;
@@ -276,6 +291,7 @@ namespace EbayPlatform.Application.Quartz.Jobs
                     productDto.EndTime = productDto.EndTime;
                     productDto.AdminEnded = itemType.SellingStatus.AdminEnded.GetValueOrDefault();
                 }
+                productDtoList.Add(productDto);
             });
             return productDtoList;
         }

@@ -1,4 +1,4 @@
-﻿using EbayPlatform.Application.Dtos;
+﻿using EbayPlatform.Application.Dtos; 
 using Quartz;
 using System;
 using System.Linq;
@@ -41,12 +41,14 @@ namespace EbayPlatform.Application.Quartz
 
             IJobDetail job = JobBuilder.Create(typeInfo)
                                        .WithIdentity(syncTaskJobConfig.JobName)
+                                       .WithDescription(syncTaskJobConfig.JobDesc)
                                        .Build();
 
             ITrigger trigger = TriggerBuilder.Create()
                                              .WithIdentity($"{syncTaskJobConfig.JobName}.trigger")
-                                             .StartNow()
                                              .WithCronSchedule(syncTaskJobConfig.Cron)
+                                             .WithDescription(syncTaskJobConfig.CronDesc)
+                                             .StartNow()
                                              .Build();
 
             await scheduler.ScheduleJob(job, trigger, cancellationToken).ConfigureAwait(false);

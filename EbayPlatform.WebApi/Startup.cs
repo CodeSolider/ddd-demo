@@ -1,13 +1,13 @@
 using EbayPlatform.Infrastructure.Context;
-using EbayPlatform.Infrastructure.Core.Extensions;
+using EbayPlatform.Infrastructure.Extensions;
 using EbayPlatform.WebApi.Extensions;
-using EbayPlatform.WebApi.Filters;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using System.Reflection;
 
 namespace EbayPlatform.WebApi
@@ -38,26 +38,22 @@ namespace EbayPlatform.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            #region MediatR
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(EbayPlatformContextTransactionBehavior<,>));
-            services.AddMediatR(Assembly.Load(Configuration.GetSection("MediatRPath").Value), typeof(Program).Assembly);
-            #endregion
+            services.AddControllers().Services
+                    .AddSqlServerDomainContext<EbayPlatformDbContext>(Configuration.GetConnectionString("DefaultConnection"), serviceLifetime: ServiceLifetime.Transient)
+                    .AddAutoDIService()
+                    .AddCapEventBus<EbayPlatformDbContext>(Configuration)
+                    .Services
+                    .AddSwaggerDocumentation()
+                    .AddTransient(typeof(IPipelineBehavior<,>), typeof(EbayPlatformContextTransactionBehavior<,>))
+                    .AddMediatR(Assembly.Load(Configuration.GetSection("MediatorPath").Value), typeof(Program).Assembly)
+                    .AddEngineService()
+                    .UseQuartz();
 
-            services.AddSqlServerDomainContext<EbayPlatformDbContext>
-                     (Configuration.GetConnectionString("DefaultConnection"), ServiceLifetime.Transient);
-            services.AddAutoDIService();
-
-            #region Cap 
-            services.AddCapEventBus<EbayPlatformDbContext>(Configuration).AddSubscribeFilter<CapSubscribeFilter>();
-            #endregion
-
-            #region Quartz
-            services.UseQuartz();
-            #endregion
-
-            services.AddControllers();
-            services.AddSwaggerDocumentation();
-            services.AddEngineService();
+            services.AddHttpClient("ScitooErp", options =>
+            {
+                options.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(Configuration.GetValue<string>("ScitooErp:AuthToken"));
+                options.BaseAddress = new Uri(Configuration.GetValue<string>("ScitooErp:ApiUrl"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,13 +61,11 @@ namespace EbayPlatform.WebApi
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 #pragma warning restore CS1591 // 缺少对公共可见类型或成员的 XML 注释
         {
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwaggerDocumentation();
             }
-
             app.UseRouting();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
