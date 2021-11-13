@@ -31,7 +31,7 @@ namespace EbayPlatform.Domain.CommandHandlers.Listing
             {
                 if (!request.ProductDList.Any())
                 {
-                    return await Task.FromResult(false);
+                    return false;
                 }
                 var productList = await _productRepository
                                         .GetProductListByOrderIdsAsync(request.ProductDList)
@@ -59,7 +59,7 @@ namespace EbayPlatform.Domain.CommandHandlers.Listing
             {
                 if (!request.Products.Any())
                 {
-                    return await Task.FromResult(false);
+                    return false;
                 }
                 _productRepository.AddRange(request.Products);
                 return await _productRepository.UnitOfWork.CommitAsync(cancellationToken).ConfigureAwait(false);

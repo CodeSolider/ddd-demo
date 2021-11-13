@@ -69,7 +69,6 @@ D:\Doc\Demo\EbayPlatform\EbayPlatform.WebApi\obj\Debug\net5.0\EbayPlatform.WebAp
 D:\Doc\Demo\EbayPlatform\EbayPlatform.WebApi\obj\Debug\net5.0\EbayPlatform.WebApi.csproj.CoreCompileInputs.cache
 D:\Doc\Demo\EbayPlatform\EbayPlatform.WebApi\obj\Debug\net5.0\EbayPlatform.WebApi.MvcApplicationPartsAssemblyInfo.cache
 D:\Doc\Demo\EbayPlatform\EbayPlatform.WebApi\obj\Debug\net5.0\staticwebassets\EbayPlatform.WebApi.StaticWebAssets.Manifest.cache
-D:\Doc\Demo\EbayPlatform\EbayPlatform.WebApi\obj\Debug\net5.0\staticwebassets\EbayPlatform.WebApi.StaticWebAssets.xml
 D:\Doc\Demo\EbayPlatform\EbayPlatform.WebApi\obj\Debug\net5.0\scopedcss\bundle\EbayPlatform.WebApi.styles.css
 D:\Doc\Demo\EbayPlatform\EbayPlatform.WebApi\obj\Debug\net5.0\EbayPlatform.WebApi.RazorTargetAssemblyInfo.cache
 D:\Doc\Demo\EbayPlatform\EbayPlatform.WebApi\obj\Debug\net5.0\EbayPlatform.WebApi.dll

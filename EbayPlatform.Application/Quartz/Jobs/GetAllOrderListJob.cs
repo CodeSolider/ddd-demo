@@ -84,32 +84,28 @@ namespace EbayPlatform.Application.Quartz.Jobs
             return Task.Run(() =>
             {
                 var getOrdersCall = apiCall as eBay.Service.Call.GetOrdersCall;
-                bool hasMoreOrders = false;
-                List<OrderDto> orderDtoList = new();
-                do
+                getOrdersCall.Execute();
+                bool hasMoreOrders = getOrdersCall.ApiResponse.HasMoreOrders.GetValueOrDefault();
+                if (!hasMoreOrders)
                 {
-                    getOrdersCall.Execute();
-                    hasMoreOrders = getOrdersCall.ApiResponse.HasMoreOrders.GetValueOrDefault();
-                    getOrdersCall.Pagination.PageNumber++;
-                    if (getOrdersCall.OrderList.Any())
-                    {
-                        orderDtoList.AddRange(ConvertData(shopName, getOrdersCall.OrderList));
-                    }
-                } while (hasMoreOrders);
-
-                if (!orderDtoList.Any())
-                {
-                    return ApiResult.Fail("暂无可下载的订单数据");
+                    return ApiResult.Fail("暂无可请求的数据");
                 }
 
-                return ApiResult.OK("下载订单数据成功", new ParamValueToEntityDto<List<OrderDto>>
+                getOrdersCall.Pagination.PageNumber++;
+                if (getOrdersCall.OrderList.Any())
                 {
-                    FromDate = getOrdersCall.CreateTimeTo,
-                    ToDate = DateTime.Now,
-                    PageIndex = (getOrdersCall?.Pagination?.PageNumber).GetValueOrDefault(),
-                    PageSize = 100,
-                    Data = orderDtoList
-                });
+                    return ApiResult.OK("下载订单数据成功", new ParamValueToEntityDto<List<OrderDto>>
+                    {
+                        FromDate = getOrdersCall.CreateTimeTo,
+                        ToDate = DateTime.Now,
+                        PageIndex = (getOrdersCall?.Pagination?.PageNumber).GetValueOrDefault(),
+                        PageSize = 100,
+                        Data = ConvertData(shopName, getOrdersCall.ApiResponse.OrderArray),
+                        HasNextPage = hasMoreOrders
+                    });
+                }
+
+                return ApiResult.Fail($"{nameof(GetAllOrderListJob)}暂无获取到数据");
             });
         }
 

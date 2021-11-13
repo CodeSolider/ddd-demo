@@ -9,4 +9,3 @@ D:\Doc\Demo\EbayPlatform\EbayPlatform.Domain.Core\obj\Debug\net5.0\EbayPlatform.
 D:\Doc\Demo\EbayPlatform\EbayPlatform.Domain.Core\obj\Debug\net5.0\EbayPlatform.Domain.Core.dll
 D:\Doc\Demo\EbayPlatform\EbayPlatform.Domain.Core\obj\Debug\net5.0\ref\EbayPlatform.Domain.Core.dll
 D:\Doc\Demo\EbayPlatform\EbayPlatform.Domain.Core\obj\Debug\net5.0\EbayPlatform.Domain.Core.pdb
-D:\Doc\Demo\EbayPlatform\EbayPlatform.Domain.Core\obj\Debug\net5.0\EbayPlatform.Domain.Core.csproj.AssemblyReference.cache

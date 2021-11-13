@@ -35,5 +35,10 @@ namespace EbayPlatform.Application.Dtos
     internal class ParamValueToEntityDto<T> : ParamValueToEntityDto
     {
         public T Data { get; set; }
+
+        /// <summary>
+        /// 是否还有下一页
+        /// </summary>
+        public bool HasNextPage { get; set; } = false;
     }
 }

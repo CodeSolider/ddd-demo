@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using System.Collections.Generic;
 
 namespace EbayPlatform.Domain.Commands.Account
 {
@@ -8,11 +7,11 @@ namespace EbayPlatform.Domain.Commands.Account
     /// </summary>
     public class AccountDeleteCommand : IRequest<bool>
     {
-        public IEnumerable<string> AccountIDList { get; }
+        public string AccountID { get; }
 
-        public AccountDeleteCommand(IEnumerable<string> accountIDList)
+        public AccountDeleteCommand(string accountID)
         {
-            this.AccountIDList = accountIDList;
+            this.AccountID = accountID;
         }
     }
 }

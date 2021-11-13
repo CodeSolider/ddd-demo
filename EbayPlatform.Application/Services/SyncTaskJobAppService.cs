@@ -7,9 +7,7 @@ using EbayPlatform.Domain.Models;
 using System.Collections.Generic;
 using EbayPlatform.Application.Dtos;
 using Mapster;
-using EbayPlatform.Domain.Models.Enums;
 using EbayPlatform.Domain.Core.Abstractions;
-using System;
 
 namespace EbayPlatform.Application.Services
 {
@@ -24,17 +22,7 @@ namespace EbayPlatform.Application.Services
         {
             _mediator = mediator;
             _syncTaskJobConfigRepository = syncTaskJobConfigRepository;
-        }
-
-        /// <summary>
-        /// 根据状态获取任务配置信息
-        /// </summary>
-        /// <returns></returns>
-        public Task<List<SyncTaskJobConfig>> GetListByJobStatusAsync(JobStatusType? jobStatus = null,
-            CancellationToken cancellationToken = default)
-        {
-            return _syncTaskJobConfigRepository.GetListByJobStatusAsync(jobStatus, cancellationToken);
-        }
+        } 
 
         /// <summary>
         /// 获取所有的任务配置信息

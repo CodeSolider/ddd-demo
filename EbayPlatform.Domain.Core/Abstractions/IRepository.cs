@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,7 +10,7 @@ namespace EbayPlatform.Domain.Core.Abstractions
     /// 定义通用存储库的接口
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
-    public interface IRepository<TEntity, TKey>  where TEntity : Entity<TKey>, IAggregateRoot
+    public interface IRepository<TEntity, TKey> where TEntity : Entity<TKey>, IAggregateRoot
     {
         IUnitOfWork UnitOfWork { get; }
         TEntity Add(TEntity entity);
@@ -24,6 +26,10 @@ namespace EbayPlatform.Domain.Core.Abstractions
         bool Delete(TKey id);
         Task<bool> DeleteAsync(TKey id);
         TEntity Get(TKey id);
+
+        TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate = null);
+
+        Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate = null);
         Task<TEntity> GetAsync(TKey id);
     }
 }

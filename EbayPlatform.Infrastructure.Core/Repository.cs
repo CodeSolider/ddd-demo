@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -91,6 +92,17 @@ namespace EbayPlatform.Infrastructure.Repository
         public virtual TEntity Get(TKey id)
         {
             return DbContext.Set<TEntity>().Find(id);
+        }
+
+
+        public virtual TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate = null)
+        {
+            return DbContext.Set<TEntity>().FirstOrDefault(predicate);
+        }
+
+        public virtual Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate = null)
+        {
+            return DbContext.Set<TEntity>().FirstOrDefaultAsync(predicate);
         }
 
         public virtual async Task<TEntity> GetAsync(TKey id)

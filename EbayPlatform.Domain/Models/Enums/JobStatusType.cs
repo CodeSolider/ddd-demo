@@ -11,10 +11,5 @@
         /// 正在执行中
         /// </summary>
         Executing = 1,
-
-        /// <summary>
-        /// 已完成
-        /// </summary>
-        Completed = 2
     }
 }

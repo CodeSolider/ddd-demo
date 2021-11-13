@@ -48,7 +48,7 @@ namespace EbayPlatform.Application.Quartz
                 return;
             }
 
-            foreach (var shopTaskItem in syncTaskJobConfigItem.ShopTasks.Where(o => o.ShopTaskStatus != Domain.Models.Enums.JobStatusType.Completed))
+            foreach (var shopTaskItem in syncTaskJobConfigItem.ShopTasks.Where(o => o.ShopTaskStatus == Domain.Models.Enums.JobStatusType.UnExecute))
             {
                 await _capPublisher.PublishAsync(syncTaskJobConfigItem.JobName, new CollectionIntegrationEvent(shopTaskItem.ShopName, shopTaskItem.ParamValue), cancellationToken: cancellationToken)
                                    .ConfigureAwait(false);
@@ -56,7 +56,6 @@ namespace EbayPlatform.Application.Quartz
                 shopTaskItem.ChangeShopTaskJobStatus(Domain.Models.Enums.JobStatusType.Executing);
             }
             //更新状态
-            syncTaskJobConfigItem.ChangeSyncTaskJobConfigJobStatus(Domain.Models.Enums.JobStatusType.Executing);
             await _syncTaskJobAppService.UpdateShopTaskAsync(new List<Domain.Models.SyncTaskJobConfig> { syncTaskJobConfigItem }, cancellationToken)
                                         .ConfigureAwait(false);
         }
@@ -160,34 +159,45 @@ namespace EbayPlatform.Application.Quartz
         /// </summary>
         protected virtual async Task ModifySyncTaskJobConfigStatusAsync<T>(ApiResult apiResult, string jobName, string shopName)
         {
-            if (apiResult.Code == 200 && apiResult is ApiResult<ParamValueToEntityDto<T>> responseData)
+            if (apiResult is ApiResult<ParamValueToEntityDto<T>> responseData)
             {
                 var syncTaskJobConfigItem = await _syncTaskJobAppService.GetSyncTaskJobConfigByNameAsync(jobName).ConfigureAwait(false);
                 if (syncTaskJobConfigItem == null)
                 {
                     return;
                 }
-
-                foreach (var shopTask in syncTaskJobConfigItem.ShopTasks.Where(o => o.ShopName == shopName))
+                //店铺
+                var shopTaskItem = syncTaskJobConfigItem.ShopTasks.FirstOrDefault(o => o.ShopName == shopName);
+                if (shopTaskItem == null)
                 {
-                    shopTask.ChangeShopTaskParamValue(JsonConvert.SerializeObject(new
-                    {
-                        responseData.Data.PageIndex,
-                        responseData.Data.PageSize,
-                        responseData.Data.FromDate,
-                        responseData.Data.ToDate,
-                    }));
-                    shopTask.ChangeShopTaskJobStatus(Domain.Models.Enums.JobStatusType.Completed);
+                    return;
                 }
 
-                if (syncTaskJobConfigItem.ShopTasks.Count(o => o.ShopTaskStatus == Domain.Models.Enums.JobStatusType.Completed) == syncTaskJobConfigItem.ShopTasks.Count())
+                //更新信息
+                shopTaskItem.ChangeShopTaskParamValue(JsonConvert.SerializeObject(new
                 {
-                    //更新状态
-                    syncTaskJobConfigItem.ChangeSyncTaskJobConfigJobStatus(Domain.Models.Enums.JobStatusType.Completed);
-                }
+                    PageIndex = responseData.Data.HasNextPage ? responseData.Data.PageIndex : 1,
+                    responseData.Data.PageSize,
+                    responseData.Data.FromDate,
+                    responseData.Data.ToDate,
+                    responseData.Data.HasNextPage
+                }));
 
+                //判断是否有下一页
+                if (responseData.Data.HasNextPage)
+                {
+
+                    shopTaskItem.ChangeShopTaskJobStatus(Domain.Models.Enums.JobStatusType.Executing);
+                    //发送消息
+                    await _capPublisher.PublishAsync(syncTaskJobConfigItem.JobName, new CollectionIntegrationEvent(shopTaskItem.ShopName, shopTaskItem.ParamValue))
+                                       .ConfigureAwait(false);
+                }
+                else
+                {
+                    shopTaskItem.ChangeShopTaskJobStatus(Domain.Models.Enums.JobStatusType.UnExecute);
+                }
                 await _syncTaskJobAppService.UpdateShopTaskAsync(new List<Domain.Models.SyncTaskJobConfig> { syncTaskJobConfigItem })
-                      .ConfigureAwait(false);
+                                            .ConfigureAwait(false);
             }
         }
         #endregion

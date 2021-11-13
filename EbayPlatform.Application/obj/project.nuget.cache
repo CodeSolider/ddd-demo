@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "YHXRsDrXIK6tleh90Y70uDDFkvEtXMFy049zT6Jg7peKm/FVGrM9ZJJVGuNiCF01Si43pIZbfueo7GvugvoKMA==",
+  "dgSpecHash": "+mZCYhaKBMttf8j3WKDTJN4Ib/b3FuCks4Kfu41muCe8/+OWZ4PE7ReeII6gW/zr2Ek9rxdclMfjNpHPKnGPlg==",
   "success": true,
   "projectFilePath": "D:\\Doc\\Demo\\EbayPlatform\\EbayPlatform.Application\\EbayPlatform.Application.csproj",
   "expectedPackageFiles": [
@@ -129,7 +129,10 @@
     "C:\\Users\\W\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\W\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\W\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\W\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
+    "C:\\Users\\W\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
+    "C:\\Users\\W\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\5.0.0\\microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\W\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\5.0.0\\microsoft.windowsdesktop.app.ref.5.0.0.nupkg.sha512",
+    "C:\\Users\\W\\.nuget\\packages\\microsoft.netcore.app.ref\\5.0.0\\microsoft.netcore.app.ref.5.0.0.nupkg.sha512"
   ],
   "logs": []
 }

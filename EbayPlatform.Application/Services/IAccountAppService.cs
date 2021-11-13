@@ -1,5 +1,4 @@
 ﻿using EbayPlatform.Application.Dtos.Accounts;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,17 +9,17 @@ namespace EbayPlatform.Application.Services
         /// <summary>
         /// 根据账户ID删除账户数据
         /// </summary>
-        /// <param name="accountIDList"></param>
+        /// <param name="accountID"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<bool> DeleteAccountIdsAsync(IEnumerable<string> accountIDList, CancellationToken cancellationToken = default);
+        Task<bool> DeleteAccountAsync(string accountID, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// 添加账单信息
         /// </summary>
-        /// <param name="accountDtos"></param>
+        /// <param name="accountDto"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        Task<bool> AddAccountAsync(List<AccountDto> accountDtos, CancellationToken cancellationToken = default);
+        Task<bool> AddAccountAsync(AccountDto accountDto, CancellationToken cancellationToken = default);
     }
 }

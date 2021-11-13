@@ -87,32 +87,23 @@ namespace EbayPlatform.Application.Quartz.Jobs
             return Task.Run(() =>
             {
                 var getAccountCall = apiCall as GetAccountCall;
-                bool hasMoreEntries = false;
-                List<AccountDto> accountDtoList = new();
-                do
-                {
-                    getAccountCall.Execute();
-                    hasMoreEntries = getAccountCall.ApiResponse.HasMoreEntries.GetValueOrDefault();
-                    getAccountCall.Pagination.PageNumber++;
-                    if (getAccountCall.ApiResponse != null && getAccountCall.ApiResponse.AccountSummary != null)
-                    {
-                        accountDtoList.Add(ConverData(shopName, getAccountCall.ApiResponse));
-                    }
-                } while (hasMoreEntries);
+                bool hasMoreEntries = getAccountCall.ApiResponse.HasMoreEntries.GetValueOrDefault();
 
-                if (!accountDtoList.Any())
+                getAccountCall.Pagination.PageNumber++;
+                if (getAccountCall.ApiResponse != null && getAccountCall.ApiResponse.AccountSummary != null)
                 {
-                    return ApiResult.Fail("暂无可下载的账单数据");
+                    return ApiResult.OK("下载账单数据成功", new ParamValueToEntityDto<AccountDto>
+                    {
+                        FromDate = getAccountCall.BeginDate,
+                        ToDate = DateTime.Now,
+                        PageIndex = (getAccountCall?.Pagination?.PageNumber).GetValueOrDefault(),
+                        PageSize = 100,
+                        Data = ConvertData(shopName, getAccountCall.ApiResponse),
+                        HasNextPage = hasMoreEntries
+                    });
                 }
 
-                return ApiResult.OK("下载账单数据成功", new ParamValueToEntityDto<List<AccountDto>>
-                {
-                    FromDate = getAccountCall.BeginDate,
-                    ToDate = DateTime.Now,
-                    PageIndex = (getAccountCall?.Pagination?.PageNumber).GetValueOrDefault(),
-                    PageSize = 100,
-                    Data = accountDtoList
-                });
+                return ApiResult.Fail($"{nameof(GetAccountJob)}暂无获取到数据");
             });
         }
 
@@ -124,21 +115,15 @@ namespace EbayPlatform.Application.Quartz.Jobs
         /// <returns></returns>
         protected override async Task DownloaderProvider_DownloadingEnd(ApiResult apiResult, string shopName)
         {
-            if (apiResult.Code == 200 && apiResult is ApiResult<ParamValueToEntityDto<List<AccountDto>>> responseData)
+            if (apiResult.Code == 200 && apiResult is ApiResult<ParamValueToEntityDto<AccountDto>> responseData)
             {
-                var accountIDList = responseData.Data.Data.Select(o => o.AccountID);
-                if (accountIDList.Any())
+                if (responseData.Data.Data != null)
                 {
-                    await _accountAppService.DeleteAccountIdsAsync(accountIDList).ConfigureAwait(false);
-                }
-
-                if (responseData.Data.Data.Any())
-                {
+                    await _accountAppService.DeleteAccountAsync(responseData.Data.Data.AccountID).ConfigureAwait(false);
                     await _accountAppService.AddAccountAsync(responseData.Data.Data).ConfigureAwait(false);
+                    //存储结果集
+                    await base.ModifySyncTaskJobConfigStatusAsync<List<OrderDto>>(apiResult, nameof(GetAllOrderListJob), shopName).ConfigureAwait(false);
                 }
-
-                //存储结果集
-                await base.ModifySyncTaskJobConfigStatusAsync<List<OrderDto>>(apiResult, nameof(GetAllOrderListJob), shopName).ConfigureAwait(false);
             }
         }
 
@@ -150,7 +135,7 @@ namespace EbayPlatform.Application.Quartz.Jobs
         /// <param name="shopName"></param>
         /// <param name="getAccountResponseType"></param>
         /// <returns></returns>
-        private AccountDto ConverData(string shopName, GetAccountResponseType getAccountResponseType)
+        private AccountDto ConvertData(string shopName, GetAccountResponseType getAccountResponseType)
         {
             var accountDto = new AccountDto
             {

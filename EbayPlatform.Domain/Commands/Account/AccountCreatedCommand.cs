@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using System.Collections.Generic;
 
 namespace EbayPlatform.Domain.Commands.Account
 {
@@ -8,11 +7,11 @@ namespace EbayPlatform.Domain.Commands.Account
         /// <summary>
         /// 添加账单
         /// </summary>
-        public List<Models.Accounts.Account> Accounts { get; }
+        public Models.Accounts.Account Account { get; }
 
-        public AccountCreatedCommand(List<Models.Accounts.Account> accounts)
+        public AccountCreatedCommand(Models.Accounts.Account account)
         {
-            this.Accounts = accounts;
+            this.Account = account;
         }
     }
 }

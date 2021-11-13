@@ -1,9 +1,7 @@
 ﻿using EbayPlatform.Domain.Core.Abstractions;
 using EbayPlatform.Domain.Interfaces;
 using EbayPlatform.Domain.Models;
-using EbayPlatform.Domain.Models.Enums;
 using EbayPlatform.Infrastructure.Context;
-using EbayPlatform.Infrastructure.Core.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,18 +18,6 @@ namespace EbayPlatform.Infrastructure.Repository
     {
         public SyncTaskJobConfigRepository(EbayPlatformDbContext dbContext)
             : base(dbContext) { }
-
-        /// <summary>
-        /// 根据状态获取任务配置信息
-        /// </summary>
-        /// <returns></returns>
-        public Task<List<SyncTaskJobConfig>> GetListByJobStatusAsync(JobStatusType? jobStatus = null,
-            CancellationToken cancellationToken = default)
-        {
-            return this.DbContext.SyncTaskJobConfigs
-                       .WhereIf(jobStatus.HasValue, o => o.JobStatus == jobStatus)
-                       .ToListAsync(cancellationToken);
-        }
 
         /// <summary>
         /// 获取所有的任务配置数据

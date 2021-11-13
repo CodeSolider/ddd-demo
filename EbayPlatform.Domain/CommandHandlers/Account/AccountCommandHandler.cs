@@ -31,19 +31,12 @@ namespace EbayPlatform.Domain.CommandHandlers.Account
         {
             using (LogContext.PushProperty("AccountDeleteCommand", $"{JsonConvert.SerializeObject(request)}"))
             {
-                if (!request.AccountIDList.Any())
+                var accountItem = await _accountRepository.FirstOrDefaultAsync(o => o.AccountID == request.AccountID).ConfigureAwait(false);
+                if (accountItem == null)
                 {
                     return false;
                 }
-
-                var accountList = await _accountRepository
-                                        .GetAccountListByOrderIdsAsync(request.AccountIDList)
-                                        .ConfigureAwait(false);
-                if (!accountList.Any())
-                {
-                    return false;
-                }
-                this._accountRepository.RemoveRange(accountList);
+                this._accountRepository.Remove(accountItem);
                 return await _accountRepository.UnitOfWork.CommitAsync(cancellationToken).ConfigureAwait(false);
             }
         }
@@ -57,12 +50,12 @@ namespace EbayPlatform.Domain.CommandHandlers.Account
         public async Task<bool> Handle(AccountCreatedCommand request, CancellationToken cancellationToken)
         {
             using (LogContext.PushProperty("AccountCreatedCommand", $"{JsonConvert.SerializeObject(request)}"))
-            { 
-                if (!request.Accounts.Any())
+            {
+                if (request.Account == null)
                 {
-                    return await Task.FromResult(false);
+                    return false;
                 }
-                _accountRepository.AddRange(request.Accounts);
+                _accountRepository.Add(request.Account);
                 return await _accountRepository.UnitOfWork.CommitAsync(cancellationToken).ConfigureAwait(false);
             }
         }

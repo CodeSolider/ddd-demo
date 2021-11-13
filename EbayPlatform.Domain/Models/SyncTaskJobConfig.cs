@@ -38,11 +38,6 @@ namespace EbayPlatform.Domain.Models
         public string CronDesc { get; private set; }
 
         /// <summary>
-        /// 作业状态
-        /// </summary>
-        public JobStatusType JobStatus { get; private set; }
-
-        /// <summary>
         /// 同步时间
         /// </summary>
         public DateTime CreateDate { get; private set; }
@@ -79,19 +74,9 @@ namespace EbayPlatform.Domain.Models
             this.JobDesc = jobDesc;
             this.JobAssemblyName = jobAssemblyName;
             this.Cron = cron;
-            this.CronDesc = cronDesc;
-            this.JobStatus = JobStatusType.UnExecute;
+            this.CronDesc = cronDesc; 
             ////添加事件
             //this.AddDomainEvent(new CreateSyncTaskJobConfigDomainEvent(this));
-        }
-
-        /// <summary>
-        /// 更新作业状态
-        /// </summary>
-        /// <param name="JobStatus"></param>
-        public void ChangeSyncTaskJobConfigJobStatus(JobStatusType jobStatus)
-        {
-            this.JobStatus = jobStatus;
         }
 
         /// <summary>

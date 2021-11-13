@@ -22,46 +22,40 @@ namespace EbayPlatform.Application.Services
         /// </summary>
         /// <param name="accountIDList"></param>
         /// <returns></returns>
-        public Task<bool> DeleteAccountIdsAsync(IEnumerable<string> accountIDList, CancellationToken cancellationToken = default)
+        public Task<bool> DeleteAccountAsync(string accountID, CancellationToken cancellationToken = default)
         {
-            return _mediator.Send(new AccountDeleteCommand(accountIDList), cancellationToken);
+            return _mediator.Send(new AccountDeleteCommand(accountID), cancellationToken);
         }
 
         #region Create Account
         /// <summary>
         /// 添加账单信息
         /// </summary>
-        /// <param name="accountDtos"></param>
+        /// <param name="accountDto"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public Task<bool> AddAccountAsync(List<AccountDto> accountDtos, CancellationToken cancellationToken = default)
+        public Task<bool> AddAccountAsync(AccountDto accountDto, CancellationToken cancellationToken = default)
         {
-            List<Domain.Models.Accounts.Account> accountList = new();
+            Domain.Models.Accounts.Account accountItem = new(accountDto.AccountID, accountDto.ShopName, accountDto.CurrencyCode,
+                                                                   accountDto.AccountState, new Domain.Models.MoneyValue(accountDto.InvoicePaymentValue,
+                                                                   accountDto.InvoicePaymentCurrency), new Domain.Models.MoneyValue(accountDto.InvoiceCreditValue,
+                                                                   accountDto.InvoicePaymentCurrency), new Domain.Models.MoneyValue(accountDto.InvoiceNewFeeValue,
+                                                                   accountDto.InvoiceNewFeeCurrency), new Domain.Models.Accounts.AdditionalAccount(new Domain.Models.MoneyValue(
+                                                                   accountDto.AdditionalAccount.BalanceValue, accountDto.AdditionalAccount.BalanceCurrency),
+                                                                   accountDto.AdditionalAccount.CurrencyCode, accountDto.AdditionalAccount.AccountCode));
 
-            accountDtos.ForEach(accountDtoItem =>
+            accountDto.AccountDetails.ForEach(AccountDetailItem =>
             {
-                Domain.Models.Accounts.Account accountItem = new(accountDtoItem.AccountID, accountDtoItem.ShopName, accountDtoItem.CurrencyCode,
-                                                                 accountDtoItem.AccountState, new Domain.Models.MoneyValue(accountDtoItem.InvoicePaymentValue,
-                                                                 accountDtoItem.InvoicePaymentCurrency), new Domain.Models.MoneyValue(accountDtoItem.InvoiceCreditValue,
-                                                                 accountDtoItem.InvoicePaymentCurrency), new Domain.Models.MoneyValue(accountDtoItem.InvoiceNewFeeValue,
-                                                                 accountDtoItem.InvoiceNewFeeCurrency), new Domain.Models.Accounts.AdditionalAccount(new Domain.Models.MoneyValue(
-                                                                 accountDtoItem.AdditionalAccount.BalanceValue, accountDtoItem.AdditionalAccount.BalanceCurrency),
-                                                                 accountDtoItem.AdditionalAccount.CurrencyCode, accountDtoItem.AdditionalAccount.AccountCode));
-
-                accountDtoItem.AccountDetails.ForEach(AccountDetailItem =>
-                {
-                    accountItem.AddAccountDetail(AccountDetailItem.RefNumber, AccountDetailItem.ItemID, AccountDetailItem.Date, AccountDetailItem.AccountType,
-                                                 AccountDetailItem.Title, AccountDetailItem.Description, new Domain.Models.MoneyValue(AccountDetailItem.BalanceValue,
-                                                 AccountDetailItem.BalanceCurrency), new Domain.Models.MoneyValue(AccountDetailItem.GrossDetailAmountValue,
-                                                 AccountDetailItem.GrossDetailAmountCurrency), new Domain.Models.MoneyValue(AccountDetailItem.ConversionRateValue,
-                                                 AccountDetailItem.ConversionRateCurrency), new Domain.Models.MoneyValue(AccountDetailItem.NetDetailAmountValue,
-                                                 AccountDetailItem.NetDetailAmountCurrency), AccountDetailItem.VATPercent, AccountDetailItem.OrderLineItemID,
-                                                 AccountDetailItem.TransactionID, AccountDetailItem.ReceivedTopRatedDiscount);
-                });
-
-                accountList.Add(accountItem);
+                accountItem.AddAccountDetail(AccountDetailItem.RefNumber, AccountDetailItem.ItemID, AccountDetailItem.Date, AccountDetailItem.AccountType,
+                                             AccountDetailItem.Title, AccountDetailItem.Description, new Domain.Models.MoneyValue(AccountDetailItem.BalanceValue,
+                                             AccountDetailItem.BalanceCurrency), new Domain.Models.MoneyValue(AccountDetailItem.GrossDetailAmountValue,
+                                             AccountDetailItem.GrossDetailAmountCurrency), new Domain.Models.MoneyValue(AccountDetailItem.ConversionRateValue,
+                                             AccountDetailItem.ConversionRateCurrency), new Domain.Models.MoneyValue(AccountDetailItem.NetDetailAmountValue,
+                                             AccountDetailItem.NetDetailAmountCurrency), AccountDetailItem.VATPercent, AccountDetailItem.OrderLineItemID,
+                                             AccountDetailItem.TransactionID, AccountDetailItem.ReceivedTopRatedDiscount);
             });
-            return _mediator.Send(new AccountCreatedCommand(accountList), cancellationToken);
+
+            return _mediator.Send(new AccountCreatedCommand(accountItem), cancellationToken);
         }
         #endregion
     }

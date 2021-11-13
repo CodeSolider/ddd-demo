@@ -80,33 +80,28 @@ namespace EbayPlatform.Application.Quartz.Jobs
             return Task.Run(() =>
             {
                 var getSellerListCall = apiCall as eBay.Service.Call.GetSellerListCall;
-                bool hasMoreItems = false;
 
-                List<ProductDto> productDtoList = new();
-                do
+                getSellerListCall.Execute();
+                bool hasMoreItems = getSellerListCall.ApiResponse.HasMoreItems.GetValueOrDefault();
+                if (!hasMoreItems)
                 {
-                    getSellerListCall.Execute();
-                    hasMoreItems = getSellerListCall.ApiResponse.HasMoreItems.GetValueOrDefault();
-                    getSellerListCall.Pagination.PageNumber++;
-                    if (getSellerListCall.ItemList.Any())
+                    return ApiResult.Fail("暂无可请求的数据");
+                }
+                getSellerListCall.Pagination.PageNumber++;
+                if (getSellerListCall.ItemList.Any())
+                {
+                    return ApiResult.OK("下载Listing数据成功", new ParamValueToEntityDto<List<ProductDto>>
                     {
-                        productDtoList.AddRange(ConvertData(shopName, getSellerListCall.ItemList));
-                    }
-                } while (hasMoreItems);
-
-                if (!productDtoList.Any())
-                {
-                    return ApiResult.Fail("暂无可下载的Listing数据");
+                        FromDate = getSellerListCall.StartTimeTo,
+                        ToDate = DateTime.Now,
+                        PageIndex = (getSellerListCall?.Pagination?.PageNumber).GetValueOrDefault(),
+                        PageSize = 100,
+                        Data = ConvertData(shopName, getSellerListCall.ItemList),
+                        HasNextPage = hasMoreItems
+                    });
                 }
 
-                return ApiResult.OK("下载Listing数据成功", new ParamValueToEntityDto<List<ProductDto>>
-                {
-                    FromDate = getSellerListCall.StartTimeTo,
-                    ToDate = DateTime.Now,
-                    PageIndex = (getSellerListCall?.Pagination?.PageNumber).GetValueOrDefault(),
-                    PageSize = 100,
-                    Data = productDtoList
-                });
+                return ApiResult.Fail($"{nameof(GetProductListJob)}暂无获取到数据");
             });
         }
 

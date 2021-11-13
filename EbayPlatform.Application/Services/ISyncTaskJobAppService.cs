@@ -1,6 +1,5 @@
 ﻿using EbayPlatform.Application.Dtos;
 using EbayPlatform.Domain.Models;
-using EbayPlatform.Domain.Models.Enums;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,15 +11,6 @@ namespace EbayPlatform.Application.Services
     /// </summary>
     public interface ISyncTaskJobAppService
     {
-        /// <summary>
-        /// 根据任务状态获取任务配置信息
-        /// </summary>
-        /// <param name="jobStatus"></param>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
-        Task<List<SyncTaskJobConfig>> GetListByJobStatusAsync(JobStatusType? jobStatus = null,
-            CancellationToken cancellationToken = default);
-
         /// <summary>
         /// 获取所有的任务配置数据
         /// </summary>
