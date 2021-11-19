@@ -1,4 +1,4 @@
-﻿using EbayPlatform.Domain.Models.Enums;
+﻿using EbayPlatform.Domain.AggregateModel.Enums;
 
 namespace EbayPlatform.Application.Dtos
 {

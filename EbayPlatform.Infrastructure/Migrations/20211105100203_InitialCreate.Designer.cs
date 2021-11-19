@@ -21,7 +21,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("EbayPlatform.Domain.Models.Accounts.Account", b =>
+            modelBuilder.Entity("EbayPlatform.Domain.AggregateModel.Accounts.Account", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -67,7 +67,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                         .HasComment("账单");
                 });
 
-            modelBuilder.Entity("EbayPlatform.Domain.Models.Listing.Product", b =>
+            modelBuilder.Entity("EbayPlatform.Domain.AggregateModel.Listing.Product", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -181,7 +181,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                         .HasComment("产品");
                 });
 
-            modelBuilder.Entity("EbayPlatform.Domain.Models.Orders.Order", b =>
+            modelBuilder.Entity("EbayPlatform.Domain.AggregateModel.Orders.Order", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
@@ -237,7 +237,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                         .HasComment("订单");
                 });
 
-            modelBuilder.Entity("EbayPlatform.Domain.Models.SyncTaskJobConfig", b =>
+            modelBuilder.Entity("EbayPlatform.Domain.AggregateModel.SyncTaskJobConfig", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -303,7 +303,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                         .HasComment("同步任务作业配置");
                 });
 
-            modelBuilder.Entity("EbayPlatform.Domain.Models.SystemLog", b =>
+            modelBuilder.Entity("EbayPlatform.Domain.AggregateModel.SystemLog", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -340,9 +340,9 @@ namespace EbayPlatform.Infrastructure.Migrations
                         .HasComment("系统日志表");
                 });
 
-            modelBuilder.Entity("EbayPlatform.Domain.Models.Accounts.Account", b =>
+            modelBuilder.Entity("EbayPlatform.Domain.AggregateModel.Accounts.Account", b =>
                 {
-                    b.OwnsMany("EbayPlatform.Domain.Models.Accounts.AccountDetail", "AccountDetails", b1 =>
+                    b.OwnsMany("EbayPlatform.Domain.AggregateModel.Accounts.AccountDetail", "AccountDetails", b1 =>
                         {
                             b1.Property<long>("Id")
                                 .ValueGeneratedOnAdd()
@@ -406,7 +406,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("AccountId");
 
-                            b1.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "Balance", b2 =>
+                            b1.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "Balance", b2 =>
                                 {
                                     b2.Property<long>("AccountDetailId")
                                         .ValueGeneratedOnAdd()
@@ -431,7 +431,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                         .HasForeignKey("AccountDetailId");
                                 });
 
-                            b1.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "ConversionRate", b2 =>
+                            b1.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "ConversionRate", b2 =>
                                 {
                                     b2.Property<long>("AccountDetailId")
                                         .ValueGeneratedOnAdd()
@@ -456,7 +456,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                         .HasForeignKey("AccountDetailId");
                                 });
 
-                            b1.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "GrossDetailAmount", b2 =>
+                            b1.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "GrossDetailAmount", b2 =>
                                 {
                                     b2.Property<long>("AccountDetailId")
                                         .ValueGeneratedOnAdd()
@@ -481,7 +481,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                         .HasForeignKey("AccountDetailId");
                                 });
 
-                            b1.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "NetDetailAmount", b2 =>
+                            b1.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "NetDetailAmount", b2 =>
                                 {
                                     b2.Property<long>("AccountDetailId")
                                         .ValueGeneratedOnAdd()
@@ -515,7 +515,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                             b1.Navigation("NetDetailAmount");
                         });
 
-                    b.OwnsOne("EbayPlatform.Domain.Models.Accounts.AdditionalAccount", "AdditionalAccount", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.Accounts.AdditionalAccount", "AdditionalAccount", b1 =>
                         {
                             b1.Property<long>("AccountId")
                                 .ValueGeneratedOnAdd()
@@ -539,7 +539,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("AccountId");
 
-                            b1.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "Balance", b2 =>
+                            b1.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "Balance", b2 =>
                                 {
                                     b2.Property<long>("AdditionalAccountAccountId")
                                         .ValueGeneratedOnAdd()
@@ -567,7 +567,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                             b1.Navigation("Balance");
                         });
 
-                    b.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "InvoiceCredit", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "InvoiceCredit", b1 =>
                         {
                             b1.Property<long>("AccountId")
                                 .ValueGeneratedOnAdd()
@@ -592,7 +592,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                 .HasForeignKey("AccountId");
                         });
 
-                    b.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "InvoiceNewFee", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "InvoiceNewFee", b1 =>
                         {
                             b1.Property<long>("AccountId")
                                 .ValueGeneratedOnAdd()
@@ -617,7 +617,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                 .HasForeignKey("AccountId");
                         });
 
-                    b.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "InvoicePayment", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "InvoicePayment", b1 =>
                         {
                             b1.Property<long>("AccountId")
                                 .ValueGeneratedOnAdd()
@@ -653,9 +653,9 @@ namespace EbayPlatform.Infrastructure.Migrations
                     b.Navigation("InvoicePayment");
                 });
 
-            modelBuilder.Entity("EbayPlatform.Domain.Models.Listing.Product", b =>
+            modelBuilder.Entity("EbayPlatform.Domain.AggregateModel.Listing.Product", b =>
                 {
-                    b.OwnsOne("EbayPlatform.Domain.Models.Listing.ProductCategory", "FreeAddedCategory", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.Listing.ProductCategory", "FreeAddedCategory", b1 =>
                         {
                             b1.Property<long>("ProductId")
                                 .ValueGeneratedOnAdd()
@@ -680,7 +680,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                 .HasForeignKey("ProductId");
                         });
 
-                    b.OwnsOne("EbayPlatform.Domain.Models.Listing.ProductCategory", "PrimaryCategory", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.Listing.ProductCategory", "PrimaryCategory", b1 =>
                         {
                             b1.Property<long>("ProductId")
                                 .ValueGeneratedOnAdd()
@@ -705,7 +705,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                 .HasForeignKey("ProductId");
                         });
 
-                    b.OwnsOne("EbayPlatform.Domain.Models.Listing.ProductCategory", "SecondaryCategory", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.Listing.ProductCategory", "SecondaryCategory", b1 =>
                         {
                             b1.Property<long>("ProductId")
                                 .ValueGeneratedOnAdd()
@@ -730,7 +730,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                 .HasForeignKey("ProductId");
                         });
 
-                    b.OwnsOne("EbayPlatform.Domain.Models.Listing.SellingStatus", "SellingStatus", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.Listing.SellingStatus", "SellingStatus", b1 =>
                         {
                             b1.Property<long>("ProductId")
                                 .ValueGeneratedOnAdd()
@@ -758,7 +758,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("ProductId");
 
-                            b1.OwnsOne("EbayPlatform.Domain.Models.Listing.PromotionalSaleDetail", "PromotionalSaleDetail", b2 =>
+                            b1.OwnsOne("EbayPlatform.Domain.AggregateModel.Listing.PromotionalSaleDetail", "PromotionalSaleDetail", b2 =>
                                 {
                                     b2.Property<long>("SellingStatusProductId")
                                         .ValueGeneratedOnAdd()
@@ -778,7 +778,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                     b2.WithOwner()
                                         .HasForeignKey("SellingStatusProductId");
 
-                                    b2.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "OriginalPrice", b3 =>
+                                    b2.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "OriginalPrice", b3 =>
                                         {
                                             b3.Property<long>("PromotionalSaleDetailSellingStatusProductId")
                                                 .ValueGeneratedOnAdd()
@@ -806,7 +806,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                     b2.Navigation("OriginalPrice");
                                 });
 
-                            b1.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "ConvertedCurrentPrice", b2 =>
+                            b1.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "ConvertedCurrentPrice", b2 =>
                                 {
                                     b2.Property<long>("SellingStatusProductId")
                                         .ValueGeneratedOnAdd()
@@ -831,7 +831,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                         .HasForeignKey("SellingStatusProductId");
                                 });
 
-                            b1.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "CurrentPrice", b2 =>
+                            b1.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "CurrentPrice", b2 =>
                                 {
                                     b2.Property<long>("SellingStatusProductId")
                                         .ValueGeneratedOnAdd()
@@ -863,7 +863,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                             b1.Navigation("PromotionalSaleDetail");
                         });
 
-                    b.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "BuyItNowPrice", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "BuyItNowPrice", b1 =>
                         {
                             b1.Property<long>("ProductId")
                                 .ValueGeneratedOnAdd()
@@ -888,7 +888,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                 .HasForeignKey("ProductId");
                         });
 
-                    b.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "BuyerGuaranteePrice", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "BuyerGuaranteePrice", b1 =>
                         {
                             b1.Property<long>("ProductId")
                                 .ValueGeneratedOnAdd()
@@ -913,7 +913,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                 .HasForeignKey("ProductId");
                         });
 
-                    b.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "ReservePrice", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "ReservePrice", b1 =>
                         {
                             b1.Property<long>("ProductId")
                                 .ValueGeneratedOnAdd()
@@ -938,7 +938,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                 .HasForeignKey("ProductId");
                         });
 
-                    b.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "StartPrice", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "StartPrice", b1 =>
                         {
                             b1.Property<long>("ProductId")
                                 .ValueGeneratedOnAdd()
@@ -980,9 +980,9 @@ namespace EbayPlatform.Infrastructure.Migrations
                     b.Navigation("StartPrice");
                 });
 
-            modelBuilder.Entity("EbayPlatform.Domain.Models.Orders.Order", b =>
+            modelBuilder.Entity("EbayPlatform.Domain.AggregateModel.Orders.Order", b =>
                 {
-                    b.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "AdjustmentAmount", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "AdjustmentAmount", b1 =>
                         {
                             b1.Property<long>("OrderId")
                                 .ValueGeneratedOnAdd()
@@ -1007,7 +1007,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                 .HasForeignKey("OrderId");
                         });
 
-                    b.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "AmountPaid", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "AmountPaid", b1 =>
                         {
                             b1.Property<long>("OrderId")
                                 .ValueGeneratedOnAdd()
@@ -1032,7 +1032,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                 .HasForeignKey("OrderId");
                         });
 
-                    b.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "AmountSaved", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "AmountSaved", b1 =>
                         {
                             b1.Property<long>("OrderId")
                                 .ValueGeneratedOnAdd()
@@ -1058,7 +1058,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                 .HasForeignKey("OrderId");
                         });
 
-                    b.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "Subtotal", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "Subtotal", b1 =>
                         {
                             b1.Property<long>("OrderId")
                                 .ValueGeneratedOnAdd()
@@ -1083,7 +1083,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                 .HasForeignKey("OrderId");
                         });
 
-                    b.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "Total", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "Total", b1 =>
                         {
                             b1.Property<long>("OrderId")
                                 .ValueGeneratedOnAdd()
@@ -1108,7 +1108,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                 .HasForeignKey("OrderId");
                         });
 
-                    b.OwnsOne("EbayPlatform.Domain.Models.Orders.Address", "ShippingAddress", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.Orders.Address", "ShippingAddress", b1 =>
                         {
                             b1.Property<long>("OrderId")
                                 .ValueGeneratedOnAdd()
@@ -1184,7 +1184,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                 .HasForeignKey("OrderId");
                         });
 
-                    b.OwnsOne("EbayPlatform.Domain.Models.Orders.CheckoutStatus", "CheckoutStatus", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.Orders.CheckoutStatus", "CheckoutStatus", b1 =>
                         {
                             b1.Property<long>("OrderId")
                                 .ValueGeneratedOnAdd()
@@ -1227,7 +1227,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                 .HasForeignKey("OrderId");
                         });
 
-                    b.OwnsMany("EbayPlatform.Domain.Models.Orders.OrderTransaction", "OrderTransactions", b1 =>
+                    b.OwnsMany("EbayPlatform.Domain.AggregateModel.Orders.OrderTransaction", "OrderTransactions", b1 =>
                         {
                             b1.Property<long>("Id")
                                 .ValueGeneratedOnAdd()
@@ -1283,7 +1283,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("OrderId");
 
-                            b1.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "TransactionPrice", b2 =>
+                            b1.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "TransactionPrice", b2 =>
                                 {
                                     b2.Property<long>("OrderTransactionId")
                                         .ValueGeneratedOnAdd()
@@ -1308,7 +1308,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                         .HasForeignKey("OrderTransactionId");
                                 });
 
-                            b1.OwnsOne("EbayPlatform.Domain.Models.Orders.ShippingServiceOption", "ShippingServiceSelected", b2 =>
+                            b1.OwnsOne("EbayPlatform.Domain.AggregateModel.Orders.ShippingServiceOption", "ShippingServiceSelected", b2 =>
                                 {
                                     b2.Property<long>("OrderTransactionId")
                                         .ValueGeneratedOnAdd()
@@ -1345,7 +1345,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                     b2.WithOwner()
                                         .HasForeignKey("OrderTransactionId");
 
-                                    b2.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "ShippingServiceCost", b3 =>
+                                    b2.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "ShippingServiceCost", b3 =>
                                         {
                                             b3.Property<long>("ShippingServiceOptionOrderTransactionId")
                                                 .ValueGeneratedOnAdd()
@@ -1370,7 +1370,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                                 .HasForeignKey("ShippingServiceOptionOrderTransactionId");
                                         });
 
-                                    b2.OwnsOne("EbayPlatform.Domain.Models.Orders.ShippingPackage", "ShippingPackage", b3 =>
+                                    b2.OwnsOne("EbayPlatform.Domain.AggregateModel.Orders.ShippingPackage", "ShippingPackage", b3 =>
                                         {
                                             b3.Property<long>("ShippingServiceOptionOrderTransactionId")
                                                 .ValueGeneratedOnAdd()
@@ -1415,7 +1415,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                     b2.Navigation("ShippingServiceCost");
                                 });
 
-                            b1.OwnsOne("EbayPlatform.Domain.Models.Orders.TransactionStatus", "Status", b2 =>
+                            b1.OwnsOne("EbayPlatform.Domain.AggregateModel.Orders.TransactionStatus", "Status", b2 =>
                                 {
                                     b2.Property<long>("OrderTransactionId")
                                         .ValueGeneratedOnAdd()
@@ -1452,7 +1452,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                             b1.Navigation("TransactionPrice");
                         });
 
-                    b.OwnsOne("EbayPlatform.Domain.Models.Orders.ShippingDetail", "ShippingDetail", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.Orders.ShippingDetail", "ShippingDetail", b1 =>
                         {
                             b1.Property<long>("OrderId")
                                 .ValueGeneratedOnAdd()
@@ -1473,7 +1473,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("OrderId");
 
-                            b1.OwnsOne("EbayPlatform.Domain.Models.Orders.SalesTax", "SalesTax", b2 =>
+                            b1.OwnsOne("EbayPlatform.Domain.AggregateModel.Orders.SalesTax", "SalesTax", b2 =>
                                 {
                                     b2.Property<long>("ShippingDetailOrderId")
                                         .ValueGeneratedOnAdd()
@@ -1495,7 +1495,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                     b2.WithOwner()
                                         .HasForeignKey("ShippingDetailOrderId");
 
-                                    b2.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "SalesTaxAmount", b3 =>
+                                    b2.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "SalesTaxAmount", b3 =>
                                         {
                                             b3.Property<long>("SalesTaxShippingDetailOrderId")
                                                 .ValueGeneratedOnAdd()
@@ -1523,7 +1523,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                     b2.Navigation("SalesTaxAmount");
                                 });
 
-                            b1.OwnsMany("EbayPlatform.Domain.Models.Orders.ShippingServiceOption", "ShippingServiceOptions", b2 =>
+                            b1.OwnsMany("EbayPlatform.Domain.AggregateModel.Orders.ShippingServiceOption", "ShippingServiceOptions", b2 =>
                                 {
                                     b2.Property<long>("Id")
                                         .ValueGeneratedOnAdd()
@@ -1563,7 +1563,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                     b2.WithOwner()
                                         .HasForeignKey("ShippingDetailOrderId");
 
-                                    b2.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "ShippingServiceCost", b3 =>
+                                    b2.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "ShippingServiceCost", b3 =>
                                         {
                                             b3.Property<long>("ShippingServiceOptionId")
                                                 .ValueGeneratedOnAdd()
@@ -1590,7 +1590,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                                 .HasForeignKey("ShippingServiceOptionId");
                                         });
 
-                                    b2.OwnsOne("EbayPlatform.Domain.Models.Orders.ShippingPackage", "ShippingPackage", b3 =>
+                                    b2.OwnsOne("EbayPlatform.Domain.AggregateModel.Orders.ShippingPackage", "ShippingPackage", b3 =>
                                         {
                                             b3.Property<long>("ShippingServiceOptionId")
                                                 .ValueGeneratedOnAdd()
@@ -1640,7 +1640,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                             b1.Navigation("ShippingServiceOptions");
                         });
 
-                    b.OwnsOne("EbayPlatform.Domain.Models.Orders.ShippingServiceOption", "ShippingServiceSelected", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.Orders.ShippingServiceOption", "ShippingServiceSelected", b1 =>
                         {
                             b1.Property<long>("OrderId")
                                 .ValueGeneratedOnAdd()
@@ -1677,7 +1677,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("OrderId");
 
-                            b1.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "ShippingServiceCost", b2 =>
+                            b1.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "ShippingServiceCost", b2 =>
                                 {
                                     b2.Property<long>("ShippingServiceOptionOrderId")
                                         .ValueGeneratedOnAdd()
@@ -1703,7 +1703,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                         .HasForeignKey("ShippingServiceOptionOrderId");
                                 });
 
-                            b1.OwnsOne("EbayPlatform.Domain.Models.Orders.ShippingPackage", "ShippingPackage", b2 =>
+                            b1.OwnsOne("EbayPlatform.Domain.AggregateModel.Orders.ShippingPackage", "ShippingPackage", b2 =>
                                 {
                                     b2.Property<long>("ShippingServiceOptionOrderId")
                                         .ValueGeneratedOnAdd()
@@ -1769,9 +1769,9 @@ namespace EbayPlatform.Infrastructure.Migrations
                     b.Navigation("Total");
                 });
 
-            modelBuilder.Entity("EbayPlatform.Domain.Models.SyncTaskJobConfig", b =>
+            modelBuilder.Entity("EbayPlatform.Domain.AggregateModel.SyncTaskJobConfig", b =>
                 {
-                    b.OwnsMany("EbayPlatform.Domain.Models.ShopTask", "ShopTasks", b1 =>
+                    b.OwnsMany("EbayPlatform.Domain.AggregateModel.ShopTask", "ShopTasks", b1 =>
                         {
                             b1.Property<int>("Id")
                                 .ValueGeneratedOnAdd()

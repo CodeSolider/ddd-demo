@@ -1,6 +1,6 @@
-﻿using EbayPlatform.Domain.Core.Abstractions;
+﻿using EbayPlatform.Domain.AggregateModel.ProductAggregate;
+using EbayPlatform.Domain.Core.Abstractions;
 using EbayPlatform.Domain.Interfaces;
-using EbayPlatform.Domain.Models.Listing;
 using EbayPlatform.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ namespace EbayPlatform.Infrastructure.Repository
     /// Product 仓储
     /// </summary>
     public class ProductRepository : Repository<Product, long, EbayPlatformDbContext>,
-        IProductRepository, IDependency
+        IProductRepository, IScopedDependency
     {
         public ProductRepository(EbayPlatformDbContext dbContext)
         : base(dbContext) { }

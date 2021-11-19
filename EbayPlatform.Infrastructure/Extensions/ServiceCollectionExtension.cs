@@ -77,8 +77,7 @@ namespace EbayPlatform.Infrastructure.Extensions
         /// <param name="services"></param>
         /// <param name="serviceLifetime"></param>
         /// <returns></returns>
-        public static IServiceCollection AddAutoDIService(this IServiceCollection services,
-            ServiceLifetime serviceLifetime = ServiceLifetime.Scoped)
+        public static IServiceCollection AddAutoDIService(this IServiceCollection services)
         {
             var allAssemblies = AppDomain.CurrentDomain.GetCurrentPathAssembly();
             foreach (var assembly in allAssemblies)
@@ -87,26 +86,30 @@ namespace EbayPlatform.Infrastructure.Extensions
                     .Where(type => type.IsClass
                                    && type.BaseType != null
                                    && type.HasImplementedRawGeneric(typeof(IDependency)));
-                foreach (var type in types)
+                foreach (var implementType in types)
                 {
-                    var interfaces = type.GetInterfaces();
+                    var interfaces = implementType.GetInterfaces();
                     if (interfaces.Any())
                     {
-                        var interfaceType = interfaces.FirstOrDefault(x => x.Name == $"I{type.Name}");
+                        var interfaceType = interfaces.FirstOrDefault(x => x.Name == $"I{implementType.Name}");
                         if (interfaceType == null)
                         {
-                            interfaceType = type;
+                            interfaceType = implementType;
                         }
 
-                        ServiceDescriptor serviceDescriptor = new(interfaceType, type, serviceLifetime);
+                        //默认为
+                        ServiceDescriptor serviceDescriptor = null;
+                        if (typeof(ITransientDependency).IsAssignableFrom(implementType))
+                            serviceDescriptor = new(interfaceType, implementType, ServiceLifetime.Transient);
+                        if (typeof(ISingletonDependency).IsAssignableFrom(implementType))
+                            serviceDescriptor = new(interfaceType, implementType, ServiceLifetime.Singleton);
+                        if (typeof(IScopedDependency).IsAssignableFrom(implementType))
+                            serviceDescriptor = new(interfaceType, implementType, ServiceLifetime.Scoped);
+
                         if (!services.Contains(serviceDescriptor))
                         {
                             services.Add(serviceDescriptor);
                         }
-                    }
-                    else
-                    {
-                        services.Add(new ServiceDescriptor(type, type, serviceLifetime));
                     }
                 }
             }

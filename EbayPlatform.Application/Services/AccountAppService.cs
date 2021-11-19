@@ -2,14 +2,12 @@
 using EbayPlatform.Domain.Commands.Account;
 using EbayPlatform.Domain.Core.Abstractions;
 using MediatR;
-using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace EbayPlatform.Application.Services
 {
-    public class AccountAppService : IAccountAppService, IDependency
+    public class AccountAppService : IAccountAppService, IScopedDependency
     {
         private readonly IMediator _mediator;
         public AccountAppService(IMediator mediator)
@@ -36,21 +34,21 @@ namespace EbayPlatform.Application.Services
         /// <returns></returns>
         public Task<bool> AddAccountAsync(AccountDto accountDto, CancellationToken cancellationToken = default)
         {
-            Domain.Models.Accounts.Account accountItem = new(accountDto.AccountID, accountDto.ShopName, accountDto.CurrencyCode,
-                                                                   accountDto.AccountState, new Domain.Models.MoneyValue(accountDto.InvoicePaymentValue,
-                                                                   accountDto.InvoicePaymentCurrency), new Domain.Models.MoneyValue(accountDto.InvoiceCreditValue,
-                                                                   accountDto.InvoicePaymentCurrency), new Domain.Models.MoneyValue(accountDto.InvoiceNewFeeValue,
-                                                                   accountDto.InvoiceNewFeeCurrency), new Domain.Models.Accounts.AdditionalAccount(new Domain.Models.MoneyValue(
+            Domain.AggregateModel.AccountAggregate.Account accountItem = new(accountDto.AccountID, accountDto.ShopName, accountDto.CurrencyCode,
+                                                                   accountDto.AccountState, new Domain.AggregateModel.MoneyValue(accountDto.InvoicePaymentValue,
+                                                                   accountDto.InvoicePaymentCurrency), new Domain.AggregateModel.MoneyValue(accountDto.InvoiceCreditValue,
+                                                                   accountDto.InvoicePaymentCurrency), new Domain.AggregateModel.MoneyValue(accountDto.InvoiceNewFeeValue,
+                                                                   accountDto.InvoiceNewFeeCurrency), new Domain.AggregateModel.AccountAggregate.AdditionalAccount(new Domain.AggregateModel.MoneyValue(
                                                                    accountDto.AdditionalAccount.BalanceValue, accountDto.AdditionalAccount.BalanceCurrency),
                                                                    accountDto.AdditionalAccount.CurrencyCode, accountDto.AdditionalAccount.AccountCode));
 
             accountDto.AccountDetails.ForEach(AccountDetailItem =>
             {
                 accountItem.AddAccountDetail(AccountDetailItem.RefNumber, AccountDetailItem.ItemID, AccountDetailItem.Date, AccountDetailItem.AccountType,
-                                             AccountDetailItem.Title, AccountDetailItem.Description, new Domain.Models.MoneyValue(AccountDetailItem.BalanceValue,
-                                             AccountDetailItem.BalanceCurrency), new Domain.Models.MoneyValue(AccountDetailItem.GrossDetailAmountValue,
-                                             AccountDetailItem.GrossDetailAmountCurrency), new Domain.Models.MoneyValue(AccountDetailItem.ConversionRateValue,
-                                             AccountDetailItem.ConversionRateCurrency), new Domain.Models.MoneyValue(AccountDetailItem.NetDetailAmountValue,
+                                             AccountDetailItem.Title, AccountDetailItem.Description, new Domain.AggregateModel.MoneyValue(AccountDetailItem.BalanceValue,
+                                             AccountDetailItem.BalanceCurrency), new Domain.AggregateModel.MoneyValue(AccountDetailItem.GrossDetailAmountValue,
+                                             AccountDetailItem.GrossDetailAmountCurrency), new Domain.AggregateModel.MoneyValue(AccountDetailItem.ConversionRateValue,
+                                             AccountDetailItem.ConversionRateCurrency), new Domain.AggregateModel.MoneyValue(AccountDetailItem.NetDetailAmountValue,
                                              AccountDetailItem.NetDetailAmountCurrency), AccountDetailItem.VATPercent, AccountDetailItem.OrderLineItemID,
                                              AccountDetailItem.TransactionID, AccountDetailItem.ReceivedTopRatedDiscount);
             });

@@ -1,6 +1,6 @@
 ﻿using EbayPlatform.Domain.Core.Abstractions;
 using EbayPlatform.Domain.Interfaces;
-using EbayPlatform.Domain.Models;
+using EbayPlatform.Domain.AggregateModel;
 using EbayPlatform.Infrastructure.Context;
 using EbayPlatform.Infrastructure.Core.Extensions;
 using System;
@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace EbayPlatform.Infrastructure.Repository
 {
     public class SystemLogRepository : Repository<SystemLog, int, EbayPlatformDbContext>,
-        ISystemLogRepository, IDependency
+        ISystemLogRepository, IScopedDependency
     {
         public SystemLogRepository(EbayPlatformDbContext dbContext)
             : base(dbContext) { }

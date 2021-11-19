@@ -1,4 +1,4 @@
-﻿using EbayPlatform.Domain.Models.Listing;
+﻿using EbayPlatform.Domain.AggregateModel.ProductAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -67,7 +67,7 @@ namespace EbayPlatform.Infrastructure.Mappings
                 v.Property(p => p.AdminEnded).HasDefaultValue(false).IsRequired(true);
                 v.OwnsOne(p => p.PromotionalSaleDetail, v =>
                 {
-                    v.Property(p => p.StartTime).IsRequired(false);
+                    v.Property(p => p.StartTime).HasDefaultValue(null).IsRequired(true);
                     v.OwnsOne(p => p.OriginalPrice, v =>
                     {
                         v.Property(p => p.Value).HasPrecision(18, 3).HasColumnName("OriginalPrice").IsRequired(true);

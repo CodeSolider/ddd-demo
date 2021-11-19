@@ -3,7 +3,7 @@ using MediatR;
 using EbayPlatform.Domain.Commands.SyncTaskJobConfig;
 using System.Threading.Tasks;
 using System.Threading;
-using EbayPlatform.Domain.Models;
+using EbayPlatform.Domain.AggregateModel;
 using System.Collections.Generic;
 using EbayPlatform.Application.Dtos;
 using Mapster;
@@ -14,7 +14,7 @@ namespace EbayPlatform.Application.Services
     /// <summary>
     /// 同步任务作业服务
     /// </summary>
-    public class SyncTaskJobAppService : ISyncTaskJobAppService, IDependency
+    public class SyncTaskJobAppService : ISyncTaskJobAppService, IScopedDependency
     {
         private readonly IMediator _mediator;
         private readonly ISyncTaskJobConfigRepository _syncTaskJobConfigRepository;
@@ -22,7 +22,7 @@ namespace EbayPlatform.Application.Services
         {
             _mediator = mediator;
             _syncTaskJobConfigRepository = syncTaskJobConfigRepository;
-        } 
+        }
 
         /// <summary>
         /// 获取所有的任务配置信息
@@ -81,6 +81,6 @@ namespace EbayPlatform.Application.Services
         public Task<bool> UpdateShopTaskAsync(List<SyncTaskJobConfig> syncTaskJobConfigs, CancellationToken cancellationToken = default)
         {
             return _mediator.Send(new UpdateSyncTaskJobConfigCommand(syncTaskJobConfigs), cancellationToken);
-        } 
+        }
     }
 }

@@ -1,13 +1,5 @@
-﻿using EbayPlatform.Application.Quartz;
-using EbayPlatform.Application.Services;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+﻿using EbayPlatform.Application.Services;
 using Quartz;
-using System.Threading;
-using System.Threading.Tasks;
-using Mapster;
-using EbayPlatform.Application.Dtos;
-using System;
 using EbayPlatform.Infrastructure.Quartz;
 
 namespace EbayPlatform.WebApi.HostedService
@@ -42,7 +34,7 @@ namespace EbayPlatform.WebApi.HostedService
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                await Task.Delay(TimeSpan.FromSeconds(1500), stoppingToken).ContinueWith(async task =>
+                await Task.Delay(TimeSpan.FromSeconds(1000), stoppingToken).ContinueWith(async task =>
                 {
                     using var serviceScope = _serviceScopeFactory.CreateScope();
                     var _syncTaskJobAppService = serviceScope.ServiceProvider.GetRequiredService<ISyncTaskJobAppService>();
@@ -54,7 +46,7 @@ namespace EbayPlatform.WebApi.HostedService
 
                     syncTaskJobConfigList.ForEach(async syncTaskJobConfigItem =>
                     {
-                        await QuartzProvider.StartJobAsync(Scheduler, syncTaskJobConfigItem.Adapt<SyncTaskJobConfigDto>()).ConfigureAwait(false);
+                        await QuartzProvider.StartJobAsync(Scheduler, syncTaskJobConfigItem).ConfigureAwait(false);
                     });
                     Scheduler.JobFactory = new JobFactory(_serviceScopeFactory);
                     await Scheduler.Start(stoppingToken).ConfigureAwait(false);
@@ -67,7 +59,7 @@ namespace EbayPlatform.WebApi.HostedService
         /// </summary>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public override Task StopAsync(CancellationToken cancellationToken)
+        public override Task? StopAsync(CancellationToken cancellationToken)
         {
             return Scheduler?.Shutdown(true, cancellationToken);
         }

@@ -1,4 +1,4 @@
-﻿using EbayPlatform.Domain.Models.Accounts;
+﻿using EbayPlatform.Domain.AggregateModel.AccountAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -37,8 +37,8 @@ namespace EbayPlatform.Infrastructure.Mappings
                     v.Property(p => p.Value).HasPrecision(18, 3).HasColumnName("Balance").IsRequired(true);
                     v.Property(p => p.Currency).HasMaxLength(10).HasColumnName("BalanceCurrency").IsRequired(false);
                 });
-                v.Property(p => p.CurrencyCode).HasMaxLength(10).HasComment("币种").IsRequired(false);
-                v.Property(p => p.AccountCode).HasMaxLength(50).HasComment("账户编号").IsRequired(false);
+                v.Property(p => p.CurrencyCode).HasMaxLength(10).HasComment("币种").HasDefaultValue(null).IsRequired(true);
+                v.Property(p => p.AccountCode).HasMaxLength(50).HasComment("账户编号").HasDefaultValue(null).IsRequired(false);
             });
             builder.OwnsMany(p => p.AccountDetails, p =>
             {

@@ -11,10 +11,10 @@ namespace EbayPlatform.Domain.Commands.SyncTaskJobConfig
         /// <summary>
         /// 同步任务配置信息
         /// </summary>
-        public List<Models.SyncTaskJobConfig> SyncTaskJobConfigs { get; }
+        public List<AggregateModel.SyncTaskJobConfig> SyncTaskJobConfigs { get; }
 
 
-        public UpdateSyncTaskJobConfigCommand(List<Models.SyncTaskJobConfig> syncTaskJobConfigs)
+        public UpdateSyncTaskJobConfigCommand(List<AggregateModel.SyncTaskJobConfig> syncTaskJobConfigs)
         {
             this.SyncTaskJobConfigs = syncTaskJobConfigs;
         }

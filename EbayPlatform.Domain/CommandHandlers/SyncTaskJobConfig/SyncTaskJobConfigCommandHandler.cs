@@ -35,7 +35,7 @@ namespace EbayPlatform.Domain.CommandHandlers.SyncTaskJobConfig
                 }
 
                 var syncTaskJobConfig = await _syncTaskJobConfigRepository
-                                              .AddAsync(new Models.SyncTaskJobConfig(request.JobName, request.JobDesc,
+                                              .AddAsync(new AggregateModel.SyncTaskJobConfig(request.JobName, request.JobDesc,
                                                         request.JobAssemblyName, request.Cron, request.CronDesc), cancellationToken)
                                               .ConfigureAwait(false);
 

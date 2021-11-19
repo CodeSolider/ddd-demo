@@ -1,4 +1,4 @@
-﻿using EbayPlatform.Domain.Models.Orders;
+﻿using EbayPlatform.Domain.AggregateModel.OrderAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -126,7 +126,7 @@ namespace EbayPlatform.Infrastructure.Mappings
                     });
                 });
                 v.Property(v => v.SellingManagerSalesRecordNumber).IsRequired(false);
-                v.Property(v => v.GetItFast).HasComment("是否加急").IsRequired(false);
+                v.Property(v => v.GetItFast).HasComment("是否加急").HasDefaultValue(false).IsRequired(true);
                 v.OwnsMany(v => v.ShippingServiceOptions, v =>
                 {
                     v.HasKey(v => v.Id);

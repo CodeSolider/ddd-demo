@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "yae+UUPjuXlh7AliA0YLwbTw1Zy5OCqCMf6tFBvowL0=",
+  "Source": "EbayPlatform.WebApi",
+  "BasePath": "_content/EbayPlatform.WebApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

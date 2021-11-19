@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 using Mapster;
 using System.Linq;
 using System.Threading;
-using EbayPlatform.Domain.Core.Abstractions;
-using System;
+using EbayPlatform.Domain.Core.Abstractions; 
 
 namespace EbayPlatform.Application.Services
 {
     /// <summary>
     /// 订单服务
     /// </summary>
-    public class OrderAppService : IOrderAppService, IDependency
+    public class OrderAppService : IOrderAppService, IScopedDependency
     {
         private readonly IMediator _mediator;
         public OrderAppService(IMediator mediator)
@@ -42,34 +41,34 @@ namespace EbayPlatform.Application.Services
         /// <returns></returns>
         public Task<bool> AddOrderAsync(List<OrderDto> orderDtos, CancellationToken cancellationToken = default)
         {
-            List<Domain.Models.Orders.Order> orderList = new();
+            List<Domain.AggregateModel.OrderAggregate.Order> orderList = new();
             orderDtos.ForEach(orderDtoItem =>
             {
-                Domain.Models.Orders.CheckoutStatus checkoutStatus = new(orderDtoItem.EBayPaymentStatus, orderDtoItem.PaymentMethod, orderDtoItem.Status,
+                Domain.AggregateModel.OrderAggregate.CheckoutStatus checkoutStatus = new(orderDtoItem.EBayPaymentStatus, orderDtoItem.PaymentMethod, orderDtoItem.Status,
                 orderDtoItem.IntegratedMerchantCreditCardEnabled, orderDtoItem.PaymentInstrument, orderDtoItem.LastModifiedTime);
 
-                Domain.Models.Orders.Order orderItem = new(orderDtoItem.OrderID, orderDtoItem.OrderStatus, orderDtoItem.ShopName, orderDtoItem.PaymentMethods,
-                                                           orderDtoItem.SellerEmail, orderDtoItem.SellerUserID, new Domain.Models.MoneyValue(orderDtoItem.AdjustmentAmountValue, orderDtoItem.AdjustmentAmountCurrency),
-                                                           new Domain.Models.MoneyValue(orderDtoItem.AmountPaidValue, orderDtoItem.AmountPaidCurrency),
-                                                           new Domain.Models.MoneyValue(orderDtoItem.AmountSavedValue, orderDtoItem.AmountSavedCurrency),
-                                                           new Domain.Models.MoneyValue(orderDtoItem.TotalValue, orderDtoItem.TotalCurrency),
-                                                           new Domain.Models.MoneyValue(orderDtoItem.SubtotalValue, orderDtoItem.SubtotalCurrency),
-                                                           checkoutStatus, orderDtoItem.ShippingAddress.Adapt<Domain.Models.Orders.Address>(), GetShippingServiceOption(orderDtoItem.ShippingServiceSelected),
+                Domain.AggregateModel.OrderAggregate.Order orderItem = new(orderDtoItem.OrderID, orderDtoItem.OrderStatus, orderDtoItem.ShopName, orderDtoItem.PaymentMethods,
+                                                           orderDtoItem.SellerEmail, orderDtoItem.SellerUserID, new Domain.AggregateModel.MoneyValue(orderDtoItem.AdjustmentAmountValue, orderDtoItem.AdjustmentAmountCurrency),
+                                                           new Domain.AggregateModel.MoneyValue(orderDtoItem.AmountPaidValue, orderDtoItem.AmountPaidCurrency),
+                                                           new Domain.AggregateModel.MoneyValue(orderDtoItem.AmountSavedValue, orderDtoItem.AmountSavedCurrency),
+                                                           new Domain.AggregateModel.MoneyValue(orderDtoItem.TotalValue, orderDtoItem.TotalCurrency),
+                                                           new Domain.AggregateModel.MoneyValue(orderDtoItem.SubtotalValue, orderDtoItem.SubtotalCurrency),
+                                                           checkoutStatus, orderDtoItem.ShippingAddress.Adapt<Domain.AggregateModel.OrderAggregate.Address>(), GetShippingServiceOption(orderDtoItem.ShippingServiceSelected),
                                                            orderDtoItem.CreatedTime);
                 //订单交易
                 orderDtoItem.OrderTransactions.ForEach(transactionItem =>
                 {
                     orderItem.AddOrderTransaction(transactionItem.TransactionID, transactionItem.OrderLineItemID, transactionItem.SiteCode, transactionItem.Title, transactionItem.ConditionID,
                                                   transactionItem.ConditionDisplayName, transactionItem.QuantityPurchased,
-                                                  new Domain.Models.MoneyValue(transactionItem.Value, transactionItem.Currency),
-                                                  new Domain.Models.Orders.TransactionStatus(transactionItem.PaymentHoldStatus, transactionItem.InquiryStatus, transactionItem.ReturnStatus),
+                                                  new Domain.AggregateModel.MoneyValue(transactionItem.Value, transactionItem.Currency),
+                                                  new Domain.AggregateModel.OrderAggregate.TransactionStatus(transactionItem.PaymentHoldStatus, transactionItem.InquiryStatus, transactionItem.ReturnStatus),
                                                   GetShippingServiceOption(transactionItem.ShippingServiceSelected), transactionItem.CreatedDate);
                 });
 
                 //添加发货详情信息
-                orderItem.AddShippingDetail(new Domain.Models.Orders.SalesTax(orderDtoItem.ShippingDetail.SalesTaxPercent,
+                orderItem.AddShippingDetail(new Domain.AggregateModel.OrderAggregate.SalesTax(orderDtoItem.ShippingDetail.SalesTaxPercent,
                                                orderDtoItem.ShippingDetail.SalesTaxState,
-                                               new Domain.Models.MoneyValue(orderDtoItem.ShippingDetail.Value, orderDtoItem.ShippingDetail.Currency)),
+                                               new Domain.AggregateModel.MoneyValue(orderDtoItem.ShippingDetail.Value, orderDtoItem.ShippingDetail.Currency)),
                                                orderDtoItem.ShippingDetail.SellingManagerSalesRecordNumber, orderDtoItem.ShippingDetail.GetItFast,
                                                orderDtoItem.ShippingDetail.ShippingServiceOptions.Select(o => GetShippingServiceOption(o)).ToList());
 
@@ -82,15 +81,15 @@ namespace EbayPlatform.Application.Services
         /// 发货打包信息
         /// </summary>
         /// <returns></returns>
-        private Domain.Models.Orders.ShippingServiceOption GetShippingServiceOption(ShippingServiceOptionDto shippingServiceOptionDto)
+        private Domain.AggregateModel.OrderAggregate.ShippingServiceOption GetShippingServiceOption(ShippingServiceOptionDto shippingServiceOptionDto)
         {
-            var shippingServiceOption = new Domain.Models.Orders.ShippingServiceOption(shippingServiceOptionDto?.ShippingService,
-                                                                                       new Domain.Models.MoneyValue((shippingServiceOptionDto?.Value).GetValueOrDefault(), shippingServiceOptionDto?.Currency),
+            var shippingServiceOption = new Domain.AggregateModel.OrderAggregate.ShippingServiceOption(shippingServiceOptionDto?.ShippingService,
+                                                                                       new Domain.AggregateModel.MoneyValue((shippingServiceOptionDto?.Value).GetValueOrDefault(), shippingServiceOptionDto?.Currency),
                                                                                        shippingServiceOptionDto?.ShippingServicePriority,
                                                                                        shippingServiceOptionDto?.ExpeditedService,
                                                                                        shippingServiceOptionDto?.ShippingTimeMin,
                                                                                        shippingServiceOptionDto?.ShippingTimeMax,
-                                                                                       shippingServiceOptionDto?.ShippingPackage.Adapt<Domain.Models.Orders.ShippingPackage>());
+                                                                                       shippingServiceOptionDto?.ShippingPackage.Adapt<Domain.AggregateModel.OrderAggregate.ShippingPackage>());
             return shippingServiceOption;
         }
         #endregion  

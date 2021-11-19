@@ -1,4 +1,4 @@
-﻿using EbayPlatform.Domain.Models.Enums;
+﻿using EbayPlatform.Domain.AggregateModel.Enums;
 using MediatR;
 
 namespace EbayPlatform.Domain.Commands.StystemLog

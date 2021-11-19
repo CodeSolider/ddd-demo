@@ -8,11 +8,6 @@ namespace EbayPlatform.Application.Dtos
     public class ParamValueToEntityDto
     {
         /// <summary>
-        /// token
-        /// </summary>
-        public string Token { get; set; }
-
-        /// <summary>
         /// 页码
         /// </summary>
         public int PageSize { get; set; } = 100;

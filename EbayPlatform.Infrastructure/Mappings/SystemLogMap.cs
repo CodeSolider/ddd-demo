@@ -1,5 +1,5 @@
-﻿using EbayPlatform.Domain.Models;
-using EbayPlatform.Domain.Models.Enums;
+﻿using EbayPlatform.Domain.AggregateModel;
+using EbayPlatform.Domain.AggregateModel.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;

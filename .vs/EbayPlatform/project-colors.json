@@ -15,7 +15,47 @@
       "ProjectGuid": "a2160f3a-b638-48fb-ab04-fe41c8cb80d3",
       "DisplayName": "EbayPlatform.WebApi",
       "ColorIndex": 1
+    },
+    "1143094f-1cd1-40e3-ac8e-f0317ed2e58f": {
+      "ProjectGuid": "1143094f-1cd1-40e3-ac8e-f0317ed2e58f",
+      "DisplayName": "EbayPlatform.Application",
+      "ColorIndex": 2
+    },
+    "8c8b2794-b64f-437a-b57f-d9536977db9b": {
+      "ProjectGuid": "8c8b2794-b64f-437a-b57f-d9536977db9b",
+      "DisplayName": "EbayPlatform.Infrastructure",
+      "ColorIndex": 3
+    },
+    "02283a87-fdc9-4690-a106-7f80b8acaa71": {
+      "ProjectGuid": "02283a87-fdc9-4690-a106-7f80b8acaa71",
+      "DisplayName": "EbayPlatform.Infrastructure.Core",
+      "ColorIndex": 4
+    },
+    "751fd2c7-8163-429b-8d5b-0820ec22acfb": {
+      "ProjectGuid": "751fd2c7-8163-429b-8d5b-0820ec22acfb",
+      "DisplayName": "EbayPlatform.Domain.Core",
+      "ColorIndex": 5
+    },
+    "bb966e1f-cc57-4036-b3fe-f0986793682b": {
+      "ProjectGuid": "bb966e1f-cc57-4036-b3fe-f0986793682b",
+      "DisplayName": "TestApi",
+      "ColorIndex": 6
+    },
+    "f4ab3f12-de91-412c-8a75-798217b99229": {
+      "ProjectGuid": "f4ab3f12-de91-412c-8a75-798217b99229",
+      "DisplayName": "TetsApi1",
+      "ColorIndex": 7
+    },
+    "b4f21737-52c3-4ad4-a12b-e154301c28a2": {
+      "ProjectGuid": "b4f21737-52c3-4ad4-a12b-e154301c28a2",
+      "DisplayName": "ClassLibrary1",
+      "ColorIndex": 8
+    },
+    "f5716c4d-ed7a-4f90-a462-c1b74c24e0ed": {
+      "ProjectGuid": "f5716c4d-ed7a-4f90-a462-c1b74c24e0ed",
+      "DisplayName": "EbayPlatform.WebApi",
+      "ColorIndex": 9
     }
   },
-  "NextColorIndex": 2
+  "NextColorIndex": 10
 }

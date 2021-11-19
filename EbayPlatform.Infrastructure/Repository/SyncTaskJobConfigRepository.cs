@@ -1,6 +1,6 @@
 ﻿using EbayPlatform.Domain.Core.Abstractions;
 using EbayPlatform.Domain.Interfaces;
-using EbayPlatform.Domain.Models;
+using EbayPlatform.Domain.AggregateModel;
 using EbayPlatform.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -14,7 +14,7 @@ namespace EbayPlatform.Infrastructure.Repository
     /// 同步任务作业配置仓储
     /// </summary>
     public class SyncTaskJobConfigRepository : Repository<SyncTaskJobConfig, int, EbayPlatformDbContext>,
-        ISyncTaskJobConfigRepository, IDependency
+        ISyncTaskJobConfigRepository, IScopedDependency
     {
         public SyncTaskJobConfigRepository(EbayPlatformDbContext dbContext)
             : base(dbContext) { }

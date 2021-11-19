@@ -7,9 +7,9 @@ namespace EbayPlatform.Domain.Commands.Account
         /// <summary>
         /// 添加账单
         /// </summary>
-        public Models.Accounts.Account Account { get; }
+        public AggregateModel.AccountAggregate.Account Account { get; }
 
-        public AccountCreatedCommand(Models.Accounts.Account account)
+        public AccountCreatedCommand(AggregateModel.AccountAggregate.Account account)
         {
             this.Account = account;
         }

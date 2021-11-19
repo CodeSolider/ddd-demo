@@ -1,4 +1,4 @@
-﻿using EbayPlatform.Domain.Models;
+﻿using EbayPlatform.Domain.AggregateModel;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

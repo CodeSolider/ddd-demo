@@ -1,5 +1,5 @@
 ﻿using EbayPlatform.Application.Dtos;
-using EbayPlatform.Domain.Models;
+using EbayPlatform.Domain.AggregateModel;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;

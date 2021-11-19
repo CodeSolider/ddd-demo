@@ -1,0 +1,1045 @@
+﻿++解决方案“EbayPlatform”‎(6 个项目，共 6 个)
+i:{00000000-0000-0000-0000-000000000000}:EbayPlatform.sln
+++Infrastructure
+i:{00000000-0000-0000-0000-000000000000}:Infrastructure
+++EbayPlatform.Infrastructure
+i:{ade1bf53-727e-4a11-aa68-834283b07dd1}:EbayPlatform.Infrastructure
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\ebayplatform.infrastructure.csproj
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\bin\debug\net6.0\ebayplatform.infrastructure.dll
+++依赖项
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:>725
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:>862
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:>722
+i:{751fd2c7-8163-429b-8d5b-0820ec22acfb}:>724
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:>723
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:>1311
+++Behaviors
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\behaviors\
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure.core\behaviors\
+++Context
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\context\
+++Extensions
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\extensions\
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure.core\extensions\
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\extensions\
+++AppQuartzExtension.cs
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\extensions\appquartzextension.cs
+++ServiceCollectionExtension.cs
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\extensions\servicecollectionextension.cs
+++Filters
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\filters\
+++Mappings
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\mappings\
+++Migrations
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\migrations\
+++Quartz
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\quartz\
+++Repository
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\repository\
+++note.txt
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\note.txt
+++分析器
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:分析器
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:分析器
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:分析器
+i:{751fd2c7-8163-429b-8d5b-0820ec22acfb}:分析器
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:分析器
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:分析器
+++框架
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:框架
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:框架
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:框架
+i:{751fd2c7-8163-429b-8d5b-0820ec22acfb}:框架
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:框架
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:框架
+++项目
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:项目
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:项目
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:项目
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:项目
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:项目
+++EbayPlatformContextTransactionBehavior.cs
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\behaviors\ebayplatformcontexttransactionbehavior.cs
+++EbayPlatformDbContext.cs
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\context\ebayplatformdbcontext.cs
+++CapSubscribeFilter.cs
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\filters\capsubscribefilter.cs
+++AccountMap.cs
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\mappings\accountmap.cs
+++OrderMap.cs
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\mappings\ordermap.cs
+++ProductMap.cs
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\mappings\productmap.cs
+++SyncTaskJobConfigMap.cs
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\mappings\synctaskjobconfigmap.cs
+++SystemLogMap.cs
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\mappings\systemlogmap.cs
+++20211105100203_InitialCreate.cs
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\migrations\20211105100203_initialcreate.cs
+++20211115054157_updatetabale1.cs
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\migrations\20211115054157_updatetabale1.cs
+++EbayPlatformDbContextModelSnapshot.cs
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\migrations\ebayplatformdbcontextmodelsnapshot.cs
+++JobFactory.cs
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\quartz\jobfactory.cs
+++QuartzProvider.cs
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\quartz\quartzprovider.cs
+++AccountRepository.cs
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\repository\accountrepository.cs
+++OrderRepository.cs
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\repository\orderrepository.cs
+++ProductRepository.cs
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\repository\productrepository.cs
+++SyncTaskJobConfigRepository.cs
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\repository\synctaskjobconfigrepository.cs
+++SystemLogRepository.cs
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\repository\systemlogrepository.cs
+++Microsoft.AspNetCore.App.Analyzers
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.0\analyzers\dotnet\cs\microsoft.aspnetcore.app.analyzers.dll
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.0\analyzers\dotnet\cs\microsoft.aspnetcore.app.analyzers.dll
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.0\analyzers\dotnet\cs\microsoft.aspnetcore.app.analyzers.dll
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.0\analyzers\dotnet\cs\microsoft.aspnetcore.app.analyzers.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.0\analyzers\dotnet\cs\microsoft.aspnetcore.app.analyzers.dll
+++Microsoft.AspNetCore.App.CodeFixes
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.0\analyzers\dotnet\cs\microsoft.aspnetcore.app.codefixes.dll
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.0\analyzers\dotnet\cs\microsoft.aspnetcore.app.codefixes.dll
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.0\analyzers\dotnet\cs\microsoft.aspnetcore.app.codefixes.dll
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.0\analyzers\dotnet\cs\microsoft.aspnetcore.app.codefixes.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.0\analyzers\dotnet\cs\microsoft.aspnetcore.app.codefixes.dll
+++Microsoft.CodeAnalysis.CSharp.NetAnalyzers
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.csharp.netanalyzers.dll
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.csharp.netanalyzers.dll
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.csharp.netanalyzers.dll
+i:{751fd2c7-8163-429b-8d5b-0820ec22acfb}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.csharp.netanalyzers.dll
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.csharp.netanalyzers.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.csharp.netanalyzers.dll
+++Microsoft.CodeAnalysis.NetAnalyzers
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.netanalyzers.dll
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.netanalyzers.dll
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.netanalyzers.dll
+i:{751fd2c7-8163-429b-8d5b-0820ec22acfb}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.netanalyzers.dll
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.netanalyzers.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\analyzers\microsoft.codeanalysis.netanalyzers.dll
+++Microsoft.EntityFrameworkCore.Analyzers
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:c:\users\w\.nuget\packages\microsoft.entityframeworkcore.analyzers\6.0.0\analyzers\dotnet\cs\microsoft.entityframeworkcore.analyzers.dll
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:c:\users\w\.nuget\packages\microsoft.entityframeworkcore.analyzers\6.0.0\analyzers\dotnet\cs\microsoft.entityframeworkcore.analyzers.dll
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:c:\users\w\.nuget\packages\microsoft.entityframeworkcore.analyzers\6.0.0\analyzers\dotnet\cs\microsoft.entityframeworkcore.analyzers.dll
+i:{751fd2c7-8163-429b-8d5b-0820ec22acfb}:c:\users\w\.nuget\packages\microsoft.entityframeworkcore.analyzers\6.0.0\analyzers\dotnet\cs\microsoft.entityframeworkcore.analyzers.dll
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:c:\users\w\.nuget\packages\microsoft.entityframeworkcore.analyzers\6.0.0\analyzers\dotnet\cs\microsoft.entityframeworkcore.analyzers.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\users\w\.nuget\packages\microsoft.entityframeworkcore.analyzers\6.0.0\analyzers\dotnet\cs\microsoft.entityframeworkcore.analyzers.dll
+++Microsoft.Extensions.Logging.Generators
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.0\analyzers\dotnet\roslyn4.0\cs\microsoft.extensions.logging.generators.dll
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.0\analyzers\dotnet\roslyn4.0\cs\microsoft.extensions.logging.generators.dll
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.0\analyzers\dotnet\roslyn4.0\cs\microsoft.extensions.logging.generators.dll
+i:{751fd2c7-8163-429b-8d5b-0820ec22acfb}:c:\users\w\.nuget\packages\microsoft.extensions.logging.abstractions\6.0.0\analyzers\dotnet\roslyn4.0\cs\microsoft.extensions.logging.generators.dll
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.0\analyzers\dotnet\roslyn4.0\cs\microsoft.extensions.logging.generators.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\packs\microsoft.aspnetcore.app.ref\6.0.0\analyzers\dotnet\roslyn4.0\cs\microsoft.extensions.logging.generators.dll
+++System.Text.Json.SourceGeneration
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:c:\program files\dotnet\packs\microsoft.netcore.app.ref\6.0.0\analyzers\dotnet\cs\system.text.json.sourcegeneration.dll
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:c:\program files\dotnet\packs\microsoft.netcore.app.ref\6.0.0\analyzers\dotnet\cs\system.text.json.sourcegeneration.dll
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:c:\program files\dotnet\packs\microsoft.netcore.app.ref\6.0.0\analyzers\dotnet\cs\system.text.json.sourcegeneration.dll
+i:{751fd2c7-8163-429b-8d5b-0820ec22acfb}:c:\program files\dotnet\packs\microsoft.netcore.app.ref\6.0.0\analyzers\dotnet\cs\system.text.json.sourcegeneration.dll
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:c:\program files\dotnet\packs\microsoft.netcore.app.ref\6.0.0\analyzers\dotnet\cs\system.text.json.sourcegeneration.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\packs\microsoft.netcore.app.ref\6.0.0\analyzers\dotnet\cs\system.text.json.sourcegeneration.dll
+++Microsoft.NETCore.App
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\microsoft.netcore.app
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure.core\microsoft.netcore.app
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\microsoft.netcore.app
+i:{751fd2c7-8163-429b-8d5b-0820ec22acfb}:d:\doc\demo\ebayplatform\ebayplatform.domain.core\microsoft.netcore.app
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\microsoft.netcore.app
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\microsoft.netcore.app
+++EbayPlatform.Domain
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.domain\bin\debug\net6.0\ebayplatform.domain.dll
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:d:\doc\demo\ebayplatform\ebayplatform.domain\ebayplatform.domain.csproj
+i:{6dc40811-8356-400d-9900-419f891dc63a}:EbayPlatform.Domain
+++EbayPlatform.Infrastructure.Core
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure.core\bin\debug\net6.0\ebayplatform.infrastructure.core.dll
+i:{ade1bf53-727e-4a11-aa68-834283b07dd1}:EbayPlatform.Infrastructure.Core
+++20211105100203_InitialCreate.Designer.cs
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\migrations\20211105100203_initialcreate.designer.cs
+++20211115054157_updatetabale1.Designer.cs
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\migrations\20211115054157_updatetabale1.designer.cs
+++Engines
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure.core\engines\
+++Page
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure.core\page\
+++ApiResult.cs
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure.core\apiresult.cs
+++EFContext.cs
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure.core\efcontext.cs
+++Repository.cs
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure.core\repository.cs
+++包
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:包
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:包
+i:{751fd2c7-8163-429b-8d5b-0820ec22acfb}:包
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:包
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:包
+++TransactionBehavior.cs
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure.core\behaviors\transactionbehavior.cs
+++Engine.cs
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure.core\engines\engine.cs
+++EngineContext.cs
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure.core\engines\enginecontext.cs
+++AssemblyExtension.cs
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure.core\extensions\assemblyextension.cs
+++GenericTypeExtension.cs
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure.core\extensions\generictypeextension.cs
+++MediatorExtension.cs
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure.core\extensions\mediatorextension.cs
+++QueryablePageListExtension.cs
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure.core\extensions\queryablepagelistextension.cs
+++WhereIfExtension.cs
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure.core\extensions\whereifextension.cs
+++PagedList.cs
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure.core\page\pagedlist.cs
+++DotNetCore.CAP.RabbitMQ (5.2.0)
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:>1350
+++DotNetCore.CAP.SqlServer (5.2.0)
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:>1352
+++Microsoft.EntityFrameworkCore.SqlServer (6.0.0)
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:>1351
+++Microsoft.Extensions.Configuration.Binder (6.0.0)
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:>1353
+++Microsoft.Extensions.DependencyModel (6.0.0)
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:>1354
+++Quartz (3.3.3)
+i:{02283a87-fdc9-4690-a106-7f80b8acaa71}:>1355
+++Domain
+i:{00000000-0000-0000-0000-000000000000}:Domain
+++CommandHandlers
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\commandhandlers\
+++Commands
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\commands\
+++EventHadlers
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\eventhadlers\
+++Events
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\events\
+++IntegrationEvents
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\integrationevents\
+++Interfaces
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\interfaces\
+++Models
+++Account
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\commandhandlers\account\
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\commands\account\
+++Listing
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\commandhandlers\listing\
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\commands\listing\
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\dtos\listing\
+++Order
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\commandhandlers\order\
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\commands\order\
+++StystemLog
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\commandhandlers\stystemlog\
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\commands\stystemlog\
+++SyncTaskJobConfig
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\commandhandlers\synctaskjobconfig\
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\commands\synctaskjobconfig\
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\eventhadlers\synctaskjobconfig\
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\events\synctaskjobconfig\
+++CollectionSyncTaskJobIntegrationEvent.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\integrationevents\collectionsynctaskjobintegrationevent.cs
+++IAccountRepository.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\interfaces\iaccountrepository.cs
+++IOrderRepository.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\interfaces\iorderrepository.cs
+++IProductRepository.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\interfaces\iproductrepository.cs
+++ISyncTaskJobConfigRepository.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\interfaces\isynctaskjobconfigrepository.cs
+++ISystemLogRepository.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\interfaces\isystemlogrepository.cs
+++Accounts
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\dtos\accounts\
+++Enums
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\aggregatemodel\enums\
+++Orders
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\dtos\orders\
+++MoneyValue.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\aggregatemodel\moneyvalue.cs
+++ShopTask.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\aggregatemodel\shoptask.cs
+++SyncTaskJobConfig.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\aggregatemodel\synctaskjobconfig.cs
+++SystemLog.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\aggregatemodel\systemlog.cs
+++DotNetCore.CAP (5.2.0)
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:>1329
+++Serilog.AspNetCore (4.1.0)
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:>1330
+++EbayPlatform.Domain.Core
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain.core\ebayplatform.domain.core.csproj
+i:{6dc40811-8356-400d-9900-419f891dc63a}:EbayPlatform.Domain.Core
+++AccountCommandHandler.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\commandhandlers\account\accountcommandhandler.cs
+++ProductCommandHandler.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\commandhandlers\listing\productcommandhandler.cs
+++OrderCommandHandler.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\commandhandlers\order\ordercommandhandler.cs
+++SystemLogCommonHandler.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\commandhandlers\stystemlog\systemlogcommonhandler.cs
+++SyncTaskJobConfigCommandHandler.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\commandhandlers\synctaskjobconfig\synctaskjobconfigcommandhandler.cs
+++AccountCreatedCommand.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\commands\account\accountcreatedcommand.cs
+++AccountDeleteCommand.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\commands\account\accountdeletecommand.cs
+++ProductCreatedCommand.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\commands\listing\productcreatedcommand.cs
+++ProductDeleteCommand.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\commands\listing\productdeletecommand.cs
+++OrderCreatedCommand.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\commands\order\ordercreatedcommand.cs
+++OrderDeleteCommand.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\commands\order\orderdeletecommand.cs
+++CreateSystemLogCommand.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\commands\stystemlog\createsystemlogcommand.cs
+++DeleteSystemLogCommand.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\commands\stystemlog\deletesystemlogcommand.cs
+++CreateSyncTaskJobConfigCommand.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\commands\synctaskjobconfig\createsynctaskjobconfigcommand.cs
+++UpdateSyncTaskJobConfigCommand.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\commands\synctaskjobconfig\updatesynctaskjobconfigcommand.cs
+++SyncTaskJobConfigEventHandler.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\eventhadlers\synctaskjobconfig\synctaskjobconfigeventhandler.cs
+++CollectionSyncTaskJobDomainEvent.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\events\synctaskjobconfig\collectionsynctaskjobdomainevent.cs
+++CreateSyncTaskJobConfigDomainEvent.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\events\synctaskjobconfig\createsynctaskjobconfigdomainevent.cs
+++Account.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\aggregatemodel\accountaggregate\account.cs
+++AccountDetail.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\aggregatemodel\accountaggregate\accountdetail.cs
+++AdditionalAccount.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\aggregatemodel\accountaggregate\additionalaccount.cs
+++EnvironmentsType.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\aggregatemodel\enums\environmentstype.cs
+++JobStatusType.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\aggregatemodel\enums\jobstatustype.cs
+++LogType.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\aggregatemodel\enums\logtype.cs
+++Product.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\aggregatemodel\productaggregate\product.cs
+++ProductCategory.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\aggregatemodel\productaggregate\productcategory.cs
+++PromotionalSaleDetail.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\aggregatemodel\productaggregate\promotionalsaledetail.cs
+++SellingStatus.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\aggregatemodel\productaggregate\sellingstatus.cs
+++Address.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\aggregatemodel\orderaggregate\address.cs
+++CheckoutStatus.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\aggregatemodel\orderaggregate\checkoutstatus.cs
+++Order.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\aggregatemodel\orderaggregate\order.cs
+++OrderTransaction.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\aggregatemodel\orderaggregate\ordertransaction.cs
+++SalesTax.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\aggregatemodel\orderaggregate\salestax.cs
+++ShippingDetail.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\aggregatemodel\orderaggregate\shippingdetail.cs
+++ShippingPackage.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\aggregatemodel\orderaggregate\shippingpackage.cs
+++ShippingServiceOption.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\aggregatemodel\orderaggregate\shippingserviceoption.cs
+++TransactionStatus.cs
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\aggregatemodel\orderaggregate\transactionstatus.cs
+++Abstractions
+i:{751fd2c7-8163-429b-8d5b-0820ec22acfb}:d:\doc\demo\ebayplatform\ebayplatform.domain.core\abstractions\
+++Entity.cs
+i:{751fd2c7-8163-429b-8d5b-0820ec22acfb}:d:\doc\demo\ebayplatform\ebayplatform.domain.core\abstractions\entity.cs
+++IAggregateRoot.cs
+i:{751fd2c7-8163-429b-8d5b-0820ec22acfb}:d:\doc\demo\ebayplatform\ebayplatform.domain.core\abstractions\iaggregateroot.cs
+++IDependency.cs
+i:{751fd2c7-8163-429b-8d5b-0820ec22acfb}:d:\doc\demo\ebayplatform\ebayplatform.domain.core\abstractions\idependency.cs
+++IDomainEvent.cs
+i:{751fd2c7-8163-429b-8d5b-0820ec22acfb}:d:\doc\demo\ebayplatform\ebayplatform.domain.core\abstractions\idomainevent.cs
+++IDomainEventHandler.cs
+i:{751fd2c7-8163-429b-8d5b-0820ec22acfb}:d:\doc\demo\ebayplatform\ebayplatform.domain.core\abstractions\idomaineventhandler.cs
+++IEngine.cs
+i:{751fd2c7-8163-429b-8d5b-0820ec22acfb}:d:\doc\demo\ebayplatform\ebayplatform.domain.core\abstractions\iengine.cs
+++IEntity.cs
+i:{751fd2c7-8163-429b-8d5b-0820ec22acfb}:d:\doc\demo\ebayplatform\ebayplatform.domain.core\abstractions\ientity.cs
+++IPagedList.cs
+i:{751fd2c7-8163-429b-8d5b-0820ec22acfb}:d:\doc\demo\ebayplatform\ebayplatform.domain.core\abstractions\ipagedlist.cs
+++IRepository.cs
+i:{751fd2c7-8163-429b-8d5b-0820ec22acfb}:d:\doc\demo\ebayplatform\ebayplatform.domain.core\abstractions\irepository.cs
+++IScopedDependency.cs
+i:{751fd2c7-8163-429b-8d5b-0820ec22acfb}:d:\doc\demo\ebayplatform\ebayplatform.domain.core\abstractions\iscopeddependency.cs
+++ISingletonDependency.cs
+i:{751fd2c7-8163-429b-8d5b-0820ec22acfb}:d:\doc\demo\ebayplatform\ebayplatform.domain.core\abstractions\isingletondependency.cs
+++ITransientDependency.cs
+i:{751fd2c7-8163-429b-8d5b-0820ec22acfb}:d:\doc\demo\ebayplatform\ebayplatform.domain.core\abstractions\itransientdependency.cs
+++IUnitOfWork.cs
+i:{751fd2c7-8163-429b-8d5b-0820ec22acfb}:d:\doc\demo\ebayplatform\ebayplatform.domain.core\abstractions\iunitofwork.cs
+++ValueObject.cs
+i:{751fd2c7-8163-429b-8d5b-0820ec22acfb}:d:\doc\demo\ebayplatform\ebayplatform.domain.core\abstractions\valueobject.cs
+++MediatR (9.0.0)
+i:{751fd2c7-8163-429b-8d5b-0820ec22acfb}:>1327
+++Microsoft.EntityFrameworkCore (6.0.0)
+i:{751fd2c7-8163-429b-8d5b-0820ec22acfb}:>1325
+++Newtonsoft.Json (13.0.1)
+i:{751fd2c7-8163-429b-8d5b-0820ec22acfb}:>1326
+++Application
+i:{00000000-0000-0000-0000-000000000000}:Application
+++EbayPlatform.Application
+i:{c49b3462-7389-4b0a-b372-90f026d12a76}:EbayPlatform.Application
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.application\bin\debug\net6.0\ebayplatform.application.dll
+++Dtos
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\dtos\
+++Services
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\services\
+++ScticooErp
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\dtos\scticooerp\
+++EbayOptionsDto.cs
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\dtos\ebayoptionsdto.cs
+++ParamValueToEntityDto.cs
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\dtos\paramvaluetoentitydto.cs
+++ShopTaskDto.cs
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\dtos\shoptaskdto.cs
+++SyncTaskJobConfigDto.cs
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\dtos\synctaskjobconfigdto.cs
+++SystemLogDto.cs
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\dtos\systemlogdto.cs
+++Jobs
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\quartz\jobs\
+++AbstractBaseJob.cs
+++DownloaderProvider.cs
+++AccountAppService.cs
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\services\accountappservice.cs
+++IAccountAppService.cs
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\services\iaccountappservice.cs
+++IOrderAppService.cs
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\services\iorderappservice.cs
+++IProductAppService.cs
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\services\iproductappservice.cs
+++ISyncTaskJobAppService.cs
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\services\isynctaskjobappservice.cs
+++ISystemLogAppService.cs
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\services\isystemlogappservice.cs
+++OrderAppService.cs
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\services\orderappservice.cs
+++ProductAppService.cs
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\services\productappservice.cs
+++SyncTaskJobAppService.cs
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\services\synctaskjobappservice.cs
+++SystemLogAppService.cs
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\services\systemlogappservice.cs
+++eBay.Service.Standard (3.1113.0)
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:>1339
+++Mapster (7.2.0)
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:>1341
+++Microsoft.Extensions.Http (6.0.0)
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:>1340
+++AccountDetailDto.cs
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\dtos\accounts\accountdetaildto.cs
+++AccountDto.cs
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\dtos\accounts\accountdto.cs
+++AdditionalAccountDto.cs
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\dtos\accounts\additionalaccountdto.cs
+++ProductDto.cs
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\dtos\listing\productdto.cs
+++AddressDto.cs
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\dtos\orders\addressdto.cs
+++OrderDto.cs
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\dtos\orders\orderdto.cs
+++OrderTransactionDto.cs
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\dtos\orders\ordertransactiondto.cs
+++ShippingDetailDto.cs
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\dtos\orders\shippingdetaildto.cs
+++ShippingPackageDto.cs
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\dtos\orders\shippingpackagedto.cs
+++ShippingServiceOptionDto.cs
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\dtos\orders\shippingserviceoptiondto.cs
+++PlatformShopAccountDto.cs
+i:{1143094f-1cd1-40e3-ac8e-f0317ed2e58f}:d:\doc\demo\ebayplatform\ebayplatform.application\dtos\scticooerp\platformshopaccountdto.cs
+++DeleteLogJob.cs
+i:{8c8b2794-b64f-437a-b57f-d9536977db9b}:d:\doc\demo\ebayplatform\ebayplatform.infrastructure\quartz\jobs\deletelogjob.cs
+++Presentation
+i:{00000000-0000-0000-0000-000000000000}:Presentation
+++EbayPlatform.WebApi
+i:{2e95d82b-6798-499f-9caa-d13230e3cf6e}:EbayPlatform.WebApi
+++Connected Services 
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:>1312
+++Properties
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\properties\
+++导入
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:>1014
+++bin
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\
+++Controllers
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\controllers\
+++HostedService
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\hostedservice\
+++obj
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\
+++appsettings.json
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\appsettings.json
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\appsettings.json
+++Program.cs
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\program.cs
+++未发现任何服务依赖项
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:>1313
+++launchSettings.json
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\properties\launchsettings.json
+++Sdk.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.web\sdk\sdk.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.illink.tasks\sdk\sdk.props
+++Sdk.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.web\sdk\sdk.targets
+++Debug
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\debug\
+++SwaggerExtensions.cs
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\extensions\swaggerextensions.cs
+++QuartzHostedService.cs
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\hostedservice\quartzhostedservice.cs
+++EbayPlatform.WebApi.csproj.nuget.dgspec.json
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\ebayplatform.webapi.csproj.nuget.dgspec.json
+++EbayPlatform.WebApi.csproj.nuget.g.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\ebayplatform.webapi.csproj.nuget.g.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\ebayplatform.webapi.csproj.nuget.g.props
+++EbayPlatform.WebApi.csproj.nuget.g.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\ebayplatform.webapi.csproj.nuget.g.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\ebayplatform.webapi.csproj.nuget.g.targets
+++project.assets.json
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\project.assets.json
+++project.nuget.cache
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\project.nuget.cache
+++staticwebassets.pack.sentinel
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\staticwebassets.pack.sentinel
+++appsettings.Development.json
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\appsettings.development.json
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\appsettings.development.json
+++Sdk.props (C:\Program Files\dotnet\sdk\6.0.100\Sdks\Microsoft.NET.Sdk\Sdk)
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\sdk\sdk.props
+++Sdk.props (C:\Program Files\dotnet\sdk\6.0.100\Sdks\Microsoft.NET.Sdk.Razor\Sdk)
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.razor\sdk\sdk.props
+++Sdk.props (C:\Program Files\dotnet\sdk\6.0.100\Sdks\Microsoft.NET.Sdk.Web.ProjectSystem\Sdk)
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.web.projectsystem\sdk\sdk.props
+++Sdk.props (C:\Program Files\dotnet\sdk\6.0.100\Sdks\Microsoft.NET.Sdk.Publish\Sdk)
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.publish\sdk\sdk.props
+++Sdk.targets (C:\Program Files\dotnet\sdk\6.0.100\Sdks\Microsoft.NET.Sdk\Sdk)
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\sdk\sdk.targets
+++Sdk.targets (C:\Program Files\dotnet\sdk\6.0.100\Sdks\Microsoft.NET.Sdk.Razor\Sdk)
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.razor\sdk\sdk.targets
+++Sdk.targets (C:\Program Files\dotnet\sdk\6.0.100\Sdks\Microsoft.NET.Sdk.Web.ProjectSystem\Sdk)
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.web.projectsystem\sdk\sdk.targets
+++Sdk.targets (C:\Program Files\dotnet\sdk\6.0.100\Sdks\Microsoft.NET.Sdk.Publish\Sdk)
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.publish\sdk\sdk.targets
+++MediatR.Extensions.Microsoft.DependencyInjection (9.0.0)
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:>1389
+++Microsoft.EntityFrameworkCore.Tools (6.0.0)
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:>1388
+++Swashbuckle.AspNetCore (6.2.3)
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:>1387
+++Microsoft.AspNetCore.Analyzers
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.web\analyzers\cs\microsoft.aspnetcore.analyzers.dll
+++Microsoft.AspNetCore.Components.Analyzers
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.web\analyzers\cs\microsoft.aspnetcore.components.analyzers.dll
+++Microsoft.AspNetCore.Mvc.Analyzers
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.web\analyzers\cs\microsoft.aspnetcore.mvc.analyzers.dll
+++Microsoft.AspNetCore.Razor.Internal.SourceGenerator.Transport
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.razor\source-generators\microsoft.aspnetcore.razor.internal.sourcegenerator.transport.dll
+++Microsoft.NET.Sdk.Razor.SourceGenerators
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.razor\source-generators\microsoft.net.sdk.razor.sourcegenerators.dll
+++Microsoft.AspNetCore.App
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\microsoft.aspnetcore.app
+++net6.0
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\debug\net6.0\
+++Microsoft.Common.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\current\microsoft.common.props
+++Microsoft.NET.Sdk.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.props
+++Sdk.Razor.CurrentVersion.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.razor\targets\sdk.razor.currentversion.props
+++Microsoft.NET.Sdk.Web.ProjectSystem.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.web.projectsystem\targets\microsoft.net.sdk.web.projectsystem.props
+++Microsoft.NET.Sdk.Publish.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.publish\targets\microsoft.net.sdk.publish.props
+++Microsoft.NET.Sdk.BeforeCommon.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.beforecommon.targets
+++Microsoft.CSharp.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\current\bin\amd64\microsoft.csharp.targets
+++Microsoft.NET.Sdk.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.targets
+++Microsoft.NET.Compatibility.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.compatibility.targets
+++NuGet.Build.Tasks.Pack.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\nuget.build.tasks.pack\build\nuget.build.tasks.pack.targets
+++Sdk.Razor.CurrentVersion.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.razor\targets\sdk.razor.currentversion.targets
+++Microsoft.NET.Sdk.Web.ProjectSystem.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.web.projectsystem\targets\microsoft.net.sdk.web.projectsystem.targets
+++Microsoft.NET.Sdk.Publish.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.publish\targets\microsoft.net.sdk.publish.targets
+++ref
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\ref\
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\debug\net6.0\ref\
+++runtimes
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\
+++DotNetCore.CAP.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\dotnetcore.cap.dll
+++DotNetCore.CAP.RabbitMQ.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\dotnetcore.cap.rabbitmq.dll
+++DotNetCore.CAP.SqlServer.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\dotnetcore.cap.sqlserver.dll
+++eBay.Service.Standard.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\ebay.service.standard.dll
+++EbayPlatform.Application.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\ebayplatform.application.dll
+++EbayPlatform.Application.pdb
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\ebayplatform.application.pdb
+++EbayPlatform.Domain.Core.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\ebayplatform.domain.core.dll
+++EbayPlatform.Domain.Core.pdb
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\ebayplatform.domain.core.pdb
+++EbayPlatform.Domain.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\ebayplatform.domain.dll
+++EbayPlatform.Domain.pdb
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\ebayplatform.domain.pdb
+++EbayPlatform.Infrastructure.Core.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\ebayplatform.infrastructure.core.dll
+++EbayPlatform.Infrastructure.Core.pdb
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\ebayplatform.infrastructure.core.pdb
+++EbayPlatform.Infrastructure.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\ebayplatform.infrastructure.dll
+++EbayPlatform.Infrastructure.pdb
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\ebayplatform.infrastructure.pdb
+++EbayPlatform.WebApi.deps.json
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\ebayplatform.webapi.deps.json
+++EbayPlatform.WebApi.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\debug\net6.0\ebayplatform.webapi.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\debug\net6.0\ref\ebayplatform.webapi.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\ref\ebayplatform.webapi.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\ebayplatform.webapi.dll
+++EbayPlatform.WebApi.exe
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\ebayplatform.webapi.exe
+++EbayPlatform.WebApi.pdb
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\debug\net6.0\ebayplatform.webapi.pdb
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\ebayplatform.webapi.pdb
+++EbayPlatform.WebApi.runtimeconfig.json
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\ebayplatform.webapi.runtimeconfig.json
+++EbayPlatform.WebApi.xml
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\debug\net6.0\ebayplatform.webapi.xml
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\ebayplatform.webapi.xml
+++Humanizer.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\humanizer.dll
+++Mapster.Core.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\mapster.core.dll
+++Mapster.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\mapster.dll
+++MediatR.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\mediatr.dll
+++MediatR.Extensions.Microsoft.DependencyInjection.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\mediatr.extensions.microsoft.dependencyinjection.dll
+++Microsoft.Data.SqlClient.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\unix\lib\netcoreapp3.1\microsoft.data.sqlclient.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\win\lib\netcoreapp3.1\microsoft.data.sqlclient.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\microsoft.data.sqlclient.dll
+++Microsoft.EntityFrameworkCore.Abstractions.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\microsoft.entityframeworkcore.abstractions.dll
+++Microsoft.EntityFrameworkCore.Design.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\microsoft.entityframeworkcore.design.dll
+++Microsoft.EntityFrameworkCore.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\microsoft.entityframeworkcore.dll
+++Microsoft.EntityFrameworkCore.Relational.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\microsoft.entityframeworkcore.relational.dll
+++Microsoft.EntityFrameworkCore.SqlServer.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\microsoft.entityframeworkcore.sqlserver.dll
+++Microsoft.Extensions.DependencyModel.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\microsoft.extensions.dependencymodel.dll
+++Microsoft.Identity.Client.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\microsoft.identity.client.dll
+++Microsoft.IdentityModel.JsonWebTokens.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\microsoft.identitymodel.jsonwebtokens.dll
+++Microsoft.IdentityModel.Logging.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\microsoft.identitymodel.logging.dll
+++Microsoft.IdentityModel.Protocols.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\microsoft.identitymodel.protocols.dll
+++Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\microsoft.identitymodel.protocols.openidconnect.dll
+++Microsoft.IdentityModel.Tokens.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\microsoft.identitymodel.tokens.dll
+++Microsoft.OpenApi.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\microsoft.openapi.dll
+++Microsoft.Win32.SystemEvents.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\win\lib\netcoreapp3.0\microsoft.win32.systemevents.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\microsoft.win32.systemevents.dll
+++Newtonsoft.Json.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\newtonsoft.json.dll
+++Quartz.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\quartz.dll
+++RabbitMQ.Client.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\rabbitmq.client.dll
+++Serilog.AspNetCore.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\serilog.aspnetcore.dll
+++Serilog.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\serilog.dll
+++Serilog.Extensions.Hosting.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\serilog.extensions.hosting.dll
+++Serilog.Extensions.Logging.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\serilog.extensions.logging.dll
+++Serilog.Formatting.Compact.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\serilog.formatting.compact.dll
+++Serilog.Settings.Configuration.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\serilog.settings.configuration.dll
+++Serilog.Sinks.Console.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\serilog.sinks.console.dll
+++Serilog.Sinks.Debug.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\serilog.sinks.debug.dll
+++Serilog.Sinks.File.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\serilog.sinks.file.dll
+++Swashbuckle.AspNetCore.Swagger.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\swashbuckle.aspnetcore.swagger.dll
+++Swashbuckle.AspNetCore.SwaggerGen.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\swashbuckle.aspnetcore.swaggergen.dll
+++Swashbuckle.AspNetCore.SwaggerUI.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\swashbuckle.aspnetcore.swaggerui.dll
+++System.Configuration.ConfigurationManager.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\system.configuration.configurationmanager.dll
+++System.Drawing.Common.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\unix\lib\netcoreapp3.0\system.drawing.common.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\win\lib\netcoreapp3.0\system.drawing.common.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\system.drawing.common.dll
+++System.IdentityModel.Tokens.Jwt.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\system.identitymodel.tokens.jwt.dll
+++System.Runtime.Caching.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\win\lib\netstandard2.0\system.runtime.caching.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\system.runtime.caching.dll
+++System.Security.Cryptography.ProtectedData.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\win\lib\netstandard2.0\system.security.cryptography.protecteddata.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\system.security.cryptography.protecteddata.dll
+++System.Security.Permissions.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\system.security.permissions.dll
+++System.ServiceModel.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\system.servicemodel.dll
+++System.ServiceModel.Http.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\system.servicemodel.http.dll
+++System.ServiceModel.Primitives.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\system.servicemodel.primitives.dll
+++System.Threading.AccessControl.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\win\lib\netstandard2.0\system.threading.accesscontrol.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\system.threading.accesscontrol.dll
+++System.Windows.Extensions.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\win\lib\netcoreapp3.0\system.windows.extensions.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\system.windows.extensions.dll
+++staticwebassets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\debug\net6.0\staticwebassets\
+++.NETCoreApp,Version=v6.0.AssemblyAttributes.cs
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\debug\net6.0\.netcoreapp,version=v6.0.assemblyattributes.cs
+++apphost.exe
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\debug\net6.0\apphost.exe
+++EbayPlatform.WebApi.AssemblyInfo.cs
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\debug\net6.0\ebayplatform.webapi.assemblyinfo.cs
+++EbayPlatform.WebApi.AssemblyInfoInputs.cache
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\debug\net6.0\ebayplatform.webapi.assemblyinfoinputs.cache
+++EbayPlatform.WebApi.assets.cache
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\debug\net6.0\ebayplatform.webapi.assets.cache
+++EbayPlatform.WebApi.csproj.AssemblyReference.cache
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\debug\net6.0\ebayplatform.webapi.csproj.assemblyreference.cache
+++EbayPlatform.WebApi.csproj.CopyComplete
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\debug\net6.0\ebayplatform.webapi.csproj.copycomplete
+++EbayPlatform.WebApi.csproj.CoreCompileInputs.cache
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\debug\net6.0\ebayplatform.webapi.csproj.corecompileinputs.cache
+++EbayPlatform.WebApi.csproj.FileListAbsolute.txt
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\debug\net6.0\ebayplatform.webapi.csproj.filelistabsolute.txt
+++EbayPlatform.WebApi.GeneratedMSBuildEditorConfig.editorconfig
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\debug\net6.0\ebayplatform.webapi.generatedmsbuildeditorconfig.editorconfig
+++EbayPlatform.WebApi.genruntimeconfig.cache
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\debug\net6.0\ebayplatform.webapi.genruntimeconfig.cache
+++EbayPlatform.WebApi.GlobalUsings.g.cs
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\debug\net6.0\ebayplatform.webapi.globalusings.g.cs
+++EbayPlatform.WebApi.MvcApplicationPartsAssemblyInfo.cache
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\debug\net6.0\ebayplatform.webapi.mvcapplicationpartsassemblyinfo.cache
+++EbayPlatform.WebApi.MvcApplicationPartsAssemblyInfo.cs
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\debug\net6.0\ebayplatform.webapi.mvcapplicationpartsassemblyinfo.cs
+++staticwebassets.build.json
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\obj\debug\net6.0\staticwebassets.build.json
+++Microsoft.LiveUnitTesting.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\current\imports\microsoft.common.props\importbefore\microsoft.liveunittesting.props
+++Microsoft.NuGet.ImportBefore.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\current\imports\microsoft.common.props\importbefore\microsoft.nuget.importbefore.props
+++NuGet.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\common7\ide\commonextensions\microsoft\nuget\nuget.props
+++Microsoft.NET.Sdk.DefaultItems.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.defaultitems.props
+++Microsoft.NET.Sdk.ImportWorkloads.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.importworkloads.props
+++Microsoft.NET.SupportedTargetFrameworks.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.supportedtargetframeworks.props
+++Microsoft.NET.SupportedPlatforms.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.supportedplatforms.props
+++Microsoft.NET.WindowsSdkSupportedTargetPlatforms.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.windowssdksupportedtargetplatforms.props
+++Microsoft.NET.Sdk.CSharp.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.csharp.props
+++Microsoft.NET.ILLink.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.illink.props
+++Microsoft.NET.Compatibility.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.compatibility.props
+++Microsoft.NET.PackTool.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.packtool.props
+++Microsoft.NET.PackProjectTool.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.packprojecttool.props
+++Microsoft.NET.Sdk.WindowsDesktop.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.windowsdesktop\targets\microsoft.net.sdk.windowsdesktop.props
+++Microsoft.NET.Windows.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.windows.props
+++Sdk.Razor.StaticAssets.ProjectSystem.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.razor\sdk\sdk.razor.staticassets.projectsystem.props
+++Microsoft.TypeScript.Default.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\microsoft\visualstudio\v17.0\typescript\microsoft.typescript.default.props
+++Microsoft.NET.Sdk.Web.DefaultItems.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.web.projectsystem\targets\microsoft.net.sdk.web.defaultitems.props
+++Microsoft.NET.DefaultAssemblyInfo.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.defaultassemblyinfo.targets
+++Microsoft.NET.DefaultOutputPaths.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.defaultoutputpaths.targets
+++Microsoft.NET.Sdk.ImportPublishProfile.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.importpublishprofile.targets
+++Microsoft.NET.TargetFrameworkInference.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.targetframeworkinference.targets
+++Microsoft.NET.Sdk.Razor.BeforeCommon.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.razor\targets\microsoft.net.sdk.razor.beforecommon.targets
+++Microsoft.NET.Sdk.ImportWorkloads.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.importworkloads.targets
+++Microsoft.NET.RuntimeIdentifierInference.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.runtimeidentifierinference.targets
+++Microsoft.NET.EolTargetFrameworks.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.eoltargetframeworks.targets
+++Microsoft.NET.NuGetOfflineCache.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.nugetofflinecache.targets
+++Microsoft.Managed.Before.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\current\bin\amd64\microsoft.managed.before.targets
+++Microsoft.CSharp.CurrentVersion.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\current\bin\amd64\microsoft.csharp.currentversion.targets
+++Microsoft.Managed.After.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\current\bin\amd64\microsoft.managed.after.targets
+++Microsoft.NET.Sdk.Common.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.common.targets
+++Microsoft.PackageDependencyResolution.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.packagedependencyresolution.targets
+++Microsoft.NET.Sdk.DefaultItems.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.defaultitems.targets
+++Microsoft.NET.Sdk.FrameworkReferenceResolution.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.frameworkreferenceresolution.targets
+++Microsoft.NET.Sdk.Shared.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.shared.targets
+++Microsoft.NET.DisableStandardFrameworkResolution.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.disablestandardframeworkresolution.targets
+++Microsoft.NET.DesignerSupport.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.designersupport.targets
+++Microsoft.NET.GenerateAssemblyInfo.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.generateassemblyinfo.targets
+++Microsoft.NET.GenerateGlobalUsings.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.generateglobalusings.targets
+++Microsoft.NET.GenerateSupportedRuntime.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.generatesupportedruntime.targets
+++Microsoft.NET.ComposeStore.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.composestore.targets
+++Microsoft.NET.CrossGen.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.crossgen.targets
+++Microsoft.NET.ObsoleteReferences.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.obsoletereferences.targets
+++Microsoft.NET.Publish.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.publish.targets
+++Microsoft.NET.PackTool.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.packtool.targets
+++Microsoft.NET.PackProjectTool.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.packprojecttool.targets
+++Microsoft.NET.PreserveCompilationContext.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.preservecompilationcontext.targets
+++Microsoft.NET.ConflictResolution.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.conflictresolution.targets
+++Microsoft.NET.Sdk.CSharp.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.csharp.targets
+++Microsoft.NET.ILLink.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.illink.targets
+++Microsoft.NET.Sdk.Analyzers.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.analyzers.targets
+++Microsoft.NET.Compatibility.Common.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.compatibility.common.targets
+++Microsoft.NET.Sdk.Razor.Configuration.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.razor\targets\microsoft.net.sdk.razor.configuration.targets
+++Microsoft.NET.Sdk.Razor.CodeGeneration.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.razor\targets\microsoft.net.sdk.razor.codegeneration.targets
+++Microsoft.NET.Sdk.Razor.SourceGenerators.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.razor\targets\microsoft.net.sdk.razor.sourcegenerators.targets
+++Microsoft.NET.Sdk.Razor.StaticWebAssets.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.razor\targets\microsoft.net.sdk.razor.staticwebassets.targets
+++Microsoft.NET.Sdk.Razor.ScopedCss.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.razor\targets\microsoft.net.sdk.razor.scopedcss.targets
+++Microsoft.NET.Sdk.Razor.JSModules.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.razor\targets\microsoft.net.sdk.razor.jsmodules.targets
+++Microsoft.NET.Sdk.Razor.GenerateAssemblyInfo.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.razor\targets\microsoft.net.sdk.razor.generateassemblyinfo.targets
+++Microsoft.NET.Sdk.Razor.MvcApplicationPartsDiscovery.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.razor\targets\microsoft.net.sdk.razor.mvcapplicationpartsdiscovery.targets
+++Microsoft.NET.Sdk.Razor.DesignTime.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\microsoft\visualstudio\razor\microsoft.net.sdk.razor.designtime.targets
+++Microsoft.TypeScript.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\microsoft\visualstudio\v17.0\typescript\microsoft.typescript.targets
+++Microsoft.TypeScript.DotNetCore.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\microsoft\visualstudio\v17.0\typescript\microsoft.typescript.dotnetcore.targets
+++Microsoft.Web.Designtime.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\microsoft\visualstudio\managed.web\microsoft.web.designtime.targets
+++Default.pubxml
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.publish\targets\publishprofiles\default.pubxml
+++Microsoft.NET.Sdk.Publish.ComputeFiles.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.publish\targets\computetargets\microsoft.net.sdk.publish.computefiles.targets
+++Microsoft.NET.Sdk.Publish.FilterFiles.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.publish\targets\copytargets\microsoft.net.sdk.publish.filterfiles.targets
+++Microsoft.NET.Sdk.Publish.CopyFiles.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.publish\targets\copytargets\microsoft.net.sdk.publish.copyfiles.targets
+++Microsoft.NET.Sdk.Publish.TransformFiles.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.publish\targets\transformtargets\microsoft.net.sdk.publish.transformfiles.targets
+++Microsoft.NET.Sdk.Publish.FileSystem.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.publish\targets\publishtargets\microsoft.net.sdk.publish.filesystem.targets
+++Microsoft.NET.Sdk.DotNetCLITool.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.publish\targets\dotnetclitooltargets\microsoft.net.sdk.dotnetclitool.targets
+++unix
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\unix\
+++win
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\win\
+++win-arm
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\win-arm\
+++win-arm64
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\win-arm64\
+++win-x64
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\win-x64\
+++win-x86
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\win-x86\
+++Microsoft.Extensions.ApiDescription.Server.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\users\w\.nuget\packages\microsoft.extensions.apidescription.server\3.0.0\build\microsoft.extensions.apidescription.server.props
+++Swashbuckle.AspNetCore.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\users\w\.nuget\packages\swashbuckle.aspnetcore\6.2.3\build\swashbuckle.aspnetcore.props
+++Microsoft.EntityFrameworkCore.Design.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\users\w\.nuget\packages\microsoft.entityframeworkcore.design\6.0.0\build\net6.0\microsoft.entityframeworkcore.design.props
+++Microsoft.NuGet.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\microsoft\nuget\17.0\microsoft.nuget.props
+++Microsoft.NETCoreSdk.BundledVersions.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\microsoft.netcoresdk.bundledversions.props
+++Microsoft.NET.Sdk.WindowsDesktop.WindowsForms.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.windowsdesktop\targets\microsoft.net.sdk.windowsdesktop.windowsforms.props
+++Microsoft.NET.Sdk.WindowsDesktop.WPF.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.windowsdesktop\targets\microsoft.net.sdk.windowsdesktop.wpf.props
+++WorkloadManifest.targets (C:\Program Files\dotnet\sdk-manifests\6.0.100\microsoft.net.sdk.android)
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk-manifests\6.0.100\microsoft.net.sdk.android\workloadmanifest.targets
+++WorkloadManifest.targets (C:\Program Files\dotnet\sdk-manifests\6.0.100\microsoft.net.sdk.ios)
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk-manifests\6.0.100\microsoft.net.sdk.ios\workloadmanifest.targets
+++WorkloadManifest.targets (C:\Program Files\dotnet\sdk-manifests\6.0.100\microsoft.net.sdk.maccatalyst)
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk-manifests\6.0.100\microsoft.net.sdk.maccatalyst\workloadmanifest.targets
+++WorkloadManifest.targets (C:\Program Files\dotnet\sdk-manifests\6.0.100\microsoft.net.sdk.macos)
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk-manifests\6.0.100\microsoft.net.sdk.macos\workloadmanifest.targets
+++WorkloadManifest.targets (C:\Program Files\dotnet\sdk-manifests\6.0.100\microsoft.net.sdk.maui)
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk-manifests\6.0.100\microsoft.net.sdk.maui\workloadmanifest.targets
+++WorkloadManifest.targets (C:\Program Files\dotnet\sdk-manifests\6.0.100\microsoft.net.sdk.tvos)
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk-manifests\6.0.100\microsoft.net.sdk.tvos\workloadmanifest.targets
+++WorkloadManifest.targets (C:\Program Files\dotnet\sdk-manifests\6.0.100\microsoft.net.workload.emscripten)
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk-manifests\6.0.100\microsoft.net.workload.emscripten\workloadmanifest.targets
+++WorkloadManifest.targets (C:\Program Files\dotnet\sdk-manifests\6.0.100\microsoft.net.workload.mono.toolchain)
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk-manifests\6.0.100\microsoft.net.workload.mono.toolchain\workloadmanifest.targets
+++Microsoft.CSharp.Core.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\current\bin\roslyn\microsoft.csharp.core.targets
+++Microsoft.CSharp.DesignTime.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\microsoft\visualstudio\managed\microsoft.csharp.designtime.targets
+++Microsoft.Common.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\current\bin\amd64\microsoft.common.targets
+++Microsoft.ServiceModel.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\current\bin\amd64\microsoft.servicemodel.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\windows\microsoft.net\framework\v4.0.30319\microsoft.servicemodel.targets
+++Microsoft.NET.Sdk.DefaultItems.Shared.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.sdk.defaultitems.shared.targets
+++Microsoft.NETCoreSdk.BundledCliTools.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\microsoft.netcoresdk.bundledclitools.props
+++Microsoft.NET.DefaultPackageConflictOverrides.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\targets\microsoft.net.defaultpackageconflictoverrides.targets
+++Microsoft.CodeAnalysis.NetAnalyzers.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\analyzers\build\microsoft.codeanalysis.netanalyzers.props
+++Microsoft.CodeAnalysis.NetAnalyzers.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk\analyzers\build\microsoft.codeanalysis.netanalyzers.targets
+++lib
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\unix\lib\
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\win\lib\
+++native
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\win-arm\native\
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\win-arm64\native\
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\win-x64\native\
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\win-x86\native\
+++Microsoft.NET.ILLink.Tasks.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.illink.tasks\build\microsoft.net.illink.tasks.props
+++System.Windows.Forms.Analyzers.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\program files\dotnet\sdk\6.0.100\sdks\microsoft.net.sdk.windowsdesktop\targets\system.windows.forms.analyzers.props
+++Microsoft.Managed.Core.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\current\bin\roslyn\microsoft.managed.core.targets
+++Microsoft.Managed.DesignTime.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\microsoft\visualstudio\managed\microsoft.managed.designtime.targets
+++Microsoft.Common.CurrentVersion.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\current\bin\amd64\microsoft.common.currentversion.targets
+++netcoreapp3.0
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\unix\lib\netcoreapp3.0\
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\win\lib\netcoreapp3.0\
+++netcoreapp3.1
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\unix\lib\netcoreapp3.1\
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\win\lib\netcoreapp3.1\
+++netstandard2.0
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\unix\lib\netstandard2.0\
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\win\lib\netstandard2.0\
+++Microsoft.Data.SqlClient.SNI.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\win-arm\native\microsoft.data.sqlclient.sni.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\win-arm64\native\microsoft.data.sqlclient.sni.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\win-x64\native\microsoft.data.sqlclient.sni.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\win-x86\native\microsoft.data.sqlclient.sni.dll
+++Microsoft.Managed.Core.CurrentVersions.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\current\bin\roslyn\microsoft.managed.core.currentversions.targets
+++Microsoft.LiveUnitTesting.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\current\microsoft.common.targets\importbefore\microsoft.liveunittesting.targets
+++Microsoft.NET.props
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\current\bin\amd64\microsoft.net.props
+++Microsoft.CodeAnalysis.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\microsoft\visualstudio\v17.0\codeanalysis\microsoft.codeanalysis.targets
+++Microsoft.Xaml.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\current\bin\amd64\microsoft.xaml.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\windows\microsoft.net\framework\v4.0.30319\microsoft.xaml.targets
+++Microsoft.WorkflowBuildExtensions.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\current\bin\amd64\microsoft.workflowbuildextensions.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\windows\microsoft.net\framework\v4.0.30319\microsoft.workflowbuildextensions.targets
+++Microsoft.TeamTest.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\microsoft\visualstudio\v17.0\teamtest\microsoft.teamtest.targets
+++NuGet.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\common7\ide\commonextensions\microsoft\nuget\nuget.targets
+++Microsoft.Docker.ImportAfter.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\current\microsoft.common.targets\importafter\microsoft.docker.importafter.targets
+++Microsoft.NET.Build.Extensions.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\current\microsoft.common.targets\importafter\microsoft.net.build.extensions.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\microsoft\microsoft.net.build.extensions\microsoft.net.build.extensions.targets
+++Microsoft.NuGet.ImportAfter.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\current\microsoft.common.targets\importafter\microsoft.nuget.importafter.targets
+++Microsoft.QualityTools.Testing.Fakes.ImportAfter.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\current\microsoft.common.targets\importafter\microsoft.qualitytools.testing.fakes.importafter.targets
+++Microsoft.Web.ImportAfter.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\current\microsoft.common.targets\importafter\microsoft.web.importafter.targets
+++Microsoft.Extensions.ApiDescription.Server.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:c:\users\w\.nuget\packages\microsoft.extensions.apidescription.server\3.0.0\build\microsoft.extensions.apidescription.server.targets
+++System.Private.ServiceModel.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\unix\lib\netstandard2.0\system.private.servicemodel.dll
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\demo\ebayplatform\ebayplatform.webapi\bin\debug\net6.0\runtimes\win\lib\netstandard2.0\system.private.servicemodel.dll
+++Microsoft.Docker.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\sdks\microsoft.docker.sdk\build\microsoft.docker.targets
+++Microsoft.QualityTools.Testing.Fakes.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\microsoft\visualstudio\v17.0\fakes\microsoft.qualitytools.testing.fakes.targets
+++Microsoft.Web.IISSupport.targets
+i:{f5716c4d-ed7a-4f90-a462-c1b74c24e0ed}:d:\doc\softdoc\installpackages\vs2022\enterprise\msbuild\microsoft\visualstudio\managed.web\microsoft.web.iissupport.targets
+++GetAccountJob.cs
+++AggregateModel
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\aggregatemodel\
+++AccountAggregate
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\aggregatemodel\accountaggregate\
+++ProductAggregate
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\aggregatemodel\productaggregate\
+++OrderAggregate
+i:{d1ffff3a-da7b-48ce-93f2-c0cf16c15659}:d:\doc\demo\ebayplatform\ebayplatform.domain\aggregatemodel\orderaggregate\
+++新文件夹

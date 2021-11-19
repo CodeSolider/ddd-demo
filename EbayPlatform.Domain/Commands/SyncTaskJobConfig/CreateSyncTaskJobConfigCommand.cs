@@ -1,4 +1,4 @@
-﻿using EbayPlatform.Domain.Models;
+﻿using EbayPlatform.Domain.AggregateModel;
 using MediatR;
 using System.Collections.Generic;
 

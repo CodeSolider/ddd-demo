@@ -1,5 +1,5 @@
-﻿using EbayPlatform.Domain.Core.Abstractions;
-using EbayPlatform.Domain.Models.Accounts; 
+﻿using EbayPlatform.Domain.AggregateModel.AccountAggregate;
+using EbayPlatform.Domain.Core.Abstractions;
 
 namespace EbayPlatform.Domain.Interfaces
 {

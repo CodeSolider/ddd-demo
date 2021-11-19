@@ -3,7 +3,6 @@ using EbayPlatform.Domain.Interfaces;
 using MediatR;
 using Newtonsoft.Json;
 using Serilog.Context;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31205.134
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{ADE1BF53-727E-4A11-AA68-834283B07DD1}"
 EndProject
@@ -17,11 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EbayPlatform.Application", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{2E95D82B-6798-499F-9CAA-D13230E3CF6E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EbayPlatform.WebApi", "EbayPlatform.WebApi\EbayPlatform.WebApi.csproj", "{A2160F3A-B638-48FB-AB04-FE41C8CB80D3}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EbayPlatform.Infrastructure.Core", "EbayPlatform.Infrastructure.Core\EbayPlatform.Infrastructure.Core.csproj", "{02283A87-FDC9-4690-A106-7F80B8ACAA71}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EbayPlatform.Domain.Core", "EbayPlatform.Domain.Core\EbayPlatform.Domain.Core.csproj", "{751FD2C7-8163-429B-8D5B-0820EC22ACFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EbayPlatform.WebApi", "EbayPlatform.WebApi\EbayPlatform.WebApi.csproj", "{F5716C4D-ED7A-4F90-A462-C1B74C24E0ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,10 +41,6 @@ Global
 		{1143094F-1CD1-40E3-AC8E-F0317ED2E58F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1143094F-1CD1-40E3-AC8E-F0317ED2E58F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1143094F-1CD1-40E3-AC8E-F0317ED2E58F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A2160F3A-B638-48FB-AB04-FE41C8CB80D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A2160F3A-B638-48FB-AB04-FE41C8CB80D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A2160F3A-B638-48FB-AB04-FE41C8CB80D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A2160F3A-B638-48FB-AB04-FE41C8CB80D3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{02283A87-FDC9-4690-A106-7F80B8ACAA71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{02283A87-FDC9-4690-A106-7F80B8ACAA71}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02283A87-FDC9-4690-A106-7F80B8ACAA71}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -53,6 +49,10 @@ Global
 		{751FD2C7-8163-429B-8D5B-0820EC22ACFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{751FD2C7-8163-429B-8D5B-0820EC22ACFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{751FD2C7-8163-429B-8D5B-0820EC22ACFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5716C4D-ED7A-4F90-A462-C1B74C24E0ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5716C4D-ED7A-4F90-A462-C1B74C24E0ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5716C4D-ED7A-4F90-A462-C1B74C24E0ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5716C4D-ED7A-4F90-A462-C1B74C24E0ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,9 +61,9 @@ Global
 		{8C8B2794-B64F-437A-B57F-D9536977DB9B} = {ADE1BF53-727E-4A11-AA68-834283B07DD1}
 		{D1FFFF3A-DA7B-48CE-93F2-C0CF16C15659} = {6DC40811-8356-400D-9900-419F891DC63A}
 		{1143094F-1CD1-40E3-AC8E-F0317ED2E58F} = {C49B3462-7389-4B0A-B372-90F026D12A76}
-		{A2160F3A-B638-48FB-AB04-FE41C8CB80D3} = {2E95D82B-6798-499F-9CAA-D13230E3CF6E}
 		{02283A87-FDC9-4690-A106-7F80B8ACAA71} = {ADE1BF53-727E-4A11-AA68-834283B07DD1}
 		{751FD2C7-8163-429B-8D5B-0820EC22ACFB} = {6DC40811-8356-400D-9900-419F891DC63A}
+		{F5716C4D-ED7A-4F90-A462-C1B74C24E0ED} = {2E95D82B-6798-499F-9CAA-D13230E3CF6E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B7230E96-05C1-49D8-BB9A-C3BC6D59F2BE}

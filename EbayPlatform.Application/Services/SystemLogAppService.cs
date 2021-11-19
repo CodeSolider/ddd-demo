@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace EbayPlatform.Application.Services
 {
-    public class SystemLogAppService : ISystemLogAppService, IDependency
+    public class SystemLogAppService : ISystemLogAppService, IScopedDependency
     {
         private readonly IMediator _mediator;
         public SystemLogAppService(IMediator mediator)

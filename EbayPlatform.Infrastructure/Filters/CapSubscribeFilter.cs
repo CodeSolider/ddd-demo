@@ -42,7 +42,7 @@ namespace EbayPlatform.Infrastructure.Filters
         /// <param name="context"></param>
         public override void OnSubscribeException(ExceptionContext context)
         {
-            _mediator.Send(new CreateSystemLogCommand(context.ConsumerDescriptor.TopicName, Domain.Models.Enums.LogType.EbayPlatform,
+            _mediator.Send(new CreateSystemLogCommand(context.ConsumerDescriptor.TopicName, Domain.AggregateModel.Enums.LogType.EbayPlatform,
                             $"错误原因为：【{context.Exception.Message}】</br> 参数为【{JsonConvert.SerializeObject(context.DeliverMessage.Headers)}】"))
                      .Wait();
         }

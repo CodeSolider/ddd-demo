@@ -1,5 +1,5 @@
 ﻿using EbayPlatform.Domain.Core.Abstractions;
-using EbayPlatform.Domain.Models;
+using EbayPlatform.Domain.AggregateModel;
 using System; 
 using System.Threading;
 using System.Threading.Tasks;

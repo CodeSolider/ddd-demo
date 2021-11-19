@@ -4,9 +4,9 @@ namespace EbayPlatform.Domain.Events.SyncTaskJobConfig
 {
     public class CreateSyncTaskJobConfigDomainEvent : IDomainEvent
     {
-        public Models.SyncTaskJobConfig SyncTaskJobConfig { get; private set; }
+        public AggregateModel.SyncTaskJobConfig SyncTaskJobConfig { get; private set; }
 
-        public CreateSyncTaskJobConfigDomainEvent(Models.SyncTaskJobConfig syncTaskJobConfig)
+        public CreateSyncTaskJobConfigDomainEvent(AggregateModel.SyncTaskJobConfig syncTaskJobConfig)
                => this.SyncTaskJobConfig = syncTaskJobConfig;
     }
 }

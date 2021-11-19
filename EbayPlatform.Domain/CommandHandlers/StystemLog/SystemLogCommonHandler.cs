@@ -71,7 +71,7 @@ namespace EbayPlatform.Domain.CommandHandlers.StystemLog
             using (LogContext.PushProperty("CreateSystemLogCommand", $"{JsonConvert.SerializeObject(request)}"))
             {
                 var systemLog = await _systemLogRepository
-                                  .AddAsync(new Models.SystemLog(request.ObjectId, request.LogType, request.Content), cancellationToken)
+                                  .AddAsync(new AggregateModel.SystemLog(request.ObjectId, request.LogType, request.Content), cancellationToken)
                                   .ConfigureAwait(false);
 
                 await _systemLogRepository.UnitOfWork.CommitAsync(cancellationToken).ConfigureAwait(false);

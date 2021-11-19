@@ -1,7 +1,7 @@
-﻿using EbayPlatform.Domain.Models;
-using EbayPlatform.Domain.Models.Accounts;
-using EbayPlatform.Domain.Models.Listing;
-using EbayPlatform.Domain.Models.Orders;
+﻿using EbayPlatform.Domain.AggregateModel;
+using EbayPlatform.Domain.AggregateModel.AccountAggregate;
+using EbayPlatform.Domain.AggregateModel.OrderAggregate;
+using EbayPlatform.Domain.AggregateModel.ProductAggregate;
 using EbayPlatform.Infrastructure.Core;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

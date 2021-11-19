@@ -2,9 +2,9 @@
 using System;
 using EbayPlatform.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Microsoft.EntityFrameworkCore.Infrastructure; 
+
+#nullable disable
 
 namespace EbayPlatform.Infrastructure.Migrations
 {
@@ -15,17 +15,19 @@ namespace EbayPlatform.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.11")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "6.0.0")
+                .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            modelBuilder.Entity("EbayPlatform.Domain.Models.Accounts.Account", b =>
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("EbayPlatform.Domain.AggregateModel.Accounts.Account", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasComment("主键Id")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasComment("主键Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<string>("AccountID")
                         .IsRequired()
@@ -59,19 +61,19 @@ namespace EbayPlatform.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Account");
+                    b.ToTable("Account", (string)null);
 
-                    b
-                        .HasComment("账单");
+                    b.HasComment("账单");
                 });
 
-            modelBuilder.Entity("EbayPlatform.Domain.Models.Listing.Product", b =>
+            modelBuilder.Entity("EbayPlatform.Domain.AggregateModel.Listing.Product", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasComment("主键Id")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasComment("主键Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<string>("Country")
                         .HasMaxLength(10)
@@ -173,19 +175,19 @@ namespace EbayPlatform.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Product");
+                    b.ToTable("Product", (string)null);
 
-                    b
-                        .HasComment("产品");
+                    b.HasComment("产品");
                 });
 
-            modelBuilder.Entity("EbayPlatform.Domain.Models.Orders.Order", b =>
+            modelBuilder.Entity("EbayPlatform.Domain.AggregateModel.Orders.Order", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
-                        .HasComment("主键Id")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasComment("主键Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<DateTime?>("CreatedTime")
                         .HasColumnType("datetime2")
@@ -229,19 +231,19 @@ namespace EbayPlatform.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Order");
+                    b.ToTable("Order", (string)null);
 
-                    b
-                        .HasComment("订单");
+                    b.HasComment("订单");
                 });
 
-            modelBuilder.Entity("EbayPlatform.Domain.Models.SyncTaskJobConfig", b =>
+            modelBuilder.Entity("EbayPlatform.Domain.AggregateModel.SyncTaskJobConfig", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasComment("主键Id")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasComment("主键Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("CreateDate")
                         .ValueGeneratedOnAdd()
@@ -279,10 +281,6 @@ namespace EbayPlatform.Infrastructure.Migrations
                         .HasColumnType("nvarchar(100)")
                         .HasComment("Job名称");
 
-                    b.Property<int>("JobStatus")
-                        .HasColumnType("int")
-                        .HasComment("运行状态");
-
                     b.Property<DateTime?>("ModifyDate")
                         .ValueGeneratedOnUpdate()
                         .HasColumnType("datetime2")
@@ -295,19 +293,19 @@ namespace EbayPlatform.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SyncTaskJobConfig");
+                    b.ToTable("SyncTaskJobConfig", (string)null);
 
-                    b
-                        .HasComment("同步任务作业配置");
+                    b.HasComment("同步任务作业配置");
                 });
 
-            modelBuilder.Entity("EbayPlatform.Domain.Models.SystemLog", b =>
+            modelBuilder.Entity("EbayPlatform.Domain.AggregateModel.SystemLog", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasComment("主键Id")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasComment("主键Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Content")
                         .HasMaxLength(4000)
@@ -332,21 +330,90 @@ namespace EbayPlatform.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SystemLog");
+                    b.ToTable("SystemLog", (string)null);
 
-                    b
-                        .HasComment("系统日志表");
+                    b.HasComment("系统日志表");
                 });
 
-            modelBuilder.Entity("EbayPlatform.Domain.Models.Accounts.Account", b =>
+            modelBuilder.Entity("EbayPlatform.Domain.AggregateModel.Accounts.Account", b =>
                 {
-                    b.OwnsMany("EbayPlatform.Domain.Models.Accounts.AccountDetail", "AccountDetails", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "InvoiceCredit", b1 =>
+                        {
+                            b1.Property<long>("AccountId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("Currency")
+                                .HasMaxLength(10)
+                                .HasColumnType("nvarchar(10)")
+                                .HasColumnName("InvoiceCreditCurrency");
+
+                            b1.Property<decimal>("Value")
+                                .HasPrecision(18, 3)
+                                .HasColumnType("decimal(18,3)")
+                                .HasColumnName("InvoiceCredit");
+
+                            b1.HasKey("AccountId");
+
+                            b1.ToTable("Account");
+
+                            b1.WithOwner()
+                                .HasForeignKey("AccountId");
+                        });
+
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "InvoiceNewFee", b1 =>
+                        {
+                            b1.Property<long>("AccountId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("Currency")
+                                .HasMaxLength(10)
+                                .HasColumnType("nvarchar(10)")
+                                .HasColumnName("InvoiceNewFeeCurrency");
+
+                            b1.Property<decimal>("Value")
+                                .HasPrecision(18, 3)
+                                .HasColumnType("decimal(18,3)")
+                                .HasColumnName("InvoiceNewFee");
+
+                            b1.HasKey("AccountId");
+
+                            b1.ToTable("Account");
+
+                            b1.WithOwner()
+                                .HasForeignKey("AccountId");
+                        });
+
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "InvoicePayment", b1 =>
+                        {
+                            b1.Property<long>("AccountId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("Currency")
+                                .HasMaxLength(10)
+                                .HasColumnType("nvarchar(10)")
+                                .HasColumnName("InvoicePaymentCurrency");
+
+                            b1.Property<decimal>("Value")
+                                .HasPrecision(18, 3)
+                                .HasColumnType("decimal(18,3)")
+                                .HasColumnName("InvoicePayment");
+
+                            b1.HasKey("AccountId");
+
+                            b1.ToTable("Account");
+
+                            b1.WithOwner()
+                                .HasForeignKey("AccountId");
+                        });
+
+                    b.OwnsMany("EbayPlatform.Domain.AggregateModel.Accounts.AccountDetail", "AccountDetails", b1 =>
                         {
                             b1.Property<long>("Id")
                                 .ValueGeneratedOnAdd()
                                 .HasColumnType("bigint")
-                                .HasComment("主键Id")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                .HasComment("主键Id");
+
+                            SqlServerPropertyBuilderExtensions.UseIdentityColumn(b1.Property<long>("Id"), 1L, 1);
 
                             b1.Property<long>("AccountId")
                                 .HasColumnType("bigint");
@@ -404,12 +471,10 @@ namespace EbayPlatform.Infrastructure.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("AccountId");
 
-                            b1.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "Balance", b2 =>
+                            b1.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "Balance", b2 =>
                                 {
                                     b2.Property<long>("AccountDetailId")
-                                        .ValueGeneratedOnAdd()
-                                        .HasColumnType("bigint")
-                                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                        .HasColumnType("bigint");
 
                                     b2.Property<string>("Currency")
                                         .HasMaxLength(10)
@@ -429,12 +494,10 @@ namespace EbayPlatform.Infrastructure.Migrations
                                         .HasForeignKey("AccountDetailId");
                                 });
 
-                            b1.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "ConversionRate", b2 =>
+                            b1.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "ConversionRate", b2 =>
                                 {
                                     b2.Property<long>("AccountDetailId")
-                                        .ValueGeneratedOnAdd()
-                                        .HasColumnType("bigint")
-                                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                        .HasColumnType("bigint");
 
                                     b2.Property<string>("Currency")
                                         .HasMaxLength(10)
@@ -454,12 +517,10 @@ namespace EbayPlatform.Infrastructure.Migrations
                                         .HasForeignKey("AccountDetailId");
                                 });
 
-                            b1.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "GrossDetailAmount", b2 =>
+                            b1.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "GrossDetailAmount", b2 =>
                                 {
                                     b2.Property<long>("AccountDetailId")
-                                        .ValueGeneratedOnAdd()
-                                        .HasColumnType("bigint")
-                                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                        .HasColumnType("bigint");
 
                                     b2.Property<string>("Currency")
                                         .HasMaxLength(10)
@@ -479,12 +540,10 @@ namespace EbayPlatform.Infrastructure.Migrations
                                         .HasForeignKey("AccountDetailId");
                                 });
 
-                            b1.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "NetDetailAmount", b2 =>
+                            b1.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "NetDetailAmount", b2 =>
                                 {
                                     b2.Property<long>("AccountDetailId")
-                                        .ValueGeneratedOnAdd()
-                                        .HasColumnType("bigint")
-                                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                        .HasColumnType("bigint");
 
                                     b2.Property<string>("Currency")
                                         .HasMaxLength(10)
@@ -513,12 +572,10 @@ namespace EbayPlatform.Infrastructure.Migrations
                             b1.Navigation("NetDetailAmount");
                         });
 
-                    b.OwnsOne("EbayPlatform.Domain.Models.Accounts.AdditionalAccount", "AdditionalAccount", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.Accounts.AdditionalAccount", "AdditionalAccount", b1 =>
                         {
                             b1.Property<long>("AccountId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bigint")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                .HasColumnType("bigint");
 
                             b1.Property<string>("AccountCode")
                                 .HasMaxLength(50)
@@ -526,6 +583,7 @@ namespace EbayPlatform.Infrastructure.Migrations
                                 .HasComment("账户编号");
 
                             b1.Property<string>("CurrencyCode")
+                                .IsRequired()
                                 .HasMaxLength(10)
                                 .HasColumnType("nvarchar(10)")
                                 .HasComment("币种");
@@ -537,12 +595,10 @@ namespace EbayPlatform.Infrastructure.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("AccountId");
 
-                            b1.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "Balance", b2 =>
+                            b1.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "Balance", b2 =>
                                 {
                                     b2.Property<long>("AdditionalAccountAccountId")
-                                        .ValueGeneratedOnAdd()
-                                        .HasColumnType("bigint")
-                                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                        .HasColumnType("bigint");
 
                                     b2.Property<string>("Currency")
                                         .HasMaxLength(10)
@@ -565,81 +621,6 @@ namespace EbayPlatform.Infrastructure.Migrations
                             b1.Navigation("Balance");
                         });
 
-                    b.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "InvoiceCredit", b1 =>
-                        {
-                            b1.Property<long>("AccountId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bigint")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                            b1.Property<string>("Currency")
-                                .HasMaxLength(10)
-                                .HasColumnType("nvarchar(10)")
-                                .HasColumnName("InvoiceCreditCurrency");
-
-                            b1.Property<decimal>("Value")
-                                .HasPrecision(18, 3)
-                                .HasColumnType("decimal(18,3)")
-                                .HasColumnName("InvoiceCredit");
-
-                            b1.HasKey("AccountId");
-
-                            b1.ToTable("Account");
-
-                            b1.WithOwner()
-                                .HasForeignKey("AccountId");
-                        });
-
-                    b.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "InvoiceNewFee", b1 =>
-                        {
-                            b1.Property<long>("AccountId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bigint")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                            b1.Property<string>("Currency")
-                                .HasMaxLength(10)
-                                .HasColumnType("nvarchar(10)")
-                                .HasColumnName("InvoiceNewFeeCurrency");
-
-                            b1.Property<decimal>("Value")
-                                .HasPrecision(18, 3)
-                                .HasColumnType("decimal(18,3)")
-                                .HasColumnName("InvoiceNewFee");
-
-                            b1.HasKey("AccountId");
-
-                            b1.ToTable("Account");
-
-                            b1.WithOwner()
-                                .HasForeignKey("AccountId");
-                        });
-
-                    b.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "InvoicePayment", b1 =>
-                        {
-                            b1.Property<long>("AccountId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bigint")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                            b1.Property<string>("Currency")
-                                .HasMaxLength(10)
-                                .HasColumnType("nvarchar(10)")
-                                .HasColumnName("InvoicePaymentCurrency");
-
-                            b1.Property<decimal>("Value")
-                                .HasPrecision(18, 3)
-                                .HasColumnType("decimal(18,3)")
-                                .HasColumnName("InvoicePayment");
-
-                            b1.HasKey("AccountId");
-
-                            b1.ToTable("Account");
-
-                            b1.WithOwner()
-                                .HasForeignKey("AccountId");
-                        });
-
                     b.Navigation("AccountDetails");
 
                     b.Navigation("AdditionalAccount");
@@ -651,14 +632,58 @@ namespace EbayPlatform.Infrastructure.Migrations
                     b.Navigation("InvoicePayment");
                 });
 
-            modelBuilder.Entity("EbayPlatform.Domain.Models.Listing.Product", b =>
+            modelBuilder.Entity("EbayPlatform.Domain.AggregateModel.Listing.Product", b =>
                 {
-                    b.OwnsOne("EbayPlatform.Domain.Models.Listing.ProductCategory", "FreeAddedCategory", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "BuyItNowPrice", b1 =>
                         {
                             b1.Property<long>("ProductId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bigint")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("Currency")
+                                .HasMaxLength(10)
+                                .HasColumnType("nvarchar(10)")
+                                .HasColumnName("BuyItNowPriceCurrency");
+
+                            b1.Property<decimal>("Value")
+                                .HasPrecision(18, 3)
+                                .HasColumnType("decimal(18,3)")
+                                .HasColumnName("BuyItNowPrice");
+
+                            b1.HasKey("ProductId");
+
+                            b1.ToTable("Product");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ProductId");
+                        });
+
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "BuyerGuaranteePrice", b1 =>
+                        {
+                            b1.Property<long>("ProductId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("Currency")
+                                .HasMaxLength(10)
+                                .HasColumnType("nvarchar(10)")
+                                .HasColumnName("BuyerGuaranteePriceCurrency");
+
+                            b1.Property<decimal>("Value")
+                                .HasPrecision(18, 3)
+                                .HasColumnType("decimal(18,3)")
+                                .HasColumnName("BuyerGuaranteePrice");
+
+                            b1.HasKey("ProductId");
+
+                            b1.ToTable("Product");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ProductId");
+                        });
+
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.Listing.ProductCategory", "FreeAddedCategory", b1 =>
+                        {
+                            b1.Property<long>("ProductId")
+                                .HasColumnType("bigint");
 
                             b1.Property<string>("CategoryID")
                                 .HasMaxLength(50)
@@ -678,12 +703,10 @@ namespace EbayPlatform.Infrastructure.Migrations
                                 .HasForeignKey("ProductId");
                         });
 
-                    b.OwnsOne("EbayPlatform.Domain.Models.Listing.ProductCategory", "PrimaryCategory", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.Listing.ProductCategory", "PrimaryCategory", b1 =>
                         {
                             b1.Property<long>("ProductId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bigint")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                .HasColumnType("bigint");
 
                             b1.Property<string>("CategoryID")
                                 .HasMaxLength(50)
@@ -703,12 +726,33 @@ namespace EbayPlatform.Infrastructure.Migrations
                                 .HasForeignKey("ProductId");
                         });
 
-                    b.OwnsOne("EbayPlatform.Domain.Models.Listing.ProductCategory", "SecondaryCategory", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "ReservePrice", b1 =>
                         {
                             b1.Property<long>("ProductId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bigint")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("Currency")
+                                .HasMaxLength(10)
+                                .HasColumnType("nvarchar(10)")
+                                .HasColumnName("ReservePriceCurrency");
+
+                            b1.Property<decimal>("Value")
+                                .HasPrecision(18, 3)
+                                .HasColumnType("decimal(18,3)")
+                                .HasColumnName("ReservePrice");
+
+                            b1.HasKey("ProductId");
+
+                            b1.ToTable("Product");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ProductId");
+                        });
+
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.Listing.ProductCategory", "SecondaryCategory", b1 =>
+                        {
+                            b1.Property<long>("ProductId")
+                                .HasColumnType("bigint");
 
                             b1.Property<string>("CategoryID")
                                 .HasMaxLength(50)
@@ -728,12 +772,33 @@ namespace EbayPlatform.Infrastructure.Migrations
                                 .HasForeignKey("ProductId");
                         });
 
-                    b.OwnsOne("EbayPlatform.Domain.Models.Listing.SellingStatus", "SellingStatus", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "StartPrice", b1 =>
                         {
                             b1.Property<long>("ProductId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bigint")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("Currency")
+                                .HasMaxLength(10)
+                                .HasColumnType("nvarchar(10)")
+                                .HasColumnName("StartPriceCurrency");
+
+                            b1.Property<decimal>("Value")
+                                .HasPrecision(18, 3)
+                                .HasColumnType("decimal(18,3)")
+                                .HasColumnName("StartPrice");
+
+                            b1.HasKey("ProductId");
+
+                            b1.ToTable("Product");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ProductId");
+                        });
+
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.Listing.SellingStatus", "SellingStatus", b1 =>
+                        {
+                            b1.Property<long>("ProductId")
+                                .HasColumnType("bigint");
 
                             b1.Property<bool>("AdminEnded")
                                 .ValueGeneratedOnAdd()
@@ -756,17 +821,16 @@ namespace EbayPlatform.Infrastructure.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("ProductId");
 
-                            b1.OwnsOne("EbayPlatform.Domain.Models.Listing.PromotionalSaleDetail", "PromotionalSaleDetail", b2 =>
+                            b1.OwnsOne("EbayPlatform.Domain.AggregateModel.Listing.PromotionalSaleDetail", "PromotionalSaleDetail", b2 =>
                                 {
                                     b2.Property<long>("SellingStatusProductId")
-                                        .ValueGeneratedOnAdd()
-                                        .HasColumnType("bigint")
-                                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                        .HasColumnType("bigint");
 
                                     b2.Property<DateTime?>("EndTime")
                                         .HasColumnType("datetime2");
 
                                     b2.Property<DateTime?>("StartTime")
+                                        .IsRequired()
                                         .HasColumnType("datetime2");
 
                                     b2.HasKey("SellingStatusProductId");
@@ -776,12 +840,10 @@ namespace EbayPlatform.Infrastructure.Migrations
                                     b2.WithOwner()
                                         .HasForeignKey("SellingStatusProductId");
 
-                                    b2.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "OriginalPrice", b3 =>
+                                    b2.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "OriginalPrice", b3 =>
                                         {
                                             b3.Property<long>("PromotionalSaleDetailSellingStatusProductId")
-                                                .ValueGeneratedOnAdd()
-                                                .HasColumnType("bigint")
-                                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                                .HasColumnType("bigint");
 
                                             b3.Property<string>("Currency")
                                                 .HasMaxLength(10)
@@ -804,12 +866,10 @@ namespace EbayPlatform.Infrastructure.Migrations
                                     b2.Navigation("OriginalPrice");
                                 });
 
-                            b1.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "ConvertedCurrentPrice", b2 =>
+                            b1.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "ConvertedCurrentPrice", b2 =>
                                 {
                                     b2.Property<long>("SellingStatusProductId")
-                                        .ValueGeneratedOnAdd()
-                                        .HasColumnType("bigint")
-                                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                        .HasColumnType("bigint");
 
                                     b2.Property<string>("Currency")
                                         .HasMaxLength(10)
@@ -829,12 +889,10 @@ namespace EbayPlatform.Infrastructure.Migrations
                                         .HasForeignKey("SellingStatusProductId");
                                 });
 
-                            b1.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "CurrentPrice", b2 =>
+                            b1.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "CurrentPrice", b2 =>
                                 {
                                     b2.Property<long>("SellingStatusProductId")
-                                        .ValueGeneratedOnAdd()
-                                        .HasColumnType("bigint")
-                                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                        .HasColumnType("bigint");
 
                                     b2.Property<string>("Currency")
                                         .HasMaxLength(10)
@@ -861,109 +919,9 @@ namespace EbayPlatform.Infrastructure.Migrations
                             b1.Navigation("PromotionalSaleDetail");
                         });
 
-                    b.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "BuyItNowPrice", b1 =>
-                        {
-                            b1.Property<long>("ProductId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bigint")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                            b1.Property<string>("Currency")
-                                .HasMaxLength(10)
-                                .HasColumnType("nvarchar(10)")
-                                .HasColumnName("BuyItNowPriceCurrency");
-
-                            b1.Property<decimal>("Value")
-                                .HasPrecision(18, 3)
-                                .HasColumnType("decimal(18,3)")
-                                .HasColumnName("BuyItNowPrice");
-
-                            b1.HasKey("ProductId");
-
-                            b1.ToTable("Product");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ProductId");
-                        });
-
-                    b.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "BuyerGuaranteePrice", b1 =>
-                        {
-                            b1.Property<long>("ProductId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bigint")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                            b1.Property<string>("Currency")
-                                .HasMaxLength(10)
-                                .HasColumnType("nvarchar(10)")
-                                .HasColumnName("BuyerGuaranteePriceCurrency");
-
-                            b1.Property<decimal>("Value")
-                                .HasPrecision(18, 3)
-                                .HasColumnType("decimal(18,3)")
-                                .HasColumnName("BuyerGuaranteePrice");
-
-                            b1.HasKey("ProductId");
-
-                            b1.ToTable("Product");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ProductId");
-                        });
-
-                    b.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "ReservePrice", b1 =>
-                        {
-                            b1.Property<long>("ProductId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bigint")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                            b1.Property<string>("Currency")
-                                .HasMaxLength(10)
-                                .HasColumnType("nvarchar(10)")
-                                .HasColumnName("ReservePriceCurrency");
-
-                            b1.Property<decimal>("Value")
-                                .HasPrecision(18, 3)
-                                .HasColumnType("decimal(18,3)")
-                                .HasColumnName("ReservePrice");
-
-                            b1.HasKey("ProductId");
-
-                            b1.ToTable("Product");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ProductId");
-                        });
-
-                    b.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "StartPrice", b1 =>
-                        {
-                            b1.Property<long>("ProductId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bigint")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                            b1.Property<string>("Currency")
-                                .HasMaxLength(10)
-                                .HasColumnType("nvarchar(10)")
-                                .HasColumnName("StartPriceCurrency");
-
-                            b1.Property<decimal>("Value")
-                                .HasPrecision(18, 3)
-                                .HasColumnType("decimal(18,3)")
-                                .HasColumnName("StartPrice");
-
-                            b1.HasKey("ProductId");
-
-                            b1.ToTable("Product");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ProductId");
-                        });
+                    b.Navigation("BuyItNowPrice");
 
                     b.Navigation("BuyerGuaranteePrice");
-
-                    b.Navigation("BuyItNowPrice");
 
                     b.Navigation("FreeAddedCategory");
 
@@ -978,140 +936,12 @@ namespace EbayPlatform.Infrastructure.Migrations
                     b.Navigation("StartPrice");
                 });
 
-            modelBuilder.Entity("EbayPlatform.Domain.Models.Orders.Order", b =>
+            modelBuilder.Entity("EbayPlatform.Domain.AggregateModel.Orders.Order", b =>
                 {
-                    b.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "AdjustmentAmount", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.Orders.Address", "ShippingAddress", b1 =>
                         {
                             b1.Property<long>("OrderId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bigint")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                            b1.Property<string>("Currency")
-                                .HasMaxLength(10)
-                                .HasColumnType("nvarchar(10)")
-                                .HasColumnName("AdjustmentAmountCurrency");
-
-                            b1.Property<decimal>("Value")
-                                .HasPrecision(18, 3)
-                                .HasColumnType("decimal(18,3)")
-                                .HasColumnName("AdjustmentAmount");
-
-                            b1.HasKey("OrderId");
-
-                            b1.ToTable("Order");
-
-                            b1.WithOwner()
-                                .HasForeignKey("OrderId");
-                        });
-
-                    b.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "AmountPaid", b1 =>
-                        {
-                            b1.Property<long>("OrderId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bigint")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                            b1.Property<string>("Currency")
-                                .HasMaxLength(10)
-                                .HasColumnType("nvarchar(10)")
-                                .HasColumnName("AmountPaidCurrency");
-
-                            b1.Property<decimal>("Value")
-                                .HasPrecision(18, 3)
-                                .HasColumnType("decimal(18,3)")
-                                .HasColumnName("AmountPaid");
-
-                            b1.HasKey("OrderId");
-
-                            b1.ToTable("Order");
-
-                            b1.WithOwner()
-                                .HasForeignKey("OrderId");
-                        });
-
-                    b.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "AmountSaved", b1 =>
-                        {
-                            b1.Property<long>("OrderId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bigint")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                            b1.Property<string>("Currency")
-                                .ValueGeneratedOnUpdateSometimes()
-                                .HasMaxLength(10)
-                                .HasColumnType("nvarchar(10)")
-                                .HasColumnName("AmountSavedCurrency");
-
-                            b1.Property<decimal>("Value")
-                                .HasPrecision(18, 3)
-                                .HasColumnType("decimal(18,3)")
-                                .HasColumnName("AmountSaved");
-
-                            b1.HasKey("OrderId");
-
-                            b1.ToTable("Order");
-
-                            b1.WithOwner()
-                                .HasForeignKey("OrderId");
-                        });
-
-                    b.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "Subtotal", b1 =>
-                        {
-                            b1.Property<long>("OrderId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bigint")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                            b1.Property<string>("Currency")
-                                .HasMaxLength(10)
-                                .HasColumnType("nvarchar(10)")
-                                .HasColumnName("SubtotalCurrency");
-
-                            b1.Property<decimal>("Value")
-                                .HasPrecision(18, 3)
-                                .HasColumnType("decimal(18,3)")
-                                .HasColumnName("Subtotal");
-
-                            b1.HasKey("OrderId");
-
-                            b1.ToTable("Order");
-
-                            b1.WithOwner()
-                                .HasForeignKey("OrderId");
-                        });
-
-                    b.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "Total", b1 =>
-                        {
-                            b1.Property<long>("OrderId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bigint")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                            b1.Property<string>("Currency")
-                                .HasMaxLength(10)
-                                .HasColumnType("nvarchar(10)")
-                                .HasColumnName("TotalCurrency");
-
-                            b1.Property<decimal>("Value")
-                                .HasPrecision(18, 3)
-                                .HasColumnType("decimal(18,3)")
-                                .HasColumnName("Total");
-
-                            b1.HasKey("OrderId");
-
-                            b1.ToTable("Order");
-
-                            b1.WithOwner()
-                                .HasForeignKey("OrderId");
-                        });
-
-                    b.OwnsOne("EbayPlatform.Domain.Models.Orders.Address", "ShippingAddress", b1 =>
-                        {
-                            b1.Property<long>("OrderId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bigint")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                .HasColumnType("bigint");
 
                             b1.Property<string>("AddressID")
                                 .IsRequired()
@@ -1182,12 +1012,10 @@ namespace EbayPlatform.Infrastructure.Migrations
                                 .HasForeignKey("OrderId");
                         });
 
-                    b.OwnsOne("EbayPlatform.Domain.Models.Orders.CheckoutStatus", "CheckoutStatus", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.Orders.CheckoutStatus", "CheckoutStatus", b1 =>
                         {
                             b1.Property<long>("OrderId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bigint")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                .HasColumnType("bigint");
 
                             b1.Property<string>("EBayPaymentStatus")
                                 .HasMaxLength(40)
@@ -1225,13 +1053,232 @@ namespace EbayPlatform.Infrastructure.Migrations
                                 .HasForeignKey("OrderId");
                         });
 
-                    b.OwnsMany("EbayPlatform.Domain.Models.Orders.OrderTransaction", "OrderTransactions", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "AdjustmentAmount", b1 =>
+                        {
+                            b1.Property<long>("OrderId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("Currency")
+                                .HasMaxLength(10)
+                                .HasColumnType("nvarchar(10)")
+                                .HasColumnName("AdjustmentAmountCurrency");
+
+                            b1.Property<decimal>("Value")
+                                .HasPrecision(18, 3)
+                                .HasColumnType("decimal(18,3)")
+                                .HasColumnName("AdjustmentAmount");
+
+                            b1.HasKey("OrderId");
+
+                            b1.ToTable("Order");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderId");
+                        });
+
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "AmountPaid", b1 =>
+                        {
+                            b1.Property<long>("OrderId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("Currency")
+                                .HasMaxLength(10)
+                                .HasColumnType("nvarchar(10)")
+                                .HasColumnName("AmountPaidCurrency");
+
+                            b1.Property<decimal>("Value")
+                                .HasPrecision(18, 3)
+                                .HasColumnType("decimal(18,3)")
+                                .HasColumnName("AmountPaid");
+
+                            b1.HasKey("OrderId");
+
+                            b1.ToTable("Order");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderId");
+                        });
+
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "AmountSaved", b1 =>
+                        {
+                            b1.Property<long>("OrderId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("Currency")
+                                .ValueGeneratedOnUpdateSometimes()
+                                .HasMaxLength(10)
+                                .HasColumnType("nvarchar(10)")
+                                .HasColumnName("AmountSavedCurrency");
+
+                            b1.Property<decimal>("Value")
+                                .HasPrecision(18, 3)
+                                .HasColumnType("decimal(18,3)")
+                                .HasColumnName("AmountSaved");
+
+                            b1.HasKey("OrderId");
+
+                            b1.ToTable("Order");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderId");
+                        });
+
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.Orders.ShippingServiceOption", "ShippingServiceSelected", b1 =>
+                        {
+                            b1.Property<long>("OrderId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<bool?>("ExpeditedService")
+                                .HasColumnType("bit")
+                                .HasComment("是否加急服务");
+
+                            b1.Property<long>("Id")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("ShippingService")
+                                .HasMaxLength(300)
+                                .HasColumnType("nvarchar(300)")
+                                .HasComment("运输服务");
+
+                            b1.Property<int?>("ShippingServicePriority")
+                                .HasColumnType("int");
+
+                            b1.Property<int?>("ShippingTimeMax")
+                                .HasColumnType("int")
+                                .HasComment("装运时间");
+
+                            b1.Property<int?>("ShippingTimeMin")
+                                .HasColumnType("int")
+                                .HasComment("装运时间");
+
+                            b1.HasKey("OrderId");
+
+                            b1.ToTable("Order");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderId");
+
+                            b1.OwnsOne("EbayPlatform.Domain.AggregateModel.Orders.ShippingPackage", "ShippingPackage", b2 =>
+                                {
+                                    b2.Property<long>("ShippingServiceOptionOrderId")
+                                        .HasColumnType("bigint");
+
+                                    b2.Property<DateTime?>("ActualDeliveryTime")
+                                        .HasColumnType("datetime2");
+
+                                    b2.Property<DateTime?>("EstimatedDeliveryTimeMax")
+                                        .HasColumnType("datetime2")
+                                        .HasComment("预计发货时间 Max");
+
+                                    b2.Property<DateTime?>("EstimatedDeliveryTimeMin")
+                                        .HasColumnType("datetime2")
+                                        .HasComment("预计发货时间 Min");
+
+                                    b2.Property<DateTime?>("ScheduledDeliveryTimeMax")
+                                        .HasColumnType("datetime2");
+
+                                    b2.Property<DateTime?>("ScheduledDeliveryTimeMin")
+                                        .HasColumnType("datetime2");
+
+                                    b2.Property<string>("ShippingTrackingEvent")
+                                        .HasMaxLength(200)
+                                        .HasColumnType("nvarchar(200)");
+
+                                    b2.Property<string>("StoreID")
+                                        .HasMaxLength(100)
+                                        .HasColumnType("nvarchar(100)");
+
+                                    b2.HasKey("ShippingServiceOptionOrderId");
+
+                                    b2.ToTable("Order");
+
+                                    b2.WithOwner()
+                                        .HasForeignKey("ShippingServiceOptionOrderId");
+                                });
+
+                            b1.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "ShippingServiceCost", b2 =>
+                                {
+                                    b2.Property<long>("ShippingServiceOptionOrderId")
+                                        .HasColumnType("bigint");
+
+                                    b2.Property<string>("Currency")
+                                        .ValueGeneratedOnUpdateSometimes()
+                                        .HasMaxLength(10)
+                                        .HasColumnType("nvarchar(10)")
+                                        .HasColumnName("AmountSavedCurrency");
+
+                                    b2.Property<decimal>("Value")
+                                        .HasPrecision(18, 3)
+                                        .HasColumnType("decimal(18,3)")
+                                        .HasColumnName("ShippingServiceCost");
+
+                                    b2.HasKey("ShippingServiceOptionOrderId");
+
+                                    b2.ToTable("Order");
+
+                                    b2.WithOwner()
+                                        .HasForeignKey("ShippingServiceOptionOrderId");
+                                });
+
+                            b1.Navigation("ShippingPackage");
+
+                            b1.Navigation("ShippingServiceCost");
+                        });
+
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "Subtotal", b1 =>
+                        {
+                            b1.Property<long>("OrderId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("Currency")
+                                .HasMaxLength(10)
+                                .HasColumnType("nvarchar(10)")
+                                .HasColumnName("SubtotalCurrency");
+
+                            b1.Property<decimal>("Value")
+                                .HasPrecision(18, 3)
+                                .HasColumnType("decimal(18,3)")
+                                .HasColumnName("Subtotal");
+
+                            b1.HasKey("OrderId");
+
+                            b1.ToTable("Order");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderId");
+                        });
+
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "Total", b1 =>
+                        {
+                            b1.Property<long>("OrderId")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("Currency")
+                                .HasMaxLength(10)
+                                .HasColumnType("nvarchar(10)")
+                                .HasColumnName("TotalCurrency");
+
+                            b1.Property<decimal>("Value")
+                                .HasPrecision(18, 3)
+                                .HasColumnType("decimal(18,3)")
+                                .HasColumnName("Total");
+
+                            b1.HasKey("OrderId");
+
+                            b1.ToTable("Order");
+
+                            b1.WithOwner()
+                                .HasForeignKey("OrderId");
+                        });
+
+                    b.OwnsMany("EbayPlatform.Domain.AggregateModel.Orders.OrderTransaction", "OrderTransactions", b1 =>
                         {
                             b1.Property<long>("Id")
                                 .ValueGeneratedOnAdd()
                                 .HasColumnType("bigint")
-                                .HasComment("主键Id")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                .HasComment("主键Id");
+
+                            SqlServerPropertyBuilderExtensions.UseIdentityColumn(b1.Property<long>("Id"), 1L, 1);
 
                             b1.Property<string>("ConditionDisplayName")
                                 .HasMaxLength(500)
@@ -1281,37 +1328,10 @@ namespace EbayPlatform.Infrastructure.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("OrderId");
 
-                            b1.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "TransactionPrice", b2 =>
+                            b1.OwnsOne("EbayPlatform.Domain.AggregateModel.Orders.ShippingServiceOption", "ShippingServiceSelected", b2 =>
                                 {
                                     b2.Property<long>("OrderTransactionId")
-                                        .ValueGeneratedOnAdd()
-                                        .HasColumnType("bigint")
-                                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                                    b2.Property<string>("Currency")
-                                        .HasMaxLength(10)
-                                        .HasColumnType("nvarchar(10)")
-                                        .HasColumnName("TransactionPriceCurrency");
-
-                                    b2.Property<decimal>("Value")
-                                        .HasPrecision(18, 3)
-                                        .HasColumnType("decimal(18,3)")
-                                        .HasColumnName("TransactionPrice");
-
-                                    b2.HasKey("OrderTransactionId");
-
-                                    b2.ToTable("OrderTransaction");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("OrderTransactionId");
-                                });
-
-                            b1.OwnsOne("EbayPlatform.Domain.Models.Orders.ShippingServiceOption", "ShippingServiceSelected", b2 =>
-                                {
-                                    b2.Property<long>("OrderTransactionId")
-                                        .ValueGeneratedOnAdd()
-                                        .HasColumnType("bigint")
-                                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                        .HasColumnType("bigint");
 
                                     b2.Property<bool?>("ExpeditedService")
                                         .HasColumnType("bit")
@@ -1343,37 +1363,10 @@ namespace EbayPlatform.Infrastructure.Migrations
                                     b2.WithOwner()
                                         .HasForeignKey("OrderTransactionId");
 
-                                    b2.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "ShippingServiceCost", b3 =>
+                                    b2.OwnsOne("EbayPlatform.Domain.AggregateModel.Orders.ShippingPackage", "ShippingPackage", b3 =>
                                         {
                                             b3.Property<long>("ShippingServiceOptionOrderTransactionId")
-                                                .ValueGeneratedOnAdd()
-                                                .HasColumnType("bigint")
-                                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                                            b3.Property<string>("Currency")
-                                                .HasMaxLength(10)
-                                                .HasColumnType("nvarchar(10)")
-                                                .HasColumnName("ShippingServiceCostCurrency");
-
-                                            b3.Property<decimal>("Value")
-                                                .HasPrecision(18, 3)
-                                                .HasColumnType("decimal(18,3)")
-                                                .HasColumnName("ShippingServiceCost");
-
-                                            b3.HasKey("ShippingServiceOptionOrderTransactionId");
-
-                                            b3.ToTable("OrderTransaction");
-
-                                            b3.WithOwner()
-                                                .HasForeignKey("ShippingServiceOptionOrderTransactionId");
-                                        });
-
-                                    b2.OwnsOne("EbayPlatform.Domain.Models.Orders.ShippingPackage", "ShippingPackage", b3 =>
-                                        {
-                                            b3.Property<long>("ShippingServiceOptionOrderTransactionId")
-                                                .ValueGeneratedOnAdd()
-                                                .HasColumnType("bigint")
-                                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                                .HasColumnType("bigint");
 
                                             b3.Property<DateTime?>("ActualDeliveryTime")
                                                 .HasColumnType("datetime2");
@@ -1408,17 +1401,61 @@ namespace EbayPlatform.Infrastructure.Migrations
                                                 .HasForeignKey("ShippingServiceOptionOrderTransactionId");
                                         });
 
+                                    b2.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "ShippingServiceCost", b3 =>
+                                        {
+                                            b3.Property<long>("ShippingServiceOptionOrderTransactionId")
+                                                .HasColumnType("bigint");
+
+                                            b3.Property<string>("Currency")
+                                                .HasMaxLength(10)
+                                                .HasColumnType("nvarchar(10)")
+                                                .HasColumnName("ShippingServiceCostCurrency");
+
+                                            b3.Property<decimal>("Value")
+                                                .HasPrecision(18, 3)
+                                                .HasColumnType("decimal(18,3)")
+                                                .HasColumnName("ShippingServiceCost");
+
+                                            b3.HasKey("ShippingServiceOptionOrderTransactionId");
+
+                                            b3.ToTable("OrderTransaction");
+
+                                            b3.WithOwner()
+                                                .HasForeignKey("ShippingServiceOptionOrderTransactionId");
+                                        });
+
                                     b2.Navigation("ShippingPackage");
 
                                     b2.Navigation("ShippingServiceCost");
                                 });
 
-                            b1.OwnsOne("EbayPlatform.Domain.Models.Orders.TransactionStatus", "Status", b2 =>
+                            b1.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "TransactionPrice", b2 =>
                                 {
                                     b2.Property<long>("OrderTransactionId")
-                                        .ValueGeneratedOnAdd()
-                                        .HasColumnType("bigint")
-                                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                        .HasColumnType("bigint");
+
+                                    b2.Property<string>("Currency")
+                                        .HasMaxLength(10)
+                                        .HasColumnType("nvarchar(10)")
+                                        .HasColumnName("TransactionPriceCurrency");
+
+                                    b2.Property<decimal>("Value")
+                                        .HasPrecision(18, 3)
+                                        .HasColumnType("decimal(18,3)")
+                                        .HasColumnName("TransactionPrice");
+
+                                    b2.HasKey("OrderTransactionId");
+
+                                    b2.ToTable("OrderTransaction");
+
+                                    b2.WithOwner()
+                                        .HasForeignKey("OrderTransactionId");
+                                });
+
+                            b1.OwnsOne("EbayPlatform.Domain.AggregateModel.Orders.TransactionStatus", "Status", b2 =>
+                                {
+                                    b2.Property<long>("OrderTransactionId")
+                                        .HasColumnType("bigint");
 
                                     b2.Property<string>("InquiryStatus")
                                         .HasMaxLength(40)
@@ -1450,15 +1487,16 @@ namespace EbayPlatform.Infrastructure.Migrations
                             b1.Navigation("TransactionPrice");
                         });
 
-                    b.OwnsOne("EbayPlatform.Domain.Models.Orders.ShippingDetail", "ShippingDetail", b1 =>
+                    b.OwnsOne("EbayPlatform.Domain.AggregateModel.Orders.ShippingDetail", "ShippingDetail", b1 =>
                         {
                             b1.Property<long>("OrderId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bigint")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                .HasColumnType("bigint");
 
                             b1.Property<bool?>("GetItFast")
+                                .IsRequired()
+                                .ValueGeneratedOnAdd()
                                 .HasColumnType("bit")
+                                .HasDefaultValue(false)
                                 .HasComment("是否加急");
 
                             b1.Property<int?>("SellingManagerSalesRecordNumber")
@@ -1471,12 +1509,10 @@ namespace EbayPlatform.Infrastructure.Migrations
                             b1.WithOwner()
                                 .HasForeignKey("OrderId");
 
-                            b1.OwnsOne("EbayPlatform.Domain.Models.Orders.SalesTax", "SalesTax", b2 =>
+                            b1.OwnsOne("EbayPlatform.Domain.AggregateModel.Orders.SalesTax", "SalesTax", b2 =>
                                 {
                                     b2.Property<long>("ShippingDetailOrderId")
-                                        .ValueGeneratedOnAdd()
-                                        .HasColumnType("bigint")
-                                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                        .HasColumnType("bigint");
 
                                     b2.Property<float>("SalesTaxPercent")
                                         .HasColumnType("real")
@@ -1493,12 +1529,10 @@ namespace EbayPlatform.Infrastructure.Migrations
                                     b2.WithOwner()
                                         .HasForeignKey("ShippingDetailOrderId");
 
-                                    b2.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "SalesTaxAmount", b3 =>
+                                    b2.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "SalesTaxAmount", b3 =>
                                         {
                                             b3.Property<long>("SalesTaxShippingDetailOrderId")
-                                                .ValueGeneratedOnAdd()
-                                                .HasColumnType("bigint")
-                                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                                .HasColumnType("bigint");
 
                                             b3.Property<string>("Currency")
                                                 .HasMaxLength(10)
@@ -1521,13 +1555,14 @@ namespace EbayPlatform.Infrastructure.Migrations
                                     b2.Navigation("SalesTaxAmount");
                                 });
 
-                            b1.OwnsMany("EbayPlatform.Domain.Models.Orders.ShippingServiceOption", "ShippingServiceOptions", b2 =>
+                            b1.OwnsMany("EbayPlatform.Domain.AggregateModel.Orders.ShippingServiceOption", "ShippingServiceOptions", b2 =>
                                 {
                                     b2.Property<long>("Id")
                                         .ValueGeneratedOnAdd()
                                         .HasColumnType("bigint")
-                                        .HasComment("主键Id")
-                                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                        .HasComment("主键Id");
+
+                                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b2.Property<long>("Id"), 1L, 1);
 
                                     b2.Property<bool?>("ExpeditedService")
                                         .HasColumnType("bit")
@@ -1561,39 +1596,10 @@ namespace EbayPlatform.Infrastructure.Migrations
                                     b2.WithOwner()
                                         .HasForeignKey("ShippingDetailOrderId");
 
-                                    b2.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "ShippingServiceCost", b3 =>
+                                    b2.OwnsOne("EbayPlatform.Domain.AggregateModel.Orders.ShippingPackage", "ShippingPackage", b3 =>
                                         {
                                             b3.Property<long>("ShippingServiceOptionId")
-                                                .ValueGeneratedOnAdd()
-                                                .HasColumnType("bigint")
-                                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                                            b3.Property<string>("Currency")
-                                                .HasMaxLength(10)
-                                                .HasColumnType("nvarchar(10)")
-                                                .HasColumnName("ShippingServiceCostCurrency");
-
-                                            b3.Property<decimal>("Value")
-                                                .ValueGeneratedOnAdd()
-                                                .HasPrecision(18, 3)
-                                                .HasColumnType("decimal(18,3)")
-                                                .HasDefaultValue(0m)
-                                                .HasColumnName("ShippingServiceCost");
-
-                                            b3.HasKey("ShippingServiceOptionId");
-
-                                            b3.ToTable("Order_ShippingServiceOptions");
-
-                                            b3.WithOwner()
-                                                .HasForeignKey("ShippingServiceOptionId");
-                                        });
-
-                                    b2.OwnsOne("EbayPlatform.Domain.Models.Orders.ShippingPackage", "ShippingPackage", b3 =>
-                                        {
-                                            b3.Property<long>("ShippingServiceOptionId")
-                                                .ValueGeneratedOnAdd()
-                                                .HasColumnType("bigint")
-                                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                                .HasColumnType("bigint");
 
                                             b3.Property<DateTime?>("ActualDeliveryTime")
                                                 .HasColumnType("datetime2");
@@ -1628,6 +1634,31 @@ namespace EbayPlatform.Infrastructure.Migrations
                                                 .HasForeignKey("ShippingServiceOptionId");
                                         });
 
+                                    b2.OwnsOne("EbayPlatform.Domain.AggregateModel.MoneyValue", "ShippingServiceCost", b3 =>
+                                        {
+                                            b3.Property<long>("ShippingServiceOptionId")
+                                                .HasColumnType("bigint");
+
+                                            b3.Property<string>("Currency")
+                                                .HasMaxLength(10)
+                                                .HasColumnType("nvarchar(10)")
+                                                .HasColumnName("ShippingServiceCostCurrency");
+
+                                            b3.Property<decimal>("Value")
+                                                .ValueGeneratedOnAdd()
+                                                .HasPrecision(18, 3)
+                                                .HasColumnType("decimal(18,3)")
+                                                .HasDefaultValue(0m)
+                                                .HasColumnName("ShippingServiceCost");
+
+                                            b3.HasKey("ShippingServiceOptionId");
+
+                                            b3.ToTable("Order_ShippingServiceOptions");
+
+                                            b3.WithOwner()
+                                                .HasForeignKey("ShippingServiceOptionId");
+                                        });
+
                                     b2.Navigation("ShippingPackage");
 
                                     b2.Navigation("ShippingServiceCost");
@@ -1636,114 +1667,6 @@ namespace EbayPlatform.Infrastructure.Migrations
                             b1.Navigation("SalesTax");
 
                             b1.Navigation("ShippingServiceOptions");
-                        });
-
-                    b.OwnsOne("EbayPlatform.Domain.Models.Orders.ShippingServiceOption", "ShippingServiceSelected", b1 =>
-                        {
-                            b1.Property<long>("OrderId")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("bigint")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                            b1.Property<bool?>("ExpeditedService")
-                                .HasColumnType("bit")
-                                .HasComment("是否加急服务");
-
-                            b1.Property<long>("Id")
-                                .HasColumnType("bigint");
-
-                            b1.Property<string>("ShippingService")
-                                .HasMaxLength(300)
-                                .HasColumnType("nvarchar(300)")
-                                .HasComment("运输服务");
-
-                            b1.Property<int?>("ShippingServicePriority")
-                                .HasColumnType("int");
-
-                            b1.Property<int?>("ShippingTimeMax")
-                                .HasColumnType("int")
-                                .HasComment("装运时间");
-
-                            b1.Property<int?>("ShippingTimeMin")
-                                .HasColumnType("int")
-                                .HasComment("装运时间");
-
-                            b1.HasKey("OrderId");
-
-                            b1.ToTable("Order");
-
-                            b1.WithOwner()
-                                .HasForeignKey("OrderId");
-
-                            b1.OwnsOne("EbayPlatform.Domain.Models.MoneyValue", "ShippingServiceCost", b2 =>
-                                {
-                                    b2.Property<long>("ShippingServiceOptionOrderId")
-                                        .ValueGeneratedOnAdd()
-                                        .HasColumnType("bigint")
-                                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                                    b2.Property<string>("Currency")
-                                        .ValueGeneratedOnUpdateSometimes()
-                                        .HasMaxLength(10)
-                                        .HasColumnType("nvarchar(10)")
-                                        .HasColumnName("AmountSavedCurrency");
-
-                                    b2.Property<decimal>("Value")
-                                        .HasPrecision(18, 3)
-                                        .HasColumnType("decimal(18,3)")
-                                        .HasColumnName("ShippingServiceCost");
-
-                                    b2.HasKey("ShippingServiceOptionOrderId");
-
-                                    b2.ToTable("Order");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("ShippingServiceOptionOrderId");
-                                });
-
-                            b1.OwnsOne("EbayPlatform.Domain.Models.Orders.ShippingPackage", "ShippingPackage", b2 =>
-                                {
-                                    b2.Property<long>("ShippingServiceOptionOrderId")
-                                        .ValueGeneratedOnAdd()
-                                        .HasColumnType("bigint")
-                                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                                    b2.Property<DateTime?>("ActualDeliveryTime")
-                                        .HasColumnType("datetime2");
-
-                                    b2.Property<DateTime?>("EstimatedDeliveryTimeMax")
-                                        .HasColumnType("datetime2")
-                                        .HasComment("预计发货时间 Max");
-
-                                    b2.Property<DateTime?>("EstimatedDeliveryTimeMin")
-                                        .HasColumnType("datetime2")
-                                        .HasComment("预计发货时间 Min");
-
-                                    b2.Property<DateTime?>("ScheduledDeliveryTimeMax")
-                                        .HasColumnType("datetime2");
-
-                                    b2.Property<DateTime?>("ScheduledDeliveryTimeMin")
-                                        .HasColumnType("datetime2");
-
-                                    b2.Property<string>("ShippingTrackingEvent")
-                                        .HasMaxLength(200)
-                                        .HasColumnType("nvarchar(200)");
-
-                                    b2.Property<string>("StoreID")
-                                        .HasMaxLength(100)
-                                        .HasColumnType("nvarchar(100)");
-
-                                    b2.HasKey("ShippingServiceOptionOrderId");
-
-                                    b2.ToTable("Order");
-
-                                    b2.WithOwner()
-                                        .HasForeignKey("ShippingServiceOptionOrderId");
-                                });
-
-                            b1.Navigation("ShippingPackage");
-
-                            b1.Navigation("ShippingServiceCost");
                         });
 
                     b.Navigation("AdjustmentAmount");
@@ -1767,14 +1690,15 @@ namespace EbayPlatform.Infrastructure.Migrations
                     b.Navigation("Total");
                 });
 
-            modelBuilder.Entity("EbayPlatform.Domain.Models.SyncTaskJobConfig", b =>
+            modelBuilder.Entity("EbayPlatform.Domain.AggregateModel.SyncTaskJobConfig", b =>
                 {
-                    b.OwnsMany("EbayPlatform.Domain.Models.ShopTask", "ShopTasks", b1 =>
+                    b.OwnsMany("EbayPlatform.Domain.AggregateModel.ShopTask", "ShopTasks", b1 =>
                         {
                             b1.Property<int>("Id")
                                 .ValueGeneratedOnAdd()
-                                .HasColumnType("int")
-                                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                                .HasColumnType("int");
+
+                            SqlServerPropertyBuilderExtensions.UseIdentityColumn(b1.Property<int>("Id"), 1L, 1);
 
                             b1.Property<string>("ParamValue")
                                 .HasMaxLength(4000)
